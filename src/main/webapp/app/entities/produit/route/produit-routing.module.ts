@@ -14,8 +14,8 @@ const produitRoute: Routes = [
     component: ProduitComponent,
     data: {
       defaultSort: 'id,' + ASC,
-    },
-    canActivate: [UserRouteAccessService],
+    }
+   // canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',

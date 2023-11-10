@@ -1,4 +1,6 @@
 import {
+  faShoppingCart,
+  faShop,
   faArrowLeft,
   faAsterisk,
   faBan,
@@ -41,6 +43,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeIcons = [
+  faShoppingCart,
+  faShop,
   faArrowLeft,
   faAsterisk,
   faBan,

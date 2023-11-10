@@ -8,6 +8,8 @@ import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/conf
 import { EntityArrayResponseType, ProduitService } from '../service/produit.service';
 import { ProduitDeleteDialogComponent } from '../delete/produit-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
+import {AccountService} from "../../../core/auth/account.service";
+import {Authority} from "../../../config/authority.constants";
 
 @Component({
   selector: 'jhi-produit',
@@ -25,7 +27,8 @@ export class ProduitComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected sortService: SortService,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected accountService: AccountService
   ) {}
 
   trackId = (_index: number, item: IProduit): number => this.produitService.getProduitIdentifier(item);

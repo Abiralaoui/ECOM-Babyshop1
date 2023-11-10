@@ -7,7 +7,10 @@ import { ProduitDeleteDialogComponent } from './delete/produit-delete-dialog.com
 import { ProduitRoutingModule } from './route/produit-routing.module';
 
 @NgModule({
-  imports: [SharedModule, ProduitRoutingModule],
-  declarations: [ProduitComponent, ProduitDetailComponent, ProduitUpdateComponent, ProduitDeleteDialogComponent],
+    imports: [SharedModule, ProduitRoutingModule],
+    declarations: [ProduitComponent, ProduitDetailComponent, ProduitUpdateComponent, ProduitDeleteDialogComponent],
+    exports: [
+        ProduitComponent
+    ]
 })
 export class ProduitModule {}
