@@ -9,6 +9,8 @@ import { IProduit } from '../produit.model';
 import { ProduitService } from '../service/produit.service';
 import { ICategory } from 'app/entities/category/category.model';
 import { CategoryService } from 'app/entities/category/service/category.service';
+import {ImageService} from "../../image/service/image.service";
+import {IImage} from "../../image/image.model";
 
 @Component({
   selector: 'jhi-produit-update',
@@ -19,6 +21,7 @@ export class ProduitUpdateComponent implements OnInit {
   produit: IProduit | null = null;
 
   categoriesSharedCollection: ICategory[] = [];
+  imagesSharedCollection: IImage[] = [];
 
   editForm: ProduitFormGroup = this.produitFormService.createProduitFormGroup();
 
@@ -26,10 +29,13 @@ export class ProduitUpdateComponent implements OnInit {
     protected produitService: ProduitService,
     protected produitFormService: ProduitFormService,
     protected categoryService: CategoryService,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    protected imageService: ImageService
   ) {}
 
   compareCategory = (o1: ICategory | null, o2: ICategory | null): boolean => this.categoryService.compareCategory(o1, o2);
+
+  compareImage = (o1: ICategory | null, o2: ICategory | null): boolean => this.imageService.compareImage(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ produit }) => {
@@ -83,6 +89,11 @@ export class ProduitUpdateComponent implements OnInit {
       this.categoriesSharedCollection,
       ...(produit.categories ?? [])
     );
+
+    this.imagesSharedCollection = this.imageService.addImageToCollectionIfMissing<IImage>(
+      this.imagesSharedCollection,
+      ...(produit.images ?? [])
+    )
   }
 
   protected loadRelationshipsOptions(): void {
@@ -95,5 +106,15 @@ export class ProduitUpdateComponent implements OnInit {
         )
       )
       .subscribe((categories: ICategory[]) => (this.categoriesSharedCollection = categories));
+
+    this.imageService
+      .query()
+      .pipe(map((res: HttpResponse<IImage[]>) => res.body ?? []))
+      .pipe(
+        map((images: IImage[]) =>
+          this.imageService.addImageToCollectionIfMissing<IImage>(images, ...(this.produit?.images ?? []))
+        )
+      )
+      .subscribe((images: IImage[]) => (this.imagesSharedCollection = images));
   }
 }
