@@ -22,8 +22,7 @@ const produitRoute: Routes = [
     component: ProduitDetailComponent,
     resolve: {
       produit: ProduitRoutingResolveService,
-    },
-    canActivate: [UserRouteAccessService],
+    }
   },
   {
     path: 'new',

@@ -1,0 +1,12 @@
+.buy-button {
+  position: absolute;
+  bottom: 10px; /* Position du bouton en bas de l'élément */
+  left: 50%; /* Centrer horizontalement */
+  transform: translateX(-50%); /* Centrer le bouton horizontalement */
+  display: none; /* Initialement caché */
+  background-color: #fff; /* Couleur de fond blanche */
+  color: #888; /* Couleur du texte en gris */
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}

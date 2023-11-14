@@ -1,18 +1,17 @@
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-3">
     <span class="hipster img-fluid rounded"></span>
+<p >hdgjgsjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjf </p>
   </div>
 
-  <div class="col-md-9">
+  <div class="col-9">
     <div [ngSwitch]="account !== null">
       <div class="alert alert-success" *ngSwitchCase="true">
         <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login }"
           >Vous êtes connecté en tant que "{{ account.login }}".</span
         >
-
       </div>
-      <jhi-produit></jhi-produit>
     </div>
-
+    <jhi-produit></jhi-produit>
   </div>
 </div>

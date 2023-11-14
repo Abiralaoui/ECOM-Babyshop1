@@ -1,59 +1,62 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
+<div class="d-flex justify-content-center" style="gap: 5.5rem">
+  <div class="col-md-4" style="margin-left: 126px">
+    <div *ngIf="produit" style="margin-top:83px" class="text-center">
+      <img src="../../../content/images/img.png" class="img-fluid" alt="Product Image">
+    </div>
+  </div>
+  <div class="col-md-8" >
     <div *ngIf="produit">
       <h2 data-cy="produitDetailsHeading"><span jhiTranslate="mainApp.produit.detail.title">Produit</span></h2>
-
       <hr />
 
       <jhi-alert-error></jhi-alert-error>
-
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ produit.id }}</span>
-        </dd>
-        <dt><span jhiTranslate="mainApp.produit.idProduit">Id Produit</span></dt>
-        <dd>
-          <span>{{ produit.idProduit }}</span>
-        </dd>
-        <dt><span jhiTranslate="mainApp.produit.libelle">Libelle</span></dt>
-        <dd>
-          <span>{{ produit.libelle }}</span>
-        </dd>
+        <dt *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"><span jhiTranslate="global.field.id">ID</span></dt>
+
+        <dd *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"><span>{{ produit.id }}</span></dd>
+        <dt *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"><span jhiTranslate="mainApp.produit.idProduit">Id Produit</span></dt>
+        <dd *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"><span>{{ produit.idProduit }}</span></dd>
+
+        <dt><span jhiTranslate="mainApp.produit.libelle" style="margin-left: 5px">Libelle</span></dt>
+        <dd><span>{{ produit.libelle }}</span></dd>
         <dt><span jhiTranslate="mainApp.produit.description">Description</span></dt>
-        <dd>
-          <span>{{ produit.description }}</span>
-        </dd>
+        <dd><span>{{ produit.description }}</span></dd>
         <dt><span jhiTranslate="mainApp.produit.prixUnitaire">Prix Unitaire</span></dt>
-        <dd>
-          <span>{{ produit.prixUnitaire }}</span>
-        </dd>
+        <dd><span>{{ produit.prixUnitaire }}</span></dd>
         <dt><span jhiTranslate="mainApp.produit.taille">Taille</span></dt>
-        <dd>
-          <span>{{ produit.taille }}</span>
-        </dd>
+        <dd><span>{{ produit.taille }}</span></dd>
         <dt><span jhiTranslate="mainApp.produit.couleur">Couleur</span></dt>
-        <dd>
-          <span>{{ produit.couleur }}</span>
-        </dd>
+        <dd><span>{{ produit.couleur }}</span></dd>
         <dt><span jhiTranslate="mainApp.produit.category">Category</span></dt>
         <dd>
+<!--          <app-stock-selector [maxStock]="10" (quantityChange)="onQuantityChange($event)"></app-stock-selector>-->
+
           <span *ngFor="let category of produit.categories; let last = last">
-            <a [routerLink]="['/category', category.id, 'view']">{{ category.id }}</a
-            >{{ last ? '' : ', ' }}
+            <a [routerLink]="['/category', category.id, 'view']">{{ category.id }}</a>{{ last ? '' : ', ' }}
           </span>
         </dd>
       </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+      <button type="submit" style="padding: 7px; border-radius: 5px;" (click)="previousState()" class="btn btn-info custom-button" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
       </button>
 
-      <button type="button" [routerLink]="['/produit', produit.id, 'edit']" class="btn btn-primary">
+      <button style="padding: 6px; height: 41px; border-color: #ffc107; background-color: #ffc107; color: black; border-radius: 5px;" class="add-to-cart-button" data-cy="addToCartButton">
+        <fa-icon icon="shopping-cart"></fa-icon>&nbsp; Add to card
+      </button>
+
+
+
+
+
+      <button type="button" [routerLink]="['/produit', produit.id, 'edit']" class="btn btn-primary"
+              *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
       </button>
     </div>
   </div>
+
+
 </div>

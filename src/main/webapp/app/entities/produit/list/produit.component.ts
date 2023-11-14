@@ -29,7 +29,10 @@ export class ProduitComponent implements OnInit {
     protected sortService: SortService,
     protected modalService: NgbModal,
     protected accountService: AccountService
-  ) {}
+
+  ) {
+
+  }
 
   trackId = (_index: number, item: IProduit): number => this.produitService.getProduitIdentifier(item);
 
@@ -119,4 +122,16 @@ export class ProduitComponent implements OnInit {
       return [predicate + ',' + ascendingQueryParam];
     }
   }
+  navigateToView(productId: number): void {
+    this.router.navigate(['/produit', productId, 'view']);
+  }
+  selectedProduct: any;
+  onProductSelected(product: any) {
+    this.selectedProduct = product;
+
+  }
+  showBuyNow: boolean = false;
+  buyNow(produit: any): void {
+  }
+
 }
