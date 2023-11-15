@@ -33,7 +33,7 @@ Logo styles
   width: 86px;
   display: inline-block;
   vertical-align: middle;
-  background: url('../../../content/images/babylogo.png') no-repeat center center;
+  background: url('../../../content/images/baby_logo.png') no-repeat center center;
   background-size: contain;
 }
 .fixed-top-nav {
@@ -45,4 +45,12 @@ Logo styles
 
 .navbar-custom-style {
   border-bottom: 1px solid #b6b6b6;
+}
+
+.navbar-alignement-style {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
 }
