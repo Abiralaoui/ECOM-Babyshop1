@@ -8,7 +8,7 @@ Bootstrap tweaks
 
 
 body{
-  background-color: white;
+  background-color: #ffffff;
 }
 body,
 h1,
@@ -252,4 +252,217 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
 
 .global-container-fluid-margin {
   margin-top: 80px;
+}
+
+.global-background-color {
+  background-color: #fafafa;
+}
+
+.wrapper {
+  border: 1px solid #d9d9d9;
+  width: 200px;
+  height: 300px;
+  background: white;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 0;
+  transform: scale(0.95);
+  transition: box-shadow 0.5s, transform 0.5s;
+  &:hover{
+    transform: scale(1);
+    box-shadow: 5px 20px 30px rgba(0,0,0,0.2);
+  }
+
+  .container{
+    width:100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+    .top{
+      width:100%;
+      -webkit-background-size: 100%;
+      -moz-background-size: 100%;
+      -o-background-size: 100%;
+      background-size: 100%;
+    }
+    .bottom{
+      width: 200%;
+      height: 15%;
+      bottom: 0;
+      transition: transform 0.5s;
+      border-top: 1px solid #c8c8c8;
+      &.clicked{
+        transform: translateX(-50%);
+      }
+      h1{
+        margin:0;
+        padding:0;
+      }
+      p{
+        margin:0;
+        padding:0;
+      }
+      .left{
+        height:100%;
+        width: 50%;
+        background: #f4f4f4;
+        position:relative;
+        float:left;
+        display: flex;
+        .details{
+          padding: 0px;
+          width: 60%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-content: center;
+          text-align: center;
+        }
+        .buy{
+          width: 40%;
+          height:100%;
+          background: #f1f1f1;
+          transition: background 0.5s;
+          border-left:solid thin rgba(0,0,0,0.1);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          i{
+            font-size:20px;
+            color: #4a4a4f;
+            transition: transform 0.5s;
+          }
+          &:hover{
+            background: #dcdcdc;
+          }
+          &:hover i{
+            transform: scale(1.1);
+            color: #464646;
+          }
+        }
+      }
+      .right{
+        width: 50%;
+        background: #A6CDDE;
+        color: white;
+        float:right;
+        height:200%;
+        overflow: hidden;
+        .details{
+          padding: 20px;
+          float: right;
+          width: calc(70% - 40px);
+        }
+        .done{
+          width: calc(30% - 2px);
+          float:left;
+          transition: transform 0.5s;
+          border-right:solid thin rgba(255,255,255,0.3);
+          height:50%;
+          i{
+            font-size:30px;
+            padding:30px;
+            color: white;
+          }
+        }
+        .remove{
+          width: calc(30% - 1px);
+          clear: both;
+          border-right:solid thin rgba(255,255,255,0.3);
+          height:50%;
+          background: #BC3B59;
+          transition: transform 0.5s, background 0.5s;
+          &:hover{
+            background: #9B2847;
+          }
+          &:hover i{
+            transform: translateY(5px);
+          }
+          i{
+            transition: transform 0.5s;
+            font-size:30px;
+            padding:30px;
+            color: white;
+          }
+        }
+        &:hover{
+          .remove, .done{
+            transform: translateY(-100%);
+          }
+        }
+      }
+    }
+  }
+
+  .inside{
+    z-index:9;
+    background: #d0d0d0;
+    width:140px;
+    height:140px;
+    position: absolute;
+    top: -90px;
+    right: -90px;
+    border-radius: 0px 0px 300px 200px;
+    transition: all 0.5s, border-radius 2s, top 1s;
+    overflow: hidden;
+    .icon{
+      position:absolute;
+      right:85px;
+      top:85px;
+      color:white;
+      opacity: 1;
+    }
+    &:hover{
+      width:100%;
+      right:0;
+      top:0;
+      border-radius: 0;
+      height:80%;
+      .icon{
+        opacity: 0;
+        right:15px;
+        top:15px;
+      }
+      .contents{
+        opacity: 1;
+        transform: scale(1);
+        transform: translateY(0);
+      }
+    }
+    .contents{
+      padding: 5%;
+      opacity: 0;
+      transform: scale(0.5);
+      transform: translateY(-200%);
+      transition: opacity 0.2s, transform 0.8s;
+      table{
+        text-align:left;
+        width:100%;
+      }
+      h1, p, table{
+        color: white;
+      }
+      p{
+        font-size:13px;
+      }
+    }
+  }
+}
+
+.wrapper:hover {
+  cursor: pointer;
+}
+
+.product-price-client {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-top-border {
+  border-bottom: 1px solid #d9d9d9;
 }

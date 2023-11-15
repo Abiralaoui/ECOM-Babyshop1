@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid global-background-color">
   <div class="row">
 
     <div class="col-md-2">
@@ -42,14 +42,14 @@
 
       <div class="row g-4">
         <!-- Affichage des produits -->
-        <div class="col-md-2" *ngFor="let produit of produits; trackBy: trackId" data-cy="entityTable">
+        <div class="col-md-2 p-2" *ngFor="let produit of produits; trackBy: trackId" data-cy="entityTable">
           <!-- Contenu de chaque produit -->
-          <div class="card mb-3 h-100" style="max-width: 200px;"  (click)="navigateToView(produit.id)">
+          <!--<div class="card mb-3 h-100 border-1" style="max-width: 200px;"  (click)="navigateToView(produit.id)">
             <img src="../../../content/images/img.png" class="card-img-top" alt="Product Image">
 
             <div class="card-body">
               <p   style="font-family: 'Segoe UI Semibold'" class="card-title">{{ produit.libelle }}</p>
-              <!-- Limit the description text and display three dots -->
+              &lt;!&ndash; Limit the description text and display three dots &ndash;&gt;
               <p style="font-size: 12px" class="card-text overflow-hidden">
                 {{ truncateDescription(produit.description) }}
               </p>
@@ -61,13 +61,13 @@
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
               </a>
-              <!-- Edit button conditionally displayed -->
+              &lt;!&ndash; Edit button conditionally displayed &ndash;&gt;
               <a [routerLink]="['/produit', produit.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton"
                  *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])">
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
               </a>
-              <!-- Delete button conditionally displayed -->
+              &lt;!&ndash; Delete button conditionally displayed &ndash;&gt;
               <button (click)="delete(produit)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton"
                       *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])">
                 <fa-icon icon="times"></fa-icon>
@@ -81,7 +81,53 @@
                 <fa-icon icon="shopping-cart"></fa-icon>&nbsp; Add to cart
               </button>
             </div>
+          </div>-->
+
+          <div class="wrapper" (click)="navigateToView(produit.id)">
+            <div class="container">
+              <div>
+                <div class="top card-top-border">
+                  <img src="../../../content/images/img.png" class="card-img-top" alt="Product Image">
+                </div>
+                <div class="product-lounge mx-2 mt-2">
+                  <h6>{{ truncateDescription(produit.libelle) }}</h6>
+                  <p>
+                    {{ truncateDescription(produit.description) }}
+                  </p>
+                </div>
+
+              </div>
+
+              <div class="bottom" [class.clicked]="isClicked">
+                <div class="left">
+                  <div class="details">
+                    <div class="product-price-client">{{ produit.prixUnitaire + " $" }}</div>
+                  </div>
+                  <div class="buy" (click)="test()"><i class="material-icons"><fa-icon icon="shopping-cart"></fa-icon></i></div>
+                </div>
+                <div class="right">
+                  <div class="done"><i class="material-icons">done</i></div>
+                  <div class="details">
+                    <h6>Chair</h6>
+                    <p>Added to your cart</p>
+                  </div>
+                  <div class="remove" (click)="remove()"><i class="material-icons">clear</i></div>
+                </div>
+              </div>
+            </div>
+            <div class="inside">
+              <div class="icon"></div>
+              <div class="contents">
+                <table>
+                  <tr>
+                    <th>Width</th>
+                    <th>Height</th>
+                  </tr>
+                </table>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </div>

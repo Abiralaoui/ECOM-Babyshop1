@@ -146,4 +146,17 @@ export class ProduitComponent implements OnInit {
   }
 
 
+  protected readonly onclick = onclick;
+
+  isClicked = false;
+
+  test() {
+    // Implement your 'buy' click logic here
+    this.isClicked = true;
+  }
+
+  remove() {
+    // Implement your 'remove' click logic here
+    this.isClicked = false;
+  }
 }
