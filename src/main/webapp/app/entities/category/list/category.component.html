@@ -3,12 +3,15 @@
     <span jhiTranslate="mainApp.category.home.title">Categories</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+      <button
+        *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"
+        class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="mainApp.category.home.refreshListLabel">Actualiser la liste</span>
       </button>
 
       <button
+        *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-category"
@@ -34,35 +37,37 @@
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
           <th scope="col" jhiSortBy="id">
             <div class="d-flex">
-              <span jhiTranslate="global.field.id">ID</span>
+              <span jhiTranslate="global.field.id" *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])">ID</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="idCategory">
+          <th scope="col" jhiSortBy="idCategory" *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])">
             <div class="d-flex">
               <span jhiTranslate="mainApp.category.idCategory">Id Category</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
+              <fa-icon  class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="nom">
+          <th  *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"  scope="col" jhiSortBy="nom">
             <div class="d-flex">
-              <span jhiTranslate="mainApp.category.nom">Nom</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
+              <span  jhiTranslate="mainApp.category.nom">Nom</span>
+              <fa-icon  class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col"></th>
+
+
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let category of categories; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/category', category.id, 'view']">{{ category.id }}</a>
+            <a *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])" [routerLink]="['/category', category.id, 'view']">{{ category.id }}</a>
           </td>
-          <td>{{ category.idCategory }}</td>
+          <td *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])">{{ category.idCategory }} </td>
           <td>{{ category.nom }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button
+                *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"
                 type="submit"
                 [routerLink]="['/category', category.id, 'view']"
                 class="btn btn-info btn-sm"
@@ -73,6 +78,7 @@
               </button>
 
               <button
+                *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"
                 type="submit"
                 [routerLink]="['/category', category.id, 'edit']"
                 class="btn btn-primary btn-sm"
@@ -82,7 +88,9 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
               </button>
 
-              <button type="submit" (click)="delete(category)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"
+                type="submit" (click)="delete(category)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
               </button>

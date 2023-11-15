@@ -1,69 +1,87 @@
-<div>
-  <h2 id="page-heading" data-cy="ProduitHeading">
-    <span jhiTranslate="mainApp.produit.home.title">tetete</span>
+<div class="container-fluid">
+  <div class="row">
 
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading"
-              *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="mainApp.produit.home.refreshListLabel">Actualiser la liste</span>
-      </button>
-
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-produit"
-        [routerLink]="['/produit/new']"
-        *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="mainApp.produit.home.createLabel"> Créer un nouveau Produit </span>
-      </button>
+    <div *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN'])" class="col-md-2">
+      <jhi-category></jhi-category>
     </div>
-  </h2>
 
-  <jhi-alert-error></jhi-alert-error>
 
-  <jhi-alert></jhi-alert>
+    <!-- Colonne contenant les produits (3/5) -->
+    <div class="col-md-10">
+      <h2 id="page-heading" data-cy="ProduitHeading">
+        <span jhiTranslate="mainApp.produit.home.title">tetete</span>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="produits?.length === 0">
-    <span jhiTranslate="mainApp.produit.home.notFound">Aucun Produit trouvé</span>
-  </div>
-
-  <div class="row g-4">
-    <div class="col-md-2" *ngFor="let produit of produits; trackBy: trackId" data-cy="entityTable">
-      <div class="card mb-3 h-100" style="max-width: 200px;" (click)="navigateToView(produit.id)">
-        <img src="../../../content/images/img.png" class="card-img-top" alt="Product Image">
-
-        <div class="card-body">
-          <h5 class="card-title">{{ produit.libelle }}</h5>
-          <!-- Limit the description text and display three dots -->
-          <p class="card-text overflow-hidden text-ellipsis">
-            {{ produit.description }}
-          </p>
-        </div>
-        <div  style="background-color: white;" class="card-footer">
-          <a [routerLink]="['/produit', produit.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton"
-             *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])">
-            <fa-icon icon="eye"></fa-icon>
-            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
-          </a>
-          <!-- Edit button conditionally displayed -->
-          <a [routerLink]="['/produit', produit.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton"
-             *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])">
-            <fa-icon icon="pencil-alt"></fa-icon>
-            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
-          </a>
-          <!-- Delete button conditionally displayed -->
-          <button (click)="delete(produit)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton"
+        <div class="d-flex justify-content-end">
+          <!-- Bouton Actualiser la liste -->
+          <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading"
                   *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])">
-            <fa-icon icon="times"></fa-icon>
-            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+            <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+            <span jhiTranslate="mainApp.produit.home.refreshListLabel">Actualiser la liste</span>
           </button>
-<!--          <button class="buy-button " style="margin-left: 44px" (click)="onProductSelected(produit)">Buy Now</button>-->
-          <button style=" margin-left:18px;padding: 6px; height: 41px; border-color: #ffcccc; background-color: #ffcccc; color: #fdfdfd; border-radius: 5px;" class="add-to-cart-button" data-cy="addToCartButton">
-            <fa-icon icon="shopping-cart"></fa-icon>&nbsp; Add to card
+
+          <!-- Bouton Créer un nouveau Produit -->
+          <button
+            id="jh-create-entity"
+            data-cy="entityCreateButton"
+            class="btn btn-primary jh-create-entity create-produit"
+            [routerLink]="['/produit/new']"
+            *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"
+          >
+            <fa-icon icon="plus"></fa-icon>
+            <span jhiTranslate="mainApp.produit.home.createLabel"> Créer un nouveau Produit </span>
           </button>
+        </div>
+      </h2>
+
+      <jhi-alert-error></jhi-alert-error>
+      <jhi-alert></jhi-alert>
+
+      <div class="alert alert-warning" id="no-result" *ngIf="produits?.length === 0">
+        <span jhiTranslate="mainApp.produit.home.notFound">Aucun Produit trouvé</span>
+      </div>
+
+      <div class="row g-4">
+        <!-- Affichage des produits -->
+        <div class="col-md-2" *ngFor="let produit of produits; trackBy: trackId" data-cy="entityTable">
+          <!-- Contenu de chaque produit -->
+          <div class="card mb-3 h-100" style="max-width: 200px;"  (click)="navigateToView(produit.id)">
+            <img src="../../../content/images/img.png" class="card-img-top" alt="Product Image">
+
+            <div class="card-body">
+              <p   style="font-family: 'Segoe UI Semibold'" class="card-title">{{ produit.libelle }}</p>
+              <!-- Limit the description text and display three dots -->
+              <p style="font-size: 12px" class="card-text overflow-hidden">
+                {{ truncateDescription(produit.description) }}
+              </p>
+
+            </div>
+            <div style="background-color: white;" class="card-footer">
+              <a [routerLink]="['/produit', produit.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton"
+                 *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </a>
+              <!-- Edit button conditionally displayed -->
+              <a [routerLink]="['/produit', produit.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton"
+                 *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </a>
+              <!-- Delete button conditionally displayed -->
+              <button (click)="delete(produit)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton"
+                      *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+              <button
+                *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"
+                style="margin-left: 18px; padding: 6px; height: 41px; border-color: #96d7ff; background-color: #96d7ff; color: #fdfdfd; border-radius: 5px;"
+                class="add-to-cart-button"
+                data-cy="addToCartButton">
+                <fa-icon icon="shopping-cart"></fa-icon>&nbsp; Add to cart
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

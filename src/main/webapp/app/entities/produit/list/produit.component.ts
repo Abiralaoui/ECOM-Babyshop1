@@ -18,7 +18,7 @@ import {Authority} from "../../../config/authority.constants";
 export class ProduitComponent implements OnInit {
   produits?: IProduit[];
   isLoading = false;
-
+  showButton: boolean = false;
   predicate = 'id';
   ascending = true;
 
@@ -133,5 +133,17 @@ export class ProduitComponent implements OnInit {
   showBuyNow: boolean = false;
   buyNow(produit: any): void {
   }
+  truncateDescription(description: string | null | undefined): string {
+    if (!description) {
+      return ''; // Ou tout autre traitement que vous souhaitez pour les valeurs nulles ou indéfinies
+    }
+
+    const words = description.split(' ');
+    if (words.length > 6) {
+      return words.slice(0, 6).join(' ') + '...';
+    }
+    return description;
+  }
+
 
 }

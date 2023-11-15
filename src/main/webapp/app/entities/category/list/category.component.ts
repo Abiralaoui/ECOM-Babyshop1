@@ -8,6 +8,7 @@ import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/conf
 import { EntityArrayResponseType, CategoryService } from '../service/category.service';
 import { CategoryDeleteDialogComponent } from '../delete/category-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
+import {AccountService} from "../../../core/auth/account.service";
 
 @Component({
   selector: 'jhi-category',
@@ -25,7 +26,9 @@ export class CategoryComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected sortService: SortService,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected accountService: AccountService
+
   ) {}
 
   trackId = (_index: number, item: ICategory): number => this.categoryService.getCategoryIdentifier(item);
