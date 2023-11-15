@@ -14,8 +14,7 @@ const categoryRoute: Routes = [
     component: CategoryComponent,
     data: {
       defaultSort: 'id,' + ASC,
-    },
-    canActivate: [UserRouteAccessService],
+    }
   },
   {
     path: ':id/view',
