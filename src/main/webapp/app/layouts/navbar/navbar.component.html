@@ -30,8 +30,21 @@
           <li class="nav-item d-flex align-items-center" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
             <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
             <span>
-              <fa-icon icon="list-timeline"></fa-icon>
               <span >A propos</span>
+            </span>
+            </a>
+          </li>
+          <li class="nav-item d-flex align-items-center" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+            <span>
+              <span jhiTranslate="global.menu.contact">Contact</span>
+            </span>
+            </a>
+          </li>
+          <li class="nav-item d-flex align-items-center" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+            <span>
+              <span jhiTranslate="global.menu.staff">Staff</span>
             </span>
             </a>
           </li>

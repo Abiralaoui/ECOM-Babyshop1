@@ -5,6 +5,11 @@
 Navbar
 ========================================================================== */
 
+* {
+  font-family: 'Lato', sans-serif;
+  font-size: 17px;
+}
+
 .navbar-version {
   font-size: 0.65em;
   color: $navbar-light-color;
@@ -17,7 +22,6 @@ Navbar
 
 .navbar {
   padding: 0.2rem 1rem;
-
 
   a.nav-link {
     font-weight: 450;
