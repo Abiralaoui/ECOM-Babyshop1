@@ -1,0 +1,20 @@
+<!-- panier.component.html -->
+<div class="panier-container">
+  <h2 class="panier-title">Mon Panier</h2>
+  <div *ngFor="let produitGroup of produitsGroupes" class="produit-group">
+    <div class="produit-item" *ngFor="let produit of produitGroup.produits">
+      <div class="produit-details">
+        <div>{{ produit.libelle }}</div>
+        <div>{{ produit.prixUnitaire | currency:'EUR' }}</div>
+      </div>
+      <div class="quantite">Quantité: {{ produitGroup.quantite }}</div>
+      <button (click)="retirerDuPanier(produit)" class="retirer-button">Retirer</button>
+    </div>
+  </div>
+  <div *ngIf="produitsGroupes.length === 0" class="empty-message">Le panier est vide.</div>
+  <div class="total-container" *ngIf="produits.length > 0">
+    <div class="total-label">Total à payer :</div>
+    <div class="total-amount">{{ calculerTotal() | currency:'EUR' }}</div>
+  </div>
+  <button (click)="validerPanier()" class="valider-button" *ngIf="produits.length > 0">Valider le panier</button>
+</div>
