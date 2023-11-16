@@ -10,6 +10,7 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
 import {PanierModule} from "./panier/panier.module";
 import {PayComponent} from "./pay/pay.component";
 import { ContactComponent } from './contact/contact.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   imports: [
@@ -38,6 +39,10 @@ import { ContactComponent } from './contact/contact.component';
         {
           path: 'contact',
           component: ContactComponent
+        },
+        {
+          path: 'about-us',
+          component: AboutUsComponent
         },
         {
           path: '',

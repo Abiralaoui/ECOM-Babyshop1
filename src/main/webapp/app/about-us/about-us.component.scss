@@ -1,0 +1,27 @@
+/* about-us.component.css */
+.about-us-container {
+    max-width: 800px;
+    margin: 50px auto;
+    text-align: center;
+  }
+  
+  .about-us-image {
+    max-width: 100%; /* La largeur maximale sera de 100% de son conteneur parent */
+    max-height: 300px; /* La hauteur maximale sera de 300 pixels, ajustez selon vos besoins */
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    color: #007bff;
+  }
+  
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  /* Ajoutez des styles supplémentaires au besoin */
+  
