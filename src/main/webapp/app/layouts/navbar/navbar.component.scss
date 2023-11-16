@@ -1,6 +1,6 @@
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
-
+@import '~@fortawesome/fontawesome-free/css/all.css';
 /* ==========================================================================
 Navbar
 ========================================================================== */
@@ -9,7 +9,20 @@ Navbar
   font-family: 'Lato', sans-serif;
   font-size: 17px;
 }
+.panier-icon {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
 
+.nombre-articles {
+  background-color: #ff0000; /* Couleur du fond pour le nombre d'articles */
+  color: #fff; /* Couleur du texte pour le nombre d'articles */
+  border-radius: 50%; /* Pour donner une forme de cercle */
+  padding: 2px 6px; /* Ajustez selon vos préférences */
+  margin-left: 5px; /* Ajustez selon vos préférences */
+  font-size: 12px; /* Ajustez selon vos préférences */
+}
 .navbar-version {
   font-size: 0.65em;
   color: $navbar-light-color;

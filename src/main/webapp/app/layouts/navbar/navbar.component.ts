@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SessionStorageService } from 'ngx-webstorage';
+import { OnDestroy } from '@angular/core';
 
+import { Subscription } from 'rxjs';
 import { VERSION } from 'app/app.constants';
 import { LANGUAGES } from 'app/config/language.constants';
 import { Account } from 'app/core/auth/account.model';
@@ -10,6 +12,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
+import { PanierService } from 'app/panier/panier.service';
 
 @Component({
   selector: 'jhi-navbar',
@@ -24,15 +27,21 @@ export class NavbarComponent implements OnInit {
   version = '';
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
-
+  nombreArticles: number = 0;
+  private subscription: Subscription;
   constructor(
+    private panierService: PanierService,
     private loginService: LoginService,
     private translateService: TranslateService,
     private sessionStorageService: SessionStorageService,
     private accountService: AccountService,
     private profileService: ProfileService,
     private router: Router
-  ) {
+  ) { this.subscription = this.panierService.nombreArticles$.subscribe(
+    (nombreArticles) => {
+      this.nombreArticles = nombreArticles;
+    }
+  );
     if (VERSION) {
       this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
     }
@@ -71,5 +80,9 @@ export class NavbarComponent implements OnInit {
 
   toggleNavbar(): void {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
+  ngOnDestroy() {
+    // N'oubliez pas de désabonner pour éviter les fuites de mémoire
+    this.subscription.unsubscribe();
   }
 }
