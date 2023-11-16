@@ -32,6 +32,7 @@ import { PayComponent } from './pay/pay.component';
 
 
 
+
 @NgModule({
   imports: [
 

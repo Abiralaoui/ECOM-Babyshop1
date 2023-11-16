@@ -71,6 +71,10 @@ export class NavbarComponent implements OnInit {
   login(): void {
     this.router.navigate(['/login']);
   }
+  validerr() {
+   
+    this.router.navigate(['/contact']);
+  }
 
   logout(): void {
     this.collapseNavbar();
