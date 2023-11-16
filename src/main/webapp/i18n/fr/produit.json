@@ -24,6 +24,7 @@
       "prixUnitaire": "Prix Unitaire",
       "taille": "Taille",
       "couleur": "Couleur",
+      "stock": "Stock",
       "image": "Image",
       "ligneCommande": "Ligne Commande",
       "avis": "Avis",
