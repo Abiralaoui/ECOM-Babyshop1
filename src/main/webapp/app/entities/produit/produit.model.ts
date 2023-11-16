@@ -9,6 +9,7 @@ export interface IProduit {
   prixUnitaire?: number | null;
   taille?: number | null;
   couleur?: string | null;
+  stock?:number | null;
   categories?: Pick<ICategory, 'id'>[] | null;
   images?: Pick<IImage, 'id'>[] | null;
 }

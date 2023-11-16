@@ -21,6 +21,9 @@ public class ProduitDTO implements Serializable {
     private String description;
 
     @DecimalMin(value = "0")
+    private Integer stock;
+
+    @DecimalMin(value = "0")
     private Float prixUnitaire;
 
     @Min(value = 0)
@@ -104,6 +107,14 @@ public class ProduitDTO implements Serializable {
         this.images = images;
     }
 
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -126,17 +137,20 @@ public class ProduitDTO implements Serializable {
     }
 
     // prettier-ignore
+
     @Override
     public String toString() {
         return "ProduitDTO{" +
-            "id=" + getId() +
-            ", idProduit=" + getIdProduit() +
-            ", libelle='" + getLibelle() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", prixUnitaire=" + getPrixUnitaire() +
-            ", taille=" + getTaille() +
-            ", couleur='" + getCouleur() + "'" +
-            ", categories=" + getCategories() +
-            "}";
+            "id=" + id +
+            ", idProduit=" + idProduit +
+            ", libelle='" + libelle + '\'' +
+            ", description='" + description + '\'' +
+            ", stock=" + stock +
+            ", prixUnitaire=" + prixUnitaire +
+            ", taille=" + taille +
+            ", couleur='" + couleur + '\'' +
+            ", categories=" + categories +
+            ", images=" + images +
+            '}';
     }
 }

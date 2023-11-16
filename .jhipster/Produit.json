@@ -32,6 +32,12 @@
     {
       "fieldName": "couleur",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "stock",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
     }
   ],
   "fluentMethods": true,

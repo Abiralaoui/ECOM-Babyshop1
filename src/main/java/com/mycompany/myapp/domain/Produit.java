@@ -46,6 +46,9 @@ public class Produit implements Serializable {
     @Column(name = "couleur")
     private String couleur;
 
+    @Column(name = "stock")
+    private Integer stock;
+
     @OneToMany(mappedBy = "produit")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "produit" }, allowSetters = true)
@@ -295,6 +298,14 @@ public class Produit implements Serializable {
         return id != null && id.equals(((Produit) o).id);
     }
 
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
     @Override
     public int hashCode() {
         // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
@@ -302,16 +313,22 @@ public class Produit implements Serializable {
     }
 
     // prettier-ignore
+
     @Override
     public String toString() {
         return "Produit{" +
-            "id=" + getId() +
-            ", idProduit=" + getIdProduit() +
-            ", libelle='" + getLibelle() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", prixUnitaire=" + getPrixUnitaire() +
-            ", taille=" + getTaille() +
-            ", couleur='" + getCouleur() + "'" +
-            "}";
+            "id=" + id +
+            ", idProduit=" + idProduit +
+            ", libelle='" + libelle + '\'' +
+            ", description='" + description + '\'' +
+            ", prixUnitaire=" + prixUnitaire +
+            ", taille=" + taille +
+            ", couleur='" + couleur + '\'' +
+            ", stock=" + stock +
+            ", images=" + images +
+            ", ligneCommandes=" + ligneCommandes +
+            ", avis=" + avis +
+            ", categories=" + categories +
+            '}';
     }
 }
