@@ -20,6 +20,8 @@ import { NgbDateDayjsAdapter } from './config/datepicker-adapter';
 import { fontAwesomeIcons } from './config/font-awesome-icons';
 import { httpInterceptorProviders } from 'app/core/interceptor/index';
 import { MainComponent } from './layouts/main/main.component';
+
+
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
@@ -29,8 +31,10 @@ import { PayComponent } from './pay/pay.component';
 
 
 
+
 @NgModule({
   imports: [
+
     BrowserModule,
     SharedModule,
     HomeModule,
@@ -48,7 +52,7 @@ import { PayComponent } from './pay/pay.component';
     {provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter},
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, PayComponent],
+  declarations: [MainComponent,NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, PayComponent],
   bootstrap: [MainComponent],
   exports: [
     PayComponent

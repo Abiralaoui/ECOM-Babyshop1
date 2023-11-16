@@ -268,11 +268,11 @@
           >
             <div>
               <li class="nav-item d-flex align-items-center" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
-            <span>
-              <fa-icon icon="shopping-cart"></fa-icon>
-              <span >Panier</span>
-            </span>
+                <a class="nav-link" routerLink="/panier" (click)="collapseNavbar()">
+                  <span class="panier-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="nombre-articles">{{ nombreArticles }}</span>
+                  </span>
                 </a>
               </li>
             </div>
