@@ -15,6 +15,7 @@ const produitRoute: Routes = [
     data: {
       defaultSort: 'id,' + ASC,
     }
+
    // canActivate: [UserRouteAccessService],
   },
   {
@@ -24,6 +25,7 @@ const produitRoute: Routes = [
       produit: ProduitRoutingResolveService,
     }
   },
+
   {
     path: 'new',
     component: ProduitUpdateComponent,

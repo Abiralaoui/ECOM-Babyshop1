@@ -22,7 +22,7 @@ const categoryRoute: Routes = [
     resolve: {
       category: CategoryRoutingResolveService,
     },
-    canActivate: [UserRouteAccessService],
+
   },
   {
     path: 'new',

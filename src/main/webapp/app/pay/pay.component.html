@@ -1,1 +1,137 @@
-<p>pay works!</p>
+
+<div>
+  <form [formGroup]="paymentForm" (ngSubmit)="payCommand()">
+
+    <div class="container mt-4 mb-4">
+      <div class="container"><h2>Entrer vos données bancaires pour payer votre commande:</h2></div>
+      <div class="container formulaires" style="justify-content: left;">
+        <div class="col-lg-7" style="margin-right: 50px;">
+          <div class="card mt-4">
+            <div class="card-header space">
+              <h5 class="card-title">Adresse de livraison</h5>
+            </div>
+            <div class="card-body">
+              <div class="input-group mt-3">
+                <span class="input-group-text">Adresse et rue</span>
+                <input formControlName="adresse" type="text" placeholder="victor Hugo rue 23" maxlength="50" class="form-control">
+              </div>
+
+              <div class="input-group mt-3">
+                <span class="input-group-text">Complément</span>
+                <input formControlName="complementAdresse" type="text" class="form-control">
+              </div>
+              <div class="double-column">
+                <div>
+                  <div class="input-group mt-3">
+                    <span class="input-group-text">Ville</span>
+                    <input formControlName="ville" type="text" placeholder="Grenoble" class="form-control">
+                  </div>
+                </div>
+                <div>
+                  <div class="input-group mt-3">
+                    <span class="input-group-text">Région</span>
+                    <input formControlName="region" type="text" placeholder="France" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mt-2">
+                <span class="input-group-text">Code Postal</span>
+                <input [formControl]="codePostal" type="text" placeholder="38000" class="form-control" maxlength="5">
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-4">
+            <div class="card-header space">
+              <h5 class="card-title">Carte Bancaire</h5>
+              <div>
+                <img src="https://www.reussir-mon-ecommerce.fr/wp-content/uploads/2016/03/logo-cb-1.jpg" width="350" alt="Credit Card black png" />
+                <img src="https://www.reussir-mon-ecommerce.fr/wp-content/uploads/2016/03/MasterCard-Logo-1-1024x768.png" width="350" alt="Credit Card black png" />
+                <img src="https://www.reussir-mon-ecommerce.fr/wp-content/uploads/2016/03/logo-visa-1.png" width="350" alt="Credit Card black png" />
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="input-group mt-3">
+                <span class="input-group-text">Numéro de carte</span>
+                <input [ngClass]="{
+                      'border-danger border-3': numero.touched && !numero.valid }" [formControl]="numero" type="text" placeholder="XXXXXXXXXXXXXXXX" maxlength="16" class="form-control">
+              </div>
+              <span [ngClass]="{
+                      'invisible': numero.valid || numero.untouched }"    class="text-danger  " >
+                      Le numéro doit contenir 16 chiffres compris entre 0 et 9
+                    </span>
+              <div class="double-column">
+                <div>
+                  <div class="input-group mt-3">
+                    <span class="input-group-text">Date expiration</span>
+                    <input [formControl]="dateExpiration" type="text" placeholder="01/2023" maxlength="7" class="form-control">
+                  </div>
+                  <span [ngClass]="{ 'invisible' : true}"> no css</span>
+                </div>
+                <div>
+                  <div class="input-group mt-3">
+                    <span class="input-group-text">CVV</span>
+                    <input [formControl]="cryptogramme" type="text" placeholder="CVV" maxlength="3" class="form-control">
+                  </div>
+                  <span [ngClass]="{ 'invisible' : cryptogramme.valid || cryptogramme.untouched}" class="text-danger">
+                              Le code de sécurité de 3 chiffres est requis
+                          </span>
+                </div>
+              </div>
+
+              <span [ngClass]="{ 'invisible' : dateExpiration.valid || dateExpiration.untouched}" class="text-danger pb-5">
+                        {{ (paymentForm.controls.dateExpiration.errors?.required || paymentForm.controls.dateExpiration.errors?.pattern) ?
+                'Une date au format "MM/AAAA" est requise' :
+                (paymentForm.controls.dateExpiration.errors?.dateExpired ?
+                  'entrer une date valid ' : ' ')  }}
+              </span>
+
+
+              <div class="input-group mt-2">
+                <span class="input-group-text">Nom du titulaire</span>
+                <input [formControl]="nom" type="text" placeholder=" ABIR ALAOUI " class="form-control">
+              </div>
+              <span [hidden]="nom.valid || nom.untouched" class="text-danger">
+                      Veuillez indiquer un nom du porteur du carte
+                    </span>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-5">
+          <div class="col-lg-10">
+            <div class="card mt-4">
+              <div class="card-header space">
+                <h5 class="card-title">Ma  commande</h5>
+              </div>
+              <div class="card-body">
+
+                <div class="float-right text-right">
+                  <h4>Total à payer :</h4>
+                  <h3>${{ this.getCartTotal() }}</h3>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          <div class=" mt-4 col-lg-10">
+            <button type="submit" style="background-color: #3e8acc; color: white;  border-radius: 10px;" class="btn  bg-gray  btn-lg w-100" [disabled]="!paymentForm.valid">Payer</button>
+          </div>
+          <div class=" mt-4 col-lg-10">
+            <h5 *ngIf="paiementIsOk" class="text text-center text-success">
+              Paiement effectué avec succès !
+            </h5>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </form>
+
+</div>

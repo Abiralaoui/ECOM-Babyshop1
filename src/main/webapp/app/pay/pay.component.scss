@@ -1,0 +1,69 @@
+:host {
+  display: block;
+}
+
+.payment-cards {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 1rem;
+  padding-block: 2rem;
+}
+
+.title-cards {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card-header > div > img {
+  max-width: 50px;
+}
+
+.icons-cards {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icons-cards > img {
+  max-width: 50px;
+}
+
+
+.double-column {
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 1rem;
+}
+
+.double-column > div {
+  flex: 1;
+}
+
+.input-group-text {
+  width: 150px;
+}
+
+.formulaires {
+  display: flex;
+  justify-content: space-around;
+}
+
+.space {
+  display: flex;
+  justify-content: space-between;
+}
+
+.disable-payment-form {
+  pointer-events: none;
+  opacity: 0.5;
+  transition: opacity .5s ease-out
+}
+
+.able-payment-form {
+  pointer-events: auto;
+  opacity: 1;
+  transition: opacity .5s ease-out
+}
