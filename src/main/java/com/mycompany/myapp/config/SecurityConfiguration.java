@@ -88,6 +88,7 @@ public class SecurityConfiguration {
             .antMatchers("/api/admin/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/produits/**").permitAll()//TO DO ; get only
             .antMatchers("/api/produit/**").permitAll()
+            .antMatchers("/api/client/**").permitAll()
             .antMatchers("/api/**").authenticated()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/health/**").permitAll()
