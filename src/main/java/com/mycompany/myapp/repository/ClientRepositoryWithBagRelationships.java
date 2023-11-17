@@ -8,7 +8,10 @@ import org.springframework.data.domain.Page;
 public interface ClientRepositoryWithBagRelationships {
     Optional<Client> fetchBagRelationships(Optional<Client> client);
 
+    Optional<Client> fetchBagRelationshipsCommandes(Optional<Client> client);
+
     List<Client> fetchBagRelationships(List<Client> clients);
 
     Page<Client> fetchBagRelationships(Page<Client> clients);
+
 }

@@ -2,7 +2,9 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.repository.ClientRepository;
 import com.mycompany.myapp.service.ClientService;
+import com.mycompany.myapp.service.CommandeService;
 import com.mycompany.myapp.service.dto.ClientDTO;
+import com.mycompany.myapp.service.dto.CommandeDTO;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -37,9 +39,12 @@ public class ClientResource {
 
     private final ClientRepository clientRepository;
 
-    public ClientResource(ClientService clientService, ClientRepository clientRepository) {
+    private final CommandeService commandeService;
+
+    public ClientResource(ClientService clientService, ClientRepository clientRepository, CommandeService commandeService) {
         this.clientService = clientService;
         this.clientRepository = clientRepository;
+        this.commandeService = commandeService;
     }
 
     /**
@@ -171,5 +176,12 @@ public class ClientResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/client/{idClient}/commandes")
+    public ResponseEntity<List<CommandeDTO>> getCommandsByClient(@PathVariable Long idClient) {
+        log.debug("REST request to get commands by client : {}", idClient);
+
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(commandeService.getCommandsByClientId(idClient)));
     }
 }

@@ -26,6 +26,11 @@ public class ClientRepositoryWithBagRelationshipsImpl implements ClientRepositor
     }
 
     @Override
+    public Optional<Client> fetchBagRelationshipsCommandes(Optional<Client> client) {
+        return client.map(this::fetchCommandes);
+    }
+
+    @Override
     public Page<Client> fetchBagRelationships(Page<Client> clients) {
         return new PageImpl<>(fetchBagRelationships(clients.getContent()), clients.getPageable(), clients.getTotalElements());
     }
@@ -38,6 +43,14 @@ public class ClientRepositoryWithBagRelationshipsImpl implements ClientRepositor
     Client fetchCarteBancaires(Client result) {
         return entityManager
             .createQuery("select client from Client client left join fetch client.carteBancaires where client is :client", Client.class)
+            .setParameter("client", result)
+            .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
+            .getSingleResult();
+    }
+
+    Client fetchCommandes(Client result) {
+        return entityManager
+            .createQuery("select client from Client client left join fetch client.commandes where client is :client", Client.class)
             .setParameter("client", result)
             .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
             .getSingleResult();

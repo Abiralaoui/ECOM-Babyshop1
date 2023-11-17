@@ -2,12 +2,15 @@ package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.config.Constants;
 import com.mycompany.myapp.domain.Authority;
+import com.mycompany.myapp.domain.Client;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.AuthorityRepository;
+import com.mycompany.myapp.repository.ClientRepository;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.security.AuthoritiesConstants;
 import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.service.dto.AdminUserDTO;
+import com.mycompany.myapp.service.dto.ClientDTO;
 import com.mycompany.myapp.service.dto.UserDTO;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -35,6 +38,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final ClientService clientService;
+
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
@@ -43,11 +48,13 @@ public class UserService {
 
     public UserService(
         UserRepository userRepository,
+        ClientService clientService,
         PasswordEncoder passwordEncoder,
         AuthorityRepository authorityRepository,
         CacheManager cacheManager
     ) {
         this.userRepository = userRepository;
+        this.clientService = clientService;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
@@ -129,7 +136,13 @@ public class UserService {
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
-        userRepository.save(newUser);
+        User createdUser = userRepository.save(newUser);
+
+        ClientDTO clientDTO = new ClientDTO();
+        clientDTO.setId(createdUser.getId());
+
+        clientService.save(clientDTO);
+
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
@@ -174,7 +187,7 @@ public class UserService {
                 .collect(Collectors.toSet());
             user.setAuthorities(authorities);
         }
-        userRepository.save(user);
+
         this.clearUserCaches(user);
         log.debug("Created Information for User: {}", user);
         return user;

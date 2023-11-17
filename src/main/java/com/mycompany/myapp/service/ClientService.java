@@ -111,6 +111,12 @@ public class ClientService {
         return clientRepository.findOneWithEagerRelationships(id).map(clientMapper::toDto);
     }
 
+    @Transactional(readOnly = true)
+    public Optional<ClientDTO> findOneWithCommandesWithEager(Long id) {
+        log.debug("Request to get Commands by Client : {}", id);
+        return clientRepository.findOneWitheEagerCommandRelationships(id).map(clientMapper::toDto);
+    }
+
     /**
      * Delete the client by id.
      *

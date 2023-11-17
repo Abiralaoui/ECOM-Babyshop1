@@ -109,4 +109,9 @@ public class CommandeService {
         log.debug("Request to delete Commande : {}", id);
         commandeRepository.deleteById(id);
     }
+
+    public List<CommandeDTO> getCommandsByClientId(Long id) {
+        log.debug("Request all commands by client id : {}", id);
+        return commandeRepository.findByClientId(id).stream().map(commandeMapper::toDto).collect(Collectors.toList());
+    }
 }

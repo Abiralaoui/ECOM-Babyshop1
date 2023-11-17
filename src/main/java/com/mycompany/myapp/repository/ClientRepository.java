@@ -21,6 +21,10 @@ public interface ClientRepository extends ClientRepositoryWithBagRelationships, 
         return this.fetchBagRelationships(this.findById(id));
     }
 
+    default Optional<Client> findOneWitheEagerCommandRelationships(Long id) {
+        return this.fetchBagRelationshipsCommandes(this.findById(id));
+    }
+
     default List<Client> findAllWithEagerRelationships() {
         return this.fetchBagRelationships(this.findAll());
     }

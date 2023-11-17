@@ -95,15 +95,16 @@ public class ClientDTO implements Serializable {
     }
 
     // prettier-ignore
+
     @Override
     public String toString() {
         return "ClientDTO{" +
-            "id=" + getId() +
-            ", identifiant='" + getIdentifiant() + "'" +
-            ", motDePasse='" + getMotDePasse() + "'" +
-            ", tel='" + getTel() + "'" +
-            ", address='" + getAddress() + "'" +
-            ", carteBancaires=" + getCarteBancaires() +
-            "}";
+            "id=" + id +
+            ", identifiant='" + identifiant + '\'' +
+            ", motDePasse='" + motDePasse + '\'' +
+            ", tel='" + tel + '\'' +
+            ", address='" + address + '\'' +
+            ", carteBancaires=" + carteBancaires +
+            '}';
     }
 }
