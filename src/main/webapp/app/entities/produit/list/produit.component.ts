@@ -10,6 +10,7 @@ import { ProduitDeleteDialogComponent } from '../delete/produit-delete-dialog.co
 import { SortService } from 'app/shared/sort/sort.service';
 import {AccountService} from "../../../core/auth/account.service";
 import {Authority} from "../../../config/authority.constants";
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'jhi-produit',
@@ -21,7 +22,7 @@ export class ProduitComponent implements OnInit {
   showButton: boolean = false;
   predicate = 'id';
   ascending = true;
-
+  searchTerm: string = '';
   constructor(
     protected produitService: ProduitService,
     protected activatedRoute: ActivatedRoute,
@@ -38,6 +39,12 @@ export class ProduitComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
+    this.activatedRoute.queryParamMap.pipe(
+      debounceTime(300), // délai d'attente de 300 ms
+      distinctUntilChanged() // n'émet pas de nouveaux éléments s'ils sont égaux au précédent
+    ).subscribe(() => {
+      this.search();
+    });
   }
 
   delete(produit: IProduit): void {
@@ -145,11 +152,28 @@ export class ProduitComponent implements OnInit {
     return description;
   }
 
-
+  
   protected readonly onclick = onclick;
 
   isClicked = false;
+  search(): void {
+    // Si vous effectuez une recherche côté serveur, utilisez le service ProduitService
+    // this.produitService.searchProduits(this.searchTerm).subscribe({
+    //   next: (res: EntityArrayResponseType) => {
+    //     this.onResponseSuccess(res);
+    //   },
+    // });
 
+    // Exemple de recherche locale (à adapter en fonction de votre structure de données)
+    if (this.searchTerm.trim() !== '') {
+      this.produits = this.produits?.filter((produit) =>
+        produit.libelle?.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      // Rechargez la liste complète si la barre de recherche est vide
+      this.load();
+    }
+  }
   test() {
     // Implement your 'buy' click logic here
     this.isClicked = true;
