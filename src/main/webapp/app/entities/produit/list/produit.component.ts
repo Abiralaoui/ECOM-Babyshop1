@@ -152,10 +152,15 @@ export class ProduitComponent implements OnInit {
     return description;
   }
 
-  
+
   protected readonly onclick = onclick;
 
   isClicked = false;
+
+  onSearchInputChange() : void {
+    this.search()
+  }
+
   search(): void {
     // Si vous effectuez une recherche côté serveur, utilisez le service ProduitService
     // this.produitService.searchProduits(this.searchTerm).subscribe({
