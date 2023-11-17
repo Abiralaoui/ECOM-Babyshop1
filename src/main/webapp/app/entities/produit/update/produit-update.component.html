@@ -85,6 +85,24 @@
         </div>
 
         <div class="row mb-3">
+          <label class="form-label" jhiTranslate="mainApp.produit.stock" for="field_stock">Stock</label>
+          <input type="number" class="form-control" name="taille" id="field_stock" data-cy="stock" formControlName="stock" />
+          <div *ngIf="editForm.get('stock')!.invalid && (editForm.get('stock')!.dirty || editForm.get('stock')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('stock')?.errors?.min"
+              jhiTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              Ce champ doit être supérieur à 0.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('stock')?.errors?.number" jhiTranslate="entity.validation.number">
+              Ce champ doit être un nombre.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
           <label class="form-label" jhiTranslate="mainApp.produit.couleur" for="field_couleur">Couleur</label>
           <input type="text" class="form-control" name="couleur" id="field_couleur" data-cy="couleur" formControlName="couleur" />
         </div>

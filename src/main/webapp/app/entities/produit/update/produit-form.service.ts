@@ -24,6 +24,7 @@ type ProduitFormGroupContent = {
   prixUnitaire: FormControl<IProduit['prixUnitaire']>;
   taille: FormControl<IProduit['taille']>;
   couleur: FormControl<IProduit['couleur']>;
+  stock: FormControl<IProduit['stock']>;
   categories: FormControl<IProduit['categories']>;
 };
 
@@ -54,6 +55,7 @@ export class ProduitFormService {
         validators: [Validators.min(0)],
       }),
       couleur: new FormControl(produitRawValue.couleur),
+      stock: new FormControl(produitRawValue.stock),
       categories: new FormControl(produitRawValue.categories ?? []),
     });
   }
