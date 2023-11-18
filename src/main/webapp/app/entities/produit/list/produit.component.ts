@@ -22,6 +22,7 @@ export class ProduitComponent implements OnInit {
   showButton: boolean = false;
   predicate = 'id';
   ascending = true;
+  cachedProducts?: IProduit[];
   searchTerm: string = '';
   constructor(
     protected produitService: ProduitService,
@@ -67,6 +68,12 @@ export class ProduitComponent implements OnInit {
     this.loadFromBackendWithRouteInformations().subscribe({
       next: (res: EntityArrayResponseType) => {
         this.onResponseSuccess(res);
+
+        this.cachedProducts = [];
+        if (this.produits !== undefined)
+          for (let i = 0; i < this.produits.length; i++) {
+            this.cachedProducts?.push(this.produits[i]);
+          }
       },
     });
   }
@@ -171,12 +178,9 @@ export class ProduitComponent implements OnInit {
 
     // Exemple de recherche locale (à adapter en fonction de votre structure de données)
     if (this.searchTerm.trim() !== '') {
-      this.produits = this.produits?.filter((produit) =>
+      this.produits = this.cachedProducts?.filter((produit) =>
         produit.libelle?.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
-    } else {
-      // Rechargez la liste complète si la barre de recherche est vide
-      this.load();
     }
   }
   test() {
