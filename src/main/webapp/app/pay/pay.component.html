@@ -13,7 +13,7 @@
             <div class="card-body">
               <div class="input-group mt-3">
                 <span class="input-group-text">Adresse et rue</span>
-                <input formControlName="adresse" type="text" placeholder="victor Hugo rue 23" maxlength="50" class="form-control">
+                <input  formControlName="adresse" type="text" placeholder="victor Hugo rue 23" maxlength="50" class="form-control">
               </div>
 
               <div class="input-group mt-3">
@@ -65,14 +65,16 @@
                 <div>
                   <div class="input-group mt-3">
                     <span class="input-group-text">Date expiration</span>
-                    <input [formControl]="dateExpiration" type="text" placeholder="01/2023" maxlength="7" class="form-control">
+                    <input  [ngClass]="{
+                      'border-danger border-3': dateExpiration.touched && !dateExpiration.valid }" [formControl]="dateExpiration" type="text" placeholder="01/2023" maxlength="7" class="form-control">
                   </div>
                   <span [ngClass]="{ 'invisible' : true}"> no css</span>
                 </div>
                 <div>
                   <div class="input-group mt-3">
                     <span class="input-group-text">CVV</span>
-                    <input [formControl]="cryptogramme" type="text" placeholder="CVV" maxlength="3" class="form-control">
+                    <input  [ngClass]="{
+                      'border-danger border-3': cryptogramme.touched && !cryptogramme.valid }"[formControl]="cryptogramme" type="text" placeholder="CVV" maxlength="3" class="form-control">
                   </div>
                   <span [ngClass]="{ 'invisible' : cryptogramme.valid || cryptogramme.untouched}" class="text-danger">
                               Le code de sécurité de 3 chiffres est requis
@@ -80,7 +82,8 @@
                 </div>
               </div>
 
-              <span [ngClass]="{ 'invisible' : dateExpiration.valid || dateExpiration.untouched}" class="text-danger pb-5">
+              <span  [ngClass]="{
+                      'border-danger border-3': dateExpiration.touched && !dateExpiration.valid }" [ngClass]="{ 'invisible' : dateExpiration.valid || dateExpiration.untouched}" class="text-danger pb-5">
                         {{ (paymentForm.controls.dateExpiration.errors?.required || paymentForm.controls.dateExpiration.errors?.pattern) ?
                 'Une date au format "MM/AAAA" est requise' :
                 (paymentForm.controls.dateExpiration.errors?.dateExpired ?
@@ -90,7 +93,8 @@
 
               <div class="input-group mt-2">
                 <span class="input-group-text">Nom du titulaire</span>
-                <input [formControl]="nom" type="text" placeholder=" ABIR ALAOUI " class="form-control">
+                <input [ngClass]="{
+                      'border-danger border-3': nom.touched && !nom.valid }"  [formControl]="nom" type="text" placeholder=" ABIR ALAOUI " class="form-control">
               </div>
               <span [hidden]="nom.valid || nom.untouched" class="text-danger">
                       Veuillez indiquer un nom du porteur du carte
