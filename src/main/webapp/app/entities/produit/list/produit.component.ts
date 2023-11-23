@@ -24,6 +24,8 @@ export class ProduitComponent implements OnInit {
   ascending = true;
   cachedProducts?: IProduit[];
   searchTerm: string = '';
+  prixFilter: 'asc' | 'desc' | null = null;
+  tailleFilter: 'asc' | 'desc' | null = null;
   constructor(
     protected produitService: ProduitService,
     protected activatedRoute: ActivatedRoute,
@@ -182,6 +184,39 @@ export class ProduitComponent implements OnInit {
         produit.libelle?.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     }
+    // Appliquez également les filtres de prix et de taille
+    if (this.prixFilter) {
+      this.produits = this.produits?.sort((a, b) => {
+        // Vérifiez si 'prixUnitaire' est défini et non null
+        const prixA = a.prixUnitaire !== undefined && a.prixUnitaire !== null ? a.prixUnitaire : 0;
+        const prixB = b.prixUnitaire !== undefined && b.prixUnitaire !== null ? b.prixUnitaire : 0;
+    
+        const order = this.prixFilter === 'asc' ? 1 : -1;
+        return (prixA - prixB) * order;
+      });
+    }
+    
+
+    if (this.tailleFilter) {
+      this.produits = this.produits?.sort((a, b) => {
+        // Vérifiez si 'taille' est défini et non null
+        const tailleA = a.taille !== undefined && a.taille !== null ? a.taille : 0;
+        const tailleB = b.taille !== undefined && b.taille !== null ? b.taille : 0;
+        
+        const order = this.tailleFilter === 'asc' ? 1 : -1;
+        return (tailleA - tailleB) * order;
+      });
+    }
+    
+  }
+  applyFilter(type: 'prix' | 'taille', order: 'asc' | 'desc'): void {
+    if (type === 'prix') {
+      this.prixFilter = order;
+    } else if (type === 'taille') {
+      this.tailleFilter = order;
+    }
+  
+    this.search(); // Appliquez immédiatement le filtre
   }
   test() {
     // Implement your 'buy' click logic here

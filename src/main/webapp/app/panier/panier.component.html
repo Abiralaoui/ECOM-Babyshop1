@@ -1,20 +1,58 @@
 <!-- panier.component.html -->
+
 <div class="panier-container">
   <h2 class="panier-title">Mon Panier</h2>
+
+  <div *ngIf="produitsGroupes.length === 0" class="empty-message">Le panier est vide.</div>
+
   <div *ngFor="let produitGroup of produitsGroupes" class="produit-group">
-    <div class="produit-item" *ngFor="let produit of produitGroup.produits">
+    <div *ngFor="let produit of produitGroup.produits" class="produit-item">
       <div class="produit-details">
-        <div>{{ produit.libelle }}</div>
-        <div>{{ produit.prixUnitaire | currency:'EUR' }}</div>
+        <!-- Add an image tag to display the product image -->
+        <img class="produit-image" [src]="getFirstImageUrl(produit)" alt="{{ produit.libelle }}">
+        <div class="produit-name">{{ produit.libelle }}</div>
+        <div class="produit-price">{{ produit.prixUnitaire | currency:'EUR' }}</div>
       </div>
-      <div class="quantite">Quantité: {{ produitGroup.quantite }}</div>
+      <div class="quantite-container">
+        <!-- Button to decrease quantity -->
+        <button (click)="diminuer(produit)" class="quantite-button">-</button>
+        <!-- Display the quantity -->
+       <!-- Example of two-way binding -->
+<div class="quantite">Quantité: {{ produitGroup.quantite }}</div>
+
+        <!-- Button to increase quantity -->
+        <button (click)="ajouter(produit)" class="quantite-button">+</button>
+      </div>
       <button (click)="retirerDuPanier(produit)" class="retirer-button">Retirer</button>
     </div>
   </div>
-  <div *ngIf="produitsGroupes.length === 0" class="empty-message">Le panier est vide.</div>
+
   <div class="total-container" *ngIf="produits.length > 0">
     <div class="total-label">Total à payer :</div>
     <div class="total-amount">{{ calculerTotal() | currency:'EUR' }}</div>
   </div>
+
   <button (click)="validerPanier()" class="valider-button" *ngIf="produits.length > 0">Valider le panier</button>
+  <!-- panier.component.html -->
+
+<!-- panier.component.html -->
+
+<div class="panier-container">
+  <!-- ... (your existing code) -->
+
+  <div *ngIf="produitsSameCategory.length > 0" class="vous-aimerez-peut-etre">
+    <h2>Vous aimerez peut-être...</h2>
+    <div class="produits-same-category">
+      <div *ngFor="let produit of produitsSameCategory" class="produit-item" (click)=" navigateToView(produit.id)">
+        <img class="produit-image" [src]="getFirstImageUrl(produit)" alt="{{ produit.libelle }}">
+        <div class="produit-details">
+          <div class="produit-name">{{ produit.libelle }}</div>
+          <div class="produit-price">{{ produit.prixUnitaire | currency:'EUR' }}</div>
+        </div>
+        <!-- Add buttons or other elements as needed -->
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>

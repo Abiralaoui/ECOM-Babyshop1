@@ -29,6 +29,7 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { PayComponent } from './pay/pay.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { MescommandesComponent } from './mescommandes/mescommandes.component';
 
 
 

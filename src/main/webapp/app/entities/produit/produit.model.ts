@@ -11,7 +11,7 @@ export interface IProduit {
   couleur?: string | null;
   stock?:number | null;
   categories?: Pick<ICategory, 'id'>[] | null;
-  images?: Pick<IImage, 'id'>[] | null;
+  images?: IImage[] | null;
 }
 
 export type NewProduit = Omit<IProduit, 'id'> & { id: null };

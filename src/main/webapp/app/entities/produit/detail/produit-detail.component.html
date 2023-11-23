@@ -67,3 +67,29 @@
 
 
 </div>
+<div class="d-flex justify-content-center" style="gap: 5.5rem">
+  <!-- ... Vos autres éléments ... -->
+
+  <div class="col-md-8">
+    <!-- Vos autres éléments ... -->
+
+    <div class="avis-section">
+      <h3 class="avis-title">Avis pour ce produit :</h3>
+
+      <div *ngIf="avisList && avisList.length > 0">
+        <ul class="avis-list">
+          <li class="avis-item" *ngFor="let avis of avisList">
+            <div class="avis-note">{{ avis.note }} - {{ avis.commentaire }}</div>
+            <div class="avis-date">{{ avis.date | formatMediumDatetime }}</div>
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="!avisList || avisList.length === 0" class="no-avis-message">
+        <p>Aucun avis disponible pour ce produit.</p>
+      </div>
+    </div>
+
+    <!-- Vos autres éléments ... -->
+  </div>
+</div>
