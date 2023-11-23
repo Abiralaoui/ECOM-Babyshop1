@@ -3,6 +3,7 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.repository.ProduitRepository;
 import com.mycompany.myapp.service.ProduitQueryService;
 import com.mycompany.myapp.service.ProduitService;
+import com.mycompany.myapp.service.S3StorageService;
 import com.mycompany.myapp.service.criteria.ProduitCriteria;
 import com.mycompany.myapp.service.dto.ProduitDTO;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
@@ -11,13 +12,20 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
+import com.mycompany.myapp.web.rest.errors.FileIsEmptyException;
+import com.mycompany.myapp.web.rest.errors.FileNotImageException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -41,10 +49,16 @@ public class ProduitResource {
 
     private final ProduitQueryService produitQueryService;
 
-    public ProduitResource(ProduitService produitService, ProduitRepository produitRepository, ProduitQueryService produitQueryService) {
+    private final S3StorageService s3StorageService;
+
+    public ProduitResource(ProduitService produitService,
+                           ProduitRepository produitRepository,
+                           ProduitQueryService produitQueryService,
+                           S3StorageService s3StorageService) {
         this.produitService = produitService;
         this.produitRepository = produitRepository;
         this.produitQueryService = produitQueryService;
+        this.s3StorageService = s3StorageService;
     }
 
     /**
@@ -54,13 +68,16 @@ public class ProduitResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new produitDTO, or with status {@code 400 (Bad Request)} if the produit has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/produits")
-    public ResponseEntity<ProduitDTO> createProduit(@Valid @RequestBody ProduitDTO produitDTO) throws URISyntaxException {
+    @PostMapping(value = "/produits", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ProduitDTO> createProduit(@ModelAttribute ProduitDTO produitDTO,
+                                                    @RequestPart List<MultipartFile> imagesStream) throws URISyntaxException, FileIsEmptyException, FileNotImageException {
         log.debug("REST request to save Produit : {}", produitDTO);
         if (produitDTO.getId() != null) {
             throw new BadRequestAlertException("A new produit cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ProduitDTO result = produitService.save(produitDTO);
+
+        ProduitDTO result = produitService.save(produitDTO, imagesStream);
+
         return ResponseEntity
             .created(new URI("/api/produits/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))

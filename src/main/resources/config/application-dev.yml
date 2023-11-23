@@ -13,6 +13,15 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+accessKey:
+  ${ACCESS_KEY}
+secretKey:
+  ${SECRET_KEY}
+bucketName:
+  s3-guru-bucket
+region:
+  eu-west-3
+
 logging:
   level:
     ROOT: DEBUG

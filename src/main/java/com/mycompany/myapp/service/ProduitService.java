@@ -1,19 +1,26 @@
 package com.mycompany.myapp.service;
 
+import com.mycompany.myapp.domain.Image;
 import com.mycompany.myapp.domain.Produit;
 import com.mycompany.myapp.repository.ProduitRepository;
+import com.mycompany.myapp.service.dto.ImageDTO;
 import com.mycompany.myapp.service.dto.ProduitDTO;
 import com.mycompany.myapp.service.mapper.ProduitMapper;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.mycompany.myapp.web.rest.errors.FileIsEmptyException;
+import com.mycompany.myapp.web.rest.errors.FileNotImageException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Service Implementation for managing {@link Produit}.
@@ -28,9 +35,19 @@ public class ProduitService {
 
     private final ProduitMapper produitMapper;
 
-    public ProduitService(ProduitRepository produitRepository, ProduitMapper produitMapper) {
+    private final S3StorageService s3StorageService;
+
+    private final ImageService imageService;
+
+
+    public ProduitService(ProduitRepository produitRepository,
+                          ProduitMapper produitMapper,
+                          S3StorageService s3StorageService,
+                          ImageService imageService) {
         this.produitRepository = produitRepository;
         this.produitMapper = produitMapper;
+        this.s3StorageService = s3StorageService;
+        this.imageService = imageService;
     }
 
     /**
@@ -39,10 +56,22 @@ public class ProduitService {
      * @param produitDTO the entity to save.
      * @return the persisted entity.
      */
-    public ProduitDTO save(ProduitDTO produitDTO) {
+    public ProduitDTO save(ProduitDTO produitDTO, List<MultipartFile> images) throws FileIsEmptyException, FileNotImageException {
         log.debug("Request to save Produit : {}", produitDTO);
         Produit produit = produitMapper.toEntity(produitDTO);
         produit = produitRepository.save(produit);
+
+        produitDTO = produitMapper.toDto(produit);
+
+        for (MultipartFile image : images) {
+            String url = s3StorageService.saveFile(image);
+            ImageDTO imageDTO = imageService.save(new ImageDTO(url, produitDTO));
+            produitDTO.addImage(imageDTO);
+        }
+
+        produit = produitMapper.toEntity(produitDTO);
+        produitRepository.save(produit);
+
         return produitMapper.toDto(produit);
     }
 
