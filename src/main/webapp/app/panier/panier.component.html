@@ -33,4 +33,26 @@
   </div>
 
   <button (click)="validerPanier()" class="valider-button" *ngIf="produits.length > 0">Valider le panier</button>
+  <!-- panier.component.html -->
+
+<!-- panier.component.html -->
+
+<div class="panier-container">
+  <!-- ... (your existing code) -->
+
+  <div *ngIf="produitsSameCategory.length > 0" class="vous-aimerez-peut-etre">
+    <h2>Vous aimerez peut-être...</h2>
+    <div class="produits-same-category">
+      <div *ngFor="let produit of produitsSameCategory" class="produit-item" (click)=" navigateToView(produit.id)">
+        <img class="produit-image" [src]="getFirstImageUrl(produit)" alt="{{ produit.libelle }}">
+        <div class="produit-details">
+          <div class="produit-name">{{ produit.libelle }}</div>
+          <div class="produit-price">{{ produit.prixUnitaire | currency:'EUR' }}</div>
+        </div>
+        <!-- Add buttons or other elements as needed -->
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>

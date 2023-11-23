@@ -1,6 +1,7 @@
 // panier.service.ts
 
 import { Injectable } from '@angular/core';
+import { ICategory } from 'app/entities/category/category.model';
 import { IProduit } from 'app/entities/produit/produit.model';
 import { BehaviorSubject } from 'rxjs';
 
@@ -30,7 +31,9 @@ export class PanierService {
     this._produits.next([...produitsActuels, produit]);
     this.mettreAJourNombreArticles();
   }
-
+  getAllProduits(): IProduit[] {
+    return this._produits.value;
+  }
   retirerDuPanier(produit: IProduit) {
     const produitsActuels = this._produits.value;
     const nouveauxProduits = produitsActuels.filter(p => p.id !== produit.id);
