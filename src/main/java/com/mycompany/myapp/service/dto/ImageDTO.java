@@ -15,6 +15,15 @@ public class ImageDTO implements Serializable {
 
     private ProduitDTO produit;
 
+    public ImageDTO() {
+
+    }
+
+    public ImageDTO(String url, ProduitDTO produit) {
+        this.url = url;
+        this.produit = produit;
+    }
+
     public Long getId() {
         return id;
     }
@@ -69,4 +78,5 @@ public class ImageDTO implements Serializable {
             ", produit=" + getProduit() +
             "}";
     }
+
 }

@@ -107,6 +107,10 @@ public class ProduitDTO implements Serializable {
         this.images = images;
     }
 
+    public void addImage(ImageDTO image) {
+        this.images.add(image);
+    }
+
     public Integer getStock() {
         return stock;
     }
