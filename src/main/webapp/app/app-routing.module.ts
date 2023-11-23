@@ -11,6 +11,7 @@ import {PanierModule} from "./panier/panier.module";
 import {PayComponent} from "./pay/pay.component";
 import { ContactComponent } from './contact/contact.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { MescommandesComponent } from './mescommandes/mescommandes.component';
 
 @NgModule({
   imports: [
@@ -43,6 +44,10 @@ import { AboutUsComponent } from './about-us/about-us.component';
         {
           path: 'about-us',
           component: AboutUsComponent
+        },
+        {
+          path: 'mescommandes',
+          component: MescommandesComponent
         },
         {
           path: '',

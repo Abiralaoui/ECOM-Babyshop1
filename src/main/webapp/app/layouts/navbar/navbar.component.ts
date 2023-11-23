@@ -71,6 +71,9 @@ export class NavbarComponent implements OnInit {
   login(): void {
     this.router.navigate(['/login']);
   }
+  gotomescomment(): void {
+    this.router.navigate(['/mescommandes']);
+  }
   validerr() {
    
     this.router.navigate(['/contact']);
