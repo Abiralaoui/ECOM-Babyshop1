@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PanierService } from './panier.service';
 import { IProduit } from 'app/entities/produit/produit.model';
@@ -13,7 +13,7 @@ interface ProduitGroup {
 })
 export class PanierComponent implements OnInit {
   produits: IProduit[] = [];
-  constructor(private router: Router,public panierService: PanierService) { }
+  constructor(private router: Router,public panierService: PanierService,private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.panierService.produits$.subscribe((produits) => {
@@ -41,6 +41,7 @@ export class PanierComponent implements OnInit {
     console.log("Panier validé !", this.produits);
     this.router.navigate(['/pay']);
   }
+  
   get produitsGroupes(): ProduitGroup[] {
     const produitsGroupes: ProduitGroup[] = [];
     this.produits.forEach((produit) => {
@@ -60,4 +61,16 @@ export class PanierComponent implements OnInit {
   calculerTotal(): number {
     return this.produits.reduce((total, produit) => total + (produit.prixUnitaire || 0), 0);
   }
+  getFirstImageUrl(produit: IProduit): string {
+    // Check if the product has images and the first image has a URL
+    const firstImage = produit.images?.[0];
+    return firstImage?.url || '../../../content/images/img.png';
+  }
+  diminuer(produit: IProduit): void {
+   this.panierService.retirerDuPanier2(produit);
+  }
+
+  ajouter(produit: IProduit): void {
+    this.panierService.ajouterAuPanier(produit);
+}
 }

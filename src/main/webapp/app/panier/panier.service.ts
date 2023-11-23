@@ -1,8 +1,8 @@
 // panier.service.ts
+
 import { Injectable } from '@angular/core';
 import { IProduit } from 'app/entities/produit/produit.model';
 import { BehaviorSubject } from 'rxjs';
-
 
 @Injectable({
   providedIn: 'root',
@@ -37,4 +37,18 @@ export class PanierService {
     this._produits.next(nouveauxProduits);
     this.mettreAJourNombreArticles();
   }
+
+  retirerDuPanier2(produit: IProduit) {
+    const produitsActuels = this._produits.value;
+    const index = produitsActuels.findIndex(p => p.id === produit.id);
+
+    if (index !== -1) {
+      // If the product is found, remove only that instance
+      const nouveauxProduits = [...produitsActuels.slice(0, index), ...produitsActuels.slice(index + 1)];
+      this._produits.next(nouveauxProduits);
+      this.mettreAJourNombreArticles();
+    }
+  }
+
+  
 }

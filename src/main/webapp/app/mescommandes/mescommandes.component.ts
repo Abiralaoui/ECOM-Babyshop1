@@ -11,7 +11,7 @@ import { ClientCommandeService } from './client-commande.service';
 })
 export class MescommandesComponent implements OnInit {
 
-  client: IClient | undefined ;
+
   commandes: ICommande[] = [];
 
   constructor(
