@@ -37,3 +37,47 @@
   border: 1px solid #45a049; /* Nouvelle bordure au survol */
   /* Ajoutez d'autres styles au survol au besoin */
 }
+/* Ajoutez ces styles dans votre feuille de style CSS */
+
+/* Ajoutez ces styles dans votre feuille de style CSS */
+.avis-section {
+  margin-top: 20px;
+}
+
+.avis-title {
+  font-size: 1.5rem;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.avis-list {
+  list-style: none;
+  padding: 0;
+}
+
+.avis-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.avis-note {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.avis-commentaire {
+  margin-bottom: 5px;
+}
+
+.avis-date {
+  color: #6c757d;
+}
+
+/* Styles pour le message "Aucun avis disponible" */
+.no-avis-message {
+  color: #6c757d;
+}
+

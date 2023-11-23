@@ -48,7 +48,12 @@ export class AvisService {
       .patch<RestAvis>(`${this.resourceUrl}/${this.getAvisIdentifier(avis)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
-
+  getAvisByProduitId(produitId: number): Observable<EntityArrayResponseType> {
+    const options = createRequestOption({ produitId });
+    return this.http
+      .get<RestAvis[]>(`${this.resourceUrl}/${produitId}`, { params: options, observe: 'response' })
+      .pipe(map(res => this.convertResponseArrayFromServer(res)));
+  }
   find(id: number): Observable<EntityResponseType> {
     return this.http
       .get<RestAvis>(`${this.resourceUrl}/${id}`, { observe: 'response' })
