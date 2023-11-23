@@ -68,9 +68,9 @@ public class ProduitResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new produitDTO, or with status {@code 400 (Bad Request)} if the produit has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping(value = "/produits", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/produits")
     public ResponseEntity<ProduitDTO> createProduit(@ModelAttribute ProduitDTO produitDTO,
-                                                    @RequestPart List<MultipartFile> imagesStream) throws URISyntaxException, FileIsEmptyException, FileNotImageException {
+                                                    @RequestPart(required = false) List<MultipartFile> imagesStream) throws URISyntaxException, FileIsEmptyException, FileNotImageException {
         log.debug("REST request to save Produit : {}", produitDTO);
         if (produitDTO.getId() != null) {
             throw new BadRequestAlertException("A new produit cannot already have an ID", ENTITY_NAME, "idexists");

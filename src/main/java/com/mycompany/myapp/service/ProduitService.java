@@ -61,16 +61,18 @@ public class ProduitService {
         Produit produit = produitMapper.toEntity(produitDTO);
         produit = produitRepository.save(produit);
 
-        produitDTO = produitMapper.toDto(produit);
+        if (images != null) {
+            produitDTO = produitMapper.toDto(produit);
 
-        for (MultipartFile image : images) {
-            String url = s3StorageService.saveFile(image);
-            ImageDTO imageDTO = imageService.save(new ImageDTO(url, produitDTO));
-            produitDTO.addImage(imageDTO);
+            for (MultipartFile image : images) {
+                String url = s3StorageService.saveFile(image);
+                ImageDTO imageDTO = imageService.save(new ImageDTO(url, produitDTO));
+                produitDTO.addImage(imageDTO);
+            }
+
+            produit = produitMapper.toEntity(produitDTO);
+            produitRepository.save(produit);
         }
-
-        produit = produitMapper.toEntity(produitDTO);
-        produitRepository.save(produit);
 
         return produitMapper.toDto(produit);
     }
