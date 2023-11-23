@@ -49,10 +49,13 @@
 
       <div class="row g-4">
         <!-- Affichage des produits -->
-        <div class="search-container mb-3">
-          <input type="text" class="form-control" [(ngModel)]="searchTerm" (input)="onSearchInputChange()" placeholder="Rechercher un produit...">
-          <button class="btn btn-primary" (click)="search()">Rechercher</button>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control rounded-end" [(ngModel)]="searchTerm" (input)="onSearchInputChange()" placeholder="Rechercher un produit...">
+          <button  style="background-color: dimgray" class="btn  rounded-start" (click)="search()">
+            <fa-icon icon="search" [fixedWidth]="true"></fa-icon>
+          </button>
         </div>
+
         <div class="col-md-2 p-2" *ngFor="let produit of produits; trackBy: trackId" data-cy="entityTable">
           <!-- Contenu de chaque produit -->
           <!--<div class="card mb-3 h-100 border-1" style="max-width: 200px;"  (click)="navigateToView(produit.id)">
