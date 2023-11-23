@@ -49,16 +49,13 @@ public class ProduitResource {
 
     private final ProduitQueryService produitQueryService;
 
-    private final S3StorageService s3StorageService;
 
     public ProduitResource(ProduitService produitService,
                            ProduitRepository produitRepository,
-                           ProduitQueryService produitQueryService,
-                           S3StorageService s3StorageService) {
+                           ProduitQueryService produitQueryService) {
         this.produitService = produitService;
         this.produitRepository = produitRepository;
         this.produitQueryService = produitQueryService;
-        this.s3StorageService = s3StorageService;
     }
 
     /**
