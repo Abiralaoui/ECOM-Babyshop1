@@ -3,9 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IProduit } from '../produit.model';
 import {AccountService} from "../../../core/auth/account.service";
-import {ProduitService} from "../service/produit.service";
+import {EntityArrayResponseType, ProduitService} from "../service/produit.service";
 import {LigneCommandeService} from "../../ligne-commande/service/ligne-commande.service";
 import { PanierService } from 'app/panier/panier.service';
+import { AvisService } from 'app/entities/avis/service/avis.service';
+import { IAvis } from 'app/entities/avis/avis.model';
 
 @Component({
   selector: 'jhi-produit-detail',
@@ -27,13 +29,29 @@ import { PanierService } from 'app/panier/panier.service';
 export class ProduitDetailComponent implements OnInit {
 
   @Input() produit: IProduit | undefined;
-  constructor(private panierService: PanierService,protected LigneCommandeService: LigneCommandeService,protected activatedRoute: ActivatedRoute ,protected accountService: AccountService ) {
+  // ProduitDetailComponent
+
+avisList: IAvis[] = [];
+
+  constructor(private avisService: AvisService,private panierService: PanierService,protected LigneCommandeService: LigneCommandeService,protected activatedRoute: ActivatedRoute ,protected accountService: AccountService ) {
 
   }
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ produit }) => {
       this.produit = produit;
+  
+      // Récupérez les avis liés au produit
+      if (this.produit && this.produit.id) {
+        this.avisService.getAvisByProduitId(this.produit.id).subscribe(
+          (res: EntityArrayResponseType) => {
+            this.avisList = res.body || [];
+          },
+          error => {
+            console.error('Error fetching avis for produit', error);
+          }
+        );
+      }
     });
   }
 
