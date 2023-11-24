@@ -41,13 +41,13 @@
         </dd>
       </dl>
 
-      <button type="submit" style="padding: 7px; border-radius: 5px;" (click)="previousState()" class="btn btn-info custom-button" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
-      </button>
+<!--      <button type="submit" style="padding: 7px; border-radius: 5px;" (click)="previousState()" class="btn btn-info custom-button" data-cy="entityDetailsBackButton">-->
+<!--        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>-->
+<!--      </button>-->
 
       <button
         *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"
-        style="margin-left: 18px; padding: 6px; height: 41px; border-color: #96d7ff; background-color: #96d7ff; color: #fdfdfd; border-radius: 5px;"
+        style="margin-left: -4px; padding: 6px; height: 41px; margin-top: 16px; border-color: #96d7ff; background-color: #96d7ff; color: #fdfdfd; border-radius: 5px;"
         class="add-to-cart-button"
         data-cy="addToCartButton"
         (click)="ajouterAuPanier()">

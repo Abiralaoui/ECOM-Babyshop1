@@ -49,12 +49,7 @@
             </a>
           </li>
         </div>
-          <div> 
-            <li class="nav-item d-flex align-items-center">
-              <a class="nav-link" (click)="gotomescomment()">
-            
-            <span >mes commande</span>
-          </a></li></div>
+
         <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
 
 
@@ -86,7 +81,7 @@
             [routerLinkActiveOptions]="{ exact: true }"
             style="display: flex !important; height: 100%; align-items: center;"
           >
-            <div>
+            <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <li
                 *ngSwitchCase="true"
                 ngbDropdown
@@ -96,9 +91,9 @@
                 [routerLinkActiveOptions]="{ exact: true }"
               >
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">
-            <span>
+            <span  *jhiHasAnyAuthority="'ROLE_ADMIN'">
               <fa-icon icon="th-list"></fa-icon>
-              <span jhiTranslate="global.menu.entities.main">Entités</span>
+              <span  jhiTranslate="global.menu.entities.main">Entités</span>
             </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
@@ -286,6 +281,16 @@
                 </a>
               </li>
             </div>
+        <div>
+          <li class="nav-item d-flex align-items-center">
+            <a class="nav-link" (click)="gotomescomment()">
+               <span   style="margin-top: 40px" *jhiHasAnyAuthority="'ROLE_USER'" >
+                 <fa-icon icon="shop" [fixedWidth]="true"></fa-icon>
+               </span>
+
+            </a>
+          </li>
+        </div>
 
             <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu" data-cy="accountMenu">
             <span *ngIf="!account?.imageUrl">
@@ -305,13 +310,13 @@
                   (click)="collapseNavbar()"
                   data-cy="settings"
                 >
-                  <fa-icon icon="wrench" [fixedWidth]="true"></fa-icon>
+                  <fa-icon icon="user" [fixedWidth]="true"></fa-icon>
                   <span >Profil</span>
                 </a>
               </li>
               <li *ngSwitchCase="true">
                 <a class="dropdown-item" (click)="gotomescomment()">
-                  <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>
+                  <fa-icon icon="shop" [fixedWidth]="true"></fa-icon>
                   <span >mes commande</span>
                 </a></li>
               <li *ngSwitchCase="true">
@@ -326,7 +331,7 @@
                   <span jhiTranslate="global.menu.account.password">Mot de passe</span>
                 </a>
               </li>
-             
+
               <li *ngSwitchCase="true">
                 <a class="dropdown-item" (click)="logout()" id="logout" data-cy="logout">
                   <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>

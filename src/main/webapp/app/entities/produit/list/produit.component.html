@@ -3,10 +3,10 @@
 
     <div class="col-md-2">
      <!-- ...  <jhi-category></jhi-category>-->
-      <div class="filter-container mb-3">      
+      <div class="filter-container mb-3">
         <button class="btn btn-secondary" (click)="applyFilter('prix', 'asc')">Prix Croissant</button>
         <button class="btn btn-secondary" (click)="applyFilter('prix', 'desc')">Prix Décroissant</button>
-      
+
         <button class="btn btn-secondary" (click)="applyFilter('taille', 'asc')">Taille Croissante</button>
         <button class="btn btn-secondary" (click)="applyFilter('taille', 'desc')">Taille Décroissante</button>
       </div>
@@ -15,9 +15,6 @@
 
     <!-- Colonne contenant les produits (3/5) -->
     <div class="col-md-10">
-      <h2 id="page-heading" data-cy="ProduitHeading">
-        <span jhiTranslate="mainApp.produit.home.title">tetete</span>
-
         <div class="d-flex justify-content-end">
           <!-- Bouton Actualiser la liste -->
           <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading"
@@ -38,7 +35,7 @@
             <span jhiTranslate="mainApp.produit.home.createLabel"> Créer un nouveau Produit </span>
           </button>
         </div>
-      </h2>
+
 
       <jhi-alert-error></jhi-alert-error>
       <jhi-alert></jhi-alert>
