@@ -11,6 +11,7 @@ import { SortService } from 'app/shared/sort/sort.service';
 import {AccountService} from "../../../core/auth/account.service";
 import {Authority} from "../../../config/authority.constants";
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import {PanierService} from "../../../panier/panier.service";
 
 @Component({
   selector: 'jhi-produit',
@@ -33,8 +34,8 @@ export class ProduitComponent implements OnInit {
     public router: Router,
     protected sortService: SortService,
     protected modalService: NgbModal,
-    protected accountService: AccountService
-
+    protected accountService: AccountService,
+    protected panierService: PanierService
   ) {
 
   }
@@ -235,5 +236,15 @@ export class ProduitComponent implements OnInit {
   remove() {
     // Implement your 'remove' click logic here
     this.isClicked = false;
+  }
+
+  ajouterAuPanier(produit: IProduit, event: Event) {
+    if (produit) {
+      this.panierService.ajouterAuPanier(produit);
+    }
+
+    console.log('Produit ajouté au panier :', produit);
+
+    event.stopPropagation();
   }
 }

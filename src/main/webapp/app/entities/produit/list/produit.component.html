@@ -3,10 +3,10 @@
 
     <div class="col-md-2">
      <!-- ...  <jhi-category></jhi-category>-->
-      <div class="filter-container mb-3">      
+      <div class="filter-container mb-3">
         <button class="btn btn-secondary" (click)="applyFilter('prix', 'asc')">Prix Croissant</button>
         <button class="btn btn-secondary" (click)="applyFilter('prix', 'desc')">Prix Décroissant</button>
-      
+
         <button class="btn btn-secondary" (click)="applyFilter('taille', 'asc')">Taille Croissante</button>
         <button class="btn btn-secondary" (click)="applyFilter('taille', 'desc')">Taille Décroissante</button>
       </div>
@@ -117,7 +117,7 @@
                   <div class="details">
                     <div class="product-price-client">{{ produit.prixUnitaire + " $" }}</div>
                   </div>
-                  <div class="buy" (click)="test()"><i class="material-icons"><fa-icon icon="shopping-cart"></fa-icon></i></div>
+                  <div class="buy" (click)="ajouterAuPanier(produit, $event)"><i class="material-icons"><fa-icon icon="shopping-cart"></fa-icon></i></div>
                 </div>
                 <div class="right">
                   <div class="done"><i class="material-icons">done</i></div>
