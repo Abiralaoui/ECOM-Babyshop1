@@ -26,6 +26,7 @@ export class ProduitComponent implements OnInit {
   searchTerm: string = '';
   prixFilter: 'asc' | 'desc' | null = null;
   tailleFilter: 'asc' | 'desc' | null = null;
+  currentCategory: number | null = null;
   constructor(
     protected produitService: ProduitService,
     protected activatedRoute: ActivatedRoute,
@@ -84,6 +85,11 @@ export class ProduitComponent implements OnInit {
     this.handleNavigation(this.predicate, this.ascending);
   }
 
+  currentCategoryUpdate(categoryId: number): void {
+    this.currentCategory = (categoryId===this.currentCategory) ? null : categoryId;
+    this.load();
+  }
+
   protected loadFromBackendWithRouteInformations(): Observable<EntityArrayResponseType> {
     return combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data]).pipe(
       tap(([params, data]) => this.fillComponentAttributeFromRoute(params, data)),
@@ -112,9 +118,12 @@ export class ProduitComponent implements OnInit {
 
   protected queryBackend(predicate?: string, ascending?: boolean): Observable<EntityArrayResponseType> {
     this.isLoading = true;
+    let criteria = (this.currentCategory == null) ? {} :
+                      {key: 'category.contains', value:this.currentCategory};
     const queryObject = {
       eagerload: true,
       sort: this.getSortQueryParam(predicate, ascending),
+      criteria
     };
     return this.produitService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
@@ -190,24 +199,24 @@ export class ProduitComponent implements OnInit {
         // Vérifiez si 'prixUnitaire' est défini et non null
         const prixA = a.prixUnitaire !== undefined && a.prixUnitaire !== null ? a.prixUnitaire : 0;
         const prixB = b.prixUnitaire !== undefined && b.prixUnitaire !== null ? b.prixUnitaire : 0;
-    
+
         const order = this.prixFilter === 'asc' ? 1 : -1;
         return (prixA - prixB) * order;
       });
     }
-    
+
 
     if (this.tailleFilter) {
       this.produits = this.produits?.sort((a, b) => {
         // Vérifiez si 'taille' est défini et non null
         const tailleA = a.taille !== undefined && a.taille !== null ? a.taille : 0;
         const tailleB = b.taille !== undefined && b.taille !== null ? b.taille : 0;
-        
+
         const order = this.tailleFilter === 'asc' ? 1 : -1;
         return (tailleA - tailleB) * order;
       });
     }
-    
+
   }
   applyFilter(type: 'prix' | 'taille', order: 'asc' | 'desc'): void {
     if (type === 'prix') {
@@ -215,7 +224,7 @@ export class ProduitComponent implements OnInit {
     } else if (type === 'taille') {
       this.tailleFilter = order;
     }
-  
+
     this.search(); // Appliquez immédiatement le filtre
   }
   test() {
