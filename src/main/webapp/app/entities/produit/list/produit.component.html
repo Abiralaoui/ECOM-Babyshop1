@@ -1,16 +1,30 @@
 <div class="container-fluid global-background-color">
   <div class="row">
 
-    <div class="col-md-2">
-     <!-- ...  <jhi-category></jhi-category>-->
+    <div  style="background-color: white" class="col-md-2">
+      <!-- ...  <jhi-category></jhi-category>-->
       <div class="filter-container mb-3">
-        <button class="btn btn-secondary" (click)="applyFilter('prix', 'asc')">Prix Croissant</button>
-        <button class="btn btn-secondary" (click)="applyFilter('prix', 'desc')">Prix Décroissant</button>
-
-        <button class="btn btn-secondary" (click)="applyFilter('taille', 'asc')">Taille Croissante</button>
-        <button class="btn btn-secondary" (click)="applyFilter('taille', 'desc')">Taille Décroissante</button>
+        <h4 style="font-weight: bold">Filtrer par </h4>
+        <form style="gap: 3">
+          <label style="color: black;font-size: 17px; font-weight: bolder;margin-bottom: 5px;">
+            <input   type="checkbox" (change)="applyFilter('prix', 'asc')" /> Prix Croissant
+          </label>
+          <br />
+          <label style="color: black;font-size: 17px; font-weight: bolder;margin-bottom: 5px;">
+            <input type="checkbox" (change)="applyFilter('prix', 'desc')" /> Prix Décroissant
+          </label>
+          <br />
+          <label style="color: black;font-size: 17px; font-weight: bolder;  margin-top: 5px;">
+            <input type="checkbox" (change)="applyFilter('taille', 'asc')" /> Taille Croissante
+          </label>
+          <br />
+          <label style="color: black;font-size: 17px; font-weight: bolder; margin-top: 5px;;">
+            <input type="checkbox" (change)="applyFilter('taille', 'desc')" /> Taille Décroissante
+          </label>
+        </form>
       </div>
     </div>
+
 
 
     <!-- Colonne contenant les produits (3/5) -->
