@@ -12,6 +12,8 @@ import {AccountService} from "../../../core/auth/account.service";
 import {Authority} from "../../../config/authority.constants";
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import {PanierService} from "../../../panier/panier.service";
+import {CategoryService} from "../../category/service/category.service";
+import {ICategory} from "../../category/category.model";
 
 @Component({
   selector: 'jhi-produit',
@@ -19,6 +21,7 @@ import {PanierService} from "../../../panier/panier.service";
 })
 export class ProduitComponent implements OnInit {
   produits?: IProduit[];
+  categories?: ICategory[];
   isLoading = false;
   showButton: boolean = false;
   predicate = 'id';
@@ -28,6 +31,7 @@ export class ProduitComponent implements OnInit {
   prixFilter: 'asc' | 'desc' | null = null;
   tailleFilter: 'asc' | 'desc' | null = null;
   currentCategory: number | null = null;
+
   constructor(
     protected produitService: ProduitService,
     protected activatedRoute: ActivatedRoute,
@@ -35,7 +39,8 @@ export class ProduitComponent implements OnInit {
     protected sortService: SortService,
     protected modalService: NgbModal,
     protected accountService: AccountService,
-    protected panierService: PanierService
+    protected panierService: PanierService,
+    protected categoryService: CategoryService
   ) {
 
   }
@@ -44,12 +49,24 @@ export class ProduitComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
+    this.fetchCategories(); // Call the method to fetch categories
     this.activatedRoute.queryParamMap.pipe(
       debounceTime(300), // délai d'attente de 300 ms
       distinctUntilChanged() // n'émet pas de nouveaux éléments s'ils sont égaux au précédent
     ).subscribe(() => {
       this.search();
     });
+  }
+
+  fetchCategories(): void {
+    this.categoryService.query().subscribe(
+      (response: EntityArrayResponseType) => {
+        this.categories = response.body ?? [];
+      },
+      (error) => {
+        console.error('Error fetching categories:', error);
+      }
+    );
   }
 
   delete(produit: IProduit): void {
@@ -86,10 +103,10 @@ export class ProduitComponent implements OnInit {
     this.handleNavigation(this.predicate, this.ascending);
   }
 
-  currentCategoryUpdate(categoryId: number): void {
+/*  currentCategoryUpdate(categoryId: number): void {
     this.currentCategory = (categoryId===this.currentCategory) ? null : categoryId;
     this.load();
-  }
+  }*/
 
   protected loadFromBackendWithRouteInformations(): Observable<EntityArrayResponseType> {
     return combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data]).pipe(
@@ -156,9 +173,12 @@ export class ProduitComponent implements OnInit {
     this.selectedProduct = product;
 
   }
+
   showBuyNow: boolean = false;
+
   buyNow(produit: any): void {
   }
+
   truncateDescription(description: string | null | undefined): string {
     if (!description) {
       return ''; // Ou tout autre traitement que vous souhaitez pour les valeurs nulles ou indéfinies
@@ -229,12 +249,10 @@ export class ProduitComponent implements OnInit {
     this.search(); // Appliquez immédiatement le filtre
   }
   test() {
-    // Implement your 'buy' click logic here
     this.isClicked = true;
   }
 
   remove() {
-    // Implement your 'remove' click logic here
     this.isClicked = false;
   }
 
@@ -247,4 +265,27 @@ export class ProduitComponent implements OnInit {
 
     event.stopPropagation();
   }
+
+  selectedCategories: number[] = [];
+
+  onCategoryChange(event: any, category: ICategory): void {
+    const categoryId = category.id;
+
+    if (event.target.checked) {
+      this.selectedCategories.push(categoryId);
+    } else {
+      this.selectedCategories = this.selectedCategories.filter(id => id !== categoryId);
+    }
+
+    this.currentCategoryUpdate(this.selectedCategories.length > 0 ? this.selectedCategories[0] : -1);
+  }
+
+  currentCategoryUpdate(categoryId: number): void {
+    this.selectedCategories.push(categoryId);
+
+    this.produits = this.cachedProducts?.filter((produit) => {
+      return produit.categories?.some(category => this.selectedCategories.includes(category.id));
+    });
+  }
+
 }
