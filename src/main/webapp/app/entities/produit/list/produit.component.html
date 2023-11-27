@@ -7,11 +7,11 @@
         <h4 style="font-weight: bold">Filtrer par </h4>
         <form style="gap: 3">
           <label style="color: black;font-size: 17px; font-weight: bolder;margin-bottom: 5px;">
-            <input   type="checkbox" (change)="applyFilter('prix', 'asc')" /> Prix Croissant
+            <input   type="radio" (change)="applyFilter('prix', 'asc')" /> Prix Croissant
           </label>
           <br />
           <label style="color: black;font-size: 17px; font-weight: bolder;margin-bottom: 5px;">
-            <input type="checkbox" (change)="applyFilter('prix', 'desc')" /> Prix Décroissant
+            <input type="radio" (change)="applyFilter('prix', 'desc')" /> Prix Décroissant
           </label>
           <br />
           <label style="color: black;font-size: 17px; font-weight: bolder;  margin-top: 5px;">
