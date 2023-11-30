@@ -13,7 +13,7 @@ interface ProduitGroup {
 })
 export class PanierComponent implements OnInit {
   produits: IProduit[] = [];
-  produitsSameCategory: IProduit[] = []; 
+  produitsSameCategory: IProduit[] = [];
   constructor(private router: Router,public panierService: PanierService,private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -61,17 +61,18 @@ export class PanierComponent implements OnInit {
 
           return false;
         });}}}
-      
+
   // Méthode pour modifier la quantité d'un produit dans le panier
   navigateToView(productId: number): void {
     this.router.navigate(['/produit', productId, 'view']);
   }
   validerPanier() {
-    // Mettez ici la logique pour valider le panier, par exemple, rediriger vers une page de paiement.
-    console.log("Panier validé !", this.produits);
-    this.router.navigate(['/pay']);
+    // Calcul du total ici
+    const total = this.calculerTotal();
+    // Redirection vers la page de paiement avec le total en tant que paramètre
+    this.router.navigate(['/pay'], { queryParams: { total: total } });
   }
-  
+
   get produitsGroupes(): ProduitGroup[] {
     const produitsGroupes: ProduitGroup[] = [];
     this.produits.forEach((produit) => {

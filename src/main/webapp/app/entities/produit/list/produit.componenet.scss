@@ -16,7 +16,30 @@ $easing: cubic-bezier(0.4, 0, 0.2, 1);
 @mixin shadow-dark {
   box-shadow: 0 36px 28px -20px rgba($black, 0.20);
 }
+.filter-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
 
+
+
+label {
+  color: black;
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+input[type="radio"] {
+  margin-right: 5px;
+}
+
+input[type="radio"]:checked {
+  transform: scale(1.2); /* Agrandir le bouton radio sélectionné pour le mettre en évidence */
+}
 %caps {
   font-size: 0.8em;
   text-transform: uppercase;

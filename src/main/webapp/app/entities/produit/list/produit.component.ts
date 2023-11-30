@@ -31,6 +31,7 @@ export class ProduitComponent implements OnInit {
   prixFilter: 'asc' | 'desc' | null = null;
   tailleFilter: 'asc' | 'desc' | null = null;
   currentCategory: number | null = null;
+  page: number = 1;
 
   constructor(
     protected produitService: ProduitService,
@@ -287,5 +288,6 @@ export class ProduitComponent implements OnInit {
       return produit.categories?.some(category => this.selectedCategories.includes(category.id));
     });
   }
+  loadPage(page: number) {}
 
 }

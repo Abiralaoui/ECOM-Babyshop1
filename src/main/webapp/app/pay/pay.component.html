@@ -6,6 +6,23 @@
       <div class="container"><h2>Entrer vos données bancaires pour payer votre commande:</h2></div>
       <div class="container formulaires" style="justify-content: left;">
         <div class="col-lg-7" style="margin-right: 50px;">
+          <div
+            *jhiHasAnyAuthority="'ROLE_ADMIN'"  class="card mt-4">
+            <div class="card-header space">
+              <h5 class="card-title">Information personnel </h5>
+            </div>
+            <div class="card-body">
+              <div class="input-group mt-3">
+                <span class="input-group-text"> Email</span>
+                <input  formControlName="adresse" type="text" placeholder="victor Hugo rue 23" maxlength="50" class="form-control">
+              </div>
+
+              <div class="input-group mt-3">
+                <span class="input-group-text"> Full name</span>
+                <input formControlName="complementAdresse" type="text" class="form-control">
+              </div>
+            </div>
+          </div>
           <div class="card mt-4">
             <div class="card-header space">
               <h5 class="card-title">Adresse de livraison</h5>
@@ -115,7 +132,7 @@
 
                 <div class="float-right text-right">
                   <h4>Total à payer :</h4>
-                  <h3>${{ this.getCartTotal() }}</h3>
+                  <h3>{{ total | currency:'EUR' }}</h3>
                 </div>
 
               </div>

@@ -8,7 +8,7 @@ import {AccountService} from "../core/auth/account.service";
 import {UserService} from "../entities/user/user.service";
 import {IUser} from "../admin/user-management/user-management.model";
 import {ClientService} from "../entities/client/service/client.service";
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 
@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./pay.component.scss']
 })
 export class PayComponent implements OnInit {
+  total: number=0;
   paiementIsOk = false;
   numero: FormControl = new FormControl('',
     [Validators.required,
@@ -64,6 +65,7 @@ export class PayComponent implements OnInit {
   client: IClient = {} as IClient;
 
   constructor(
+    private route: ActivatedRoute,
     private commandeService: CommandeService,
     // private cartService: CartService,
     private formBuilder: FormBuilder,
@@ -90,6 +92,9 @@ export class PayComponent implements OnInit {
     //       });
     //     }
     //   });
+    this.route.queryParams.subscribe(params => {
+      this.total = params['total'];
+    });
 
   }
 
