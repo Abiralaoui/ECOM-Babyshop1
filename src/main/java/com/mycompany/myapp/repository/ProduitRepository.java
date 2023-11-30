@@ -1,8 +1,10 @@
 package com.mycompany.myapp.repository;
 
+import com.mycompany.myapp.domain.Category;
 import com.mycompany.myapp.domain.Produit;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -29,4 +31,17 @@ public interface ProduitRepository
     default Page<Produit> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
+
+    default List<Produit> findAllByCategories(List<Category> categories, long categoryCount) {
+        return this.fetchBagRelationships(findProductsByAllCategories(categories, categoryCount));
+    }
+
+    @Query("SELECT DISTINCT p FROM Produit p " +
+        "JOIN p.categories c " +
+        "WHERE c IN :categories " +
+        "GROUP BY p " +
+        "HAVING COUNT(DISTINCT c) = :categoryCount")
+    List<Produit> findProductsByAllCategories(@Param("categories") List<Category> categories,
+                                             @Param("categoryCount") long categoryCount);
+
 }

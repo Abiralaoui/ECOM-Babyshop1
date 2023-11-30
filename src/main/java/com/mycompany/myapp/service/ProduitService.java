@@ -67,7 +67,9 @@ public class ProduitService {
             for (MultipartFile image : images) {
                 String url = s3StorageService.saveFile(image);
                 ImageDTO imageDTO = imageService.save(new ImageDTO(url, produitDTO));
+/*
                 produitDTO.addImage(imageDTO);
+*/
             }
 
             produit = produitMapper.toEntity(produitDTO);

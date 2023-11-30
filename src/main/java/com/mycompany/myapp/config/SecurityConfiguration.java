@@ -86,7 +86,7 @@ public class SecurityConfiguration {
             .antMatchers("/api/account/reset-password/finish").permitAll()
             .antMatchers("/api/categories").permitAll()
             .antMatchers("/api/admin/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/api/produits/**").permitAll()//TO DO ; get only
+            .antMatchers("/api/produits/**").permitAll()//TODO : get only
             .antMatchers("/api/produit/**").permitAll()
             .antMatchers("/api/client/**").permitAll()
             .antMatchers("/api/**").authenticated()

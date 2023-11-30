@@ -33,7 +33,6 @@ public class ProduitDTO implements Serializable {
 
     private Set<CategoryDTO> categories = new HashSet<>();
 
-    private Set<ImageDTO> images = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -99,18 +98,6 @@ public class ProduitDTO implements Serializable {
         this.categories = categories;
     }
 
-    public Set<ImageDTO> getImages() {
-        return images;
-    }
-
-    public void setImages(Set<ImageDTO> images) {
-        this.images = images;
-    }
-
-    public void addImage(ImageDTO image) {
-        this.images.add(image);
-    }
-
     public Integer getStock() {
         return stock;
     }
@@ -154,7 +141,6 @@ public class ProduitDTO implements Serializable {
             ", taille=" + taille +
             ", couleur='" + couleur + '\'' +
             ", categories=" + categories +
-            ", images=" + images +
             '}';
     }
 }

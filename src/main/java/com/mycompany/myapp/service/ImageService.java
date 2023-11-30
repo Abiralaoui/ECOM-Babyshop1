@@ -109,4 +109,11 @@ public class ImageService {
         log.debug("Request to delete Image : {}", id);
         imageRepository.deleteById(id);
     }
+
+    public List<String> findUrlsByProductId(Long id) {
+        log.debug("Request image urls by product id : " + id);
+
+        return imageRepository.findByProduitId(id).stream().map(image -> image.getUrl()).collect(Collectors.toList());
+    }
+
 }

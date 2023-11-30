@@ -15,11 +15,10 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface ProduitMapper extends EntityMapper<ProduitDTO, Produit> {
-    @Mapping(target = "images", source = "images", qualifiedByName = "imageIdSet")
+
     @Mapping(target = "categories", source = "categories", qualifiedByName = "categoryIdSet")
     ProduitDTO toDto(Produit s);
 
-    @Mapping(target = "removeImage", ignore = true)
     @Mapping(target = "removeCategory", ignore = true)
     Produit toEntity(ProduitDTO produitDTO);
 
@@ -34,13 +33,4 @@ public interface ProduitMapper extends EntityMapper<ProduitDTO, Produit> {
         return category.stream().map(this::toDtoCategoryId).collect(Collectors.toSet());
     }
 
-    @Named("imageId")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "id", source = "id")
-    ImageDTO toDtoImageId(Image image);
-
-    @Named("imageIdSet")
-    default Set<ImageDTO> toDtoImageIdSet(Set<Image> image) {
-        return image.stream().map(this::toDtoImageId).collect(Collectors.toSet());
-    }
 }

@@ -1,18 +1,20 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.repository.ProduitRepository;
+import com.mycompany.myapp.service.ImageService;
 import com.mycompany.myapp.service.ProduitQueryService;
 import com.mycompany.myapp.service.ProduitService;
-import com.mycompany.myapp.service.S3StorageService;
 import com.mycompany.myapp.service.criteria.ProduitCriteria;
+import com.mycompany.myapp.service.dto.CategoryDTO;
 import com.mycompany.myapp.service.dto.ProduitDTO;
+import com.mycompany.myapp.service.mapper.CategoryMapper;
+import com.mycompany.myapp.service.mapper.ProduitMapper;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -20,10 +22,9 @@ import com.mycompany.myapp.web.rest.errors.FileIsEmptyException;
 import com.mycompany.myapp.web.rest.errors.FileNotImageException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tech.jhipster.web.util.HeaderUtil;
@@ -49,13 +50,17 @@ public class ProduitResource {
 
     private final ProduitQueryService produitQueryService;
 
+    private final ImageService imageService;
+
 
     public ProduitResource(ProduitService produitService,
                            ProduitRepository produitRepository,
-                           ProduitQueryService produitQueryService) {
+                           ProduitQueryService produitQueryService,
+                           ImageService imageService) {
         this.produitService = produitService;
         this.produitRepository = produitRepository;
         this.produitQueryService = produitQueryService;
+        this.imageService = imageService;
     }
 
     /**
@@ -203,5 +208,28 @@ public class ProduitResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @Autowired
+    CategoryMapper mapper;
+
+    @Autowired
+    ProduitMapper produitMapper;
+
+    @GetMapping("/produits/categories")
+    public ResponseEntity<List<ProduitDTO>> getProduitsByCategories(@RequestBody List<CategoryDTO> categories) {
+        log.info(categories.toString());
+        return ResponseEntity.ok().body(
+                produitMapper.toDto(produitRepository.findAllByCategories(mapper.toEntity(categories), categories.size()))
+        );
+    }
+
+    @GetMapping("/produits/{id}/images")
+    public ResponseEntity<List<String>> getImagesUrlByProductId(@PathVariable Long id) {
+        log.info("Fetching image urls corresponding to product with id " + id);
+
+        return ResponseEntity.ok().body(
+            imageService.findUrlsByProductId(id)
+        );
     }
 }
