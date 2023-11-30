@@ -21,7 +21,6 @@ export class LigneCommandeService {
   create(ligneCommande: NewLigneCommande): Observable<EntityResponseType> {
     return this.http.post<ILigneCommande>(this.resourceUrl, ligneCommande, { observe: 'response' });
   }
-
   update(ligneCommande: ILigneCommande): Observable<EntityResponseType> {
     return this.http.put<ILigneCommande>(`${this.resourceUrl}/${this.getLigneCommandeIdentifier(ligneCommande)}`, ligneCommande, {
       observe: 'response',

@@ -8,6 +8,7 @@ import {LigneCommandeService} from "../../ligne-commande/service/ligne-commande.
 import { PanierService } from 'app/panier/panier.service';
 import { AvisService } from 'app/entities/avis/service/avis.service';
 import { IAvis } from 'app/entities/avis/avis.model';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'jhi-produit-detail',
@@ -32,17 +33,21 @@ export class ProduitDetailComponent implements OnInit {
   // ProduitDetailComponent
 
 avisList: IAvis[] = [];
+  images: string[] | undefined;
 
-  constructor(private avisService: AvisService,private panierService: PanierService,protected LigneCommandeService: LigneCommandeService,protected activatedRoute: ActivatedRoute ,protected accountService: AccountService ) {
+  constructor( private produitService:ProduitService,private avisService: AvisService,private panierService: PanierService,protected LigneCommandeService: LigneCommandeService,protected activatedRoute: ActivatedRoute ,protected accountService: AccountService ) {
 
   }
 
   ngOnInit(): void {
+
     this.activatedRoute.data.subscribe(({ produit }) => {
       this.produit = produit;
-  
+
       // Récupérez les avis liés au produit
+      this.loadProduitImages();
       if (this.produit && this.produit.id) {
+
         this.avisService.getAvisByProduitId(this.produit.id).subscribe(
           (res: EntityArrayResponseType) => {
             this.avisList = res.body || [];
@@ -58,13 +63,23 @@ avisList: IAvis[] = [];
   previousState(): void {
     window.history.back();
   }
-
+  loadProduitImages(): void {
+    this.produitService.getImagesForProduit(this.produit?.id).subscribe(
+      (images) => {
+       this.images=images;
+        console.log('Images du produit:', this.images);
+      },
+      (error) => {
+        console.error('Une erreur s\'est produite lors du chargement des images du produit:', error);
+      }
+    );
+  }
 
   onQuantityChange(quantity: number) {
     console.log('Nouvelle quantité sélectionnée :', quantity);
     // Faites ce que vous voulez avec la nouvelle quantité...
   }
-  
+
     ajouterAuPanier() {
       if (this.produit) {
         this.panierService.ajouterAuPanier(this.produit);
@@ -76,6 +91,6 @@ avisList: IAvis[] = [];
     // Vous pouvez utiliser un service pour gérer le panier ou effectuer d'autres actions nécessaires
     // Par exemple, si vous utilisez un service de panier, vous pourriez appeler une méthode comme :
     // this.panierService.ajouterAuPanier(this.produit);
-   
-  
+
+
 }

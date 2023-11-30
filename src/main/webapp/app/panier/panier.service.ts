@@ -30,6 +30,7 @@ export class PanierService {
     const produitsActuels = this._produits.value;
     this._produits.next([...produitsActuels, produit]);
     this.mettreAJourNombreArticles();
+    // ajoute appel holder de produit actuels
   }
   getAllProduits(): IProduit[] {
     return this._produits.value;
@@ -39,6 +40,7 @@ export class PanierService {
     const nouveauxProduits = produitsActuels.filter(p => p.id !== produit.id);
     this._produits.next(nouveauxProduits);
     this.mettreAJourNombreArticles();
+    // ajoute retirer
   }
 
   retirerDuPanier2(produit: IProduit) {
@@ -53,5 +55,5 @@ export class PanierService {
     }
   }
 
-  
+
 }

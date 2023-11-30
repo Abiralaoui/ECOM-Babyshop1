@@ -1,9 +1,19 @@
 <div class="d-flex justify-content-center" style="gap: 5.5rem">
   <div class="col-md-4" style="margin-left: 126px">
-    <div *ngIf="produit" style="margin-top:83px" class="text-center">
-      <img src="../../../content/images/img.png" class="img-fluid" alt="Product Image">
+
+
+      <div class="col-md-4" style="margin-left: 126px">
+        <div *ngIf="produit && images" style="margin-top: 83px" class="text-center">
+          <div *ngFor="let image of images" class="image-container">
+            <img [src]="image" class="img-fluid" >
+          </div>
+        </div>
+      </div>
+
+      <!-- ... Vos autres éléments ... -->
+
     </div>
-  </div>
+
   <div class="col-md-8" >
     <div *ngIf="produit">
       <h2 data-cy="produitDetailsHeading"><span jhiTranslate="mainApp.produit.detail.title">Produit</span></h2>
