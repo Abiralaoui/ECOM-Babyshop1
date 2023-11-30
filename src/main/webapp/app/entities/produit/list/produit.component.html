@@ -22,7 +22,18 @@
             <input type="checkbox" (change)="applyFilter('taille', 'desc')" /> Taille Décroissante
           </label>
         </form>
+
       </div>
+
+      <div class="filter-container mb-3">
+        <div *ngFor="let category of categories">
+          <label>
+            <input type="checkbox" [value]="category.id" (change)="onCategoryChange($event, category)">
+            {{ category.nom }}
+          </label>
+        </div>
+      </div>
+
     </div>
 
 
@@ -128,7 +139,7 @@
                   <div class="details">
                     <div class="product-price-client">{{ produit.prixUnitaire + " $" }}</div>
                   </div>
-                  <div class="buy" (click)="test()"><i class="material-icons"><fa-icon icon="shopping-cart"></fa-icon></i></div>
+                  <div class="buy" (click)="ajouterAuPanier(produit, $event)"><i class="material-icons"><fa-icon icon="shopping-cart"></fa-icon></i></div>
                 </div>
                 <div class="right">
                   <div class="done"><i class="material-icons">done</i></div>

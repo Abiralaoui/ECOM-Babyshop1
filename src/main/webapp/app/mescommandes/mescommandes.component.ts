@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { IClient } from 'app/entities/client/client.model';
 import { ICommande } from 'app/entities/commande/commande.model';
 import { ClientCommandeService } from './client-commande.service';
+import {AccountService} from "../core/auth/account.service";
+import {accountState} from "../account/account.route";
 
 @Component({
   selector: 'jhi-mescommandes',
@@ -11,26 +13,24 @@ import { ClientCommandeService } from './client-commande.service';
 })
 export class MescommandesComponent implements OnInit {
 
-
   commandes: ICommande[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private clientCommandeService: ClientCommandeService
+    private clientCommandeService: ClientCommandeService,
+    private accountService : AccountService
   ) {}
 
   ngOnInit(): void {
-      
-     
-       
-        this.getCommandesClientt(1);
-    console.log(this.commandes);
+    this.accountService.identity().subscribe(account => {
+      console.log(account?.login)
+    })
   }
 
   getCommandesClientt(clientId: number): void {
     this.clientCommandeService.getCommandesClient(clientId)
       .subscribe(Commandes => {
-       
+
         this.commandes = Commandes;
       });
   }

@@ -11,6 +11,9 @@ import { SortService } from 'app/shared/sort/sort.service';
 import {AccountService} from "../../../core/auth/account.service";
 import {Authority} from "../../../config/authority.constants";
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import {PanierService} from "../../../panier/panier.service";
+import {CategoryService} from "../../category/service/category.service";
+import {ICategory} from "../../category/category.model";
 
 @Component({
   selector: 'jhi-produit',
@@ -18,6 +21,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 })
 export class ProduitComponent implements OnInit {
   produits?: IProduit[];
+  categories?: ICategory[];
   isLoading = false;
   showButton: boolean = false;
   predicate = 'id';
@@ -26,14 +30,17 @@ export class ProduitComponent implements OnInit {
   searchTerm: string = '';
   prixFilter: 'asc' | 'desc' | null = null;
   tailleFilter: 'asc' | 'desc' | null = null;
+  currentCategory: number | null = null;
+
   constructor(
     protected produitService: ProduitService,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected sortService: SortService,
     protected modalService: NgbModal,
-    protected accountService: AccountService
-
+    protected accountService: AccountService,
+    protected panierService: PanierService,
+    protected categoryService: CategoryService
   ) {
 
   }
@@ -42,12 +49,24 @@ export class ProduitComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
+    this.fetchCategories(); // Call the method to fetch categories
     this.activatedRoute.queryParamMap.pipe(
       debounceTime(300), // délai d'attente de 300 ms
       distinctUntilChanged() // n'émet pas de nouveaux éléments s'ils sont égaux au précédent
     ).subscribe(() => {
       this.search();
     });
+  }
+
+  fetchCategories(): void {
+    this.categoryService.query().subscribe(
+      (response: EntityArrayResponseType) => {
+        this.categories = response.body ?? [];
+      },
+      (error) => {
+        console.error('Error fetching categories:', error);
+      }
+    );
   }
 
   delete(produit: IProduit): void {
@@ -84,6 +103,11 @@ export class ProduitComponent implements OnInit {
     this.handleNavigation(this.predicate, this.ascending);
   }
 
+/*  currentCategoryUpdate(categoryId: number): void {
+    this.currentCategory = (categoryId===this.currentCategory) ? null : categoryId;
+    this.load();
+  }*/
+
   protected loadFromBackendWithRouteInformations(): Observable<EntityArrayResponseType> {
     return combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data]).pipe(
       tap(([params, data]) => this.fillComponentAttributeFromRoute(params, data)),
@@ -112,9 +136,12 @@ export class ProduitComponent implements OnInit {
 
   protected queryBackend(predicate?: string, ascending?: boolean): Observable<EntityArrayResponseType> {
     this.isLoading = true;
+    let criteria = (this.currentCategory == null) ? {} :
+                      {key: 'category.contains', value:this.currentCategory};
     const queryObject = {
       eagerload: true,
       sort: this.getSortQueryParam(predicate, ascending),
+      criteria
     };
     return this.produitService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
@@ -146,9 +173,12 @@ export class ProduitComponent implements OnInit {
     this.selectedProduct = product;
 
   }
+
   showBuyNow: boolean = false;
+
   buyNow(produit: any): void {
   }
+
   truncateDescription(description: string | null | undefined): string {
     if (!description) {
       return ''; // Ou tout autre traitement que vous souhaitez pour les valeurs nulles ou indéfinies
@@ -190,24 +220,24 @@ export class ProduitComponent implements OnInit {
         // Vérifiez si 'prixUnitaire' est défini et non null
         const prixA = a.prixUnitaire !== undefined && a.prixUnitaire !== null ? a.prixUnitaire : 0;
         const prixB = b.prixUnitaire !== undefined && b.prixUnitaire !== null ? b.prixUnitaire : 0;
-    
+
         const order = this.prixFilter === 'asc' ? 1 : -1;
         return (prixA - prixB) * order;
       });
     }
-    
+
 
     if (this.tailleFilter) {
       this.produits = this.produits?.sort((a, b) => {
         // Vérifiez si 'taille' est défini et non null
         const tailleA = a.taille !== undefined && a.taille !== null ? a.taille : 0;
         const tailleB = b.taille !== undefined && b.taille !== null ? b.taille : 0;
-        
+
         const order = this.tailleFilter === 'asc' ? 1 : -1;
         return (tailleA - tailleB) * order;
       });
     }
-    
+
   }
   applyFilter(type: 'prix' | 'taille', order: 'asc' | 'desc'): void {
     if (type === 'prix') {
@@ -215,16 +245,47 @@ export class ProduitComponent implements OnInit {
     } else if (type === 'taille') {
       this.tailleFilter = order;
     }
-  
+
     this.search(); // Appliquez immédiatement le filtre
   }
   test() {
-    // Implement your 'buy' click logic here
     this.isClicked = true;
   }
 
   remove() {
-    // Implement your 'remove' click logic here
     this.isClicked = false;
   }
+
+  ajouterAuPanier(produit: IProduit, event: Event) {
+    if (produit) {
+      this.panierService.ajouterAuPanier(produit);
+    }
+
+    console.log('Produit ajouté au panier :', produit);
+
+    event.stopPropagation();
+  }
+
+  selectedCategories: number[] = [];
+
+  onCategoryChange(event: any, category: ICategory): void {
+    const categoryId = category.id;
+
+    if (event.target.checked) {
+      this.selectedCategories.push(categoryId);
+    } else {
+      this.selectedCategories = this.selectedCategories.filter(id => id !== categoryId);
+    }
+
+    this.currentCategoryUpdate(this.selectedCategories.length > 0 ? this.selectedCategories[0] : -1);
+  }
+
+  currentCategoryUpdate(categoryId: number): void {
+    this.selectedCategories.push(categoryId);
+
+    this.produits = this.cachedProducts?.filter((produit) => {
+      return produit.categories?.some(category => this.selectedCategories.includes(category.id));
+    });
+  }
+
 }
