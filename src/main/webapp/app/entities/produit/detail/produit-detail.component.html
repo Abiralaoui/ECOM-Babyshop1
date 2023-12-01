@@ -16,44 +16,16 @@
 
   <div class="col-md-8" >
     <div *ngIf="produit">
-      <h2 data-cy="produitDetailsHeading"><span jhiTranslate="mainApp.produit.detail.title">Produit</span></h2>
+      <h2>{{ produit.libelle }}</h2>
       <hr />
 
+      <!-- Messages d'alerte/d'erreur en haut de page
       <jhi-alert-error></jhi-alert-error>
       <jhi-alert></jhi-alert>
+      -->
 
-      <dl class="row-md jh-entity-details">
-        <dt *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"><span jhiTranslate="global.field.id">ID</span></dt>
-
-        <dd *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"><span>{{ produit.id }}</span></dd>
-        <dt *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"><span jhiTranslate="mainApp.produit.idProduit">Id Produit</span></dt>
-        <dd *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"><span>{{ produit.idProduit }}</span></dd>
-
-        <dt><span jhiTranslate="mainApp.produit.libelle" style="margin-left: 5px">Libelle</span></dt>
-        <dd><span>{{ produit.libelle }}</span></dd>
-        <dt><span jhiTranslate="mainApp.produit.description">Description</span></dt>
-        <dd><span>{{ produit.description }}</span></dd>
-        <dt><span jhiTranslate="mainApp.produit.prixUnitaire">Prix Unitaire</span></dt>
-        <dd><span>{{ produit.prixUnitaire }}</span></dd>
-        <dt><span jhiTranslate="mainApp.produit.taille">Taille</span></dt>
-        <dd><span>{{ produit.taille }}</span></dd>
-        <dt><span jhiTranslate="mainApp.produit.couleur">Couleur</span></dt>
-        <dd><span>{{ produit.couleur }}</span></dd>
-        <dt><span jhiTranslate="mainApp.produit.stock">Stock</span></dt>
-        <dd><span>{{ produit.stock }}</span></dd>
-        <dt><span jhiTranslate="mainApp.produit.category">Category</span></dt>
-        <dd>
-<!--          <app-stock-selector [maxStock]="10" (quantityChange)="onQuantityChange($event)"></app-stock-selector>-->
-
-          <span *ngFor="let category of produit.categories; let last = last">
-            <a [routerLink]="['/category', category.id, 'view']">{{ category.id }}</a>{{ last ? '' : ', ' }}
-          </span>
-        </dd>
-      </dl>
-
-<!--      <button type="submit" style="padding: 7px; border-radius: 5px;" (click)="previousState()" class="btn btn-info custom-button" data-cy="entityDetailsBackButton">-->
-<!--        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>-->
-<!--      </button>-->
+      <p>{{ produit.description }}</p>
+      <p style="color:#f86c35"><b>Prix : {{ produit.prixUnitaire }} €</b></p>
 
       <button
 
@@ -65,6 +37,25 @@
         (click)="ajouterAuPanier()">
         <fa-icon icon="shopping-cart"></fa-icon>&nbsp; Add to cart
       </button>
+
+      <hr/>
+
+      <h5><u>Détails du produit</u></h5>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="mainApp.produit.taille">Taille</span></dt>
+        <dd><span>{{ produit.taille }}</span></dd>
+        <dt><span jhiTranslate="mainApp.produit.couleur">Couleur</span></dt>
+        <dd><span>{{ produit.couleur }}</span></dd>
+        <!--
+        <dt><span jhiTranslate="mainApp.produit.stock">Stock</span></dt>
+        <dd><span>{{ produit.stock }}</span></dd>
+        -->
+      </dl>
+
+<!--      <button type="submit" style="padding: 7px; border-radius: 5px;" (click)="previousState()" class="btn btn-info custom-button" data-cy="entityDetailsBackButton">-->
+<!--        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>-->
+<!--      </button>-->
 
       <button type="button" [routerLink]="['/produit', produit.id, 'edit']" class="btn btn-primary"
               *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])">
