@@ -1,4 +1,4 @@
-package com.mycompany.myapp.service.validator;
+package com.mycompany.myapp.service.utils;
 
 import com.mycompany.myapp.web.rest.errors.FileIsEmptyException;
 import com.mycompany.myapp.web.rest.errors.FileNotImageException;
