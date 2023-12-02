@@ -1,6 +1,5 @@
 package com.mycompany.myapp.service;
 
-import com.mycompany.myapp.domain.Image;
 import com.mycompany.myapp.domain.Produit;
 import com.mycompany.myapp.repository.ProduitRepository;
 import com.mycompany.myapp.service.dto.ImageDTO;
@@ -9,9 +8,9 @@ import com.mycompany.myapp.service.mapper.ProduitMapper;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.mycompany.myapp.service.utils.NamingService;
 import com.mycompany.myapp.web.rest.errors.FileIsEmptyException;
 import com.mycompany.myapp.web.rest.errors.FileNotImageException;
 import org.slf4j.Logger;
@@ -20,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -56,6 +56,8 @@ public class ProduitService {
      * @param produitDTO the entity to save.
      * @return the persisted entity.
      */
+
+    @Transactional
     public ProduitDTO save(ProduitDTO produitDTO, List<MultipartFile> images) throws FileIsEmptyException, FileNotImageException {
         log.debug("Request to save Produit : {}", produitDTO);
         Produit produit = produitMapper.toEntity(produitDTO);
@@ -64,12 +66,17 @@ public class ProduitService {
         if (images != null) {
             produitDTO = produitMapper.toDto(produit);
 
-            for (MultipartFile image : images) {
-                String url = s3StorageService.saveFile(image);
-                ImageDTO imageDTO = imageService.save(new ImageDTO(url, produitDTO));
-/*
-                produitDTO.addImage(imageDTO);
-*/
+            try {
+                for (MultipartFile image : images) {
+                    String url = s3StorageService.saveFile(
+                        NamingService.generateUniqueImageFile(image)
+                    );
+                    imageService.save(new ImageDTO(url, produitDTO));
+                }
+            } catch (Exception exception) {
+                handleS3StorageException(exception);
+
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
 
             produit = produitMapper.toEntity(produitDTO);
@@ -77,6 +84,14 @@ public class ProduitService {
         }
 
         return produitMapper.toDto(produit);
+    }
+
+    private void handleS3StorageException(Exception e) {
+        // Log the exception or perform other actions
+        System.err.println("Exception occurred in S3 storage service: " + e.getMessage());
+
+        // Add cleanup logic if needed, e.g., deleting records from the database
+        // ...
     }
 
     /**

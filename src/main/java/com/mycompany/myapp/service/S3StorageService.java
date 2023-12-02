@@ -5,7 +5,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
-import com.mycompany.myapp.service.validator.FileValidator;
+import com.mycompany.myapp.service.utils.FileValidator;
 import com.mycompany.myapp.web.rest.errors.FileIsEmptyException;
 import com.mycompany.myapp.web.rest.errors.FileNotImageException;
 import org.springframework.beans.factory.annotation.Value;
