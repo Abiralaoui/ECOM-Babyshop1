@@ -1,7 +1,7 @@
 package com.mycompany.myapp.service.utils;
 
-import com.mycompany.myapp.web.rest.errors.FileIsEmptyException;
-import com.mycompany.myapp.web.rest.errors.FileNotImageException;
+import com.mycompany.myapp.service.exceptions.FileIsEmptyException;
+import com.mycompany.myapp.service.exceptions.FileNotImageException;
 import org.apache.http.entity.ContentType;
 import org.springframework.web.multipart.MultipartFile;
 

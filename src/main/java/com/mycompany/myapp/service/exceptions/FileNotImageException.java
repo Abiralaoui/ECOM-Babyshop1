@@ -1,4 +1,4 @@
-package com.mycompany.myapp.web.rest.errors;
+package com.mycompany.myapp.service.exceptions;
 
 public class FileNotImageException extends Exception {
 

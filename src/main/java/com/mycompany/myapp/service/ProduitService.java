@@ -11,8 +11,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.mycompany.myapp.service.utils.NamingService;
-import com.mycompany.myapp.web.rest.errors.FileIsEmptyException;
-import com.mycompany.myapp.web.rest.errors.FileNotImageException;
+import com.mycompany.myapp.service.exceptions.FileIsEmptyException;
+import com.mycompany.myapp.service.exceptions.FileNotImageException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;

@@ -20,8 +20,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import com.mycompany.myapp.web.rest.errors.FileIsEmptyException;
-import com.mycompany.myapp.web.rest.errors.FileNotImageException;
+import com.mycompany.myapp.service.exceptions.FileIsEmptyException;
+import com.mycompany.myapp.service.exceptions.FileNotImageException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
