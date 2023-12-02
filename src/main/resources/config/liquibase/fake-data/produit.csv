@@ -1,11 +1,42 @@
 id;id_produit;libelle;description;prix_unitaire;taille;couleur;stock
-1;98199;lavender;next de;3486;42889;Stand-alone Stagiaire XSS;1
-2;29563;Avon b;SAS Namibie;45380;91449;Wooden Enterprise-wide morph;1
-3;48025;Market Soap Sausages;web-readiness;75223;37721;back;1
-4;5204;PNG THX;Lepic;30386;28839;Borders sensor Nord-Pas-de-Calais;5
-5;85981;B2C Beauty Ball;Handmade;11024;46650;Du;5
-6;94807;Corse;HDD du;49939;21539;synergies;5
-7;84030;Guilder mission-critical;back-end;42856;14611;Chair architecture Auvergne;4
-8;31911;portal Concrete;synergistic;56143;2604;Surinam;5
-9;59545;orchid Trinité-et-Tobago;Customizable;76969;62678;strategize la Cambridgeshire;9
-10;76736;enterprise Real;Analyste Keyboard;67917;28944;Picardie;6
+1;1;Body en coton;Body dou en coton pour bébé;12.99;3;Blanc;1
+2;2;Pyjama étoilé;Pyjama confortable avec motif étoilé;19.99;6;Bleu;2
+3;3;Doudou lapin;Doudou moelleu en forme de lapin;9.99;;Rose;120
+4;4;Biberon anti-colique;Biberon avec système anti-colique;14.99;250 ml;Vert;60
+5;5;Chaussettes en laine;Chaussettes chaudes en laine;8.99;1;Gris;50
+6;6;Mobile musical;Mobile avec musique apaisante;24.99;;Multicolore;30
+7;7;Couverture en polaire;Couverture douce en polaire;18.99;80;Jaune;70
+8;8;Tapis d'éveil;Tapis d'éveil coloré avec jouets suspendus;29.99;100;Orange;40
+9;9;Sucette orthodontique;Sucette avec forme orthodontique;6.99;;Bleu;90
+10;10;Lingettes pour bébé;Lingettes douces pour le visage et les mains;4.99;Pack de 50;Blanc;110
+11;11;Cape de bain;Cape de bain en éponge;15.99;70;Vert;75
+12;12;Porte-bébé ergonomique;Porte-bébé avec support dorsal;39.99;31;Noir;25
+13;13;Poussette légère;Poussette compacte et légère;89.99;;Rouge;15
+14;14;Bavoir imperméable;Bavoir avec revêtement imperméable;7.99;;Rose;120
+15;15;Thermomètre frontal;Thermomètre infrarouge pour bébé;18.99;;Bleu;50
+16;16;Protège-carnet de santé;Protège-carnet de santé en tissu;12.99;;Gris;80
+17;17;Kit de manucure bébé;Kit complet pour les ongles de bébé;9.99;;Rose;100
+18;18;Jouet de dentition;Jouet de dentition en silicone;5.99;;Bleu;70
+19;19;Gigoteuse d'hiver;Gigoteuse chaude pour l'hiver;22.99;61;Vert;40
+20;20;Livre en tissu;Livre en tissu avec tetures différentes;11.99;;Multicolore;60
+21;21;Chaise haute évolutive;Chaise haute évolutive avec plateau amovible;49.99;;Blanc;20
+22;22;Peluche musicale;Peluche musicale avec berceuse;16.99;;Jaune;35
+23;23;Barrière de sécurité;Barrière de sécurité pour escaliers;34.99;75;Bleu;15
+24;24;Set de vaisselle bébé;Set de vaisselle en silicone pour bébé;27.99;;Rose;25
+25;25;Puzzle en bois;Puzzle éducatif en bois;8.99;;Multicolore;55
+26;26;Tétine en silicone;Tétine en silicone sans BPA;3.99;;Vert;90
+27;27;Baignoire pliable;Baignoire pliable pour bébé;32.99;;Bleu;30
+28;28;Kit de premiers secours;Kit de premiers secours pour bébé;19.99;;Rouge;40
+29;29;Cape de bain avec capuche;Cape de bain avec capuche en forme d'animal;21.99;80;Rose;50
+30;30;Veilleuse nomade;Veilleuse rechargeable avec plusieurs couleurs;14.99;;Blanc;65
+31;31;Puzzle mousse;Tapis puzzle en mousse pour jouer et s'asseoir;26.99;120;Multicolore;20
+32;32;Gobelet anti-fuites;Gobelet avec bec anti-fuites;9.99;;Bleu;80
+33;33;Tapis de jeu en tissu;Tapis de jeu dou en tissu;32.99;150;Gris;15
+34;34;Chaussons en laine;Chaussons chauds en laine;11.99;61;Bleu;40
+35;35;Siège auto pivotant;Siège auto pivotant pour bébé;159.99;24;Noir;10
+36;36;Attache-tétine;Attache-tétine en silicone;5.99;;Rose;75
+37;37;Lampe veilleuse;Lampe veilleuse avec projection d'étoiles;23.99;;Bleu;30
+38;38;Brosse et peigne bébé;Brosse et peigne dou pour bébé;8.99;;Blanc;60
+39;39;Gilet en tricot;Gilet en tricot pour bébé;17.99;1;Rose;45
+40;40;Tapis de bain antidérapant;Tapis de bain avec surface antidérapante;13.99;50;Bleu;50
+41;41;Tire-lait électrique;Tire-lait électrique double pompage;79.99;;Blanc;25
