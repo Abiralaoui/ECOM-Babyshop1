@@ -1,5 +1,7 @@
 package com.mycompany.myapp.web.rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.myapp.repository.ProduitRepository;
 import com.mycompany.myapp.service.ImageService;
 import com.mycompany.myapp.service.ProduitQueryService;
@@ -24,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,15 +55,19 @@ public class ProduitResource {
 
     private final ImageService imageService;
 
+    private ObjectMapper objectMapper;
+
 
     public ProduitResource(ProduitService produitService,
                            ProduitRepository produitRepository,
                            ProduitQueryService produitQueryService,
-                           ImageService imageService) {
+                           ImageService imageService,
+                           ObjectMapper objectMapper) {
         this.produitService = produitService;
         this.produitRepository = produitRepository;
         this.produitQueryService = produitQueryService;
         this.imageService = imageService;
+        this.objectMapper = objectMapper;
     }
 
     /**
@@ -70,10 +77,13 @@ public class ProduitResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new produitDTO, or with status {@code 400 (Bad Request)} if the produit has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping(value = "/produits")
-    public ResponseEntity<ProduitDTO> createProduit(@ModelAttribute ProduitDTO produitDTO,
-                                                    @RequestPart(required = false) List<MultipartFile> imagesStream) throws URISyntaxException, FileIsEmptyException, FileNotImageException {
-        log.debug("REST request to save Produit : {}", produitDTO);
+    @PostMapping(value = "/produits", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ProduitDTO> createProduit(@RequestPart String produitDTOJSON,
+                                                    @RequestPart(required = false) List<MultipartFile> imagesStream) throws URISyntaxException, FileIsEmptyException, FileNotImageException, JsonProcessingException {
+        log.debug("REST request to save Produit");
+
+        ProduitDTO produitDTO = objectMapper.readValue(produitDTOJSON, ProduitDTO.class);
+
         if (produitDTO.getId() != null) {
             throw new BadRequestAlertException("A new produit cannot already have an ID", ENTITY_NAME, "idexists");
         }

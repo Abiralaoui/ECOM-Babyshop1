@@ -14,13 +14,14 @@
 # ===================================================================
 
 accessKey:
-  "dgfdfgdg"
+  ${ACCESS_KEY}
 secretKey:
-  "dgfdfgdg"
+  ${SECRET_KEY}
 bucketName:
   s3-guru-bucket
 region:
   eu-west-3
+
 
 logging:
   level:
