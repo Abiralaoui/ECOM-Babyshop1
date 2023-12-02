@@ -47,6 +47,7 @@ public class Produit implements Serializable {
     private String couleur;
 
     @Column(name = "stock")
+    @Min(0)
     private Integer stock;
 
     @OneToMany(mappedBy = "produit")
