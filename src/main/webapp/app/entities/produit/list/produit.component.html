@@ -159,12 +159,15 @@
             <div class="inside">
               <div class="icon"></div>
               <div class="contents">
-                Any description
+               {{produit.description}}
               </div>
             </div>
           </div>
 
         </div>
+      </div>
+      <div class="text-center">
+        <pagination-controls (pageChange)="loadPage($event)"paginationId="custom-pagination" ></pagination-controls>
       </div>
     </div>
   </div>

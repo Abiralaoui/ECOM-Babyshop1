@@ -40,25 +40,24 @@ avisList: IAvis[] = [];
   }
 
   ngOnInit(): void {
-
+    
+  
     this.activatedRoute.data.subscribe(({ produit }) => {
       this.produit = produit;
 
       // Récupérez les avis liés au produit
-      this.loadProduitImages();
-      if (this.produit && this.produit.id) {
+      this.avisService.getAvis().subscribe((avis: IAvis[]) => {
+        this.avisList = avis;
+        console.log(this.avisList); // Affiche les avis dans la console
+      });
+      
 
-        this.avisService.getAvisByProduitId(this.produit.id).subscribe(
-          (res: EntityArrayResponseType) => {
-            this.avisList = res.body || [];
-          },
-          error => {
-            console.error('Error fetching avis for produit', error);
-          }
-        );
-      }
-    });
-  }
+       
+  })
+  this.loadProduitImages();
+  
+}
+
 
   previousState(): void {
     window.history.back();

@@ -74,7 +74,9 @@ export class AvisService {
   getAvisIdentifier(avis: Pick<IAvis, 'id'>): number {
     return avis.id;
   }
-
+  getAvis(): Observable<IAvis[]> {
+    return this.http.get<IAvis[]>('/api/avis');
+  }
   compareAvis(o1: Pick<IAvis, 'id'> | null, o2: Pick<IAvis, 'id'> | null): boolean {
     return o1 && o2 ? this.getAvisIdentifier(o1) === this.getAvisIdentifier(o2) : o1 === o2;
   }

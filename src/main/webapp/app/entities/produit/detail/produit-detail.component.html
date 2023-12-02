@@ -78,8 +78,8 @@
       <div *ngIf="avisList && avisList.length > 0">
         <ul class="avis-list">
           <li class="avis-item" *ngFor="let avis of avisList">
-            <div class="avis-note">{{ avis.note }} - {{ avis.commentaire }}</div>
-            <div class="avis-date">{{ avis.date | formatMediumDatetime }}</div>
+            <div class="avis-note">la note :{{ avis.note }} - {{ avis.commentaire }}</div>
+            <div class="avis-date">{{ avis.date  }}</div>
           </li>
         </ul>
       </div>

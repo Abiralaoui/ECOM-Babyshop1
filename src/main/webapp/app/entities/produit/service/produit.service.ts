@@ -6,6 +6,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IProduit, NewProduit } from '../produit.model';
+import { IImage } from 'app/entities/image/image.model';
 
 export type PartialUpdateProduit = Partial<IProduit> & Pick<IProduit, 'id'>;
 
@@ -74,5 +75,9 @@ export class ProduitService {
   getImagesForProduit(produitId: number | null | undefined): Observable<string[]> {
     const endpoint = `http://localhost:9000/api/produits/${produitId}/images`;
     return this.http.get<string[]>(endpoint);
+  }
+  getImages(): Observable<IImage[]> {
+    const endpoint = `http://localhost:9000/api/images`;
+    return this.http.get<IImage[]>(endpoint);
   }
 }

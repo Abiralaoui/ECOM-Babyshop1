@@ -25,6 +25,7 @@ export class MescommandesComponent implements OnInit {
     this.accountService.identity().subscribe(account => {
       console.log(account?.login)
     })
+    this.getCommandesClientt(3);
   }
 
   getCommandesClientt(clientId: number): void {

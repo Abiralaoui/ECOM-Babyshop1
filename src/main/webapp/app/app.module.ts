@@ -30,7 +30,7 @@ import { ErrorComponent } from './layouts/error/error.component';
 import { PayComponent } from './pay/pay.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { MescommandesComponent } from './mescommandes/mescommandes.component';
-import {NgxPaginationModule} from "ngx-pagination";
+
 
 
 
@@ -38,7 +38,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
   imports: [
-
+    
     BrowserModule,
     SharedModule,
     HomeModule,
@@ -49,7 +49,7 @@ import {NgxPaginationModule} from "ngx-pagination";
     HttpClientModule,
     NgxWebstorageModule.forRoot({prefix: 'jhi', separator: '-', caseSensitive: true}),
     TranslationModule,
-    NgxPaginationModule,
+    
   ],
   providers: [
     Title,

@@ -1,25 +1,30 @@
+// produit.component.ts
+
+// ... (existing imports)
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { IProduit } from '../produit.model';
 import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
 import { EntityArrayResponseType, ProduitService } from '../service/produit.service';
 import { ProduitDeleteDialogComponent } from '../delete/produit-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
-import {AccountService} from "../../../core/auth/account.service";
-import {Authority} from "../../../config/authority.constants";
+import { AccountService } from "../../../core/auth/account.service";
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import {PanierService} from "../../../panier/panier.service";
-import {CategoryService} from "../../category/service/category.service";
-import {ICategory} from "../../category/category.model";
+import { PanierService } from "../../../panier/panier.service";
+import { CategoryService } from "../../category/service/category.service";
+import { ICategory } from "../../category/category.model";
+import { IImage } from 'app/entities/image/image.model';
 
 @Component({
   selector: 'jhi-produit',
   templateUrl: './produit.component.html',
 })
 export class ProduitComponent implements OnInit {
+  imagelist: IImage[] = [];
   produits?: IProduit[];
   categories?: ICategory[];
   isLoading = false;
@@ -31,7 +36,11 @@ export class ProduitComponent implements OnInit {
   prixFilter: 'asc' | 'desc' | null = null;
   tailleFilter: 'asc' | 'desc' | null = null;
   currentCategory: number | null = null;
-  page: number = 1;
+  itemsPerPage = 15;
+  page = 1;
+  p: number = 1; // Current page for ngx-pagination
+  totalItems: number = 0; // Total number of items
+  itemsPerPageOptions = [15, 30, 45]; // You can customize this array based on your needs
 
   constructor(
     protected produitService: ProduitService,
@@ -42,18 +51,16 @@ export class ProduitComponent implements OnInit {
     protected accountService: AccountService,
     protected panierService: PanierService,
     protected categoryService: CategoryService
-  ) {
-
-  }
+  ) {}
 
   trackId = (_index: number, item: IProduit): number => this.produitService.getProduitIdentifier(item);
 
   ngOnInit(): void {
     this.load();
-    this.fetchCategories(); // Call the method to fetch categories
+    this.fetchCategories();
     this.activatedRoute.queryParamMap.pipe(
-      debounceTime(300), // délai d'attente de 300 ms
-      distinctUntilChanged() // n'émet pas de nouveaux éléments s'ils sont égaux au précédent
+      debounceTime(300),
+      distinctUntilChanged()
     ).subscribe(() => {
       this.search();
     });
@@ -73,7 +80,7 @@ export class ProduitComponent implements OnInit {
   delete(produit: IProduit): void {
     const modalRef = this.modalService.open(ProduitDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.produit = produit;
-    // unsubscribe not needed because closed completes on modal close
+
     modalRef.closed
       .pipe(
         filter(reason => reason === ITEM_DELETED_EVENT),
@@ -104,11 +111,6 @@ export class ProduitComponent implements OnInit {
     this.handleNavigation(this.predicate, this.ascending);
   }
 
-/*  currentCategoryUpdate(categoryId: number): void {
-    this.currentCategory = (categoryId===this.currentCategory) ? null : categoryId;
-    this.load();
-  }*/
-
   protected loadFromBackendWithRouteInformations(): Observable<EntityArrayResponseType> {
     return combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data]).pipe(
       tap(([params, data]) => this.fillComponentAttributeFromRoute(params, data)),
@@ -125,6 +127,7 @@ export class ProduitComponent implements OnInit {
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
     this.produits = this.refineData(dataFromBody);
+    this.totalItems = this.produits.length; // Update totalItems after data is loaded
   }
 
   protected refineData(data: IProduit[]): IProduit[] {
@@ -166,23 +169,26 @@ export class ProduitComponent implements OnInit {
       return [predicate + ',' + ascendingQueryParam];
     }
   }
+
   navigateToView(productId: number): void {
     this.router.navigate(['/produit', productId, 'view']);
   }
+
   selectedProduct: any;
+
   onProductSelected(product: any) {
     this.selectedProduct = product;
-
   }
 
   showBuyNow: boolean = false;
 
   buyNow(produit: any): void {
+    // Implement buyNow logic here
   }
 
   truncateDescription(description: string | null | undefined): string {
     if (!description) {
-      return ''; // Ou tout autre traitement que vous souhaitez pour les valeurs nulles ou indéfinies
+      return '';
     }
 
     const words = description.split(' ');
@@ -192,54 +198,40 @@ export class ProduitComponent implements OnInit {
     return description;
   }
 
-
   protected readonly onclick = onclick;
 
   isClicked = false;
 
-  onSearchInputChange() : void {
-    this.search()
+  onSearchInputChange(): void {
+    this.search();
   }
 
   search(): void {
-    // Si vous effectuez une recherche côté serveur, utilisez le service ProduitService
-    // this.produitService.searchProduits(this.searchTerm).subscribe({
-    //   next: (res: EntityArrayResponseType) => {
-    //     this.onResponseSuccess(res);
-    //   },
-    // });
-
-    // Exemple de recherche locale (à adapter en fonction de votre structure de données)
     if (this.searchTerm.trim() !== '') {
       this.produits = this.cachedProducts?.filter((produit) =>
         produit.libelle?.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     }
-    // Appliquez également les filtres de prix et de taille
+
     if (this.prixFilter) {
       this.produits = this.produits?.sort((a, b) => {
-        // Vérifiez si 'prixUnitaire' est défini et non null
         const prixA = a.prixUnitaire !== undefined && a.prixUnitaire !== null ? a.prixUnitaire : 0;
         const prixB = b.prixUnitaire !== undefined && b.prixUnitaire !== null ? b.prixUnitaire : 0;
-
         const order = this.prixFilter === 'asc' ? 1 : -1;
         return (prixA - prixB) * order;
       });
     }
 
-
     if (this.tailleFilter) {
       this.produits = this.produits?.sort((a, b) => {
-        // Vérifiez si 'taille' est défini et non null
         const tailleA = a.taille !== undefined && a.taille !== null ? a.taille : 0;
         const tailleB = b.taille !== undefined && b.taille !== null ? b.taille : 0;
-
         const order = this.tailleFilter === 'asc' ? 1 : -1;
         return (tailleA - tailleB) * order;
       });
     }
-
   }
+
   applyFilter(type: 'prix' | 'taille', order: 'asc' | 'desc'): void {
     if (type === 'prix') {
       this.prixFilter = order;
@@ -247,8 +239,9 @@ export class ProduitComponent implements OnInit {
       this.tailleFilter = order;
     }
 
-    this.search(); // Appliquez immédiatement le filtre
+    this.search();
   }
+
   test() {
     this.isClicked = true;
   }
@@ -288,6 +281,9 @@ export class ProduitComponent implements OnInit {
       return produit.categories?.some(category => this.selectedCategories.includes(category.id));
     });
   }
-  loadPage(page: number) {}
 
+  loadPage(page: number) {
+    this.page = page;
+    this.load();
+  }
 }

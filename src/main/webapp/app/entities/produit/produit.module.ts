@@ -7,9 +7,10 @@ import { ProduitDeleteDialogComponent } from './delete/produit-delete-dialog.com
 import { ProduitRoutingModule } from './route/produit-routing.module';
 import {AppModule} from "../../app.module";
 import {CategoryModule} from "../category/category.module";
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
-  imports: [SharedModule, ProduitRoutingModule, CategoryModule],
+  imports: [SharedModule, ProduitRoutingModule, CategoryModule,NgxPaginationModule],
     declarations: [ProduitComponent, ProduitDetailComponent, ProduitUpdateComponent, ProduitDeleteDialogComponent],
     exports: [
         ProduitComponent
