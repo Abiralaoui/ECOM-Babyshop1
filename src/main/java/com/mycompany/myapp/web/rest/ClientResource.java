@@ -43,14 +43,10 @@ public class ClientResource {
 
     private final CommandeService commandeService;
 
-    private final UserService userService;
-
-    public ClientResource(ClientService clientService, ClientRepository clientRepository, CommandeService commandeService,
-                          UserService userService) {
+    public ClientResource(ClientService clientService, ClientRepository clientRepository, CommandeService commandeService) {
         this.clientService = clientService;
         this.clientRepository = clientRepository;
         this.commandeService = commandeService;
-        this.userService = userService;
     }
 
     /**
@@ -195,8 +191,6 @@ public class ClientResource {
     public ResponseEntity<ClientDTO> getClientByLogin(@PathVariable String login) {
         log.debug("REST request to get client by login : {}", login);
 
-        return ResponseUtil.wrapOrNotFound(clientService.findClientById(
-            userService.findByLogin(login).get().getId()
-        ));
+        return ResponseUtil.wrapOrNotFound(clientService.findClientByLogin(login));
     }
 }

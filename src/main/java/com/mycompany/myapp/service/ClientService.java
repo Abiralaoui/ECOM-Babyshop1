@@ -128,7 +128,7 @@ public class ClientService {
         clientRepository.deleteById(id);
     }
 
-    public Optional<ClientDTO> findClientById(Long id) {
-        return clientRepository.findById(id).map(clientMapper::toDto);
+    public Optional<ClientDTO> findClientByLogin(String login) {
+        return clientRepository.findClientByIdentifiant(login).map(clientMapper::toDto);
     }
 }

@@ -32,4 +32,6 @@ public interface ClientRepository extends ClientRepositoryWithBagRelationships, 
     default Page<Client> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
+
+    Optional<Client> findClientByIdentifiant(String identifiant);
 }
