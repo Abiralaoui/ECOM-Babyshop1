@@ -16,15 +16,16 @@ public class CarteBancaireValidator {
     public static boolean validateDateExpiration(Instant dateExpiration) {
         return dateExpiration != null && dateExpiration.isAfter(Instant.now());
     }
+
     public static boolean validateCvv(Integer cvv) {
         return cvv != null && CVV_PATTERN.matcher(String.valueOf(cvv)).matches();
     }
+
     public static boolean validateCarteBancaire(CarteBancaireDTO carteBancaire) {
         return carteBancaire != null &&
             validateCardNumber(String.valueOf(carteBancaire.getNumCarte())) &&
             validateDateExpiration(carteBancaire.getDateExpiration()) &&
             validateCvv(carteBancaire.getCvv());
     }
-
 
 }
