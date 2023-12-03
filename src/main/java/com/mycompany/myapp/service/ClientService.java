@@ -28,6 +28,7 @@ public class ClientService {
 
     private final ClientMapper clientMapper;
 
+
     public ClientService(ClientRepository clientRepository, ClientMapper clientMapper) {
         this.clientRepository = clientRepository;
         this.clientMapper = clientMapper;
@@ -125,5 +126,9 @@ public class ClientService {
     public void delete(Long id) {
         log.debug("Request to delete Client : {}", id);
         clientRepository.deleteById(id);
+    }
+
+    public Optional<ClientDTO> findClientById(Long id) {
+        return clientRepository.findById(id).map(clientMapper::toDto);
     }
 }

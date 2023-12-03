@@ -3,6 +3,7 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.repository.ClientRepository;
 import com.mycompany.myapp.service.ClientService;
 import com.mycompany.myapp.service.CommandeService;
+import com.mycompany.myapp.service.UserService;
 import com.mycompany.myapp.service.dto.ClientDTO;
 import com.mycompany.myapp.service.dto.CommandeDTO;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
@@ -17,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -41,10 +43,14 @@ public class ClientResource {
 
     private final CommandeService commandeService;
 
-    public ClientResource(ClientService clientService, ClientRepository clientRepository, CommandeService commandeService) {
+    private final UserService userService;
+
+    public ClientResource(ClientService clientService, ClientRepository clientRepository, CommandeService commandeService,
+                          UserService userService) {
         this.clientService = clientService;
         this.clientRepository = clientRepository;
         this.commandeService = commandeService;
+        this.userService = userService;
     }
 
     /**
@@ -183,5 +189,14 @@ public class ClientResource {
         log.debug("REST request to get commands by client : {}", idClient);
 
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(commandeService.getCommandsByClientId(idClient)));
+    }
+
+    @GetMapping("/client/{login}")
+    public ResponseEntity<ClientDTO> getClientByLogin(@PathVariable String login) {
+        log.debug("REST request to get client by login : {}", login);
+
+        return ResponseUtil.wrapOrNotFound(clientService.findClientById(
+            userService.findByLogin(login).get().getId()
+        ));
     }
 }
