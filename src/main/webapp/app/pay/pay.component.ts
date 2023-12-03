@@ -9,6 +9,12 @@ import {UserService} from "../entities/user/user.service";
 import {IUser} from "../admin/user-management/user-management.model";
 import {ClientService} from "../entities/client/service/client.service";
 import {ActivatedRoute, Router} from '@angular/router';
+import {NewCommande} from "../entities/commande/commande.model";
+import {PanierService} from "../panier/panier.service";
+import { IProduit } from 'app/entities/produit/produit.model';
+import {LigneCommandeService} from "../entities/ligne-commande/service/ligne-commande.service";
+import {ILigneCommande, NewLigneCommande} from "../entities/ligne-commande/ligne-commande.model";
+
 
 
 
@@ -63,7 +69,8 @@ export class PayComponent implements OnInit {
   account: Account | null = null;
   user: IUser = {} as IUser;
   client: IClient = {} as IClient;
-
+  login: string | null = null;
+  produits: IProduit[] = [];
   constructor(
     private route: ActivatedRoute,
     private commandeService: CommandeService,
@@ -72,7 +79,10 @@ export class PayComponent implements OnInit {
     private accountService: AccountService,
     private userService: UserService,
     private clientService: ClientService,
-    private router: Router
+    public panierService: PanierService,
+    private ligneCommandeService: LigneCommandeService,
+
+  private router: Router
   ) {
   }
 
@@ -95,8 +105,19 @@ export class PayComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.total = params['total'];
     });
-
+    this.accountService.identity().subscribe((account) => {
+      if (account && account.login) {
+        this.account=account;
+        this.login= account.login;
+        console.log(this.login);
+      }
+    });
+    this.panierService.produits$.subscribe((produits) => {
+      this.produits = produits;
+      // You can perform any additional logic when products are updated in this component
+    });
   }
+
 
   getCartTotal() {
     // return this.cartService.getCartTotal();
@@ -131,9 +152,63 @@ export class PayComponent implements OnInit {
   }
 
   payCommand(): void {
-    let values = this.paymentForm.value;
+    if (this.paymentForm.valid) {
+      // The form is valid, proceed with the payment
 
+      // Retrieve values from the form
+      const formValues = this.paymentForm.value;
+      const newCommande: NewCommande = {
+        // Assuming you have 'id', 'date', 'etat', 'typePayement', 'carteBancaire', 'client' properties in NewCommande
+        id: null,  // It's often assigned by the server
+        date: null,  // Convert the date to dayjs if needed
+        etat: formValues.etat || null,
+        typePayement: null,
+        carteBancaire:  null,
+        client: null,
+
+      };
+
+      // Call the create method from CommandeService to create a new order
+      this.commandeService.create(newCommande).subscribe(
+        (response) => {
+          // Handle success response
+          console.log('Commande created:', newCommande);
+          this.paiementIsOk = true;
+        },
+        (error) => {
+          // Handle error response
+          console.error('Error processing payment:', error);
+        }
+      );
+      // Create ILigneCommande and save it
+      const ligneCommande:  NewLigneCommande = {
+        id: null, // Set to 0 if creating a new instance
+        quantite: null, // Adjust as needed
+       prix: null, // Adjust as needed
+       commande: null,
+       produit: null // Adjust as needed
+      };
+
+      this.ligneCommandeService.create(ligneCommande).subscribe(
+        (createdLigneCommande) => {
+          // Handle success if needed
+          console.log('LigneCommande created:', createdLigneCommande);
+        },
+        (error) => {
+          // Handle error if needed
+          console.error('Error creating LigneCommande:', error);
+        }
+      );
+
+      // Create a NewCommande object based on the form values
+      // @ts-ignore
+
+    } else {
+      // The form is not valid, display an error message or take appropriate action
+    }
   }
+
+
 
 
 
