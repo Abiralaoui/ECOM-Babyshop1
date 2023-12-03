@@ -21,9 +21,6 @@ spring:
   config:
     activate:
       on-profile: '!api-docs'
-  servlet:
-    multipart:
-      enabled: true
 
 springdoc:
   api-docs:
