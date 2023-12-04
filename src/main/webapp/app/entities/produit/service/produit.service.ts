@@ -80,4 +80,11 @@ export class ProduitService {
     const endpoint = `http://localhost:9000/api/images`;
     return this.http.get<IImage[]>(endpoint);
   }
+
+  fetchProductsByCriteria(criteria: Record<string, number[]>): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(criteria);
+    const url = `${this.resourceUrl}`;
+
+    return this.http.get<IProduit[]>(url, { params: options, observe: 'response' });
+  }
 }

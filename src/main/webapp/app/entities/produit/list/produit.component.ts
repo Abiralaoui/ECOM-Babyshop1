@@ -140,8 +140,9 @@ export class ProduitComponent implements OnInit {
 
   protected queryBackend(predicate?: string, ascending?: boolean): Observable<EntityArrayResponseType> {
     this.isLoading = true;
-    let criteria = (this.currentCategory == null) ? {} :
-                      {key: 'category.contains', value:this.currentCategory};
+    let criteria = (this.selectedCategories.length == 0) ? {} :
+                      {key: 'category.in', value:this.selectedCategories};
+
     const queryObject = {
       eagerload: true,
       sort: this.getSortQueryParam(predicate, ascending),
@@ -271,15 +272,25 @@ export class ProduitComponent implements OnInit {
       this.selectedCategories = this.selectedCategories.filter(id => id !== categoryId);
     }
 
-    this.currentCategoryUpdate(this.selectedCategories.length > 0 ? this.selectedCategories[0] : -1);
+    const criteria = {
+      'categoryId.in': this.selectedCategories
+    };
+
+    this.produitService.fetchProductsByCriteria(criteria).subscribe({
+        next: (res: EntityArrayResponseType) => {
+          this.onResponseSuccess(res);
+        }
+    });
   }
 
   currentCategoryUpdate(categoryId: number): void {
     this.selectedCategories.push(categoryId);
 
-    this.produits = this.cachedProducts?.filter((produit) => {
+    const filteredProducts = this.cachedProducts?.filter((produit) => {
       return produit.categories?.some(category => this.selectedCategories.includes(category.id));
     });
+
+    this.produits = filteredProducts?.length == 0 ? this.produits : filteredProducts;
   }
 
   loadPage(page: number) {
