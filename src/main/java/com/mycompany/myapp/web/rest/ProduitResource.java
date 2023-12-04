@@ -3,10 +3,12 @@ package com.mycompany.myapp.web.rest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.myapp.repository.ProduitRepository;
+import com.mycompany.myapp.service.AvisService;
 import com.mycompany.myapp.service.ImageService;
 import com.mycompany.myapp.service.ProduitQueryService;
 import com.mycompany.myapp.service.ProduitService;
 import com.mycompany.myapp.service.criteria.ProduitCriteria;
+import com.mycompany.myapp.service.dto.AvisDTO;
 import com.mycompany.myapp.service.dto.CategoryDTO;
 import com.mycompany.myapp.service.dto.ProduitDTO;
 import com.mycompany.myapp.service.mapper.CategoryMapper;
@@ -55,18 +57,22 @@ public class ProduitResource {
 
     private final ImageService imageService;
 
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
+
+    private final AvisService avisService;
 
 
     public ProduitResource(ProduitService produitService,
                            ProduitRepository produitRepository,
                            ProduitQueryService produitQueryService,
                            ImageService imageService,
+                           AvisService avisService,
                            ObjectMapper objectMapper) {
         this.produitService = produitService;
         this.produitRepository = produitRepository;
         this.produitQueryService = produitQueryService;
         this.imageService = imageService;
+        this.avisService = avisService;
         this.objectMapper = objectMapper;
     }
 
@@ -240,6 +246,15 @@ public class ProduitResource {
 
         return ResponseEntity.ok().body(
             imageService.findUrlsByProductId(id)
+        );
+    }
+
+    @GetMapping("/produits/{id}/avis")
+    public ResponseEntity<List<AvisDTO>> getAvisByProductId(@PathVariable Long id) {
+        log.info("Fetching avis corresponding to product with id " + id);
+
+        return ResponseEntity.ok().body(
+            avisService.findAvisByProductId(id)
         );
     }
 }

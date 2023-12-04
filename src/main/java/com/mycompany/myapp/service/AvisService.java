@@ -109,4 +109,10 @@ public class AvisService {
         log.debug("Request to delete Avis : {}", id);
         avisRepository.deleteById(id);
     }
+
+    public List<AvisDTO> findAvisByProductId(Long id) {
+        log.debug("Request to get avis by product id : {}", id);
+
+        return avisRepository.findByProduitId(id).stream().map(avisMapper::toDto).collect(Collectors.toList());
+    }
 }
