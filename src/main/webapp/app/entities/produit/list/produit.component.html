@@ -38,6 +38,9 @@
         </div>
       </div>
 
+      <div class="filter-container mb-3">
+        <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeEnd)="updateSliderInfo($event)"></ngx-slider>
+      </div>
     </div>
 
 

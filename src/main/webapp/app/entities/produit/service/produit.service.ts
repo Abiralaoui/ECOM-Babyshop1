@@ -81,7 +81,7 @@ export class ProduitService {
     return this.http.get<IImage[]>(endpoint);
   }
 
-  fetchProductsByCriteria(criteria: Record<string, number[]>): Observable<EntityArrayResponseType> {
+  fetchProductsByCriteria(criteria: Record<string, any>): Observable<EntityArrayResponseType> {
     const options = createRequestOption(criteria);
     const url = `${this.resourceUrl}`;
 

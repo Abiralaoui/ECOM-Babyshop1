@@ -8,9 +8,10 @@ import { ProduitRoutingModule } from './route/produit-routing.module';
 import {AppModule} from "../../app.module";
 import {CategoryModule} from "../category/category.module";
 import { NgxPaginationModule } from 'ngx-pagination';
+import {NgxSliderModule} from "@angular-slider/ngx-slider";
 
 @NgModule({
-  imports: [SharedModule, ProduitRoutingModule, CategoryModule,NgxPaginationModule],
+  imports: [SharedModule, ProduitRoutingModule, CategoryModule, NgxPaginationModule, NgxSliderModule],
     declarations: [ProduitComponent, ProduitDetailComponent, ProduitUpdateComponent, ProduitDeleteDialogComponent],
     exports: [
         ProduitComponent

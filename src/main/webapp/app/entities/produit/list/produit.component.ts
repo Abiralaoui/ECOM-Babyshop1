@@ -18,6 +18,7 @@ import { PanierService } from "../../../panier/panier.service";
 import { CategoryService } from "../../category/service/category.service";
 import { ICategory } from "../../category/category.model";
 import { IImage } from 'app/entities/image/image.model';
+import {Options, LabelType, ChangeContext} from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'jhi-produit',
@@ -36,11 +37,13 @@ export class ProduitComponent implements OnInit {
   prixFilter: 'asc' | 'desc' | null = null;
   tailleFilter: 'asc' | 'desc' | null = null;
   currentCategory: number | null = null;
+  sliderValue: number = 0;
   itemsPerPage = 15;
   page = 1;
   p: number = 1; // Current page for ngx-pagination
   totalItems: number = 0; // Total number of items
   itemsPerPageOptions = [15, 30, 45]; // You can customize this array based on your needs
+  criteria: any = {};
 
   constructor(
     protected produitService: ProduitService,
@@ -276,6 +279,8 @@ export class ProduitComponent implements OnInit {
       'categoryId.in': this.selectedCategories
     };
 
+    this.criteria['categoryId.in'] = this.selectedCategories;
+
     this.produitService.fetchProductsByCriteria(criteria).subscribe({
         next: (res: EntityArrayResponseType) => {
           this.onResponseSuccess(res);
@@ -303,4 +308,40 @@ export class ProduitComponent implements OnInit {
     this.page = page;
     this.load();
   }
+
+  minValue: number = 0;
+  maxValue: number = 500;
+
+  options: Options = {
+    floor: 0,
+    ceil: 500,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return value + ' €';
+        case LabelType.High:
+          return value + ' €';
+        default:
+          return value + ' €';
+      }
+    }
+  };
+
+  updateSliderInfo($event: ChangeContext) {
+    this.criteria['prixUnitaire.lessThan'] = $event.highValue;
+    this.criteria['prixUnitaire.greaterThan'] = $event.value;
+
+    this.produitService.fetchProductsByCriteria(this.criteria).subscribe({
+      next: (res: EntityArrayResponseType) => {
+        this.onResponseSuccess(res);
+
+        this.cachedProducts = [];
+        if (this.produits !== undefined)
+          for (let i = 0; i < this.produits.length; i++) {
+            this.cachedProducts?.push(this.produits[i]);
+          }
+      }
+    });
+  }
+
 }

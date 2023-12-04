@@ -71,6 +71,7 @@
     "packaging": "jar"
   },
   "dependencies": {
+    "@angular-slider/ngx-slider": "^2.0.4",
     "@angular/common": "14.2.0",
     "@angular/compiler": "14.2.0",
     "@angular/core": "14.2.0",
