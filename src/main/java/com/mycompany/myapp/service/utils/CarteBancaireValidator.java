@@ -1,6 +1,6 @@
 package com.mycompany.myapp.service.utils;
 
-import com.mycompany.myapp.service.dto.CarteBancaireDTO;
+import com.mycompany.myapp.domain.CarteBancaire;
 
 import java.time.Instant;
 import java.util.regex.Pattern;
@@ -21,7 +21,7 @@ public class CarteBancaireValidator {
         return cvv != null && CVV_PATTERN.matcher(String.valueOf(cvv)).matches();
     }
 
-    public static boolean validateCarteBancaire(CarteBancaireDTO carteBancaire) {
+    public static boolean validateCarteBancaire(CarteBancaire carteBancaire) {
         return carteBancaire != null &&
             validateCardNumber(String.valueOf(carteBancaire.getNumCarte())) &&
             validateDateExpiration(carteBancaire.getDateExpiration()) &&
