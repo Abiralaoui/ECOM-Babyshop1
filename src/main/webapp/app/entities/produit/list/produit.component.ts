@@ -275,13 +275,9 @@ export class ProduitComponent implements OnInit {
       this.selectedCategories = this.selectedCategories.filter(id => id !== categoryId);
     }
 
-    const criteria = {
-      'categoryId.in': this.selectedCategories
-    };
-
     this.criteria['categoryId.in'] = this.selectedCategories;
 
-    this.produitService.fetchProductsByCriteria(criteria).subscribe({
+    this.produitService.fetchProductsByCriteria(this.criteria).subscribe({
         next: (res: EntityArrayResponseType) => {
           this.onResponseSuccess(res);
 
