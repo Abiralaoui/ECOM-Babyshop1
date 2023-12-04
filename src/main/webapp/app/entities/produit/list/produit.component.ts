@@ -279,6 +279,12 @@ export class ProduitComponent implements OnInit {
     this.produitService.fetchProductsByCriteria(criteria).subscribe({
         next: (res: EntityArrayResponseType) => {
           this.onResponseSuccess(res);
+
+          this.cachedProducts = [];
+          if (this.produits !== undefined)
+            for (let i = 0; i < this.produits.length; i++) {
+              this.cachedProducts?.push(this.produits[i]);
+            }
         }
     });
   }
