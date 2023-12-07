@@ -75,7 +75,18 @@ public class Produit implements Serializable {
     @JsonIgnoreProperties(value = { "produits" }, allowSetters = true)
     private Set<Category> categories = new HashSet<>();
 
+    @Version
+    private Long version;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
 
     public Long getId() {
         return this.id;

@@ -38,6 +38,10 @@
       "fieldType": "Integer",
       "fieldValidateRules": ["min"],
       "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "version",
+      "fieldType": "Long"
     }
   ],
   "fluentMethods": true,
