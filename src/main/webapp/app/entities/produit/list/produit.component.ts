@@ -19,13 +19,15 @@ import { CategoryService } from "../../category/service/category.service";
 import { ICategory } from "../../category/category.model";
 import { IImage } from 'app/entities/image/image.model';
 import {Options, LabelType, ChangeContext} from '@angular-slider/ngx-slider';
+import { ImageService } from 'app/entities/image/service/image.service';
+
 
 @Component({
   selector: 'jhi-produit',
   templateUrl: './produit.component.html',
 })
 export class ProduitComponent implements OnInit {
-  imagelist: IImage[] = [];
+  images: IImage[] = [];
   produits?: IProduit[];
   categories?: ICategory[];
   isLoading = false;
@@ -55,7 +57,8 @@ export class ProduitComponent implements OnInit {
     protected modalService: NgbModal,
     protected accountService: AccountService,
     protected panierService: PanierService,
-    protected categoryService: CategoryService
+    protected categoryService: CategoryService,
+    private imageService: ImageService
   ) {}
 
   trackId = (_index: number, item: IProduit): number => this.produitService.getProduitIdentifier(item);
@@ -63,12 +66,15 @@ export class ProduitComponent implements OnInit {
   ngOnInit(): void {
     this.load();
     this.fetchCategories();
+   
     this.activatedRoute.queryParamMap.pipe(
       debounceTime(300),
       distinctUntilChanged()
     ).subscribe(() => {
       this.search();
     });
+   
+    
   }
 
   fetchCategories(): void {
@@ -109,7 +115,10 @@ export class ProduitComponent implements OnInit {
         this.onResponseSuccess(res);
 
         this.cachedProducts = [];
+        this.loadImagesForProducts();
+       console.log(this.produits)
         if (this.produits !== undefined)
+        
           for (let i = 0; i < this.produits.length; i++) {
             this.cachedProducts?.push(this.produits[i]);
           }
@@ -399,5 +408,25 @@ export class ProduitComponent implements OnInit {
       }
     });
   }
-
+  loadImagesForProducts(): void {
+    this.imageService.query().subscribe(
+      (res) => {
+        const images = res.body || [];
+        this.associateImagesWithProducts(images);
+      },
+      (error) => {
+        console.error('Error fetching images:', error);
+      }
+    );
+  }
+  
+  associateImagesWithProducts(images: IImage[]): void {
+    // Iterate through products and associate images
+    if (this.produits) {
+      this.produits.forEach((produit) => {
+        produit.images = images.filter((image) => image.produit?.id === produit.id);
+      });
+    }
+  }
+  
 }

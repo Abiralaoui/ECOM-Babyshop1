@@ -130,8 +130,8 @@
           <div class="wrapper" (click)="navigateToView(produit.id)">
             <div class="container">
               <div>
-                <div class="top card-top-border">
-                  <img src="../../../content/images/img.png" class="card-img-top" alt="Product Image">
+                <div *ngIf="produit.images && produit.images.length > 0">
+                  <img [src]="produit.images[0].url" alt="Product Image" style="width: 200px; height: auto;">
                 </div>
                 <div class="product-lounge mx-2 mt-2">
                   <h6>{{ truncateDescription(produit.libelle) }}</h6>

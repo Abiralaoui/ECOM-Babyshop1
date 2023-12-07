@@ -14,9 +14,9 @@
 # ===================================================================
 
 accessKey:
-  ${ACCESS_KEY}
+  "dgfdfgdg"
 secretKey:
-  ${SECRET_KEY}
+  "dgfdfgdg"
 bucketName:
   s3-guru-bucket
 region:
