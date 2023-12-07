@@ -18,8 +18,6 @@ public class LigneCommandeDTO implements Serializable {
     @DecimalMin(value = "0")
     private Float prix;
 
-    private CommandeDTO commande;
-
     private ProduitDTO produit;
 
     public Long getId() {
@@ -44,14 +42,6 @@ public class LigneCommandeDTO implements Serializable {
 
     public void setPrix(Float prix) {
         this.prix = prix;
-    }
-
-    public CommandeDTO getCommande() {
-        return commande;
-    }
-
-    public void setCommande(CommandeDTO commande) {
-        this.commande = commande;
     }
 
     public ProduitDTO getProduit() {
@@ -90,7 +80,6 @@ public class LigneCommandeDTO implements Serializable {
             "id=" + getId() +
             ", quantite=" + getQuantite() +
             ", prix=" + getPrix() +
-            ", commande=" + getCommande() +
             ", produit=" + getProduit() +
             "}";
     }

@@ -1,13 +1,20 @@
 package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.domain.Commande;
+import com.mycompany.myapp.domain.LigneCommande;
 import com.mycompany.myapp.repository.CommandeRepository;
 import com.mycompany.myapp.service.dto.CommandeDTO;
+import com.mycompany.myapp.service.exceptions.CarteBancaireNotValidException;
+import com.mycompany.myapp.service.exceptions.OutOfStockException;
 import com.mycompany.myapp.service.mapper.CommandeMapper;
+
+import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import com.mycompany.myapp.service.utils.CarteBancaireValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -26,9 +33,12 @@ public class CommandeService {
 
     private final CommandeMapper commandeMapper;
 
-    public CommandeService(CommandeRepository commandeRepository, CommandeMapper commandeMapper) {
+    private final LigneCommandeService ligneCommandeService;
+
+    public CommandeService(CommandeRepository commandeRepository, CommandeMapper commandeMapper, LigneCommandeService ligneCommandeService) {
         this.commandeRepository = commandeRepository;
         this.commandeMapper = commandeMapper;
+        this.ligneCommandeService = ligneCommandeService;
     }
 
     /**
@@ -37,10 +47,24 @@ public class CommandeService {
      * @param commandeDTO the entity to save.
      * @return the persisted entity.
      */
-    public CommandeDTO save(CommandeDTO commandeDTO) {
+    public CommandeDTO save(CommandeDTO commandeDTO) throws CarteBancaireNotValidException, OutOfStockException {
         log.debug("Request to save Commande : {}", commandeDTO);
         Commande commande = commandeMapper.toEntity(commandeDTO);
+        var carteBancaire = commande.getCarteBancaire();
+
+        if (CarteBancaireValidator.validateCarteBancaire(carteBancaire))
+            throw new CarteBancaireNotValidException("Bank card informations are not valid.");
+
+        var ligneCommandes = commande.getLigneCommandes();
+
+        for (var ligneCommande: ligneCommandes)
+            ligneCommandeService.updateStock(ligneCommande.getProduit().getId(), ligneCommande.getQuantite());
+
+        log.warn(String.valueOf(commande.getLigneCommandes().size()));
+
+        commande.setDate(Instant.now());
         commande = commandeRepository.save(commande);
+
         return commandeMapper.toDto(commande);
     }
 

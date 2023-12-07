@@ -3,6 +3,8 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.repository.CommandeRepository;
 import com.mycompany.myapp.service.CommandeService;
 import com.mycompany.myapp.service.dto.CommandeDTO;
+import com.mycompany.myapp.service.exceptions.CarteBancaireNotValidException;
+import com.mycompany.myapp.service.exceptions.OutOfStockException;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,6 +14,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
@@ -47,8 +50,8 @@ public class CommandeResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new commandeDTO, or with status {@code 400 (Bad Request)} if the commande has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/commandes")
-    public ResponseEntity<CommandeDTO> createCommande(@RequestBody CommandeDTO commandeDTO) throws URISyntaxException {
+    @PostMapping(value = "/commandes")
+    public ResponseEntity<CommandeDTO> createCommande(@RequestBody CommandeDTO commandeDTO) throws URISyntaxException, CarteBancaireNotValidException, OutOfStockException {
         log.debug("REST request to save Commande : {}", commandeDTO);
         if (commandeDTO.getId() != null) {
             throw new BadRequestAlertException("A new commande cannot already have an ID", ENTITY_NAME, "idexists");

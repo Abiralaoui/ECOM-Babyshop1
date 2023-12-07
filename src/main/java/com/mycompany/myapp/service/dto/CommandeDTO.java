@@ -5,6 +5,7 @@ import com.mycompany.myapp.domain.enumeration.TypePayement;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the {@link com.mycompany.myapp.domain.Commande} entity.
@@ -23,6 +24,8 @@ public class CommandeDTO implements Serializable {
     private CarteBancaireDTO carteBancaire;
 
     private ClientDTO client;
+
+    private Set<LigneCommandeDTO> ligneCommandes;
 
     public Long getId() {
         return id;
@@ -70,6 +73,14 @@ public class CommandeDTO implements Serializable {
 
     public void setClient(ClientDTO client) {
         this.client = client;
+    }
+
+    public Set<LigneCommandeDTO> getLigneCommandes() {
+        return ligneCommandes;
+    }
+
+    public void setLigneCommandes(Set<LigneCommandeDTO> ligneCommandes) {
+        this.ligneCommandes = ligneCommandes;
     }
 
     @Override

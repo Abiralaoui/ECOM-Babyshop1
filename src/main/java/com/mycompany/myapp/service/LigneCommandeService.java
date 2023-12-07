@@ -3,6 +3,7 @@ package com.mycompany.myapp.service;
 import com.mycompany.myapp.domain.LigneCommande;
 import com.mycompany.myapp.repository.LigneCommandeRepository;
 import com.mycompany.myapp.service.dto.LigneCommandeDTO;
+import com.mycompany.myapp.service.exceptions.OutOfStockException;
 import com.mycompany.myapp.service.mapper.LigneCommandeMapper;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,9 +27,12 @@ public class LigneCommandeService {
 
     private final LigneCommandeMapper ligneCommandeMapper;
 
-    public LigneCommandeService(LigneCommandeRepository ligneCommandeRepository, LigneCommandeMapper ligneCommandeMapper) {
+    private final ProduitService produitService;
+
+    public LigneCommandeService(LigneCommandeRepository ligneCommandeRepository, LigneCommandeMapper ligneCommandeMapper, ProduitService produitService) {
         this.ligneCommandeRepository = ligneCommandeRepository;
         this.ligneCommandeMapper = ligneCommandeMapper;
+        this.produitService = produitService;
     }
 
     /**
@@ -108,5 +112,18 @@ public class LigneCommandeService {
     public void delete(Long id) {
         log.debug("Request to delete LigneCommande : {}", id);
         ligneCommandeRepository.deleteById(id);
+    }
+
+    public void updateStock(Long id, int quantity) throws OutOfStockException {
+        var produit = produitService.findOne(id).get();
+        var stock = produit.getStock();
+        var itemsleft = stock - quantity;
+
+        if (itemsleft < 0)
+            throw new OutOfStockException("There's " + itemsleft + " left on stock.");
+
+        produit.setStock(produit.getStock() - quantity);
+
+        produitService.save(produit);
     }
 }

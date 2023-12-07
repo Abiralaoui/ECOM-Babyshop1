@@ -13,14 +13,18 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface LigneCommandeMapper extends EntityMapper<LigneCommandeDTO, LigneCommande> {
+/*
     @Mapping(target = "commande", source = "commande", qualifiedByName = "commandeId")
+*/
     @Mapping(target = "produit", source = "produit", qualifiedByName = "produitId")
     LigneCommandeDTO toDto(LigneCommande s);
 
+/*
     @Named("commandeId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     CommandeDTO toDtoCommandeId(Commande commande);
+*/
 
     @Named("produitId")
     @BeanMapping(ignoreByDefault = true)
