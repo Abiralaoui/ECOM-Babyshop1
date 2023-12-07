@@ -114,9 +114,10 @@ public class LigneCommandeService {
         ligneCommandeRepository.deleteById(id);
     }
 
+    @Transactional
     public void updateStock(Long id, int quantity) throws OutOfStockException {
-        var produit = produitService.findOne(id).get();
-        var stock = produit.getStock();
+        var produit   = produitService.findOneWithLockingById(id).get();
+        var stock     = produit.getStock();
         var itemsleft = stock - quantity;
 
         if (itemsleft < 0)

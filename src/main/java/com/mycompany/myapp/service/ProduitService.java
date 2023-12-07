@@ -135,6 +135,10 @@ public class ProduitService {
             .map(produitMapper::toDto);
     }
 
+    public Optional<ProduitDTO> findOneWithLockingById(Long id) {
+        return produitRepository.findWithLockingById(id).map(produitMapper::toDto);
+    }
+
     /**
      * Get all the produits.
      *

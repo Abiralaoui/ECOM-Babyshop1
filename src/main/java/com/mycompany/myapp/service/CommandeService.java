@@ -47,6 +47,7 @@ public class CommandeService {
      * @param commandeDTO the entity to save.
      * @return the persisted entity.
      */
+    @Transactional
     public CommandeDTO save(CommandeDTO commandeDTO) throws CarteBancaireNotValidException, OutOfStockException {
         log.debug("Request to save Commande : {}", commandeDTO);
         Commande commande = commandeMapper.toEntity(commandeDTO);

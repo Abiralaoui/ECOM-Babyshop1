@@ -11,6 +11,8 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.LockModeType;
+
 /**
  * Spring Data JPA repository for the Produit entity.
  *
@@ -43,5 +45,8 @@ public interface ProduitRepository
         "HAVING COUNT(DISTINCT c) = :categoryCount")
     List<Produit> findProductsByAllCategories(@Param("categories") List<Category> categories,
                                              @Param("categoryCount") long categoryCount);
+
+    @Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
+    Optional<Produit> findWithLockingById(Long id);
 
 }
