@@ -28,6 +28,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -178,12 +180,13 @@ public class ProduitResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of produits in body.
      */
-    @GetMapping("/produits")
-    public ResponseEntity<List<ProduitDTO>> getAllProduits(ProduitCriteria criteria) {
-        log.debug("REST request to get Produits by criteria: {}", criteria);
-        List<ProduitDTO> entityList = produitQueryService.findByCriteria(criteria);
-        return ResponseEntity.ok().body(entityList);
-    }
+     @GetMapping("/produits")
+     public ResponseEntity<Page<ProduitDTO>> getAllProduits(ProduitCriteria criteria, Pageable pageable) {
+         log.debug("REST request to get Produits by criteria: {}", criteria);
+
+         Page<ProduitDTO> entityList = produitQueryService.findByCriteria(criteria, pageable);
+         return ResponseEntity.ok().body(entityList);
+     }
 
     /**
      * {@code GET  /produits/count} : count all the produits.
