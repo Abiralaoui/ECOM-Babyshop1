@@ -44,6 +44,8 @@ export class ProduitComponent implements OnInit {
   totalItems: number = 0; // Total number of items
   itemsPerPageOptions = [15, 30, 45]; // You can customize this array based on your needs
   criteria: any = {};
+  currentPage: any = 0;
+  totalPages: any;
 
   constructor(
     protected produitService: ProduitService,
@@ -97,7 +99,12 @@ export class ProduitComponent implements OnInit {
   }
 
   load(): void {
-    this.loadFromBackendWithRouteInformations().subscribe({
+    const pageable = {
+      'page': this.currentPage,
+      'size': 20
+    };
+
+    this.loadFromBackendWithRouteInformations(pageable).subscribe({
       next: (res: EntityArrayResponseType) => {
         this.onResponseSuccess(res);
 
@@ -114,10 +121,10 @@ export class ProduitComponent implements OnInit {
     this.handleNavigation(this.predicate, this.ascending);
   }
 
-  protected loadFromBackendWithRouteInformations(): Observable<EntityArrayResponseType> {
+  protected loadFromBackendWithRouteInformations(pageable?: any): Observable<EntityArrayResponseType> {
     return combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data]).pipe(
       tap(([params, data]) => this.fillComponentAttributeFromRoute(params, data)),
-      switchMap(() => this.queryBackend(this.predicate, this.ascending))
+      switchMap(() => this.queryBackend(this.predicate, this.ascending, pageable))
     );
   }
 
@@ -128,7 +135,10 @@ export class ProduitComponent implements OnInit {
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
-    const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
+    // @ts-ignore
+    const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body.content);
+    // @ts-ignore
+    this.totalPages = response.body.totalPages;
     this.produits = this.refineData(dataFromBody);
     this.totalItems = this.produits.length; // Update totalItems after data is loaded
   }
@@ -141,7 +151,7 @@ export class ProduitComponent implements OnInit {
     return data ?? [];
   }
 
-  protected queryBackend(predicate?: string, ascending?: boolean): Observable<EntityArrayResponseType> {
+  protected queryBackend(predicate?: string, ascending?: boolean, pageable?: any): Observable<EntityArrayResponseType> {
     this.isLoading = true;
     let criteria = (this.selectedCategories.length == 0) ? {} :
                       {key: 'category.in', value:this.selectedCategories};
@@ -149,7 +159,8 @@ export class ProduitComponent implements OnInit {
     const queryObject = {
       eagerload: true,
       sort: this.getSortQueryParam(predicate, ascending),
-      criteria
+      criteria,
+      ...pageable
     };
     return this.produitService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
@@ -322,6 +333,55 @@ export class ProduitComponent implements OnInit {
       }
     }
   };
+
+
+  onPageChange(pageNumber: any): void {
+    this.currentPage = pageNumber;
+    this.load();
+  }
+
+  getPages(): any {
+    let pages = [];
+
+    for (let i = 0; i < this.totalPages; i++)
+      pages.push(i);
+
+    return pages;
+  }
+
+  // pagination.component.ts
+  getPagesWithEllipsis(): (number | 'ellipsis')[] {
+    const pages = [];
+    const maxPages = 10;
+
+    if (this.totalPages <= maxPages) {
+      return this.getPages();
+    }
+
+    const startPage = Math.max(1, this.currentPage - Math.floor(maxPages / 2));
+    const endPage = Math.min(this.totalPages, startPage + maxPages - 1);
+
+    if (startPage > 1) {
+      pages.push(1);
+      if (startPage > 2) {
+        pages.push('ellipsis');
+      }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    if (endPage < this.totalPages) {
+      if (endPage < this.totalPages - 1) {
+        pages.push('ellipsis');
+      }
+      pages.push(this.totalPages);
+    }
+
+    return pages;
+  }
+
 
   updateSliderInfo($event: ChangeContext) {
     this.criteria['prixUnitaire.lessThan'] = $event.highValue;
