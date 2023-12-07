@@ -89,6 +89,7 @@ public class SecurityConfiguration {
             .antMatchers("/api/produits/**").permitAll()//TODO : get only
             .antMatchers("/api/produit/**").permitAll()
             .antMatchers("/api/client/**").permitAll()
+            .antMatchers("/api/images").permitAll()
             .antMatchers("/api/**").authenticated()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/health/**").permitAll()
