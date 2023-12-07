@@ -86,6 +86,14 @@ public class ProduitService {
         return produitMapper.toDto(produit);
     }
 
+    @Transactional
+    public ProduitDTO save(ProduitDTO produitDTO) {
+        log.debug("Request to save Produit : {}", produitDTO);
+        Produit produit = produitMapper.toEntity(produitDTO);
+        produit = produitRepository.save(produit);
+        return produitMapper.toDto(produit);
+    }
+
     private void handleS3StorageException(Exception e) {
         // Log the exception or perform other actions
         System.err.println("Exception occurred in S3 storage service: " + e.getMessage());
