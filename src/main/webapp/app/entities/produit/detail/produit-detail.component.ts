@@ -46,9 +46,9 @@ avisList: IAvis[] = [];
       this.produit = produit;
 
       // Récupérez les avis liés au produit
-      this.avisService.getAvis().subscribe((avis: IAvis[]) => {
-        this.avisList = avis;
-        console.log(this.avisList); // Affiche les avis dans la console
+      this.avisService.getAvisByProduitId(produit.id).subscribe((avis: IAvis[]) => {
+        this.avisList = avis
+        console.log(this.avisList); // Display filtered reviews in the console
       });
       
 
