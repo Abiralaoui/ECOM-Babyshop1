@@ -8,6 +8,7 @@ import {LigneCommandeService} from "../../ligne-commande/service/ligne-commande.
 import { PanierService } from 'app/panier/panier.service';
 import { AvisService } from 'app/entities/avis/service/avis.service';
 import { IAvis } from 'app/entities/avis/avis.model';
+
 import {Observable} from "rxjs";
 
 @Component({
@@ -40,8 +41,8 @@ avisList: IAvis[] = [];
   }
 
   ngOnInit(): void {
-    
-  
+
+
     this.activatedRoute.data.subscribe(({ produit }) => {
       this.produit = produit;
 
@@ -50,12 +51,12 @@ avisList: IAvis[] = [];
         this.avisList = avis
         console.log(this.avisList); // Display filtered reviews in the console
       });
-      
 
-       
+
+
   })
   this.loadProduitImages();
-  
+
 }
 
 
@@ -85,6 +86,7 @@ avisList: IAvis[] = [];
       }
       console.log('Produit ajouté au panier :', this.produit);
     }
+
 
     // Ajoutez ici la logique pour ajouter le produit au panier
     // Vous pouvez utiliser un service pour gérer le panier ou effectuer d'autres actions nécessaires
