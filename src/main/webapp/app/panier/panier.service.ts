@@ -3,7 +3,8 @@
 import { Injectable } from '@angular/core';
 import { ICategory } from 'app/entities/category/category.model';
 import { IProduit } from 'app/entities/produit/produit.model';
-import { BehaviorSubject } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root',
@@ -54,6 +55,13 @@ export class PanierService {
       this.mettreAJourNombreArticles();
     }
   }
+
+  isEmpty(): Observable<boolean> {
+    return this.produits$.pipe(
+      map(produits => produits.length === 0)
+    );
+  }
+
 
 
 }
