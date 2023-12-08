@@ -78,8 +78,9 @@
       <div *ngIf="avisList && avisList.length > 0">
         <ul class="avis-list">
           <li class="avis-item" *ngFor="let avis of avisList">
-            <div class="avis-note">la note :{{ avis.note }} - {{ avis.commentaire }}</div>
-            <div class="avis-date">{{ avis.date  }}</div>
+            <div class="avis-date">Avis posté le {{ avis.date }}</div>
+            <div class="avis-note">Note : {{ avis.note }} / 5</div>
+            <div>{{ avis.commentaire }}</div>
           </li>
         </ul>
       </div>
