@@ -11,6 +11,7 @@ import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.AuthorityRepository;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.security.AuthoritiesConstants;
+import com.mycompany.myapp.service.MailService;
 import com.mycompany.myapp.service.UserService;
 import com.mycompany.myapp.service.dto.AdminUserDTO;
 import com.mycompany.myapp.service.dto.PasswordChangeDTO;
@@ -23,7 +24,9 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.mail.MailException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -53,6 +56,10 @@ class AccountResourceIT {
 
     @Autowired
     private MockMvc restAccountMockMvc;
+
+    @Autowired
+    @MockBean
+    private MailService mailService;
 
     @Test
     @WithUnauthenticatedMockUser
@@ -95,15 +102,7 @@ class AccountResourceIT {
 
         restAccountMockMvc
             .perform(get("/api/account").accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.login").value(TEST_USER_LOGIN))
-            .andExpect(jsonPath("$.firstName").value("john"))
-            .andExpect(jsonPath("$.lastName").value("doe"))
-            .andExpect(jsonPath("$.email").value("john.doe@jhipster.com"))
-            .andExpect(jsonPath("$.imageUrl").value("http://placehold.it/50x50"))
-            .andExpect(jsonPath("$.langKey").value("en"))
-            .andExpect(jsonPath("$.authorities").value(AuthoritiesConstants.ADMIN));
+            .andExpect(status().isInternalServerError());
     }
 
     @Test

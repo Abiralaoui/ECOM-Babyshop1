@@ -17,6 +17,18 @@
 ---
 # Conditionally disable springdoc on missing api-docs profile
 
+accessKey:
+  "dgfdfgdg"
+
+secretKey:
+  "dgfdfgdg"
+
+bucketName:
+  s3-guru-bucket
+
+region:
+  eu-west-3
+
 spring:
   config:
     activate:

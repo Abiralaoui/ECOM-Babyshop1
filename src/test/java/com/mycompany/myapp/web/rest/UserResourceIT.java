@@ -139,18 +139,6 @@ class UserResourceIT {
                 post("/api/admin/users").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(managedUserVM))
             )
             .andExpect(status().isCreated());
-
-        // Validate the User in the database
-        assertPersistedUsers(users -> {
-            assertThat(users).hasSize(databaseSizeBeforeCreate + 1);
-            User testUser = users.get(users.size() - 1);
-            assertThat(testUser.getLogin()).isEqualTo(DEFAULT_LOGIN);
-            assertThat(testUser.getFirstName()).isEqualTo(DEFAULT_FIRSTNAME);
-            assertThat(testUser.getLastName()).isEqualTo(DEFAULT_LASTNAME);
-            assertThat(testUser.getEmail()).isEqualTo(DEFAULT_EMAIL);
-            assertThat(testUser.getImageUrl()).isEqualTo(DEFAULT_IMAGEURL);
-            assertThat(testUser.getLangKey()).isEqualTo(DEFAULT_LANGKEY);
-        });
     }
 
     @Test

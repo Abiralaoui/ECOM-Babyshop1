@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PanierService } from './panier.service';
 import { IProduit } from 'app/entities/produit/produit.model';
+import {AccountService} from "../core/auth/account.service";
 interface ProduitGroup {
   produits: IProduit[];
   quantite: number;

@@ -29,10 +29,10 @@ public class S3StorageService {
     private final AmazonS3 s3;
 
     public S3StorageService(
-        @Value("${bucketName}") String bucketName,
-        @Value("${accessKey}") String accessKey,
-        @Value("${secretKey}") String secretKey,
-        @Value("${region}") String awsRegion
+        @Value("${bucketName:default}") String bucketName,
+        @Value("${accessKey:default}") String accessKey,
+        @Value("${secretKey:default}") String secretKey,
+        @Value("${region:default}") String awsRegion
     ) {
         this.bucketName = bucketName;
         this.accessKey  = accessKey;

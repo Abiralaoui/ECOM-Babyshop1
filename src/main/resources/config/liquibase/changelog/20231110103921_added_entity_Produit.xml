@@ -37,7 +37,7 @@
                 <constraints nullable="true"/>
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
-            <column name="version" type="integer">
+            <column name="version" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
