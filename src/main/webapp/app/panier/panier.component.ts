@@ -14,7 +14,7 @@ interface ProduitGroup {
 export class PanierComponent implements OnInit {
   produits: IProduit[] = [];
   produitsSameCategory: IProduit[] = [];
-  constructor(private router: Router,public panierService: PanierService,private cdr: ChangeDetectorRef) { }
+  constructor(private router: Router, public  accountService: AccountService,public panierService: PanierService,private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.panierService.produits$.subscribe((produits) => {
@@ -59,10 +59,16 @@ export class PanierComponent implements OnInit {
     this.router.navigate(['/produit', productId, 'view']);
   }
   validerPanier(): void {
-    // Calcul du total ici
-    const total = this.calculerTotal();
-    // Redirection vers la page de paiement avec le total en tant que paramètre
-    this.router.navigate(['/pay'], { queryParams: { total } });
+    if (this.accountService.isAuthenticated()) {
+
+      const total = this.calculerTotal();
+      // Redirection vers la page de paiement avec le total en tant que paramètre
+      this.router.navigate(['/pay'], { queryParams: { total } });
+    } else {
+
+      // Redirection vers la page de connexion si l'utilisateur n'est pas connecté
+      this.router.navigate(['/login']);
+    }
   }
 
   get produitsGroupes(): ProduitGroup[] {

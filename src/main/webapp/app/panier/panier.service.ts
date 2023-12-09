@@ -1,6 +1,7 @@
 // panier.service.ts
 
 import { Injectable } from '@angular/core';
+import { ICategory } from 'app/entities/category/category.model';
 import { IProduit } from 'app/entities/produit/produit.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 

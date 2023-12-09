@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IClient } from 'app/entities/client/client.model';
 import { ICommande } from 'app/entities/commande/commande.model';
 import { ClientCommandeService } from './client-commande.service';
 import {AccountService} from "../core/auth/account.service";
-import {accountState} from "../account/account.route";
 
 @Component({
   selector: 'jhi-mescommandes',

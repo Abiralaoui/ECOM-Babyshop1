@@ -1,13 +1,19 @@
 package com.mycompany.myapp.service;
 
+import com.amazonaws.services.glue.model.EntityNotFoundException;
 import com.mycompany.myapp.domain.Avis;
+import com.mycompany.myapp.domain.Produit;
 import com.mycompany.myapp.repository.AvisRepository;
+import com.mycompany.myapp.repository.ProduitRepository;
 import com.mycompany.myapp.service.dto.AvisDTO;
+import com.mycompany.myapp.service.dto.ProduitDTO;
 import com.mycompany.myapp.service.mapper.AvisMapper;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import com.mycompany.myapp.service.mapper.ProduitMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -25,10 +31,14 @@ public class AvisService {
     private final AvisRepository avisRepository;
 
     private final AvisMapper avisMapper;
+    private final ProduitMapper produitMapper;
+    private final ProduitRepository produitRepository;
 
-    public AvisService(AvisRepository avisRepository, AvisMapper avisMapper) {
+    public AvisService(ProduitMapper produitMapper, ProduitRepository produitRepository,AvisRepository avisRepository, AvisMapper avisMapper) {
         this.avisRepository = avisRepository;
         this.avisMapper = avisMapper;
+        this.produitMapper=produitMapper;
+        this.produitRepository=produitRepository;
     }
 
     /**
@@ -39,8 +49,18 @@ public class AvisService {
      */
     public AvisDTO save(AvisDTO avisDTO) {
         log.debug("Request to save Avis : {}", avisDTO);
+
+        ProduitDTO produitDTO = avisDTO.getProduit(); // Get the associated ProduitDTO
+        Produit produit = produitMapper.toEntity(produitDTO);
+        Long produitId = produit.getId(); // Assuming you have an ID in the ProduitDTO
+
+         produit = produitRepository.findById(produitId)
+            .orElseThrow(() -> new EntityNotFoundException("Produit not found with ID: " + produitId));
+
         Avis avis = avisMapper.toEntity(avisDTO);
+        avis.setProduit(produit); // Set the reference to the existing Produit
         avis = avisRepository.save(avis);
+
         return avisMapper.toDto(avis);
     }
 

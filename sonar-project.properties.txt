@@ -1,0 +1,34 @@
+# Port sur lequel SonarQube sera accessible
+sonar.web.port=9000
+sonar.login= "admin"
+sonar.password="abir"
+
+
+# Doit être unique dans l'instance SonarQube
+sonar.projectKey=demo123
+
+sonar.host.url=http://localhost:9000
+
+# Language
+
+sonar.language=angular
+sonar.exclusions=**/*.java
+
+
+
+
+
+# Le nom et la version affichés dans l'interface SonarQube
+sonar.projectName=ProjetEcom
+sonar.projectVersion=1.0
+
+# Le chemin relatif aux fichiers que vous souhaitez analyser dans votre code
+sonar.sources=src
+
+# Cas d'un projet utilisant composer. 
+# On ignore l'analyse du code présent dans les dépendances.
+sonar.exclusions=vendor/**
+
+# Encodage du code source.
+sonar.sourceEncoding=UTF-8
+-Dproject.settings=./sonar-project.properties 

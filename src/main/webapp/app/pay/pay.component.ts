@@ -16,7 +16,10 @@ import {LigneCommandeService} from "../entities/ligne-commande/service/ligne-com
 import {ILigneCommande, NewLigneCommande} from "../entities/ligne-commande/ligne-commande.model";
 
 
-
+interface ProduitGroup {
+  produits: IProduit[];
+  quantite: number;
+}
 
 @Component({
   selector: 'jhi-pay',
@@ -173,12 +176,11 @@ export class PayComponent implements OnInit {
           console.error('Error processing payment:', error);
         }
       );
-      // Create ILigneCommande and save it
+  
       const ligneCommande:  NewLigneCommande = {
         id: null, // Set to 0 if creating a new instance
         quantite: null, // Adjust as needed
        prix: null, // Adjust as needed
-       commande: null,
        produit: null // Adjust as needed
       };
 
@@ -197,11 +199,24 @@ export class PayComponent implements OnInit {
     } else {
       // The form is not valid, display an error message or take appropriate action
     }
+    
   }
 
 
 
+  get produitsGroupes(): ProduitGroup[] {
+    const produitsGroupes: ProduitGroup[] = [];
+    this.produits.forEach((produit) => {
+      const groupeExist = produitsGroupes.find((g) => g.produits[0].id === produit.id);
 
+      if (groupeExist) {
+        groupeExist.quantite += 1;
+      } else {
+        produitsGroupes.push({ produits: [produit], quantite: 1 });
+      }
+    });
 
+    return produitsGroupes;
+  }
 
 }
