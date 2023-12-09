@@ -56,8 +56,7 @@ describe('LigneCommande Management Update Component', () => {
     it('Should call Commande query and add missing value', () => {
       const ligneCommande: ILigneCommande = { id: 456 };
       const commande: ICommande = { id: 7874 };
-      ligneCommande.commande = commande;
-
+     
       const commandeCollection: ICommande[] = [{ id: 78715 }];
       jest.spyOn(commandeService, 'query').mockReturnValue(of(new HttpResponse({ body: commandeCollection })));
       const additionalCommandes = [commande];
@@ -100,7 +99,7 @@ describe('LigneCommande Management Update Component', () => {
     it('Should update editForm', () => {
       const ligneCommande: ILigneCommande = { id: 456 };
       const commande: ICommande = { id: 45253 };
-      ligneCommande.commande = commande;
+
       const produit: IProduit = { id: 18297 };
       ligneCommande.produit = produit;
 

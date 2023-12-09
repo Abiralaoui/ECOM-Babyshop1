@@ -14,6 +14,7 @@ import {PanierService} from "../panier/panier.service";
 import { IProduit } from 'app/entities/produit/produit.model';
 import {LigneCommandeService} from "../entities/ligne-commande/service/ligne-commande.service";
 import {ILigneCommande, NewLigneCommande} from "../entities/ligne-commande/ligne-commande.model";
+import { TypePayement } from 'app/entities/enumerations/type-payement.model';
 
 
 interface ProduitGroup {
@@ -150,23 +151,56 @@ export class PayComponent implements OnInit {
 
   payCommand(): void {
     if (this.paymentForm.valid) {
-      // The form is valid, proceed with the payment
-
       // Retrieve values from the form
       const formValues = this.paymentForm.value;
+
+      // Construct the payload for Commande
       const newCommande: NewCommande = {
-        // Assuming you have 'id', 'date', 'etat', 'typePayement', 'carteBancaire', 'client' properties in NewCommande
-        id: null,  // It's often assigned by the server
-        date: null,  // Convert the date to dayjs if needed
-        etat: formValues.etat || null,
-        typePayement: null,
-        carteBancaire:  null,
-        client: null,
-
+        id: null,
+        date: dayjs(), // Assuming you have dayjs imported
+        etat: null,
+        typePayement:TypePayement.CB,
+        carteBancaire: {
+          id: undefined,
+          nomPorteur: formValues.nom,
+          numCarte: formValues.numero,
+          dateExpiration: dayjs(formValues.dateExpiration, 'MM/YYYY'), // Assuming date format is MM/YYYY
+          cvv: formValues.cryptogramme
+        },
+        client: {
+          id: 1, //  { id: client.id }
+         },
+        ligneCommandes: [] // Leave it empty for now
       };
-
+      this.produits.forEach((produit) => {
+        // Check if the product already exists in ligneCommandes
+        const existingLigneCommandeIndex = newCommande.ligneCommandes!.findIndex(
+          (ligneCommande) => ligneCommande.produit?.id === produit.id
+        );
+  
+        if (existingLigneCommandeIndex !== -1) {
+          // If the product exists, update the quantity and price
+          newCommande.ligneCommandes![existingLigneCommandeIndex].quantite! += 1;
+          newCommande.ligneCommandes![existingLigneCommandeIndex].prix! += produit.prixUnitaire!;
+        } else {
+          // If the product doesn't exist, create a new ligneCommande
+          const ligneCommande: ILigneCommande = {
+            id: null, // Generate the ID as needed
+            quantite: 1,
+            prix: produit.prixUnitaire,
+            produit: { id: produit.id }
+          };
+  
+          // Add the new ligneCommande to the list
+          newCommande.ligneCommandes!.push(ligneCommande);
+        }
+      });
+      console.log("voillaaa la ligne de comande ");
+      console.log(newCommande.ligneCommandes);
+      console.log("voillaaa la COMMANDE");
+      console.log(newCommande);
       // Call the create method from CommandeService to create a new order
-      this.commandeService.create(newCommande).subscribe(
+    /*  this.commandeService.create(newCommande).subscribe(
         (response) => {
           // Handle success response
           this.paiementIsOk = true;
@@ -176,32 +210,11 @@ export class PayComponent implements OnInit {
           console.error('Error processing payment:', error);
         }
       );
-  
-      const ligneCommande:  NewLigneCommande = {
-        id: null, // Set to 0 if creating a new instance
-        quantite: null, // Adjust as needed
-       prix: null, // Adjust as needed
-       produit: null // Adjust as needed
-      };
-
-      this.ligneCommandeService.create(ligneCommande).subscribe(
-        (createdLigneCommande) => {
-          // Handle success if needed
-        },
-        (error) => {
-          // Handle error if needed
-          console.error('Error creating LigneCommande:', error);
-        }
-      );
-
-      // Create a NewCommande object based on the form values
-
     } else {
       // The form is not valid, display an error message or take appropriate action
-    }
-    
+    }*/
   }
-
+  }
 
 
   get produitsGroupes(): ProduitGroup[] {

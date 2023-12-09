@@ -72,11 +72,7 @@
           </td>
           <td>{{ ligneCommande.quantite }}</td>
           <td>{{ ligneCommande.prix }}</td>
-          <td>
-            <div *ngIf="ligneCommande.commande">
-              <a [routerLink]="['/commande', ligneCommande.commande.id, 'view']">{{ ligneCommande.commande.id }}</a>
-            </div>
-          </td>
+         
           <td>
             <div *ngIf="ligneCommande.produit">
               <a [routerLink]="['/produit', ligneCommande.produit.id, 'view']">{{ ligneCommande.produit.id }}</a>

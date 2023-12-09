@@ -47,7 +47,7 @@ export class LigneCommandeService {
   }
 
   getLigneCommandeIdentifier(ligneCommande: Pick<ILigneCommande, 'id'>): number {
-    return ligneCommande.id;
+    return ligneCommande.id!;
   }
 
   compareLigneCommande(o1: Pick<ILigneCommande, 'id'> | null, o2: Pick<ILigneCommande, 'id'> | null): boolean {

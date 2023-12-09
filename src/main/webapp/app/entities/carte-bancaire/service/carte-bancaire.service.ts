@@ -69,7 +69,7 @@ export class CarteBancaireService {
   }
 
   getCarteBancaireIdentifier(carteBancaire: Pick<ICarteBancaire, 'id'>): number {
-    return carteBancaire.id;
+    return carteBancaire.id!;
   }
 
   compareCarteBancaire(o1: Pick<ICarteBancaire, 'id'> | null, o2: Pick<ICarteBancaire, 'id'> | null): boolean {

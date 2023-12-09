@@ -58,7 +58,7 @@ export class LigneCommandeUpdateComponent implements OnInit {
     if (ligneCommande.id !== null) {
       this.subscribeToSaveResponse(this.ligneCommandeService.update(ligneCommande));
     } else {
-      this.subscribeToSaveResponse(this.ligneCommandeService.create(ligneCommande));
+   
     }
   }
 
@@ -87,7 +87,6 @@ export class LigneCommandeUpdateComponent implements OnInit {
 
     this.commandesSharedCollection = this.commandeService.addCommandeToCollectionIfMissing<ICommande>(
       this.commandesSharedCollection,
-      ligneCommande.commande
     );
     this.produitsSharedCollection = this.produitService.addProduitToCollectionIfMissing<IProduit>(
       this.produitsSharedCollection,
@@ -101,7 +100,7 @@ export class LigneCommandeUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<ICommande[]>) => res.body ?? []))
       .pipe(
         map((commandes: ICommande[]) =>
-          this.commandeService.addCommandeToCollectionIfMissing<ICommande>(commandes, this.ligneCommande?.commande)
+          this.commandeService.addCommandeToCollectionIfMissing<ICommande>(commandes, )
         )
       )
       .subscribe((commandes: ICommande[]) => (this.commandesSharedCollection = commandes));

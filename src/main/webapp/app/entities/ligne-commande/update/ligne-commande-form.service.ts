@@ -20,7 +20,6 @@ type LigneCommandeFormGroupContent = {
   id: FormControl<ILigneCommande['id'] | NewLigneCommande['id']>;
   quantite: FormControl<ILigneCommande['quantite']>;
   prix: FormControl<ILigneCommande['prix']>;
-  commande: FormControl<ILigneCommande['commande']>;
   produit: FormControl<ILigneCommande['produit']>;
 };
 
@@ -47,7 +46,6 @@ export class LigneCommandeFormService {
       prix: new FormControl(ligneCommandeRawValue.prix, {
         validators: [Validators.min(0)],
       }),
-      commande: new FormControl(ligneCommandeRawValue.commande),
       produit: new FormControl(ligneCommandeRawValue.produit),
     });
   }

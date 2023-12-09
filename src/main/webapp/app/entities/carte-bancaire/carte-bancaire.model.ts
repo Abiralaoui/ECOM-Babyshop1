@@ -2,7 +2,7 @@ import dayjs from 'dayjs/esm';
 import { IClient } from 'app/entities/client/client.model';
 
 export interface ICarteBancaire {
-  id: number;
+  id?: number;
   nomPorteur?: string | null;
   numCarte?: number | null;
   dateExpiration?: dayjs.Dayjs | null;
