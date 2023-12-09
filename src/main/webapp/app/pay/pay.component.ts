@@ -24,7 +24,7 @@ import {ILigneCommande, NewLigneCommande} from "../entities/ligne-commande/ligne
   styleUrls: ['./pay.component.scss']
 })
 export class PayComponent implements OnInit {
-  total: number=0;
+  total = 0;
   paiementIsOk = false;
   numero: FormControl = new FormControl('',
     [Validators.required,
@@ -36,7 +36,7 @@ export class PayComponent implements OnInit {
       Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ-' ]+$/)
     ]);
 
-  regex: RegExp = new RegExp(/^(0[1-9]|1[0-2])\/\d{4}$/);
+  regex = new RegExp(/^(0[1-9]|1[0-2])\/\d{4}$/);
 
   dateExpiration: FormControl = new FormControl('',
     Validators.compose([
@@ -106,21 +106,15 @@ export class PayComponent implements OnInit {
       this.total = params['total'];
     });
     this.accountService.identity().subscribe((account) => {
-      if (account && account.login) {
+      if (account?.login) {
         this.account=account;
         this.login= account.login;
-        console.log(this.login);
       }
     });
     this.panierService.produits$.subscribe((produits) => {
       this.produits = produits;
       // You can perform any additional logic when products are updated in this component
     });
-  }
-
-
-  getCartTotal() {
-    // return this.cartService.getCartTotal();
   }
 
   isValidDate(): ValidatorFn {
@@ -136,10 +130,10 @@ export class PayComponent implements OnInit {
 
           const date = new Date(year, month - 1);
 
-          let today = new Date();
+          const today = new Date();
           today.setHours(0, 0, 0, 0);
 
-          let result = date >= today ? null : {dateExpired: true};
+          const result = date >= today ? null : {dateExpired: true};
 
           return result;
         }
@@ -172,7 +166,6 @@ export class PayComponent implements OnInit {
       this.commandeService.create(newCommande).subscribe(
         (response) => {
           // Handle success response
-          console.log('Commande created:', newCommande);
           this.paiementIsOk = true;
         },
         (error) => {
@@ -192,7 +185,6 @@ export class PayComponent implements OnInit {
       this.ligneCommandeService.create(ligneCommande).subscribe(
         (createdLigneCommande) => {
           // Handle success if needed
-          console.log('LigneCommande created:', createdLigneCommande);
         },
         (error) => {
           // Handle error if needed
@@ -201,7 +193,6 @@ export class PayComponent implements OnInit {
       );
 
       // Create a NewCommande object based on the form values
-      // @ts-ignore
 
     } else {
       // The form is not valid, display an error message or take appropriate action

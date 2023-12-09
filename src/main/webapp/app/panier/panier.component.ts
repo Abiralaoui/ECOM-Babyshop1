@@ -22,17 +22,9 @@ export class PanierComponent implements OnInit {
       this.updateProduitsSameCategory();
     });
   }
-  navigateToPanier() {
-    this.router.navigate(['/panier']);
-  }
-  panierItems: any[] = [
-    { nom: 'Produit 1', prix: 19.99, quantite: 1 },
-    { nom: 'Produit 2', prix: 29.99, quantite: 2 },
-    // ... autres articles
-  ];
 
   // Méthode pour supprimer un produit du panier
-  retirerDuPanier(produit: IProduit) {
+  retirerDuPanier(produit: IProduit): void {
     this.panierService.retirerDuPanier(produit);
   }
   updateProduitsSameCategory(): void {
@@ -50,7 +42,7 @@ export class PanierComponent implements OnInit {
 
         // Filter products from the same category
         this.produitsSameCategory = allProducts.filter(product => {
-          const isSameCategory = product.categories && product.categories.some(cat => cat.id === category.id);
+          const isSameCategory = product.categories?.some(cat => cat.id === category.id);
           const isNotDuplicate = !uniqueProductIds.has(product.id);
 
           // Add product ID to the Set if it's not a duplicate
@@ -66,11 +58,11 @@ export class PanierComponent implements OnInit {
   navigateToView(productId: number): void {
     this.router.navigate(['/produit', productId, 'view']);
   }
-  validerPanier() {
+  validerPanier(): void {
     // Calcul du total ici
     const total = this.calculerTotal();
     // Redirection vers la page de paiement avec le total en tant que paramètre
-    this.router.navigate(['/pay'], { queryParams: { total: total } });
+    this.router.navigate(['/pay'], { queryParams: { total } });
   }
 
   get produitsGroupes(): ProduitGroup[] {
@@ -90,12 +82,12 @@ export class PanierComponent implements OnInit {
 
   // Méthode pour calculer le total du panier
   calculerTotal(): number {
-    return this.produits.reduce((total, produit) => total + (produit.prixUnitaire || 0), 0);
+    return this.produits.reduce((total, produit) => total + (produit.prixUnitaire ?? 0), 0);
   }
   getFirstImageUrl(produit: IProduit): string {
     // Check if the product has images and the first image has a URL
     const firstImage = produit.images?.[0];
-    return firstImage?.url || '../../../content/images/img.png';
+    return firstImage?.url ?? '../../../content/images/img.png';
   }
   diminuer(produit: IProduit): void {
    this.panierService.retirerDuPanier2(produit);

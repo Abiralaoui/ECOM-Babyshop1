@@ -8,11 +8,16 @@ import { of } from 'rxjs';
 import { CategoryService } from '../service/category.service';
 
 import { CategoryComponent } from './category.component';
+import {AccountService} from "../../../core/auth/account.service";
+import {TranslateService} from "@ngx-translate/core";
 
 describe('Category Management Component', () => {
   let comp: CategoryComponent;
   let fixture: ComponentFixture<CategoryComponent>;
   let service: CategoryService;
+  let accountService: AccountService;
+  let mockTranslateService: TranslateService;
+
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -35,7 +40,10 @@ describe('Category Management Component', () => {
             snapshot: { queryParams: {} },
           },
         },
+        { provide: AccountService, useValue: accountService },
+        { provide: TranslateService, useValue: mockTranslateService}
       ],
+
     })
       .overrideTemplate(CategoryComponent, '')
       .compileComponents();
@@ -43,6 +51,8 @@ describe('Category Management Component', () => {
     fixture = TestBed.createComponent(CategoryComponent);
     comp = fixture.componentInstance;
     service = TestBed.inject(CategoryService);
+    accountService = TestBed.inject(AccountService);
+    mockTranslateService = TestBed.inject(TranslateService);
 
     const headers = new HttpHeaders();
     jest.spyOn(service, 'query').mockReturnValue(

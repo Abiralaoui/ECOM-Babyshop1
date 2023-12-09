@@ -14,6 +14,6 @@ export class ClientCommandeService {
   constructor(private http: HttpClient) {}
 
   getCommandesClient(clientId: number): Observable<ICommande[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/client/${clientId}/commandes`);
+    return this.http.get<ICommande[]>(`${this.apiUrl}/client/${clientId}/commandes`);
   }
 }

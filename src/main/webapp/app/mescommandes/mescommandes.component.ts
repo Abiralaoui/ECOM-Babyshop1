@@ -22,9 +22,8 @@ export class MescommandesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.accountService.identity().subscribe(account => {
-      console.log(account?.login)
-    })
+    /*this.accountService.identity().subscribe(account => {
+    })*/
     this.getCommandesClientt(3);
   }
 

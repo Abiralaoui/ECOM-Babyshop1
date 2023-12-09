@@ -7,11 +7,13 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IProduit, NewProduit } from '../produit.model';
 import { IImage } from 'app/entities/image/image.model';
+import {ApiResponse} from "./ApiResponse";
 
 export type PartialUpdateProduit = Partial<IProduit> & Pick<IProduit, 'id'>;
 
 export type EntityResponseType = HttpResponse<IProduit>;
 export type EntityArrayResponseType = HttpResponse<IProduit[]>;
+export type EntityArrayPaginationResponsseType = HttpResponse<ApiResponse>;
 
 @Injectable({ providedIn: 'root' })
 export class ProduitService {
@@ -72,7 +74,7 @@ export class ProduitService {
     return produitCollection;
   }
 
-  getImagesForProduit(produitId: number | null | undefined): Observable<string[]> {
+  getImagesForProduit(produitId: number): Observable<string[]> {
     const endpoint = `http://localhost:9000/api/produits/${produitId}/images`;
     return this.http.get<string[]>(endpoint);
   }

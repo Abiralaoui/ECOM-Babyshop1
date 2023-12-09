@@ -10,8 +10,9 @@ export class ContactComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+      const dump = this.router.navigated;
   }
-  navigateToContact() {
+  navigateToContact(): void {
     this.router.navigate(['/contact']);
   }
 }

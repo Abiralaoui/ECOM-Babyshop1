@@ -31,23 +31,34 @@ export class ProduitComponent implements OnInit {
   produits?: IProduit[];
   categories?: ICategory[];
   isLoading = false;
-  showButton: boolean = false;
   predicate = 'id';
   ascending = true;
   cachedProducts?: IProduit[];
-  searchTerm: string = '';
+  searchTerm = '';
   prixFilter: 'asc' | 'desc' | null = null;
   tailleFilter: 'asc' | 'desc' | null = null;
-  currentCategory: number | null = null;
-  sliderValue: number = 0;
-  itemsPerPage = 15;
   page = 1;
-  p: number = 1; // Current page for ngx-pagination
-  totalItems: number = 0; // Total number of items
-  itemsPerPageOptions = [15, 30, 45]; // You can customize this array based on your needs
+  p = 1; // Current page for ngx-pagination
+  totalItems = 0; // Total number of items
   criteria: any = {};
   currentPage: any = 0;
   totalPages: any;
+  isClicked = false;
+  minValue = 0;
+  maxValue = 500;
+  options: Options = {
+    floor: 0,
+    ceil: 500,
+    translate(value: number, label: LabelType): string {
+      switch (label) {
+        case LabelType.Low:
+        case LabelType.High:
+        default:
+          return `${value} €`;
+      }
+    }
+  };
+  selectedCategories: number[] = [];
 
   constructor(
     protected produitService: ProduitService,
@@ -66,15 +77,15 @@ export class ProduitComponent implements OnInit {
   ngOnInit(): void {
     this.load();
     this.fetchCategories();
-   
+
     this.activatedRoute.queryParamMap.pipe(
       debounceTime(300),
       distinctUntilChanged()
     ).subscribe(() => {
       this.search();
     });
-   
-    
+
+
   }
 
   fetchCategories(): void {
@@ -116,12 +127,11 @@ export class ProduitComponent implements OnInit {
 
         this.cachedProducts = [];
         this.loadImagesForProducts();
-       console.log(this.produits)
-        if (this.produits !== undefined)
-        
+        if (this.produits !== undefined) {
           for (let i = 0; i < this.produits.length; i++) {
-            this.cachedProducts?.push(this.produits[i]);
+            this.cachedProducts.push(this.produits[i]);
           }
+        }
       },
     });
   }
@@ -130,102 +140,6 @@ export class ProduitComponent implements OnInit {
     this.handleNavigation(this.predicate, this.ascending);
   }
 
-  protected loadFromBackendWithRouteInformations(pageable?: any): Observable<EntityArrayResponseType> {
-    return combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data]).pipe(
-      tap(([params, data]) => this.fillComponentAttributeFromRoute(params, data)),
-      switchMap(() => this.queryBackend(this.predicate, this.ascending, pageable))
-    );
-  }
-
-  protected fillComponentAttributeFromRoute(params: ParamMap, data: Data): void {
-    const sort = (params.get(SORT) ?? data[DEFAULT_SORT_DATA]).split(',');
-    this.predicate = sort[0];
-    this.ascending = sort[1] === ASC;
-  }
-
-  protected onResponseSuccess(response: EntityArrayResponseType): void {
-    // @ts-ignore
-    const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body.content);
-    // @ts-ignore
-    this.totalPages = response.body.totalPages;
-    this.produits = this.refineData(dataFromBody);
-    this.totalItems = this.produits.length; // Update totalItems after data is loaded
-  }
-
-  protected refineData(data: IProduit[]): IProduit[] {
-    return data.sort(this.sortService.startSort(this.predicate, this.ascending ? 1 : -1));
-  }
-
-  protected fillComponentAttributesFromResponseBody(data: IProduit[] | null): IProduit[] {
-    return data ?? [];
-  }
-
-  protected queryBackend(predicate?: string, ascending?: boolean, pageable?: any): Observable<EntityArrayResponseType> {
-    this.isLoading = true;
-    let criteria = (this.selectedCategories.length == 0) ? {} :
-                      {key: 'category.in', value:this.selectedCategories};
-
-    const queryObject = {
-      eagerload: true,
-      sort: this.getSortQueryParam(predicate, ascending),
-      criteria,
-      ...pageable
-    };
-    return this.produitService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
-  }
-
-  protected handleNavigation(predicate?: string, ascending?: boolean): void {
-    const queryParamsObj = {
-      sort: this.getSortQueryParam(predicate, ascending),
-    };
-
-    this.router.navigate(['./'], {
-      relativeTo: this.activatedRoute,
-      queryParams: queryParamsObj,
-    });
-  }
-
-  protected getSortQueryParam(predicate = this.predicate, ascending = this.ascending): string[] {
-    const ascendingQueryParam = ascending ? ASC : DESC;
-    if (predicate === '') {
-      return [];
-    } else {
-      return [predicate + ',' + ascendingQueryParam];
-    }
-  }
-
-  navigateToView(productId: number): void {
-    this.router.navigate(['/produit', productId, 'view']);
-  }
-
-  selectedProduct: any;
-
-  onProductSelected(product: any) {
-    this.selectedProduct = product;
-  }
-
-  showBuyNow: boolean = false;
-
-  buyNow(produit: any): void {
-    // Implement buyNow logic here
-  }
-
-  truncateDescription(description: string | null | undefined): string {
-    if (!description) {
-      return '';
-    }
-
-    const words = description.split(' ');
-    if (words.length > 6) {
-      return words.slice(0, 6).join(' ') + '...';
-    }
-    return description;
-  }
-
-  protected readonly onclick = onclick;
-
-  isClicked = false;
-
   onSearchInputChange(): void {
     this.search();
   }
@@ -233,7 +147,7 @@ export class ProduitComponent implements OnInit {
   search(): void {
     if (this.searchTerm.trim() !== '') {
       this.produits = this.cachedProducts?.filter((produit) =>
-        produit.libelle?.toLowerCase().includes(this.searchTerm.toLowerCase())
+          produit.libelle?.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     }
 
@@ -259,32 +173,28 @@ export class ProduitComponent implements OnInit {
   applyFilter(type: 'prix' | 'taille', order: 'asc' | 'desc'): void {
     if (type === 'prix') {
       this.prixFilter = order;
-    } else if (type === 'taille') {
+    }
+
+    if (type === 'taille') {
       this.tailleFilter = order;
     }
 
     this.search();
   }
 
-  test() {
+  test(): void {
     this.isClicked = true;
   }
 
-  remove() {
+  remove(): void {
     this.isClicked = false;
   }
 
-  ajouterAuPanier(produit: IProduit, event: Event) {
-    if (produit) {
+  ajouterAuPanier(produit: IProduit, event: Event): void {
       this.panierService.ajouterAuPanier(produit);
-    }
-
-    console.log('Produit ajouté au panier :', produit);
 
     event.stopPropagation();
   }
-
-  selectedCategories: number[] = [];
 
   onCategoryChange(event: any, category: ICategory): void {
     const categoryId = category.id;
@@ -298,69 +208,38 @@ export class ProduitComponent implements OnInit {
     this.criteria['categoryId.in'] = this.selectedCategories;
 
     this.produitService.fetchProductsByCriteria(this.criteria).subscribe({
-        next: (res: EntityArrayResponseType) => {
-          this.onResponseSuccess(res);
+      next: (res: EntityArrayResponseType) => {
+        this.onResponseSuccess(res);
 
-          this.cachedProducts = [];
-          if (this.produits !== undefined)
-            for (let i = 0; i < this.produits.length; i++) {
-              this.cachedProducts?.push(this.produits[i]);
-            }
+        this.cachedProducts = [];
+        if (this.produits !== undefined) {
+          for (let i = 0; i < this.produits.length; i++) {
+            this.cachedProducts.push(this.produits[i]);
+          }
         }
-    });
-  }
 
-  currentCategoryUpdate(categoryId: number): void {
-    this.selectedCategories.push(categoryId);
-
-    const filteredProducts = this.cachedProducts?.filter((produit) => {
-      return produit.categories?.some(category => this.selectedCategories.includes(category.id));
-    });
-
-    this.produits = filteredProducts?.length == 0 ? this.produits : filteredProducts;
-  }
-
-  loadPage(page: number) {
-    this.page = page;
-    this.load();
-  }
-
-  minValue: number = 0;
-  maxValue: number = 500;
-
-  options: Options = {
-    floor: 0,
-    ceil: 500,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return value + ' €';
-        case LabelType.High:
-          return value + ' €';
-        default:
-          return value + ' €';
       }
-    }
-  };
-
+    });
+  }
 
   onPageChange(pageNumber: any): void {
     this.currentPage = pageNumber;
     this.load();
   }
 
-  getPages(): any {
-    let pages = [];
+  getPages(): (number | 'ellipsis')[] {
+    const pages: (number | 'ellipsis')[] = [];
 
-    for (let i = 0; i < this.totalPages; i++)
+    for (let i = 0; i < this.totalPages; i++) {
       pages.push(i);
+    }
 
     return pages;
   }
 
   // pagination.component.ts
   getPagesWithEllipsis(): (number | 'ellipsis')[] {
-    const pages = [];
+    const pages: (number | 'ellipsis') [] = [];
     const maxPages = 10;
 
     if (this.totalPages <= maxPages) {
@@ -392,7 +271,7 @@ export class ProduitComponent implements OnInit {
   }
 
 
-  updateSliderInfo($event: ChangeContext) {
+  updateSliderInfo($event: ChangeContext): void {
     this.criteria['prixUnitaire.lessThan'] = $event.highValue;
     this.criteria['prixUnitaire.greaterThan'] = $event.value;
 
@@ -401,25 +280,26 @@ export class ProduitComponent implements OnInit {
         this.onResponseSuccess(res);
 
         this.cachedProducts = [];
-        if (this.produits !== undefined)
+        if (this.produits !== undefined) {
           for (let i = 0; i < this.produits.length; i++) {
-            this.cachedProducts?.push(this.produits[i]);
+            this.cachedProducts.push(this.produits[i]);
           }
+        }
       }
     });
   }
   loadImagesForProducts(): void {
     this.imageService.query().subscribe(
-      (res) => {
-        const images = res.body || [];
-        this.associateImagesWithProducts(images);
-      },
-      (error) => {
-        console.error('Error fetching images:', error);
-      }
+        (res) => {
+          const images = res.body ?? [];
+          this.associateImagesWithProducts(images);
+        },
+        (error) => {
+          console.error('Error fetching images:', error);
+        }
     );
   }
-  
+
   associateImagesWithProducts(images: IImage[]): void {
     // Iterate through products and associate images
     if (this.produits) {
@@ -428,5 +308,83 @@ export class ProduitComponent implements OnInit {
       });
     }
   }
-  
+
+  navigateToView(productId: number): void {
+    this.router.navigate(['/produit', productId, 'view']);
+  }
+
+  truncateDescription(description: string | null | undefined): string {
+    if (!description) {
+      return '';
+    }
+
+    const words = description.split(' ');
+    if (words.length > 6) {
+      return words.slice(0, 6).join(' ') + '...';
+    }
+    return description;
+  }
+
+  protected loadFromBackendWithRouteInformations(pageable?: any): Observable<EntityArrayResponseType> {
+    return combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data]).pipe(
+      tap(([params, data]) => this.fillComponentAttributeFromRoute(params, data)),
+      switchMap(() => this.queryBackend(this.predicate, this.ascending, pageable))
+    );
+  }
+
+  protected fillComponentAttributeFromRoute(params: ParamMap, data: Data): void {
+    const sort = (params.get(SORT) ?? data[DEFAULT_SORT_DATA]).split(',');
+    this.predicate = sort[0];
+    this.ascending = sort[1] === ASC;
+  }
+
+  protected onResponseSuccess(response: any): void {
+    const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body?.content);
+
+    this.totalPages = response.body.totalPages;
+    this.produits = this.refineData(dataFromBody);
+    this.totalItems = this.produits.length; // Update totalItems after data is loaded
+  }
+
+  protected refineData(data: IProduit[]): IProduit[] {
+    return data.sort(this.sortService.startSort(this.predicate, this.ascending ? 1 : -1));
+  }
+
+  protected fillComponentAttributesFromResponseBody(data: IProduit[] | null): IProduit[] {
+    return data ?? [];
+  }
+
+  protected queryBackend(predicate?: string, ascending?: boolean, pageable?: any): Observable<EntityArrayResponseType> {
+    this.isLoading = true;
+    const criteria = (this.selectedCategories.length === 0) ? {} :
+                      {key: 'category.in', value:this.selectedCategories};
+
+    const queryObject = {
+      eagerload: true,
+      sort: this.getSortQueryParam(predicate, ascending),
+      criteria,
+      ...pageable
+    };
+    return this.produitService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+  }
+
+  protected handleNavigation(predicate?: string, ascending?: boolean): void {
+    const queryParamsObj = {
+      sort: this.getSortQueryParam(predicate, ascending),
+    };
+
+    this.router.navigate(['./'], {
+      relativeTo: this.activatedRoute,
+      queryParams: queryParamsObj,
+    });
+  }
+
+  protected getSortQueryParam(predicate = this.predicate, ascending = this.ascending): string[] {
+    const ascendingQueryParam = ascending ? ASC : DESC;
+    if (predicate === '') {
+      return [];
+    } else {
+      return [predicate + ',' + ascendingQueryParam];
+    }
+  }
 }

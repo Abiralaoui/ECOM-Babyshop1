@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
   version = '';
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
-  nombreArticles: number = 0;
+  nombreArticles = 0;
   private subscription: Subscription;
   constructor(
     private panierService: PanierService,
@@ -74,10 +74,6 @@ export class NavbarComponent implements OnInit {
   gotomescomment(): void {
     this.router.navigate(['/mescommandes']);
   }
-  validerr() {
-   
-    this.router.navigate(['/contact']);
-  }
 
   logout(): void {
     this.collapseNavbar();
@@ -88,7 +84,7 @@ export class NavbarComponent implements OnInit {
   toggleNavbar(): void {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
   }
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     // N'oubliez pas de désabonner pour éviter les fuites de mémoire
     this.subscription.unsubscribe();
   }

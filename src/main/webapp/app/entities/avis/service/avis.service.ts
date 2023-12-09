@@ -49,7 +49,7 @@ export class AvisService {
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
   getAvisByProduitId(produitId: number): Observable<IAvis[]> {
-    return this.http.get<IAvis[]>('/api/produits/'+produitId+'/avis');
+    return this.http.get<IAvis[]>(`/api/produits/${produitId}/avis`);
   }
   find(id: number): Observable<EntityResponseType> {
     return this.http
