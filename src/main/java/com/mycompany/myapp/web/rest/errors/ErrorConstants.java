@@ -7,6 +7,7 @@ public final class ErrorConstants {
     public static final String ERR_CONCURRENCY_FAILURE = "error.concurrencyFailure";
     public static final String ERR_VALIDATION = "error.validation";
     public static final String ERR_CARD_VALIDATION = "Les données de la carte bancaire ne sont pas correctes.";
+    public static final String ERR_PRODUCT_OUT_OF_STOCK = "Le produit que vous essayez d'acheter est actuellement en rupture de stock. Veuillez vérifier la disponibilité ultérieurement ou choisir un autre produit.";
     public static final String PROBLEM_BASE_URL = "https://www.jhipster.tech/problem";
     public static final URI DEFAULT_TYPE = URI.create(PROBLEM_BASE_URL + "/problem-with-message");
     public static final URI CONSTRAINT_VIOLATION_TYPE = URI.create(PROBLEM_BASE_URL + "/constraint-violation");

@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 
 import com.mycompany.myapp.service.exceptions.CarteBancaireNotValidException;
+import com.mycompany.myapp.service.exceptions.OutOfStockException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -169,6 +170,12 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
     @ExceptionHandler
     public ResponseEntity<Problem> handleInvalidCardInfos(CarteBancaireNotValidException ex, NativeWebRequest request) {
         Problem problem = Problem.builder().withStatus(Status.BAD_REQUEST).with(MESSAGE_KEY, ErrorConstants.ERR_CARD_VALIDATION).build();
+        return create(ex, problem, request);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Problem> handleOutOfStockException(OutOfStockException ex, NativeWebRequest request) {
+        Problem problem = Problem.builder().withStatus(Status.BAD_REQUEST).with(MESSAGE_KEY, ErrorConstants.ERR_PRODUCT_OUT_OF_STOCK).build();
         return create(ex, problem, request);
     }
 
