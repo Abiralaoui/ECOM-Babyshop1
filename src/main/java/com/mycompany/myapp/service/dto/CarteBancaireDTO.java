@@ -14,7 +14,7 @@ public class CarteBancaireDTO implements Serializable {
 
     private String nomPorteur;
 
-    private Integer numCarte;
+    private Long numCarte;
 
     private Instant dateExpiration;
 
@@ -36,11 +36,11 @@ public class CarteBancaireDTO implements Serializable {
         this.nomPorteur = nomPorteur;
     }
 
-    public Integer getNumCarte() {
+    public Long getNumCarte() {
         return numCarte;
     }
 
-    public void setNumCarte(Integer numCarte) {
+    public void setNumCarte(Long numCarte) {
         this.numCarte = numCarte;
     }
 

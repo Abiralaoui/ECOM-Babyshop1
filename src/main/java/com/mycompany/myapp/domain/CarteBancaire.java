@@ -30,7 +30,7 @@ public class CarteBancaire implements Serializable {
     private String nomPorteur;
 
     @Column(name = "num_carte")
-    private Integer numCarte;
+    private Long numCarte;
 
     @Column(name = "date_expiration")
     private Instant dateExpiration;
@@ -76,16 +76,16 @@ public class CarteBancaire implements Serializable {
         this.nomPorteur = nomPorteur;
     }
 
-    public Integer getNumCarte() {
+    public Long getNumCarte() {
         return this.numCarte;
     }
 
-    public CarteBancaire numCarte(Integer numCarte) {
+    public CarteBancaire numCarte(Long numCarte) {
         this.setNumCarte(numCarte);
         return this;
     }
 
-    public void setNumCarte(Integer numCarte) {
+    public void setNumCarte(Long numCarte) {
         this.numCarte = numCarte;
     }
 
