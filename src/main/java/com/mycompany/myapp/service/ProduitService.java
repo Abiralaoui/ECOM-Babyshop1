@@ -78,9 +78,6 @@ public class ProduitService {
 
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
-
-            produit = produitMapper.toEntity(produitDTO);
-            produitRepository.save(produit);
         }
 
         return produitMapper.toDto(produit);

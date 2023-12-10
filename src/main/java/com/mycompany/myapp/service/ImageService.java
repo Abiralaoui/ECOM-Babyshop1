@@ -1,7 +1,9 @@
 package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.domain.Image;
+import com.mycompany.myapp.domain.Produit;
 import com.mycompany.myapp.repository.ImageRepository;
+import com.mycompany.myapp.repository.ProduitRepository;
 import com.mycompany.myapp.service.dto.ImageDTO;
 import com.mycompany.myapp.service.mapper.ImageMapper;
 import java.util.LinkedList;
@@ -24,10 +26,13 @@ public class ImageService {
 
     private final ImageRepository imageRepository;
 
+    private final ProduitRepository produitRepository;
+
     private final ImageMapper imageMapper;
 
-    public ImageService(ImageRepository imageRepository, ImageMapper imageMapper) {
+    public ImageService(ImageRepository imageRepository, ProduitRepository produitRepository, ImageMapper imageMapper) {
         this.imageRepository = imageRepository;
+        this.produitRepository = produitRepository;
         this.imageMapper = imageMapper;
     }
 
@@ -40,6 +45,8 @@ public class ImageService {
     public ImageDTO save(ImageDTO imageDTO) {
         log.debug("Request to save Image : {}", imageDTO);
         Image image = imageMapper.toEntity(imageDTO);
+        Produit produit = produitRepository.getById(imageDTO.getProduit().getId());
+        image.setProduit(produit);
         image = imageRepository.save(image);
         return imageMapper.toDto(image);
     }
