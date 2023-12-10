@@ -23,6 +23,8 @@ export class ProduitUpdateComponent implements OnInit {
   categoriesSharedCollection: ICategory[] = [];
   imagesSharedCollection: IImage[] = [];
 
+  images: any[] = [];
+
   editForm: ProduitFormGroup = this.produitFormService.createProduitFormGroup();
 
   constructor(
@@ -58,7 +60,14 @@ export class ProduitUpdateComponent implements OnInit {
     if (produit.id !== null) {
       this.subscribeToSaveResponse(this.produitService.update(produit));
     } else {
-      this.subscribeToSaveResponse(this.produitService.create(produit));
+      this.subscribeToSaveResponse(this.produitService.create(produit, this.images));
+    }
+  }
+
+  handleFileInput(event: any): void {
+    const files: FileList = event.target.files;
+    for (let i = 0; i < files.length; i++) {
+      this.images.push(files[i])
     }
   }
 

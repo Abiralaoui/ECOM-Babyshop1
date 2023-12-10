@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
@@ -21,8 +21,18 @@ export class ProduitService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(produit: NewProduit): Observable<EntityResponseType> {
-    return this.http.post<IProduit>(this.resourceUrl, produit, { observe: 'response' });
+  create(produit: NewProduit, images: any): Observable<EntityResponseType> {
+    const header = new HttpHeaders();
+    // Ensure you set the appropriate content type for multipart form data
+    header.set('Content-Type', 'multipart/form-data');
+    const formData: FormData = new FormData();
+
+    formData.append('produitDTOJSON', JSON.stringify(produit));
+    for (const image of images) {
+      formData.append('imagesStream', image);
+    }
+
+    return this.http.post<IProduit>(this.resourceUrl, formData, { observe: 'response', headers: header });
   }
 
   update(produit: IProduit): Observable<EntityResponseType> {

@@ -135,6 +135,8 @@
             <option [ngValue]="imageOption" *ngFor="let imageOption of imagesSharedCollection">{{ imageOption.id }}</option>
           </select>
         </div>
+
+        <input type="file" (change)="handleFileInput($event)" accept="image/*" multiple formControlName="imageStream">
       </div>
 
       <div>
