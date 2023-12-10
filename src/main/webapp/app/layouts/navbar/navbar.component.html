@@ -283,7 +283,8 @@
               <li class="nav-item d-flex align-items-center" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="/panier" (click)="collapseNavbar()">
                   <span class="panier-icon">
-                    <i class="fas fa-shopping-cart"></i>
+                    <!-- Use a relative path for the image -->
+                    <img src="../../../content/images/panier.jpg" alt="Your Image Alt Text" style="width: 40px; height: 40px;">
                     <span class="nombre-articles">{{ nombreArticles }}</span>
                   </span>
                 </a>
