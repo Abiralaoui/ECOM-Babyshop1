@@ -44,7 +44,7 @@ public class Commande implements Serializable {
     @JsonIgnoreProperties(value = { "commande", "produit" }, allowSetters = true)
     private Set<LigneCommande> ligneCommandes = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JsonIgnoreProperties(value = { "commandes", "clients" }, allowSetters = true)
     private CarteBancaire carteBancaire;
 

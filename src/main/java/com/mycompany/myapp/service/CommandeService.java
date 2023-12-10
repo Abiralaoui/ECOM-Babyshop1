@@ -1,5 +1,6 @@
 package com.mycompany.myapp.service;
 
+import com.mycompany.myapp.domain.CarteBancaire;
 import com.mycompany.myapp.domain.Commande;
 import com.mycompany.myapp.domain.LigneCommande;
 import com.mycompany.myapp.repository.CommandeRepository;
@@ -35,10 +36,13 @@ public class CommandeService {
 
     private final LigneCommandeService ligneCommandeService;
 
-    public CommandeService(CommandeRepository commandeRepository, CommandeMapper commandeMapper, LigneCommandeService ligneCommandeService) {
+    private final CarteBancaireService carteBancaireService;
+
+    public CommandeService(CommandeRepository commandeRepository, CommandeMapper commandeMapper, LigneCommandeService ligneCommandeService, CarteBancaireService carteBancaireService) {
         this.commandeRepository = commandeRepository;
         this.commandeMapper = commandeMapper;
         this.ligneCommandeService = ligneCommandeService;
+        this.carteBancaireService = carteBancaireService;
     }
 
     /**
@@ -51,17 +55,19 @@ public class CommandeService {
     public CommandeDTO save(CommandeDTO commandeDTO) throws CarteBancaireNotValidException, OutOfStockException {
         log.debug("Request to save Commande : {}", commandeDTO);
         Commande commande = commandeMapper.toEntity(commandeDTO);
-        var carteBancaire = commande.getCarteBancaire();
+        CarteBancaire carteBancaire = commande.getCarteBancaire();
 
-        if (CarteBancaireValidator.validateCarteBancaire(carteBancaire))
+        if (!CarteBancaireValidator.validateCarteBancaire(carteBancaire))
             throw new CarteBancaireNotValidException("Bank card informations are not valid.");
 
-        var ligneCommandes = commande.getLigneCommandes();
+        var ligneCommandes = commandeDTO.getLigneCommandes();
 
-        for (var ligneCommande: ligneCommandes)
+        System.out.println(ligneCommandes);
+
+        for (var ligneCommande: ligneCommandes) {
+            ligneCommandeService.save(ligneCommande);
             ligneCommandeService.updateStock(ligneCommande.getProduit().getId(), ligneCommande.getQuantite());
-
-        log.warn(String.valueOf(commande.getLigneCommandes().size()));
+        }
 
         commande.setDate(Instant.now());
         commande = commandeRepository.save(commande);

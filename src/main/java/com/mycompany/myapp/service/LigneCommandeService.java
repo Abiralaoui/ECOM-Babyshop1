@@ -1,7 +1,9 @@
 package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.domain.LigneCommande;
+import com.mycompany.myapp.domain.Produit;
 import com.mycompany.myapp.repository.LigneCommandeRepository;
+import com.mycompany.myapp.repository.ProduitRepository;
 import com.mycompany.myapp.service.dto.LigneCommandeDTO;
 import com.mycompany.myapp.service.exceptions.OutOfStockException;
 import com.mycompany.myapp.service.mapper.LigneCommandeMapper;
@@ -44,6 +46,8 @@ public class LigneCommandeService {
     public LigneCommandeDTO save(LigneCommandeDTO ligneCommandeDTO) {
         log.debug("Request to save LigneCommande : {}", ligneCommandeDTO);
         LigneCommande ligneCommande = ligneCommandeMapper.toEntity(ligneCommandeDTO);
+        Produit produit = produitService.getProduitById(ligneCommandeDTO.getProduit().getId());
+        ligneCommande.setProduit(produit);
         ligneCommande = ligneCommandeRepository.save(ligneCommande);
         return ligneCommandeMapper.toDto(ligneCommande);
     }
@@ -125,6 +129,6 @@ public class LigneCommandeService {
 
         produit.setStock(produit.getStock() - quantity);
 
-        produitService.save(produit);
+        produitService.partialUpdate(produit);
     }
 }

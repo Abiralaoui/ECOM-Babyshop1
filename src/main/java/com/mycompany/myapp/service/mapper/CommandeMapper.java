@@ -12,15 +12,9 @@ import java.util.stream.Collectors;
  */
 @Mapper(componentModel = "spring")
 public interface CommandeMapper extends EntityMapper<CommandeDTO, Commande> {
-    @Mapping(target = "carteBancaire", source = "carteBancaire", qualifiedByName = "carteBancaireId")
     @Mapping(target = "client", source = "client", qualifiedByName = "clientId")
     @Mapping(target = "ligneCommandes", source = "ligneCommandes", qualifiedByName = "ligneCommandesIdSet")
     CommandeDTO toDto(Commande s);
-
-    @Named("carteBancaireId")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "id", source = "id")
-    CarteBancaireDTO toDtoCarteBancaireId(CarteBancaire carteBancaire);
 
     @Named("clientId")
     @BeanMapping(ignoreByDefault = true)

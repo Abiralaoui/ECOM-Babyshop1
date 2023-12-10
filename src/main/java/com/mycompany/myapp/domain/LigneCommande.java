@@ -37,6 +37,7 @@ public class LigneCommande implements Serializable {
     private Commande commande;
 
     @ManyToOne
+    @JoinColumn(name = "produit_id")
     @JsonIgnoreProperties(value = { "images", "ligneCommandes", "avis", "categories" }, allowSetters = true)
     private Produit produit;
 

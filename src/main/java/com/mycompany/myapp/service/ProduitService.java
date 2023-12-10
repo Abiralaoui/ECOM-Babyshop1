@@ -180,4 +180,9 @@ public class ProduitService {
         log.debug("Request to delete Produit : {}", id);
         produitRepository.deleteById(id);
     }
+
+    public Produit getProduitById(Long id) {
+        log.debug("Request to get Produit : {}", id);
+        return produitRepository.getById(id);
+    }
 }
