@@ -75,6 +75,8 @@ export class PayComponent implements OnInit {
   client: IClient = {} as IClient;
   login: string | null = null;
   produits: IProduit[] = [];
+  id: number | undefined;
+
   constructor(
     private route: ActivatedRoute,
     private commandeService: CommandeService,
@@ -113,6 +115,7 @@ export class PayComponent implements OnInit {
       if (account?.login) {
         this.account=account;
         this.login= account.login;
+        this.id= account.id;
       }
     });
     this.panierService.produits$.subscribe((produits) => {
@@ -168,7 +171,7 @@ export class PayComponent implements OnInit {
           cvv: formValues.cryptogramme
         },
         client: {
-          id: 1, //  { id: client.id }
+          id: this.id ?? -1, //  { id: client.id }
          },
         ligneCommandes: [] // Leave it empty for now
       };
@@ -177,7 +180,7 @@ export class PayComponent implements OnInit {
         const existingLigneCommandeIndex = newCommande.ligneCommandes!.findIndex(
           (ligneCommande) => ligneCommande.produit?.id === produit.id
         );
-  
+
         if (existingLigneCommandeIndex !== -1) {
           // If the product exists, update the quantity and price
           newCommande.ligneCommandes![existingLigneCommandeIndex].quantite! += 1;
@@ -190,7 +193,7 @@ export class PayComponent implements OnInit {
             prix: produit.prixUnitaire,
             produit: { id: produit.id }
           };
-  
+
           // Add the new ligneCommande to the list
           newCommande.ligneCommandes!.push(ligneCommande);
         }
@@ -214,7 +217,7 @@ export class PayComponent implements OnInit {
       // The form is not valid, display an error message or take appropriate action
     }
   }
-  
+
 
 
   get produitsGroupes(): ProduitGroup[] {

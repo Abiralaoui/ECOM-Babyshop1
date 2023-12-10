@@ -22,8 +22,12 @@ export class MescommandesComponent implements OnInit {
   ngOnInit(): void {
     /*this.accountService.identity().subscribe(account => {
     })*/
-    this.getCommandesClientt(3);
-    
+
+    this.accountService.identity(true).subscribe(user =>
+      // @ts-ignore
+      this.getCommandesClientt(user.id)
+    );
+
   }
 
   getCommandesClientt(clientId: number): void {
@@ -31,8 +35,6 @@ export class MescommandesComponent implements OnInit {
       .subscribe(Commandes => {
 
         this.commandes = Commandes;
-        console.log("voici les commande ")
-    console.log(this.commandes);
       });
   }
 
