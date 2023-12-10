@@ -36,13 +36,11 @@ public class CommandeService {
 
     private final LigneCommandeService ligneCommandeService;
 
-    private final CarteBancaireService carteBancaireService;
 
-    public CommandeService(CommandeRepository commandeRepository, CommandeMapper commandeMapper, LigneCommandeService ligneCommandeService, CarteBancaireService carteBancaireService) {
+    public CommandeService(CommandeRepository commandeRepository, CommandeMapper commandeMapper, LigneCommandeService ligneCommandeService) {
         this.commandeRepository = commandeRepository;
         this.commandeMapper = commandeMapper;
         this.ligneCommandeService = ligneCommandeService;
-        this.carteBancaireService = carteBancaireService;
     }
 
     /**
