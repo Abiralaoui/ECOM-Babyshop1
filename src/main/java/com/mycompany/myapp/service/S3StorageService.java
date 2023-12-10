@@ -61,8 +61,7 @@ public class S3StorageService {
                 metadata.setContentLength(file.getSize());
 
                 s3.putObject(new PutObjectRequest(bucketName, originalFilename, file.getInputStream(), metadata));
-
-                return "https://" + bucketName + ".s3-aws-" + awsRegion + ".amazonaws.com/" + originalFilename;
+                return "https://" + bucketName + ".s3." + awsRegion + ".amazonaws.com/" + originalFilename;
             } catch (IOException e) {
                 if (++count == maxTries) throw new RuntimeException(e);
             }
