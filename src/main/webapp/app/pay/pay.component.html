@@ -146,6 +146,10 @@
             <h5 *ngIf="paiementIsOk" class="text text-center text-success">
               Paiement effectué avec succès !
             </h5>
+            <h5 *ngIf="error" class="text text-center text-danger">
+              {{ errorMessage }}
+            </h5>
+
           </div>
 
         </div>

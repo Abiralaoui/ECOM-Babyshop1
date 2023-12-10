@@ -28,6 +28,7 @@ export class ProduitService {
     const formData: FormData = new FormData();
 
     formData.append('produitDTOJSON', JSON.stringify(produit));
+
     for (const image of images) {
       formData.append('imagesStream', image);
     }

@@ -30,6 +30,9 @@ interface ProduitGroup {
 export class PayComponent implements OnInit {
   total = 0;
   paiementIsOk = false;
+  error= false;
+  errorMessage= "";
+
   numero: FormControl = new FormControl('',
     [Validators.required,
       Validators.pattern('[0-9]{16}')
@@ -211,6 +214,8 @@ export class PayComponent implements OnInit {
         (error) => {
           // Handle error response
           console.error('Error processing payment:', error);
+          this.error = true;
+          this.errorMessage = error.error.message;
         }
       );
     } else {
