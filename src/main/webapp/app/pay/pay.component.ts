@@ -200,7 +200,7 @@ export class PayComponent implements OnInit {
       console.log("voillaaa la COMMANDE");
       console.log(newCommande);
       // Call the create method from CommandeService to create a new order
-    /*  this.commandeService.create(newCommande).subscribe(
+      this.commandeService.create(newCommande).subscribe(
         (response) => {
           // Handle success response
           this.paiementIsOk = true;
@@ -212,9 +212,9 @@ export class PayComponent implements OnInit {
       );
     } else {
       // The form is not valid, display an error message or take appropriate action
-    }*/
+    }
   }
-  }
+  
 
 
   get produitsGroupes(): ProduitGroup[] {

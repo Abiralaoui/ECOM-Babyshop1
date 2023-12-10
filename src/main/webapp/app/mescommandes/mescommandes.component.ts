@@ -23,6 +23,7 @@ export class MescommandesComponent implements OnInit {
     /*this.accountService.identity().subscribe(account => {
     })*/
     this.getCommandesClientt(3);
+    
   }
 
   getCommandesClientt(clientId: number): void {
@@ -30,6 +31,8 @@ export class MescommandesComponent implements OnInit {
       .subscribe(Commandes => {
 
         this.commandes = Commandes;
+        console.log("voici les commande ")
+    console.log(this.commandes);
       });
   }
 

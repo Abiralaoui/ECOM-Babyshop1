@@ -29,12 +29,22 @@
 
       <button
 
-        *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'ROLE_USER'])"
+        *ngIf="this.accountService.hasAnyAuthority(['ROLE_USER'])"
         style="margin-left: 18px; padding: 6px; height: 41px; border-color: #96d7ff; background-color: #96d7ff; color: #fdfdfd; border-radius: 5px;"
 
         class="add-to-cart-button"
         data-cy="addToCartButton"
         (click)="ajouterAuPanier()">
+        <fa-icon icon="shopping-cart"></fa-icon>&nbsp; Add to cart
+      </button>
+      <button
+
+        *ngIf="!this.accountService.hasAnyAuthority(['ROLE_USER'])"
+        style="margin-left: 18px; padding: 6px; height: 41px; border-color: #96d7ff; background-color: #96d7ff; color: #fdfdfd; border-radius: 5px;"
+
+        class="add-to-cart-button"
+        data-cy="addToCartButton"
+        (click)="gotosubscription()">
         <fa-icon icon="shopping-cart"></fa-icon>&nbsp; Add to cart
       </button>
 

@@ -8,6 +8,6 @@ import { MescommandesComponent } from './mescommandes.component';
 
 @NgModule({
   imports: [SharedModule, RouterModule.forChild([LOGIN_ROUTE])],
-  declarations: [MescommandesComponent],
+  declarations: [],
 })
 export class MescommandesModule {}

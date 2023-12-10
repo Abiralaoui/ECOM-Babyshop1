@@ -28,6 +28,7 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { PayComponent } from './pay/pay.component';
+import { MescommandesComponent } from './mescommandes/mescommandes.component';
 
 
 @NgModule({
@@ -51,7 +52,7 @@ import { PayComponent } from './pay/pay.component';
     {provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter},
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent,NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, PayComponent],
+  declarations: [MainComponent,NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, PayComponent,MescommandesComponent],
   bootstrap: [MainComponent],
   exports: [
     PayComponent

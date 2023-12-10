@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { IProduit } from '../produit.model';
 import {AccountService} from "../../../core/auth/account.service";
@@ -34,7 +34,8 @@ export class ProduitDetailComponent implements OnInit {
     avisList: IAvis[] = [];
     images: string[] | undefined;
     newReview: { note: number | null, commentaire: string | null } = { note: null, commentaire: null };
-    constructor( private produitService:ProduitService,private avisService: AvisService,private panierService: PanierService,protected ligneCommandeService: LigneCommandeService,protected activatedRoute: ActivatedRoute ,protected accountService: AccountService ) {
+  
+    constructor(  public router: Router,private produitService:ProduitService,private avisService: AvisService,private panierService: PanierService,protected ligneCommandeService: LigneCommandeService,protected activatedRoute: ActivatedRoute ,protected accountService: AccountService ) {
 
     }
 
@@ -100,5 +101,7 @@ export class ProduitDetailComponent implements OnInit {
       }
     }
 
-
+gotosubscription(){
+  this.router.navigate(['/login']);
+}
 }
