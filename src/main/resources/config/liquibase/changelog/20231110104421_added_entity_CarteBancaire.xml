@@ -17,7 +17,7 @@
             <column name="nom_porteur" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="num_carte" type="bigint">
+            <column name="num_carte" type="varchar(16)">
                 <constraints nullable="true" />
             </column>
             <column name="date_expiration" type="${datetimeType}">

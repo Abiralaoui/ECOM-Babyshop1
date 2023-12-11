@@ -36,8 +36,8 @@ class CarteBancaireResourceIT {
     private static final String DEFAULT_NOM_PORTEUR = "AAAAAAAAAA";
     private static final String UPDATED_NOM_PORTEUR = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_NUM_CARTE = 1L;
-    private static final Long UPDATED_NUM_CARTE = 2L;
+    private static final String DEFAULT_NUM_CARTE = "1234567891234567";
+    private static final String UPDATED_NUM_CARTE = "1234567891234567";
 
     private static final Instant DEFAULT_DATE_EXPIRATION = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE_EXPIRATION = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -156,7 +156,7 @@ class CarteBancaireResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(carteBancaire.getId().intValue())))
             .andExpect(jsonPath("$.[*].nomPorteur").value(hasItem(DEFAULT_NOM_PORTEUR)))
-            .andExpect(jsonPath("$.[*].numCarte").value(hasItem(DEFAULT_NUM_CARTE.intValue())))
+            .andExpect(jsonPath("$.[*].numCarte").value(hasItem(DEFAULT_NUM_CARTE)))
             .andExpect(jsonPath("$.[*].dateExpiration").value(hasItem(DEFAULT_DATE_EXPIRATION.toString())))
             .andExpect(jsonPath("$.[*].cvv").value(hasItem(DEFAULT_CVV)));
     }
