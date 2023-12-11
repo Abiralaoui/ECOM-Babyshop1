@@ -11,7 +11,7 @@
     },
     {
       "fieldName": "numCarte",
-      "fieldType": "Long"
+      "fieldType": "String"
     },
     {
       "fieldName": "dateExpiration",
