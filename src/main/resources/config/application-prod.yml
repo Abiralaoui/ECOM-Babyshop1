@@ -47,8 +47,8 @@ spring:
   mail:
     host: localhost
     port: 25
-    username:
-    password:
+    username: hacenepete@Gmail.com
+    password: ctnh uesn qbvz xvin
   thymeleaf:
     cache: true
 

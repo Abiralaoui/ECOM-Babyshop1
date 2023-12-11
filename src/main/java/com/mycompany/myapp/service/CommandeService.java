@@ -50,7 +50,7 @@ public class CommandeService {
      * @param commandeDTO the entity to save.
      * @return the persisted entity.
      */
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public CommandeDTO save(CommandeDTO commandeDTO) throws CarteBancaireNotValidException, OutOfStockException {
         log.debug("Request to save Commande : {}", commandeDTO);
         Commande commande = commandeMapper.toEntity(commandeDTO);
@@ -70,7 +70,8 @@ public class CommandeService {
         }
 
         commandeDTO.setEtat(EtatCommande.PAYEE);
-        update(commandeDTO);
+        commandeDTO.setId(commande.getId());
+        partialUpdate(commandeDTO);
 
         return commandeMapper.toDto(commande);
     }
