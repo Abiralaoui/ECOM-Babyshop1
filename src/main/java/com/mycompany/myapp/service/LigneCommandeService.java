@@ -1,9 +1,10 @@
 package com.mycompany.myapp.service;
 
+import com.mycompany.myapp.domain.Commande;
 import com.mycompany.myapp.domain.LigneCommande;
 import com.mycompany.myapp.domain.Produit;
+import com.mycompany.myapp.repository.CommandeRepository;
 import com.mycompany.myapp.repository.LigneCommandeRepository;
-import com.mycompany.myapp.repository.ProduitRepository;
 import com.mycompany.myapp.service.dto.LigneCommandeDTO;
 import com.mycompany.myapp.service.exceptions.OutOfStockException;
 import com.mycompany.myapp.service.mapper.LigneCommandeMapper;
@@ -31,10 +32,13 @@ public class LigneCommandeService {
 
     private final ProduitService produitService;
 
-    public LigneCommandeService(LigneCommandeRepository ligneCommandeRepository, LigneCommandeMapper ligneCommandeMapper, ProduitService produitService) {
+    private final CommandeRepository commandeRepository;
+
+    public LigneCommandeService(LigneCommandeRepository ligneCommandeRepository, LigneCommandeMapper ligneCommandeMapper, ProduitService produitService, CommandeRepository commandeRepository) {
         this.ligneCommandeRepository = ligneCommandeRepository;
         this.ligneCommandeMapper = ligneCommandeMapper;
         this.produitService = produitService;
+        this.commandeRepository = commandeRepository;
     }
 
     /**
@@ -43,11 +47,13 @@ public class LigneCommandeService {
      * @param ligneCommandeDTO the entity to save.
      * @return the persisted entity.
      */
-    public LigneCommandeDTO save(LigneCommandeDTO ligneCommandeDTO) {
+    public LigneCommandeDTO save(LigneCommandeDTO ligneCommandeDTO, Long commandeId) {
         log.debug("Request to save LigneCommande : {}", ligneCommandeDTO);
         LigneCommande ligneCommande = ligneCommandeMapper.toEntity(ligneCommandeDTO);
         Produit produit = produitService.getProduitById(ligneCommandeDTO.getProduit().getId());
+        Commande commande = commandeRepository.getReferenceById(commandeId);
         ligneCommande.setProduit(produit);
+        ligneCommande.setCommande(commande);
         ligneCommande = ligneCommandeRepository.save(ligneCommande);
         return ligneCommandeMapper.toDto(ligneCommande);
     }

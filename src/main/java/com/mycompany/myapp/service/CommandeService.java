@@ -58,17 +58,15 @@ public class CommandeService {
         if (!CarteBancaireValidator.validateCarteBancaire(carteBancaire))
             throw new CarteBancaireNotValidException("Bank card informations are not valid.");
 
-        var ligneCommandes = commandeDTO.getLigneCommandes();
-
-        System.out.println(ligneCommandes);
-
-        for (var ligneCommande: ligneCommandes) {
-            ligneCommandeService.save(ligneCommande);
-            ligneCommandeService.updateStock(ligneCommande.getProduit().getId(), ligneCommande.getQuantite());
-        }
-
         commande.setDate(Instant.now());
         commande = commandeRepository.save(commande);
+
+        var ligneCommandes = commandeDTO.getLigneCommandes();
+
+        for (var ligneCommande: ligneCommandes) {
+            ligneCommandeService.save(ligneCommande, commande.getId());
+            ligneCommandeService.updateStock(ligneCommande.getProduit().getId(), ligneCommande.getQuantite());
+        }
 
         return commandeMapper.toDto(commande);
     }

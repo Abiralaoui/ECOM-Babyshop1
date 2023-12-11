@@ -33,6 +33,7 @@ public class LigneCommande implements Serializable {
     private Float prix;
 
     @ManyToOne
+    @JoinColumn(name = "commande_id")
     @JsonIgnoreProperties(value = { "ligneCommandes", "carteBancaire", "client" }, allowSetters = true)
     private Commande commande;
 

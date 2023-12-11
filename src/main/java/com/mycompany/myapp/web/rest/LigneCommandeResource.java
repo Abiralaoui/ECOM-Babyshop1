@@ -56,7 +56,7 @@ public class LigneCommandeResource {
         if (ligneCommandeDTO.getId() != null) {
             throw new BadRequestAlertException("A new ligneCommande cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        LigneCommandeDTO result = ligneCommandeService.save(ligneCommandeDTO);
+        LigneCommandeDTO result = ligneCommandeService.save(ligneCommandeDTO, null);
         return ResponseEntity
             .created(new URI("/api/ligne-commandes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
