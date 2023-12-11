@@ -3,6 +3,7 @@ package com.mycompany.myapp.service;
 import com.mycompany.myapp.domain.CarteBancaire;
 import com.mycompany.myapp.domain.Commande;
 import com.mycompany.myapp.domain.LigneCommande;
+import com.mycompany.myapp.domain.enumeration.EtatCommande;
 import com.mycompany.myapp.repository.CommandeRepository;
 import com.mycompany.myapp.service.dto.CommandeDTO;
 import com.mycompany.myapp.service.exceptions.CarteBancaireNotValidException;
@@ -67,6 +68,9 @@ public class CommandeService {
             ligneCommandeService.save(ligneCommande, commande.getId());
             ligneCommandeService.updateStock(ligneCommande.getProduit().getId(), ligneCommande.getQuantite());
         }
+
+        commandeDTO.setEtat(EtatCommande.PAYEE);
+        update(commandeDTO);
 
         return commandeMapper.toDto(commande);
     }
