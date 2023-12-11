@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import dayjs from 'dayjs/esm';
 import {CommandeService} from "../entities/commande/service/commande.service";
 import {IClient} from "../entities/client/client.model";
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {Account} from "../core/auth/account.model";
 import {AccountService} from "../core/auth/account.service";
 import {UserService} from "../entities/user/user.service";
@@ -11,10 +11,11 @@ import {ClientService} from "../entities/client/service/client.service";
 import {ActivatedRoute, Router} from '@angular/router';
 import {NewCommande} from "../entities/commande/commande.model";
 import {PanierService} from "../panier/panier.service";
-import { IProduit } from 'app/entities/produit/produit.model';
+import {IProduit} from 'app/entities/produit/produit.model';
 import {LigneCommandeService} from "../entities/ligne-commande/service/ligne-commande.service";
-import {ILigneCommande, NewLigneCommande} from "../entities/ligne-commande/ligne-commande.model";
-import { TypePayement } from 'app/entities/enumerations/type-payement.model';
+import {ILigneCommande} from "../entities/ligne-commande/ligne-commande.model";
+import {TypePayement} from 'app/entities/enumerations/type-payement.model';
+import {EtatCommande} from "../entities/enumerations/etat-commande.model";
 
 
 interface ProduitGroup {
@@ -164,7 +165,7 @@ export class PayComponent implements OnInit {
       const newCommande: NewCommande = {
         id: null,
         date: dayjs(), // Assuming you have dayjs imported
-        etat: null,
+        etat: EtatCommande.EN_COURS,
         typePayement:TypePayement.CB,
         carteBancaire: {
           id: undefined,
