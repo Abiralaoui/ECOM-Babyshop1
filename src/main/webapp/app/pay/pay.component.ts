@@ -112,9 +112,7 @@ export class PayComponent implements OnInit {
     //       });
     //     }
     //   });
-    this.route.queryParams.subscribe(params => {
-      this.total = params['total'];
-    });
+    this.total=this.panierService.gettotal();
     this.accountService.identity().subscribe((account) => {
       if (account?.login) {
         this.account=account;
@@ -211,6 +209,8 @@ export class PayComponent implements OnInit {
         (response) => {
           // Handle success response
           this.paiementIsOk = true;
+          this.panierService.retirertout();
+          this.router.navigate(['/mescommandes']);
         },
         (error) => {
           // Handle error response

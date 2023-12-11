@@ -147,7 +147,8 @@
                   <div class="details">
                     <div class="product-price-client">{{ produit.prixUnitaire + " $" }}</div>
                   </div>
-                  <div class="buy" (click)="ajouterAuPanier(produit, $event)"><i class="material-icons"><fa-icon icon="shopping-cart"></fa-icon></i></div>
+                  <div *ngIf="produit.outOfStock" class="out-of-stock-banner" (click)=" showOutOfStockModal($event)">Out of Stock</div>
+                  <div *ngIf="!produit.outOfStock" class="buy" (click)="ajouterAuPanier(produit, $event)"><i class="material-icons"><fa-icon icon="shopping-cart"></fa-icon></i></div>
                 </div>
                 <div class="right">
                   <div class="done"><i class="material-icons">done</i></div>

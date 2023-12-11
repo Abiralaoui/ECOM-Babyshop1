@@ -12,6 +12,7 @@ export interface IProduit {
   stock?:number | null;
   categories?: Pick<ICategory, 'id'>[] | null;
   images?: IImage[] | null;
+  outOfStock?: boolean | null;
 }
 
 export type NewProduit = Omit<IProduit, 'id'> & { id: null };

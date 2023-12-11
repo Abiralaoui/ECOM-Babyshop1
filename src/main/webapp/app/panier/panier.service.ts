@@ -31,7 +31,10 @@ export class PanierService {
     this._produits.next(nouveauxProduits);
     this.mettreAJourNombreArticles();
     // ajoute retirer
-  }
+  }retirertout(){
+    this._produits.next([]);
+    this.mettreAJourNombreArticles();}
+
 
   retirerDuPanier2(produit: IProduit): void {
     const produitsActuels = this._produits.value;
@@ -53,5 +56,14 @@ export class PanierService {
     const nombreArticles = this._produits.value.length;
     this._nombreArticles.next(nombreArticles);
   }
+
+
+  gettotal(): number {
+    const produitsActuels = this._produits.value;
+
+    // Use reduce to sum up the prices of all products in the cart
+    return produitsActuels.reduce((total, produit) => total + (produit.prixUnitaire ?? 0), 0);
+  }
+
 
 }

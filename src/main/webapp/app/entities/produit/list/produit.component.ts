@@ -1,7 +1,7 @@
 // produit.component.ts
 
 // ... (existing imports)
-
+import { ViewEncapsulation } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
@@ -20,11 +20,14 @@ import { ICategory } from "../../category/category.model";
 import { IImage } from 'app/entities/image/image.model';
 import {Options, LabelType, ChangeContext} from '@angular-slider/ngx-slider';
 import { ImageService } from 'app/entities/image/service/image.service';
+import { OutOfStockPopupComponent } from 'app/out-of-stock-popup/out-of-stock-popup.component';
+import { AddProduitPopupComponent } from 'app/add-produit-popup/add-produit-popup.component';
 
 
 @Component({
   selector: 'jhi-produit',
   templateUrl: './produit.component.html',
+  styleUrls: ['./produit.component.scss']
 })
 export class ProduitComponent implements OnInit {
   images: IImage[] = [];
@@ -69,13 +72,14 @@ export class ProduitComponent implements OnInit {
     protected accountService: AccountService,
     protected panierService: PanierService,
     protected categoryService: CategoryService,
-    private imageService: ImageService
+    private imageService: ImageService,
   ) {}
 
   trackId = (_index: number, item: IProduit): number => this.produitService.getProduitIdentifier(item);
 
   ngOnInit(): void {
     this.load();
+   
     this.fetchCategories();
 
     this.activatedRoute.queryParamMap.pipe(
@@ -128,9 +132,14 @@ export class ProduitComponent implements OnInit {
         this.cachedProducts = [];
         this.loadImagesForProducts();
         if (this.produits !== undefined) {
+         
           for (let i = 0; i < this.produits.length; i++) {
+            this.produits[i].outOfStock = this.produits[i].stock === 0;
             this.cachedProducts.push(this.produits[i]);
+        
           }
+          console.log("iciii")
+          console.log(this.produits)
         }
       },
     });
@@ -192,7 +201,8 @@ export class ProduitComponent implements OnInit {
 
   ajouterAuPanier(produit: IProduit, event: Event): void {
       this.panierService.ajouterAuPanier(produit);
-
+      const modalRef = this.modalService.open(AddProduitPopupComponent);
+      modalRef.componentInstance.produit =produit;
     event.stopPropagation();
   }
 
@@ -215,7 +225,11 @@ export class ProduitComponent implements OnInit {
         if (this.produits !== undefined) {
           for (let i = 0; i < this.produits.length; i++) {
             this.cachedProducts.push(this.produits[i]);
+            this.produits[i].outOfStock = this.produits[i].stock === 0;
+          
+
           }
+          
         }
 
       }
@@ -386,5 +400,16 @@ export class ProduitComponent implements OnInit {
     } else {
       return [predicate + ',' + ascendingQueryParam];
     }
+  }
+  showOutOfStockModal(event:any): void {
+    const modalRef = this.modalService.open(OutOfStockPopupComponent, {
+      /* Optionally, you can configure modal options here */
+    });
+
+    event.stopPropagation();
+  
+    // You can pass data or subscribe to events from the modal
+    // Example: modalRef.componentInstance.someData = yourData;
+    // Example: modalRef.result.then((result) => { /* Handle modal result */ });
   }
 }

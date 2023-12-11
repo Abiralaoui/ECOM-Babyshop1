@@ -10,7 +10,11 @@
 .form-title {
   color: #007bff; /* Change the title color */
 }
-
+.out-of-stock-button {
+  background-color: #ccc; // Customize the background color for out-of-stock button
+  color: #888; // Customize the text color for out-of-stock button
+  cursor: not-allowed; // Change the cursor to indicate that the button is not clickable
+}
 .form-buttons {
   margin-top: 20px;
 }

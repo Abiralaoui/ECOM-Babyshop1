@@ -8,7 +8,9 @@ import {LigneCommandeService} from "../../ligne-commande/service/ligne-commande.
 import { PanierService } from 'app/panier/panier.service';
 import { AvisService } from 'app/entities/avis/service/avis.service';
 import { IAvis } from 'app/entities/avis/avis.model';
-
+import { OutOfStockPopupComponent } from 'app/out-of-stock-popup/out-of-stock-popup.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddProduitPopupComponent } from 'app/add-produit-popup/add-produit-popup.component';
 @Component({
   selector: 'jhi-produit-detail',
   templateUrl: './produit-detail.component.html',
@@ -34,8 +36,9 @@ export class ProduitDetailComponent implements OnInit {
     avisList: IAvis[] = [];
     images: string[] | undefined;
     newReview: { note: number | null, commentaire: string | null } = { note: null, commentaire: null };
+  outOfStockMessage: string | undefined;
   
-    constructor(  public router: Router,private produitService:ProduitService,private avisService: AvisService,private panierService: PanierService,protected ligneCommandeService: LigneCommandeService,protected activatedRoute: ActivatedRoute ,protected accountService: AccountService ) {
+    constructor( private modalService: NgbModal, public router: Router,private produitService:ProduitService,private avisService: AvisService,private panierService: PanierService,protected ligneCommandeService: LigneCommandeService,protected activatedRoute: ActivatedRoute ,protected accountService: AccountService ) {
 
     }
 
@@ -50,7 +53,7 @@ export class ProduitDetailComponent implements OnInit {
         this.avisList = avis
       });
 
-
+      console.log(this.produit)
 
   });
 
@@ -80,7 +83,12 @@ export class ProduitDetailComponent implements OnInit {
       if (this.produit) {
         this.panierService.ajouterAuPanier(this.produit);
       }
+      const modalRef = this.modalService.open(AddProduitPopupComponent);
+      modalRef.componentInstance.produit =this.produit;
+     
+      
     }
+    
 
     submitReview(): void {
       if (this.produit!==undefined && this.newReview.note !== null && this.newReview.commentaire !== null) {
@@ -103,5 +111,14 @@ export class ProduitDetailComponent implements OnInit {
 
 gotosubscription(){
   this.router.navigate(['/login']);
+}
+showOutOfStockModal(): void {
+  const modalRef = this.modalService.open(OutOfStockPopupComponent, {
+    /* Optionally, you can configure modal options here */
+  });
+
+  // You can pass data or subscribe to events from the modal
+  // Example: modalRef.componentInstance.someData = yourData;
+  // Example: modalRef.result.then((result) => { /* Handle modal result */ });
 }
 }

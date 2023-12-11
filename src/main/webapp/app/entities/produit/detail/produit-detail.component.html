@@ -26,17 +26,16 @@
 
       <p>{{ produit.description }}</p>
       <p style="color:#f86c35"><b>Prix : {{ produit.prixUnitaire }} €</b></p>
-
+        
+          
       <button
-
-        *ngIf="this.accountService.hasAnyAuthority(['ROLE_USER'])"
-        style="margin-left: 18px; padding: 6px; height: 41px; border-color: #96d7ff; background-color: #96d7ff; color: #fdfdfd; border-radius: 5px;"
-
-        class="add-to-cart-button"
-        data-cy="addToCartButton"
-        (click)="ajouterAuPanier()">
-        <fa-icon icon="shopping-cart"></fa-icon>&nbsp; Add to cart
-      </button>
+      *ngIf="this.accountService.hasAnyAuthority(['ROLE_USER'])"
+      [ngClass]="{'out-of-stock-button': produit.outOfStock}"
+      (click)="produit.stock===0 ? showOutOfStockModal() : ajouterAuPanier()"
+    >
+      <fa-icon icon="shopping-cart"></fa-icon>&nbsp; 
+      {{ produit.stock===0  ? 'Out of Stock' : 'Add to cart' }}
+    </button>
       <button
 
         *ngIf="!this.accountService.hasAnyAuthority(['ROLE_USER'])"

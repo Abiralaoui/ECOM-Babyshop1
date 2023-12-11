@@ -29,6 +29,9 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { PayComponent } from './pay/pay.component';
 import { MescommandesComponent } from './mescommandes/mescommandes.component';
+import { OutOfStockPopupComponent } from './out-of-stock-popup/out-of-stock-popup.component';
+import { AddProduitPopupComponent } from './add-produit-popup/add-produit-popup.component';
+import { ValiderCommandePopupComponent } from './valider-commande-popup/valider-commande-popup.component';
 
 
 @NgModule({
@@ -52,7 +55,7 @@ import { MescommandesComponent } from './mescommandes/mescommandes.component';
     {provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter},
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent,NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, PayComponent,MescommandesComponent],
+  declarations: [MainComponent,NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, PayComponent,MescommandesComponent, OutOfStockPopupComponent, AddProduitPopupComponent, ValiderCommandePopupComponent],
   bootstrap: [MainComponent],
   exports: [
     PayComponent
