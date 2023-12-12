@@ -6,15 +6,10 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-
 .form-title {
   color: #007bff; /* Change the title color */
 }
-.out-of-stock-button {
-  background-color: #ccc; // Customize the background color for out-of-stock button
-  color: #888; // Customize the text color for out-of-stock button
-  cursor: not-allowed; // Change the cursor to indicate that the button is not clickable
-}
+
 .form-buttons {
   margin-top: 20px;
 }
@@ -51,7 +46,7 @@
 
 .avis-title {
   font-size: 1.5rem;
-  color: #0b6402;
+  color: #007bff;
   margin-bottom: 10px;
 }
 

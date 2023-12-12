@@ -85,7 +85,7 @@ export class ProduitService {
     return produitCollection;
   }
 
-  getImagesForProduit(produitId: number): Observable<string[]> {
+    getImagesForProduit(produitId: number | undefined): Observable<string[]> {
     const endpoint = `http://localhost:9000/api/produits/${produitId}/images`;
     return this.http.get<string[]>(endpoint);
   }

@@ -1,84 +1,52 @@
-<div class="d-flex justify-content-center" style="gap: 5.5rem">
-  <div class="col-md-4" style="margin-left: 126px">
 
-
-      <div class="col-md-4" style="margin-left: 126px">
-        <div *ngIf="produit && images" style="margin-top: 83px" class="text-center">
-          <div *ngFor="let image of images" class="image-container">
-            <img [src]="image" class="img-fluid" >
-          </div>
-        </div>
+<section id="prodetail" class="section-p1">
+  <div class="single-pro-image">
+    <div style="margin-bottom: 10px">
+      <img [src]="mainImage" width="100%" id="MainImg" />
+    </div>
+    <div class="small-img-group" >
+      <div class="small-img-col" *ngFor="let image of images" >
+        <img [src]="image" width="100%" class="smal-img" (click)="changeMainImage(image)" [ngClass]="{'selected': image===mainImage}"/>
       </div>
 
-      <!-- ... Vos autres éléments ... -->
-
-    </div>
-
-  <div class="col-md-8" >
-    <div *ngIf="produit">
-      <h2>{{ produit.libelle }}</h2>
-      <hr />
-
-      <!-- Messages d'alerte/d'erreur en haut de page
-      <jhi-alert-error></jhi-alert-error>
-      <jhi-alert></jhi-alert>
-      -->
-
-      <p>{{ produit.description }}</p>
-      <p style="color:#f86c35"><b>Prix : {{ produit.prixUnitaire }} €</b></p>
-        
-          
-      <button
-      *ngIf="this.accountService.hasAnyAuthority(['ROLE_USER'])"
-      [ngClass]="{'out-of-stock-button': produit.outOfStock}"
-      (click)="produit.stock===0 ? showOutOfStockModal() : ajouterAuPanier()"
-    >
-      <fa-icon icon="shopping-cart"></fa-icon>&nbsp; 
-      {{ produit.stock===0  ? 'Out of Stock' : 'Add to cart' }}
-    </button>
-      <button
-
-        *ngIf="!this.accountService.hasAnyAuthority(['ROLE_USER'])"
-        style="margin-left: 18px; padding: 6px; height: 41px; border-color: #96d7ff; background-color: #96d7ff; color: #fdfdfd; border-radius: 5px;"
-
-        class="add-to-cart-button"
-        data-cy="addToCartButton"
-        (click)="gotosubscription()">
-        <fa-icon icon="shopping-cart"></fa-icon>&nbsp; Add to cart
-      </button>
-
-      <hr/>
-
-      <h5><u>Détails du produit</u></h5>
-
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="mainApp.produit.taille">Taille</span></dt>
-        <dd><span>{{ produit.taille }}</span></dd>
-        <dt><span jhiTranslate="mainApp.produit.couleur">Couleur</span></dt>
-        <dd><span>{{ produit.couleur }}</span></dd>
-        <!--
-        <dt><span jhiTranslate="mainApp.produit.stock">Stock</span></dt>
-        <dd><span>{{ produit.stock }}</span></dd>
-        -->
-      </dl>
-
-<!--      <button type="submit" style="padding: 7px; border-radius: 5px;" (click)="previousState()" class="btn btn-info custom-button" data-cy="entityDetailsBackButton">-->
-<!--        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>-->
-<!--      </button>-->
-
-      <button type="button" [routerLink]="['/produit', produit.id, 'edit']" class="btn btn-primary"
-              *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN'])">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
-      </button>
     </div>
   </div>
+  <div *ngIf="produit" class="single-pro-details">
+    <h6>Home/Detail</h6>
+    <h4>{{ produit.libelle }}</h4>
+    <h2>{{ produit.prixUnitaire }} €</h2>
+
+    <button class="normal"
+            *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'ROLE_USER'])"
+            (click)="ajouterAuPanier()"
+    >
+      Add to Cart
+    </button>
+    <div class="jh-entity-details">
+      <h4>Détails du produit</h4>
+      <span>
+          {{ produit.description }}
+    </span>
+      <div>
+        <span jhiTranslate="mainApp.produit.taille">Taille</span>
+        <span>: {{ produit.taille }}</span>
+
+      </div>
+      <div>
+        <span jhiTranslate="mainApp.produit.couleur">Couleur</span>
+        <span>: {{ produit.couleur }}</span>
+      </div>
 
 
-</div>
+    </div>
+
+  </div>
+</section>
+
 <div class="d-flex justify-content-center" style="gap: 5.5rem">
   <!-- ... Vos autres éléments ... -->
 
-  <div class="col-md-8">
+  <div class="col-md-10">
     <!-- Vos autres éléments ... -->
 
     <div class="avis-section">
@@ -86,10 +54,11 @@
 
       <div *ngIf="avisList && avisList.length > 0">
         <ul class="avis-list">
+          <li>note globale {{getAvisGlobal()}}</li>
           <li class="avis-item" *ngFor="let avis of avisList">
-            <div class="avis-date">Avis posté le {{ avis.date }}</div>
-            <div class="avis-note">Note : {{ avis.note }} / 5</div>
-            <div>{{ avis.commentaire }}</div>
+            <div class="avis-note">la note :{{ avis.note }}-{{avis.client?.id}} - {{ avis.commentaire }}</div>
+            <app-rating [rating]="3" ></app-rating>
+            <div class="avis-date">{{ avis.date  }}</div>
           </li>
         </ul>
       </div>
@@ -98,22 +67,6 @@
         <p>Aucun avis disponible pour ce produit.</p>
       </div>
     </div>
-    <!-- Add this section in your template where you want users to leave a review -->
-<div *ngIf="this.accountService.hasAnyAuthority(['ROLE_USER'])">
-  <h3>Leave a Review</h3>
-  <form (ngSubmit)="submitReview()">
-    <div class="form-group">
-      <label for="note">Rating (1-5):</label>
-      <input type="number" class="form-control" id="note" [(ngModel)]="newReview.note" name="note" required min="1" max="5">
-    </div>
-    <div class="form-group">
-      <label for="commentaire">Comment:</label>
-      <textarea class="form-control" id="commentaire" [(ngModel)]="newReview.commentaire" name="commentaire" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit Review</button>
-  </form>
-</div>
-
 
     <!-- Vos autres éléments ... -->
   </div>
