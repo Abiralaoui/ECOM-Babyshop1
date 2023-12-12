@@ -14,19 +14,7 @@ import { AddProduitPopupComponent } from 'app/add-produit-popup/add-produit-popu
 @Component({
   selector: 'jhi-produit-detail',
   templateUrl: './produit-detail.component.html',
-  styles: [`
-    .custom-button {
-      /* Ajoutez votre style personnalisé ici */
-      background-color: #337ab7;
-      color: #fff;
-      /* Ajoutez d'autres styles selon vos besoins */
-    }
-
-    .custom-button:hover {
-      /* Styles pour l'état survolé */
-      background-color: #286090;
-    }
-  `]
+  styleUrls: ['./produit-detail.componenet.scss']
 })
 export class ProduitDetailComponent implements OnInit {
 
@@ -37,7 +25,7 @@ export class ProduitDetailComponent implements OnInit {
     images: string[] | undefined;
     newReview: { note: number | null, commentaire: string | null } = { note: null, commentaire: null };
   outOfStockMessage: string | undefined;
-  
+
     constructor( private modalService: NgbModal, public router: Router,private produitService:ProduitService,private avisService: AvisService,private panierService: PanierService,protected ligneCommandeService: LigneCommandeService,protected activatedRoute: ActivatedRoute ,protected accountService: AccountService ) {
 
     }
@@ -85,10 +73,10 @@ export class ProduitDetailComponent implements OnInit {
       }
       const modalRef = this.modalService.open(AddProduitPopupComponent);
       modalRef.componentInstance.produit =this.produit;
-     
-      
+
+
     }
-    
+
 
     submitReview(): void {
       if (this.produit!==undefined && this.newReview.note !== null && this.newReview.commentaire !== null) {

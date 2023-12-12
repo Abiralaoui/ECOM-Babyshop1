@@ -16,6 +16,8 @@ import {LigneCommandeService} from "../entities/ligne-commande/service/ligne-com
 import {ILigneCommande} from "../entities/ligne-commande/ligne-commande.model";
 import {TypePayement} from 'app/entities/enumerations/type-payement.model';
 import {EtatCommande} from "../entities/enumerations/etat-commande.model";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ValiderCommandePopupComponent } from 'app/valider-commande-popup/valider-commande-popup.component';
 
 
 interface ProduitGroup {
@@ -91,8 +93,8 @@ export class PayComponent implements OnInit {
     private clientService: ClientService,
     public panierService: PanierService,
     private ligneCommandeService: LigneCommandeService,
-
-  private router: Router
+    private modalService: NgbModal,
+    private router: Router
   ) {
   }
 
@@ -210,7 +212,8 @@ export class PayComponent implements OnInit {
           // Handle success response
           this.paiementIsOk = true;
           this.panierService.retirertout();
-          this.router.navigate(['/mescommandes']);
+          this.openPaymentConfirmationPopup();
+          //this.router.navigate(['/mescommandes']);
         },
         (error) => {
           // Handle error response
@@ -240,5 +243,7 @@ export class PayComponent implements OnInit {
 
     return produitsGroupes;
   }
+  openPaymentConfirmationPopup(): void {
+    const modalRef = this.modalService.open(ValiderCommandePopupComponent);
 
-}
+  }}

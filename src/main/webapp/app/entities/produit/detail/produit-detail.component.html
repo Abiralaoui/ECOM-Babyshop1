@@ -14,7 +14,7 @@
 
     </div>
 
-  <div class="col-md-8" >
+  <div class="prodetail" >
     <div *ngIf="produit">
       <h2>{{ produit.libelle }}</h2>
       <hr />
@@ -26,14 +26,14 @@
 
       <p>{{ produit.description }}</p>
       <p style="color:#f86c35"><b>Prix : {{ produit.prixUnitaire }} €</b></p>
-        
-          
+
+
       <button
       *ngIf="this.accountService.hasAnyAuthority(['ROLE_USER'])"
       [ngClass]="{'out-of-stock-button': produit.outOfStock}"
       (click)="produit.stock===0 ? showOutOfStockModal() : ajouterAuPanier()"
     >
-      <fa-icon icon="shopping-cart"></fa-icon>&nbsp; 
+      <fa-icon icon="shopping-cart"></fa-icon>&nbsp;
       {{ produit.stock===0  ? 'Out of Stock' : 'Add to cart' }}
     </button>
       <button
