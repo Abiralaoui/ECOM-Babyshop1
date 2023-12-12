@@ -113,4 +113,5 @@ export class ProduitDetailComponent implements OnInit {
   // this.panierService.ajouterAuPanier(this.produit);
 
 
+  protected readonly Date = Date;
 }

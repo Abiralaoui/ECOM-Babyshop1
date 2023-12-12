@@ -13,7 +13,11 @@
   </div>
   <div *ngIf="produit" class="single-pro-details">
     <h6>Home/Detail</h6>
+    <div style="display: flex;align-items: center;gap:10px">
+      <app-rating [size]="30" [rating]="getAvisGlobal() ?? 0" ></app-rating> <span style="color: #ffc107;margin-top: 4px">{{ getAvisGlobal() ?? 0 }} / 5</span>
+    </div>
     <h4>{{ produit.libelle }}</h4>
+
     <h2>{{ produit.prixUnitaire }} €</h2>
 
     <button class="normal"
@@ -46,20 +50,20 @@
 <div class="d-flex justify-content-center" style="gap: 5.5rem">
   <!-- ... Vos autres éléments ... -->
 
-  <div class="col-md-10">
+  <div class="col-md-12 section-p1">
     <!-- Vos autres éléments ... -->
 
     <div class="avis-section">
-      <h3 class="avis-title">Avis pour ce produit :</h3>
-
       <div *ngIf="avisList && avisList.length > 0">
-        <ul class="avis-list">
-          <li>note globale {{getAvisGlobal()}}</li>
-          <li class="avis-item" *ngFor="let avis of avisList">
-            <div class="avis-note">la note :{{ avis.note }}-{{avis.client?.id}} - {{ avis.commentaire }}</div>
-            <app-rating [rating]="3" ></app-rating>
-            <div class="avis-date">{{ avis.date  }}</div>
+        <ul class="avis-list avis-item">
+          <h3 class="avis-title">Avis pour ce produit :</h3>
+          <li class="item" *ngFor="let avis of avisList;let last = last">
+
+            <app-rating [size]="20" [rating]="avis.note ?? 0" ></app-rating>
+            <div class="avis-date"><span style="font-weight: bold">{{ avis.date?.toString() | date:'medium'}} :</span> {{ avis.commentaire }}</div>
+            <hr *ngIf="!last"/>
           </li>
+
         </ul>
       </div>
 
