@@ -9,3 +9,104 @@
     background-position: 0% 50%;
   }
 }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~@fortawesome/fontawesome-free/css/all.css';
+* {
+  margin: 0;
+  top: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  font-size: 50px;
+  line-height: 64px;
+  color: #222;
+}
+h2 {
+  font-size: 46px;
+  line-height: 54px;
+  color: #222;
+}
+
+h4 {
+  font-size: 20px;
+  color: #222;
+}
+h6 {
+  font-weight: 700;
+  font-size: 12px;
+}
+p {
+  font-size: 16px;
+  color: #465b52;
+  margin: 15px 0 20px 0;
+}
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .my-col {
+    display: flex;
+    min-width: 200px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  .logo{
+    margin-bottom: 30px;
+    width: 100px;
+  }
+  h4{
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 20px;
+  }
+  p{
+    font-size: 13px;
+    margin: 0 0 8px 0;
+  }
+  a{
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: normal;
+    color: #222;
+    margin-bottom: 10px;
+    &:hover{
+      color: #088178;
+    }
+  }
+  span{
+    font-weight: bold;
+  }
+  .follow{
+    i{
+      color: #465b52;
+      padding-right: 2px;
+      cursor: pointer;
+      &:hover{
+        color: #088178;
+      }
+    }
+
+  }
+  .install{
+    .my-row{
+      img{
+        border: 1px solid #088178;
+        border-radius: 6px;
+      }
+    }
+    img{
+      margin: 10px 0 15px 0;
+    }
+  }
+  .copyright{
+    width: 100%;
+    text-align: center;
+  }
+
+}
+

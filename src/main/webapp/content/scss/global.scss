@@ -6,7 +6,42 @@
 Bootstrap tweaks
 ===============================================================*/
 
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&display=swap');
+* {
+  margin: 0;
+  top: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+.section-p1 {
+  padding: 40px 80px;
+}
+.section-m1 {
+  margin: 40px 0;
+}
+button.normal{
+  font-size: 14px;
+  font-weight: 600;
+  padding: 15px 30px;
+  color: #000;
+  background-color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: 0.2s;
+}
+button.white{
+  font-size: 13px;
+  font-weight: 600;
+  padding: 11px 18px;
+  color: #FFF;
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid #FFF;
+  outline: none;
+  transition: 0.2s;
+}
 body{
   background-color: #ffffff;
 }
@@ -309,7 +344,7 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
       .left{
         height:100%;
         width: 50%;
-        background: #f4f4f4;
+        background: #cbe5d3;
         position:relative;
         float:left;
         display: flex;
@@ -325,30 +360,32 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
         .buy{
           width: 40%;
           height:100%;
-          background: #f1f1f1;
+
+          background: #8ec7a3;
           transition: background 0.5s;
           border-left:solid thin rgba(0,0,0,0.1);
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
+
           i{
             font-size:20px;
-            color: #797878;
+            color: #03804e;
             transition: transform 0.5s;
           }
           &:hover{
-            background: #e8e8e8;
+            background: #548f62;
           }
           &:hover i{
             transform: scale(1.1);
-            color: #797878;
+            color: #02603b;
           }
         }
       }
       .right{
         width: 50%;
-        background: #A6CDDE;
+        background: #bdcbcb;
         color: white;
         float:right;
         height:200%;
@@ -401,10 +438,11 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
 
   .inside{
     z-index:9;
-    background: rgb(172 219 255);;
+    background: #67987c;
     width:140px;
     height:140px;
     position: absolute;
+    color: #FFFFFF;
     top: -90px;
     right: -90px;
     border-radius: 0px 0px 300px 200px;
@@ -422,7 +460,7 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
       right:0;
       top:0;
       border-radius: 0;
-      height:80%;
+      height:86%;
       .icon{
         opacity: 0;
         right:15px;

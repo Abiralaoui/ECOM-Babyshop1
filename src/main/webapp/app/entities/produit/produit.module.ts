@@ -9,9 +9,10 @@ import {AppModule} from "../../app.module";
 import {CategoryModule} from "../category/category.module";
 import { NgxPaginationModule } from 'ngx-pagination';
 import {NgxSliderModule} from "@angular-slider/ngx-slider";
+import {NgbdRatingBasic} from "./rating/rating-basic";
 
 @NgModule({
-  imports: [SharedModule, ProduitRoutingModule, CategoryModule, NgxPaginationModule, NgxSliderModule],
+    imports: [SharedModule, ProduitRoutingModule, CategoryModule, NgxPaginationModule, NgxSliderModule, NgbdRatingBasic],
     declarations: [ProduitComponent, ProduitDetailComponent, ProduitUpdateComponent, ProduitDeleteDialogComponent],
     exports: [
         ProduitComponent

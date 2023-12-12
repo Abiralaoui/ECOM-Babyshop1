@@ -6,12 +6,12 @@
 
       <div class="filter-container mb-3">
         <h4 >Trier par Prix</h4>
-        <form style="gap: 3">
+        <form style="gap: 3;">
           <label>
-            <input  type="radio" name="prix" (change)="applyFilter('prix', 'asc')" /> Prix Croissant
+            <input  type="radio" name="prix" (change)="applyFilter('prix', 'asc')" style="display: none" /> Prix Croissant
           </label>
           <label>
-            <input type="radio" name="prix" (change)="applyFilter('prix', 'desc')" /> Prix Décroissant
+            <input type="radio" name="prix" (change)="applyFilter('prix', 'desc')" style="display: none"  /> Prix Décroissant
           </label>
         </form>
       </div>
@@ -20,10 +20,10 @@
         <h4>Trier par Taille</h4>
         <form style="gap: 3">
           <label>
-            <input type="radio" name="taille" (change)="applyFilter('taille', 'asc')" /> Taille Croissante
+            <input type="radio" name="taille" (change)="applyFilter('taille', 'asc')" style="display: none" /> Taille Croissante
           </label>
           <label>
-            <input type="radio" name="taille" (change)="applyFilter('taille', 'desc')" /> Taille Décroissante
+            <input type="radio" name="taille" (change)="applyFilter('taille', 'desc')" style="display: none" /> Taille Décroissante
           </label>
         </form>
       </div>
@@ -46,7 +46,7 @@
 
 
     <!-- Colonne contenant les produits (3/5) -->
-    <div class="col-md-10">
+    <div class="col-md-10 col-sm-12">
         <div class="d-flex justify-content-end">
           <!-- Bouton Actualiser la liste -->
           <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading"
@@ -86,7 +86,7 @@
           </button>
         </div>
 
-        <div class="col-md-2 p-2" *ngFor="let produit of produits; trackBy: trackId" data-cy="entityTable">
+        <div class="col-md-2 mx-3" *ngFor="let produit of produits; trackBy: trackId" data-cy="entityTable">
           <!-- Contenu de chaque produit -->
           <!--<div class="card mb-3 h-100 border-1" style="max-width: 200px;"  (click)="navigateToView(produit.id)">
             <img src="../../../content/images/img.png" class="card-img-top" alt="Product Image">
