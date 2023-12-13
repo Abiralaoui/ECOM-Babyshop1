@@ -54,19 +54,19 @@
     <!-- Vos autres éléments ... -->
 
     <div class="avis-section">
-      <div *ngIf="avisList && avisList.length > 0">
+      <div *ngIf="avisList && avisList.length > 0" class="avis-section-scrollable">
         <ul class="avis-list avis-item">
           <h3 class="avis-title">Avis pour ce produit :</h3>
           <li class="item" *ngFor="let avis of avisList;let last = last">
-
-            <app-rating [size]="20" [rating]="avis.note ?? 0" ></app-rating>
-            <div class="avis-date"><span style="font-weight: bold">{{ avis.date?.toString() | date:'medium'}} :</span> {{ avis.commentaire }}</div>
+            <app-rating [size]="20" [rating]="avis.note ?? 0"></app-rating>
+            <div class="avis-date">
+              <span style="font-weight: bold">{{ avis.date?.toString() | date:'medium'}} :</span> {{ avis.commentaire }}
+            </div>
             <hr *ngIf="!last"/>
           </li>
-
         </ul>
       </div>
-
+      
       <div *ngIf="!avisList || avisList.length === 0" class="no-avis-message">
         <p>Aucun avis disponible pour ce produit.</p>
       </div>

@@ -5,7 +5,8 @@ export interface ILigneCommande {
   id: number| null;
   quantite?: number | null;
   prix?: number | null;
-  produit?: Pick<IProduit, 'id'> | null;
+  produit?:IProduit| null;
+  showDetails? :boolean| null;
 }
 
 export type NewLigneCommande = Omit<ILigneCommande, 'id'> & { id: null };
