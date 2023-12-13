@@ -1,21 +1,428 @@
 id;note;commentaire;date;produit_id;client_id
-1;4;Très satisfait du produit!;2023-01-10;1;1
-2;5;Pyjama adorable et confortable!;2023-01-12;2;2
-3;4;Doudou lapin très doux. Ma fille l'adore!;2023-01-15;3;3
-4;4;Biberon pratique et efficace contre les coliques.;2023-01-18;4;4
-5;5;Chaussettes en laine de grande qualité.;2023-01-20;5;5
-6;3;Le mobile musical est joli mais la musique est un peu forte.;2023-01-22;6;1
-7;5;Couverture en polaire très douce et chaude.;2023-01-25;7;2
-8;4;Tapis d'éveil coloré et attractif pour bébé.;2023-01-28;8;3
-9;5;Sucette orthodontique de bonne qualité.;2023-01-30;9;4
-10;3;Lingettes douces et pratiques.;2023-02-02;10;5
-11;4;Cape de bain absorbante et mignonne.;2023-02-05;11;1
-12;5;Porte-bébé ergonomique très confortable.;2023-02-08;12;2
-13;4;Poussette légère et maniable.;2023-02-10;13;3
-14;5;Bavoir imperméable de bonne qualité.;2023-02-13;14;4
-15;3;Thermomètre frontal facile à utiliser.;2023-02-15;15;5
-16;4;Protège-carnet de santé élégant.;2023-02-18;16;1
-17;5;Kit de manucure bébé complet.;2023-02-20;17;2
-18;4;Jouet de dentition en silicone apprécié par bébé.;2023-02-23;18;3
-19;5;Gigoteuse d'hiver bien chaude.;2023-02-26;19;4
-20;3;Livre en tissu avec textures variées.;2023-02-28;20;5
+1;1;"When this came I was really pleased as it is a very high quality looking product... However when I came to do it not so good! I tried to do it while my 3 month old daughter was asleep but she woke up!";2013-09-02;0;3
+2;3;"Lovely item. The prints were easy to do and it's definitely the best way to display them alonv with a picture.  Very pleased x x";2013-05-17;0;4
+3;1;"Awesome well happy with everything about it postage, product itself, well worth the money and it's really quality deffo buy it";2014-03-31;0;1
+4;4;"It is amazing, easy to use and very beautiful.";2023-06-05;1;12
+5;3;"The kit turned out great. It’s users friendly, but super messy. My husband helped me do it. I chose to stand up to get my upper thighs and that was tough because it does take time to put it one and le";2022-12-20;1;9
+6;1;"I loved the process very easy and convenient";2023-05-12;1;13
+7;4;"Easy to use, fun to do.Use a lot of vaseline on any part of your body that will have plaster on it, so it won’t hurt to take it off.Use warm to hot water, Trust there’s a difference.LAYERS! it will no";2023-03-07;1;6
+8;5;"It came out great ….brought it for my wife for vday  because I wanted to do something fun for her because we couldn’t really get out the house she LOVES IT I LOVE EVERYONE LOVES IT …….. had to mold my";2023-03-03;1;3
+9;1;"It is very messy, and I would recommend if you are using any clothes to make sure you are okay with throwing it away. The cast didn’t come out of my items.";2023-01-16;1;18
+10;5;"Brought this for my daughters To cast her pregnancy stomach. Cute concept that came out rather nicely but you gotta be ready for the wet mess.";2023-01-10;1;13
+11;1;"Twice we purchased these casting kits and then nearly forgot them until it was too late so we have two beautiful casts that were done while my wife was at full term. The casting kit includes everythin";2022-11-29;1;13
+12;5;"Je m’attendais a plus pour 50$!!Des pinceaux et de la peinture à l’eau du dolorama aurais fais pareil!!! Paquet cheap je trouve!";2023-05-12;1;7
+13;1;"Horrible. Do not waste your money. The paint is thin, weak and transparent.";2023-02-16;1;12
+14;3;"Easy and Fun!I did the cast at 36 weeks and 3 days, as my little one had been threatening to come out at 30 weeks already, and we didn't want to push it any longer in fear we may miss it (good thing w";2017-01-27;1;15
+15;5;"届いて、パッケージを開けた瞬間、二度見するほど安っぽかったです。日本だったら100均？レベルの見た目クオリティー・包装？というか内容物の梱包？梱包もされていない絵の具と筆とスポンジハンコ（これがまた安っぽい）などがぽろぽろっと箱に入っている状態でした。使用前は心配でしたが、使用感は使ってみると発色も良く（写真参照）シャワーでサラッと落とすこともできました。使用感は☆4くらいですが、値段が高いのと梱";2021-08-28;1;4
+16;1;"手先が不器用な人には向いていません。手先な器用で几帳面な旦那がしましたが仕上がりは微妙でした笑お腹が大きいので誰かにやってもらった方がベストです。汚れるので汚れてもいいように裸族で浴室でした方が良いかと思われます。お腹の形はクッキリわかります。これは今棚に収納していますが、今後これが日の目を見ることはあるのでしょうか。疑問です。綺麗に遺されたい方は本格的な石膏がオススメです。価格は高いですが。まぁ";2018-02-10;1;8
+17;2;"Apart from the obvious ways described on the box. There are multiple ways to play with this.9-12 months - Let the baby watch you stack. My son enjoyed destroying the stacking before we could finish it";2020-02-17;2;15
+18;4;"Don't be worried that these are cardboard...they are SUPER sturdy and have already survived some major abuse. :)  The illustrations are stunning and it surprised me that they are actually pretty gende";2013-10-03;2;6
+19;1;"I love the Janod brand as I find their toys to be both practical and cute/whimsical at the same time. This stacking set is okay. I have bought a few other stacking pyramid toys for my daughter and the";2014-09-02;2;17
+20;1;"We have several Janod toys and they are far more beautiful than most of the American toys we buy - ooh la la! The French - I don't think they could make anything ugly if you paid them. Anyhow, this is";2014-03-29;2;19
+21;1;"A very simple concept, still a great and entertaining toy. My daughter and I play the &#34;Tower of Pisa&#34; with this stacking toy. She counts to ten and she is learning to count backward thanks to ";2016-01-12;2;18
+22;2;"This one is a winner!!!!! So Beautifully designed, simple concespt to stack inside or build a tower. Just gorgeous and fun to see my baby growing with this toy and learning with time how to play with ";2018-03-01;2;14
+23;4;"This stacking tower was a gift for my niece. The images were very pretty and vivid. Loved the colors. Lightweight and easy to stack. It is just very thick cardboard but I like that it's more environme";2019-02-25;2;9
+24;1;"Beautiful toys! I purchase for my niece who will get many years of fun out of these stackers.";2020-03-11;2;2
+25;2;"Compré este juguete con más de un 80% de descuento y por el precio que pagué, está bien. Pero lamentaría mucho la compra si hubiera pagado lo que vale realmente, ya que la calidad no es buena para nad";2017-10-16;2;15
+26;3;"Super divertente ed istruttivo! mia figlia ci gioca un sacco";2022-12-01;2;18
+27;5;"I bought this for my baby niece and I am saving it to give to her for Christmas so I can't judge durability yet. The pictures are bright and eye catching. I thought the cylindrical shape would be good";2013-10-03;2;19
+28;2;"Giochino impilabile molto carino e colorato. È piaciuto molto alla mia figlia che ha un anno. Per ora quello che le piace di più è mettere una scatolina dentro l’altra, oppure buttare giù le torri che";2018-03-27;2;9
+29;4;"Wir haben diesen Stapelturm vor 3 Jahren geschenkt bekommen und ich habe ihn nun zu Weihnachten neu gekauft und einem Kind geschenkt. Es ist ein sehr hochwertiges Spielzeug, das für meine Kinder ab ca";2020-12-26;2;2
+30;4;"My daughter used it for her second baptism dress and it was so beautiful and comfy. She was 8 months and the 9 month fit her perfect as it does fit true to size.";2021-12-24;3;2
+31;4;"It doesn't mention it in the product description, but it comes with an adorable matching bonnet! The newborn size fit perfectly for our 2 month old daughter!";2021-02-23;3;19
+32;1;"This outfit was perfect for the summer baptism of our daughter (at just over 3 months old). She was cool and comfortable during the service, adorable at the family gathering that followed, and easy to";2018-08-18;3;5
+33;1;"Nice material and looked as expected-description and pictures adequately explain/show the dress.";2018-06-01;3;12
+34;4;"Baby coming home";2018-12-19;3;13
+35;2;"This dress was used for my granddaughter's blessing at church. She was tiny but it fit perfectly! it is beautiful, well made and good quality material for the price.";2013-03-21;3;17
+36;1;"I ordered petit ami dress and instead received an ugly dress from a completely different brand called 7 for all man kind . Iam really disappointed for this is a gift";2020-02-07;3;7
+37;1;"Really beautiful cotton gown and bonnet. Sadly to be used for viewing of my baby who passed at 2 months old. Would have enjoyed dressing her in this cool gown this summer";2018-06-30;3;9
+38;2;"It is amazing, easy to use and very beautiful.";2023-06-05;4;8
+39;4;"The kit turned out great. It’s users friendly, but super messy. My husband helped me do it. I chose to stand up to get my upper thighs and that was tough because it does take time to put it one and le";2022-12-20;4;9
+40;5;"I loved the process very easy and convenient";2023-05-12;4;3
+41;5;"Easy to use, fun to do.Use a lot of vaseline on any part of your body that will have plaster on it, so it won’t hurt to take it off.Use warm to hot water, Trust there’s a difference.LAYERS! it will no";2023-03-07;4;6
+42;3;"It came out great ….brought it for my wife for vday  because I wanted to do something fun for her because we couldn’t really get out the house she LOVES IT I LOVE EVERYONE LOVES IT …….. had to mold my";2023-03-03;4;15
+43;2;"It is very messy, and I would recommend if you are using any clothes to make sure you are okay with throwing it away. The cast didn’t come out of my items.";2023-01-16;4;11
+44;3;"Brought this for my daughters To cast her pregnancy stomach. Cute concept that came out rather nicely but you gotta be ready for the wet mess.";2023-01-10;4;3
+45;3;"Twice we purchased these casting kits and then nearly forgot them until it was too late so we have two beautiful casts that were done while my wife was at full term. The casting kit includes everythin";2022-11-29;4;14
+46;3;"Je m’attendais a plus pour 50$!!Des pinceaux et de la peinture à l’eau du dolorama aurais fais pareil!!! Paquet cheap je trouve!";2023-05-12;4;7
+47;1;"Horrible. Do not waste your money. The paint is thin, weak and transparent.";2023-02-16;4;14
+48;1;"Easy and Fun!I did the cast at 36 weeks and 3 days, as my little one had been threatening to come out at 30 weeks already, and we didn't want to push it any longer in fear we may miss it (good thing w";2017-01-27;4;15
+49;2;"届いて、パッケージを開けた瞬間、二度見するほど安っぽかったです。日本だったら100均？レベルの見た目クオリティー・包装？というか内容物の梱包？梱包もされていない絵の具と筆とスポンジハンコ（これがまた安っぽい）などがぽろぽろっと箱に入っている状態でした。使用前は心配でしたが、使用感は使ってみると発色も良く（写真参照）シャワーでサラッと落とすこともできました。使用感は☆4くらいですが、値段が高いのと梱";2021-08-28;4;6
+50;1;"手先が不器用な人には向いていません。手先な器用で几帳面な旦那がしましたが仕上がりは微妙でした笑お腹が大きいので誰かにやってもらった方がベストです。汚れるので汚れてもいいように裸族で浴室でした方が良いかと思われます。お腹の形はクッキリわかります。これは今棚に収納していますが、今後これが日の目を見ることはあるのでしょうか。疑問です。綺麗に遺されたい方は本格的な石膏がオススメです。価格は高いですが。まぁ";2018-02-10;4;12
+51;4;"This is a such a cute cute shoe when u see this in person!  Not a shoe for a walking baby! However,  this is a very cute shoe for the summer. Definitely is a show stopper shoe!";2014-05-05;7;5
+52;4;"Simply precious sandal for your little girl! I purchased these for a May 2011 wedding to coordinate with a custom designed dress my daughter will be wearing. The hot pink is as it's shown online. Vibr";2011-04-10;7;13
+53;1;"I initially saw these for the first time at an evaluation appt for my toddler. He was having some speech delays, and his pediatrician sent him for an evaluation. The therapist used these to perform a ";2019-02-08;8;11
+54;2;"Our autistic daughter (4)  has these in therapy and is always playing with them, so we decided to purchase they for her for Christmas.  Her favorite things to do with them is stack  them 10 high and w";2019-01-19;8;11
+55;1;"These are neat.  I bought them for my 1.5 year old because she loves blocks and stacking things.  She also loves animals so I thought how cool this would be for her.  The only con is that it is a bit ";2017-06-28;8;17
+56;1;"My son LOVES the stacking peg sets from Alex toy company and I was positive he would get a huge charge out of the monkeys in this set.  Although there was nothing wrong with these as a toy, they did n";2011-10-19;8;5
+57;5;"My child uses this for OT";2021-05-12;8;2
+58;1;"My grandson was quickly bored with them";2021-08-14;8;14
+59;5;"A great favorite of my granddaughter";2021-06-20;8;1
+60;3;"I bought these for my young preschool grandchild. It is such a versatile toy. He can stack with them, make patterns with them, sort the colors, and count them. As a teacher, I highly recommend this ed";2018-06-22;8;9
+61;3;"Great Product";2016-07-04;8;1
+62;3;"Thrilled with this product - perfect for small fingers and provided hours of fun for our 3yr old grab don!";2016-01-03;8;5
+63;2;"The shoes were the right size and fit my granddaughter perfectly.  One of the reviews mentioned to go one size up which I did. My granddaughter 's feet are wide so I brought her a size 5.5 wide. Strid";2023-06-05;10;20
+64;1;"I like this product because of the flowers on the side I brought them from my goddaughter she love them she was walking into 2days . I just wish they had more colors for the flowers.";2023-05-17;10;5
+65;1;"Both shoes were labeled size 5 but one shoe was smaller than the other. I missed the return time frame and wanted to pay to return them for an exchange but using the chat was no help with this.";2023-05-21;10;18
+66;4;"They are so cute. Our granddaughter measured at a 5 but we got a half a size larger, and they fit well.";2023-03-03;10;18
+67;3;"This shoe was labeled WIDE but wasn't wide enough. I had to return such";2023-04-25;10;2
+68;2;"Just as described. So cute. Fit great.";2023-02-28;10;17
+69;1;"I ordered these as a gift. They truly are lovely. The gift receiver told me they did not fit the little one. So I had to get the next size. Surprise surprise they were more than twice the price I coul";2022-11-11;10;18
+70;1;"I wanted to love these because they are well made, supportive, and look very sweet. But they were such a pain to get on my 1 year old’s feet. . And she immediately began playing with the laces once th";2023-02-10;10;20
+71;1;"loved these shoes for my little toddler girl";2019-10-10;10;19
+72;3;"Was very happy with these shoes.  I had hunted all over to get a good pair of baby walking shoes and when I found these on your sight, they were exactly what I was looking for.";2017-04-10;10;5
+73;3;"Parfaite, merci";2016-04-19;10;13
+74;3;"I went on some advise to order a little bigger. I went half size bigger and they are much bigger than expected. Eventually she will fit into them but not for awhile. I do really like the shoes!!! Grea";2015-12-03;10;17
+75;4;"Love the hear og shoes they are definitely helping my baby learn to walk giving her balance and strengthening her confidence to walk";2023-06-02;11;9
+76;2;"Del producto me ágrafo todo , solo que tienen que explicar mejor la medida del zapato  y gracias";2023-05-04;11;12
+77;4;"Good solid shoe for beginner walkers.  My granddaughter was taking steps and needed more ankle support these shoes are the solution.";2023-04-26;11;16
+78;5;"I bought these for my grandson he's trying to walk.";2023-04-24;11;14
+79;4;"The media could not be loaded.
+                
+            
+                
+            
+            
+        
+    
+    
+
+
+
+
+
+
+
+
+  
+  
+    &nbsp;That really helped his stability and running";2023-05-21;11;17
+80;1;"These were so nice for my baby, no complaints";2023-03-27;11;9
+81;1;"Excelente producto. Calidad. Llego en el tiempo requerido.";2023-01-23;11;17
+82;5;"My son at 13 months was more comfortable crawling.  Bought the shoes at my sis in law suggestion and yes he walked yes he walked after a week of wearing them!";2022-12-01;11;20
+83;3;"Expensive but good shoe for a toddler learning to walk.";2022-11-09;11;18
+84;1;"Returned due to size, nice shoe";2016-12-17;11;14
+85;3;"Perfect first shoes! Got them for our daughter just before her first birthday and she loved them and still does 2 months later. I will buy a new pair for our next children for sure!";2018-12-13;11;7
+86;5;"Great shoes, good support for little walkers.Excellent quality!";2015-11-07;11;15
+87;1;"Dank der Dame, die in einer vorherigen Rezension geschrieben hatte, daß sie einen schicken Schuh für ihr Kind suchte, bestellte ich ihn auch und bin sehr zufrieden.+ Die Qualität dieses Lederschuhs is";2012-02-02;11;13
+88;3;"Ordered 3 of these for Xmas gifts! They have several sheets of the paper so that you can practice first. One wipe in each pack but lasts for quite a while, certainly long enough to practice and then d";2012-12-24;15;19
+89;4;"Absolutely beautiful! Looks so professional when finished, so glad i found this. Will definitely be buying again when next baby arrives";2016-04-05;15;7
+90;2;"Really good for a friend or yourself that's had a baby!! I would recommend getting it whilst there young so you can fit both hand a foot on the page.";2013-11-08;15;14
+91;2;"Good bit of kit, worked well.";2016-01-22;15;1
+92;1;"Is not so easy to use, a lot of instructions and the quality is not the most perfect. You need to have a lot of patience to finish the work";2022-08-10;28;13
+93;5;"The best thing I bought for my baby";2022-06-26;28;13
+94;5;"C est vraiment un kit parfait les empreintes de ma fille sont parfaites . Il y assez de poudre pour faire trois empreintes on est en manque de rien c’est vraiment un kit que je recommande . Le mode d ";2018-01-26;28;11
+95;1;"Very nice";2017-04-28;30;8
+96;1;"Gift idea, It was a lovely product";2015-12-14;30;14
+97;5;"Amazing just wish there were more wipes";2014-10-15;30;4
+98;5;"So I did a bit of research to find the best organic mittens with a reasonable price tag. I concluded these were by far the most popular mittens with great reviews and a decent price for TWO pairs of m";2012-01-26;31;17
+99;1;"I first bought these several years ago with the birth of my first son.  He was eight pounds and could get the all the other mittens off easily so I searched for an answer.  It was so frustrating.  I f";2011-06-22;31;16
+100;4;"We were given several pair of scratch mittens after we'd already bought these. My daughter constantly scratched her face as a newborn, and so she spent the first two months of her life in these mitten";2013-05-31;31;1
+101;2;"these mittens are wonderfully breathable and soft - which is great because my daughter has recently learned to suck on her knuckles, and it's starting to get warm here in california! had to wait until";2012-05-27;31;12
+102;3;"My baby is a scratcher and these mittens were a life saver. The fabric is just the right thickness and prevents his little nails from scratching his face, while still thin enough to let his hands brea";2012-02-19;31;7
+103;2;"the elastic on these are way tight, and the actual mittens are teeny tiny.  they're super cute though, which is why i kept trying to use them, but one time they ended up cutting off the circulation in";2011-02-23;31;5
+104;1;"pros: its organic, soft, easy to fitcons: baby's hands has a lot of thread-like material from the mittens once you remove them. So I have to make sure to clean her hands throughly otherwise when she t";2013-01-23;31;10
+105;3;"I brought these to the hospital for my newborn boy, who weighs 8 lbs. 2 oz., and unfortunately they were way to tight on his little wrists and left little red marks after only wearing them for 20 minu";2013-01-08;31;20
+106;1;"This frame is soo cute for a little boy. It's good quality. It's ceramic made and it's not cheesy. It's really baby kid like frame. Nice and colorful. The cupcake has a little bit of glitter. Good for";2013-10-09;32;8
+107;2;"It was exactly what I expected.  I would recommend it to anyone who has a first birthday.  I had it personalized to make it more personal  at an other store though.";2014-05-22;32;9
+108;4;"This was exactly what I was looking for. I have all my sons milestones in different frames. This was the final piece of the pie for us.";2012-12-27;32;20
+109;1;"This frame could be for girls or boys, but I bought for a boy.";2015-07-25;32;13
+110;5;"Perfect good quality frame! Is prettier in person! Can't believe it was only $9.99!";2015-06-12;32;3
+111;2;"Had a hard time trying to find a 1st birthday picture frame, looked everywhere, but as usual Amazon had them.Really cute, loved it. Thanks";2010-08-10;32;9
+112;2;"Cheap, but very cute frame.";2015-07-10;32;6
+113;2;"Love it!";2015-10-07;32;17
+114;4;"Love the size and muted color for a toddler, My 2 year old wears them easily. Hard to find small ones that have the thumb as well. The light blue is really pretty and subtle and can go with any jacket";2019-01-20;34;11
+115;1;"Excellent product for the price. The shipping took about 6 weeks, so if you need them for this winter you will not get them on time.I bought them for my 4-month-old, and they are very large on him, bu";2015-12-11;34;18
+116;3;"These are very cute gloves. I wanted lighter weight gloves with the thumb spot for my 21 month old son. They are harder to find in local stores than one would think. Thsee are perfect. My son has long";2016-01-31;34;19
+117;2;"These Mittens worked just fine for my son they were a little big but then again he's only 2 months old when we needed them.";2014-04-28;34;2
+118;3;"Bought them to use on a Christmas snowman wreath. Look great.";2015-11-25;34;5
+119;4;"A little thinner than i expected, but still good!";2015-10-08;34;7
+120;2;"These work, they fit my 1 year old Son and he will even be able to wear these next winter as well. Incase anyone is wondering, these do NOT have the attached string.";2015-03-12;34;4
+121;2;"Perfect for my 17 month old daughter.  Easy to put on.  Only problem was my daycare lost one, so I'm reordering the same ones, since I liked them so much!";2014-11-15;34;16
+122;2;"I found this product very satisfying and at good price. They fit the body without constriction and stay in place. The non transparent texture is what I wanted for my little girl. Don’t expect it’ll la";2023-03-17;35;3
+123;1;"These are pretty nice tights for the price. They’re pretty soft and don’t seem to pill or run easily.";2023-03-19;35;19
+124;5;"Not stretchy enough for a true 4t .";2022-12-18;35;16
+125;3;"Too tight in belly area";2022-11-11;35;20
+126;2;"These stockings fit my toddler perfectly, and they are super thick yet sheer. They didn’t shrink in the wash, and kept their elasticity.";2023-01-29;35;15
+127;4;"These tights are cute & nice quality. Got for my 3 yr old twins and they fit perfect.";2023-01-30;35;13
+128;2;"Son bellas de buena calidad";2023-02-16;35;9
+129;5;"Bought three sets of these for my granddaughters.  Great quality for the price.";2023-01-05;35;3
+130;2;"las medias son muy lindas y los colores bonitos, pero son muy pequeñas!!!! mi hija tiene 19 meses y le compré talla 18 a 24 meses y le quedaron super pequeñas!!! que desilusión porque realmente no las";2020-11-30;35;16
+131;3;"Aunque compré la talla más chica le quedaron ligeramente grandes a mi bebé y eso que ella usa talla 6 meses, pensé que serían un poco más gruesas la verdad es que son más parecidas a pantimedias que a";2020-10-21;35;14
+132;3;"Muy muy delgada";2021-09-27;35;7
+133;1;"Cintura muy reducida";2021-07-31;35;18
+134;5;"Están muy bien en cuánto a la calidad, ya que son medias, pero están resistentes. Solo que le quedaron grandes a mi bebé. Tiene 5 meses.";2021-11-24;35;20
+135;4;"I bought a 3T fuchsia and 5T royal blue for my 2 and 4 year olds hoping they would fit this year and next. These snow pants are great! The fuchsia pair are much brighter in person than what is picture";2023-02-01;37;11
+136;2;"We purchased these for a trip to Alaska in December 2021. They were worn 13 out of 15 days for all kinds of adventures... Sledding, ice skating, sleigh rides, dogsledding, and even Northern Lights hun";2022-11-30;37;4
+137;1;"I loved this jump suit, it was perfect for my 3yo to play in the snow.";2023-01-15;37;9
+138;1;"Wonderful quality, especially for the price! I got the 3t for my large 2 year old daughter. She is about 36”-37” tall and 30lbs. I’m so glad I went with the 3t (what she wears in most things) and not ";2019-11-06;37;10
+139;2;"This item was perfect for my daughter. True to the size I ordered. Would highly recommend this for any kid ready to play in the snow.";2022-02-21;37;6
+140;3;"These snow pants were a lifesaver this winter! We ordered a size bigger than what my daughter usually wears (so that she can wear them next year.) the way the pants are designed- it made it easy to sc";2018-03-01;37;14
+141;4;"Exactly as advertised. True fit.";2022-03-07;37;19
+142;1;"Great product! Ordered this for my almost 3 year old daughter(3 in 3 months) and it fit her so well. Ordered her a size 3T and there’s still room for her to grow. Will update on how the product does i";2021-01-28;37;12
+143;3;"Great pair of snow pants for the winter season, bought another pair!";2019-12-04;37;16
+144;1;"Well made";2019-03-13;37;11
+145;3;"Great snow pants. Good fit, good protection.";2018-01-13;37;6
+146;1;"Great quality material and keeps my little ladies legs warm.";2016-03-24;37;14
+147;2;"Aún no lo probamos pero se ve muy bien el traje, lo mejor es que llega muy rápido.";2019-12-08;37;12
+148;5;"We plan to take a ski trip this winter and need ski gear for our girls. This was a steal at $6 and will fit my 4 or 5 year old!!! They are both on the petite side at around 32 and 36 inches tall.";2023-06-29;38;11
+149;5;"Bought the 4t for 3year old daughter. Length was a little long so it is true to size. Seemed a little on the tight size. Quality was really good even bought a adult size and quality was also good. Rec";2023-02-21;38;17
+150;2;"My three year old nephew like to play outside in the snow a lot so I wanted to see if this will keep him warm and it does he like to wear it all the time lol";2023-01-10;38;11
+151;5;"Update- This item is very durable.  It repels water a little buy I was never caught in a rain storm.  My little one is able to walk in them with ease without the seams coming out.  I would recommend t";2019-10-22;38;4
+152;2;"Me gusto mucho la calidad de la tela y la suavidad al mismo tiempo ! Excelente compra gracias al vendedor y al fabricante!";2022-11-30;38;3
+153;2;"Ya’ll I don’t usually write reviews, but these snow bibs are awesome! Bought these toddler ones and the Artix Kid Insulated snow bibs for my son. AMAZING! My kids played in the snow for a few hours, i";2021-02-07;38;9
+154;1;"They fit well, no snow gets up the pant legs, look so cute and comfortable for the kids.";2022-05-07;38;13
+155;2;"We live where the weather dips to -30 with our wind chills. My very tiny 4 year old never complains of being cold. These are so durable and clean looking. They are adjustable and will grow with her. W";2022-01-25;38;6
+156;5;"It is thick and the bib is big enough to cover kid's chest and back.  The color is very pretty.";2022-04-22;38;20
+157;4;"Better than expected fits great. And shipping was fast my daughter absolutely loves it seem like good quality but we'll see if the material holds.";2021-02-21;38;3
+158;4;"Had to buy snowpants for the first time for my little man and was skeptical about the size as he is in-between sizes. But the size was perfect and the quality looks good";2020-03-23;38;7
+159;5;"These came in very quickly I wish they were a bit thicker, they’re pretty thin not sure how warm they really are, but it’s ok i guess.";2020-05-03;38;14
+160;3;"Esta lindo, gran funcionalidad y con un precio que vale la pena sin sacrificar cálidaMi bb pesa 18 kilos y tiene 3 años.  Le compre talla 4 y le quedó perfecto";2021-11-30;38;20
+161;2;"They fit nicely. The material is nice and soft, and the value for money is pretty dang good!";2023-06-29;39;4
+162;2;"Much better than I had expected for the price! Pretty little gowns with nice heavy fabric. Perfect for any new tiny princess!";2023-05-03;39;19
+163;3;"The picture showed 4 nighties in various colors. I received three  and the colors were not the ones shown. But I got them for a baby shower and did not have time to return them and have them to give. ";2023-03-27;39;18
+164;2;"These are really lovely and seem to be well made. However the sizing for preemie/newborn was more like 0-3mos, much larger than I expected. One star deducted for that but overall they're great.";2023-03-18;39;4
+165;3;"Lovely feminine designs";2023-04-11;39;5
+166;2;"This was a gift for a baby shower so I am unable to write a review for them.  The baby's mother registered for them and she would have to be the one to write a review.";2023-02-09;39;19
+167;3;"I love using these under sleep sacks for easy diaper changes. I have several sets and they're all I use at night for my little. No snaps or zippers to fight. They're also super cute! I got the sets wi";2022-11-16;39;13
+168;2;"They are cute but only received 3 of 4 so not too happy. They run big so thats a super + for me. Not too happy that I am short 1";2023-04-14;39;20
+169;3;"Las recomiendo están muy bonitas y tienen buen tamaño";2021-10-31;39;8
+170;4;"These are a really nice thick material which surprised me, they feel like good quality and like they'll last a long time!";2019-10-23;39;18
+171;4;"They are beautiful but theres a chemical smell too them. I was them 4 times in hot water and soak them for a day to get the smell out. The neck is huge. But they are cute and handy to have.";2016-10-25;39;12
+172;1;"Muy lindos.";2020-08-01;39;9
+173;4;"Fits as expected";2016-10-04;39;20
+174;5;"Love these gloves!  My daughter is 2 1/2 and these gloves fit her..well, like a glove!  It's so difficult to find gloves for such small hands.  They're either too big or mittens.  However, these are s";2011-03-01;40;11
+175;3;"I bought these for my son this past winter (he turned two in January) because one of the four gloves had an owl design on it, and he loves owls (and doesn't mind the color pink either).  I had a hard ";2012-06-12;42;13
+176;1;"I love the product. Just make sure you go up two sizes. These gowns run small. I went straight to the 3-6 month one for my newborn.";2020-02-20;52;3
+177;4;"Cute colors and prints, easy to put on, super stretch material, hand mitts so my baby cannot scratch her face, and the softest material ever.  I am HOOKED on these.  They make changing diapers a snap ";2013-05-31;52;6
+178;2;"I wanted this to be my baby's take home outfit so badly, but it is just not a great fit!! The material is SO soft, the color is beautiful, the craftsmanship is very nice.  The elastic on the bottom is";2013-09-04;52;16
+179;4;"my son was 8lbs and 20"" and this gown was skin tight and at least 3 inches of leg hung out. i wanted him warm so he never even got to wear this. i would not purchase this gown again.";2011-01-20;52;10
+180;5;"This is SOOOOO soft!";2015-03-03;53;16
+181;3;"I'm giving 5 stars because we love the actual product. I bought a full piece set of these pajamas for my son when he was a few months old and they fit him perfectly, and are so extremely soft! We love";2016-01-15;54;11
+182;4;"These pajamas are nice and are very soft.  I listened to other reviewers and ordered a size up as recommended.  I am very thankful I did because they fit great.  If I had ordered her true size, they w";2015-06-19;54;11
+183;1;"A friend bought a Kicky Pants onsie as a shower gift and I have been obsessed ever since. I love how stretchy the clothes are - it makes it easy to dress a squirmy baby. And they are so SOFT! I don't ";2012-12-05;54;5
+184;4;"Fit pretty small. The 0-3 month size fit while my son fit into his newborn clothes. But such a soft and adorable outfit! Absolutely loved it! And the color is so amazing in person! Maybe just order a ";2020-01-02;54;9
+185;3;"I always have at least one pair of these in our pajama rotation.  I love them because they are incredibly soft and stretchy, so they can be worn for a while while my son grows.  They are cool enough f";2011-11-28;54;17
+186;5;"I love ANY of the Kicky Pants products. They are super soft, durable, breathable, light. The sets are great b/c I mix them up with other shirts or pants, use them as PJ's, etc. I have some combination";2010-09-13;54;11
+187;3;"I bought these for my newborn daughter. They are so soft- I loved putting her in it and was sad when she quickly outgrew them. The pajamas are very fitted (which I liked) so do not expect your baby to";2012-07-28;54;5
+188;2;"This is an ideal pajama because its long sleeve and pants to keep baby warm, but the fabric is lightweight enough that your baby doesn't get too hot. And wow are they soft and comfortable.Just know th";2012-09-19;54;11
+189;4;"These are more expensive than your average pair of baby's pajamas, BUT they are soooo soft. These are softer than any pajamas I have or have come across. I bought a size larger, so my baby hasn't worn";2010-05-28;56;3
+190;2;"These are the best pajamas. I love putting them on my one year old; they're so soft. The fact that they stretch means that he can wear them longer than any other clothes which definitely makes them wo";2012-09-28;56;19
+191;5;"The material is really thin and soft. They are great pajamas for my daughter and she looks really cute in them.";2013-01-28;56;12
+192;5;"Comfy material and look very good on! Wish they had more of my sons size in other colors on amazon!";2012-01-31;56;6
+193;5;"We love Kicky Pants. These are so soft and they fit great. Wish we had a pair in every color.";2012-11-20;56;18
+194;2;"Our baby knows when she is wearing Kickee brand. So soft and comfortable. I’ve purchased several from the dress, romper and two piece pajama set they’re all Great!A must purchase.";2019-10-03;57;7
+195;1;"My favorite PJs for my son. And his favorite as well! So comfy and soft...and fits is snug, which is why he likes them so much. True to size.";2017-09-14;57;14
+196;4;"Loves the bamboo materials. But size a bit too small for my 2 year old, even though I ordered a 3T";2017-01-26;57;20
+197;5;"We love Kickee Pants they are so soft!! They do run small though. We bought 12-18 months for a 7 month old. They are very stretchy so they should fit for a while.";2017-08-09;57;12
+198;3;"I like the bamboo softness, however, in it, my son looks like a blue mime.  He's 14 months old and not tall or fat for his height and the arms on this are almost too tight.  The length of the pants an";2013-04-22;57;1
+199;3;"I love this outfit and I love this brand! So soft and great. And super stretchy so the child can wear it for longer than you think.";2016-09-13;57;20
+200;4;"Adorable and super soft! Fits small. My 2T son wears a 3T in these pjs.";2016-10-12;57;15
+201;3;"I wish I had bought only these for my kids as underwear for cold weather but also summer pijamas. We use them also under fleece pijamas for cold night here in NYC.";2013-01-27;57;18
+202;4;"Says LITTLE BOY!! However the sleeve seems VERY FEMININE to me! I am certain this is a ruffle with white trim when arrived and the image does not show true product. RETURNING!! VERY sad as I am very f";2016-01-08;59;13
+203;5;"I was surprised at how soft these pj's are!We live in Hawaii, so my baby doesn't need pj's that keep her warm, so this thin material is perfect.I will be buying more as she grows.Oh, and I received th";2012-11-17;59;12
+204;2;"The only thing I can say about these is COMFORTABLE. They are a thin so good for spring or summer";2015-01-24;59;1
+205;5;"This is a cutey-patootie shoe for your infant. My daughter loves them! She is turning into quite the ""shoe-diva"" just like her Momma! The shoes are very durable and has sustained chewing, grabbing, ki";2010-07-12;63;2
+206;2;"My son is 10 months old, 31 inches tall and 21 pounds.  Initially I ordered the 12-18 month size, but ended up returning all but one for the 18-24 size.  It was a tight fit and even though 12-18 mos f";2013-03-20;64;19
+207;1;"These are the softest PJs ever!  I wish they came in adult sizes!  This is the only sleeper that we use for our baby - from newborn on up.  They are a little thin, so we like to use a sleep sack in ad";2014-08-26;64;7
+208;1;"they're pricey, yes, but it's hard to go back to other pjs after putting these soft guys on my little one. a friend got us the footies when she was born, and ever since then, we've progresses to the c";2012-03-19;64;13
+209;3;"Kickee clothing seem to run large but that's fine because I just fold up the sleeves and ankles and my child eventually grows into it.  The fabric is thin and silky smooth.  I almost wish these came i";2015-03-13;64;19
+210;1;"I thought I had ordered the 6-12 month size. When it came and was newborn size, I was surprised. I don't know whether I ordered the wrong size or whether they just sent the wrong size. Either way, I h";2017-01-02;64;1
+211;1;"A friend on Facebook had a picture of her baby in a Kickee Pants pajama outfit. She raved about the softness, the ease of putting it on her baby so I had to try it. I was not disappointed, the brand l";2016-02-14;64;18
+212;3;"I LOVE these outfits.  This fabric is without a doubt the most ideal fabric for infant clothing.  1) It is soft to the touch, 2) It is elastic and therefore is easy to take on and off with each diaper";2016-01-10;64;9
+213;2;"The fabric is very soft and stretchy, which makes it a little easier to dress a very wiggly baby, but not very warm. The vent in the back is more for looks than usefulness. but that gives it the old w";2012-11-15;64;13
+214;4;"The pj is very cute, but the quality of the cotton is not as good as I thought...after washing it...";2011-04-07;65;19
+215;5;"I love Hatley pajams.  They are made of the softest cotton and come in the cutest patterns.  I also love the no slip feet.  Totally recomend these pajamas.";2011-06-10;65;7
+216;5;"Dieses Schnuffeltuch haben wir bereits 3 x gekauft. Es ist unglaublich süß und unsere Kleine geht nicht ohne ihr Schaf aus dem Haus. Mittlerweile ist es total abgenutzt und wir haben nachdem sie eines";2014-12-18;67;8
+217;1;"War ein Geschenk, kam sehr gut an.";2019-11-08;67;8
+218;5;"Wir haben das Schaf zur Geburt verschenkt und es ist wirklich sehr gut angekommen. Wir würden es jederzeit wieder bestellen.";2013-07-17;67;16
+219;5;"Schön weich und kuschelig... Ohne unserm Mäh Mäh geht nix :-)Kann man super in der Maschine waschen.";2020-01-02;67;7
+220;5;"Unser 3. Schäfchen, unsere Tochter liebt es , gute Qualität, die sich nur langsam und durch intensiven Gebrauch abnutzt. Alles gut!";2016-02-29;67;14
+221;1;"I got this stacker set for my little son quite a while ago, but due to some hospitalizations, he really only just started playing with it about a month ago. HE LOVES IT (and so do I)! Not only does it";2012-03-10;72;9
+222;4;"I'm a fan of Green Toys. Yep.But please don't get me wrong - I'm not some Hipster McGee jumping on the bandwagon of a company for &#34;street cred&#34;. Nope. I eat gluten like I invented it. I don't ";2015-09-05;72;2
+223;1;"This is a favorite in my daycare. It's easier for the kids to stack these then to figure out the nesting cups and they aren't the same as stacking rings, either, so they are an excellent addition when";2022-03-21;72;12
+224;3;"Bought this for my baby once he gets older, and they seem quite nice! Like the colors too!";2022-08-06;72;7
+225;1;"This product is made from recycled plastic and bpa free-yeah!!!  The ways it can be used and played with is ENDLESS. Best of all; There is no wrong way to stack them-so  your child will be filled with";2022-02-28;72;3
+226;2;"I am so happy we purchased this stacker. My 9 month old loves to play with it.  Most stackers that I have seen have the pole in the middle that all the rings stack on.  On this stacker, there is no mi";2013-07-12;72;4
+227;2;"I bought these for daycare and the kids love them but the only downfall is the texture of these is kind of slick so they’re hard to kind of grab otherwise a great product";2021-11-17;72;14
+228;2;"Our son is 5months old and this is his favorite toy! I bought 10 small floor-play toys like this one or smaller and thought I’d maybe save this one for a few more months ... but I gave it to him with ";2018-02-20;72;16
+229;3;"Brilliant- good quality, love the look and that you can stack it in any order. Great for younger and older babies. The parts roll across our floor well, and you can spin them on the spot too. My baby ";2019-10-08;72;19
+230;5;"schöner Stapeltum der sogar in der Spülmaschine gereinigt werden kann (auf Webseite des Herstellers angegeben)";2021-03-14;72;7
+231;2;"Prima Spielzeug.";2020-12-17;72;16
+232;3;"Easy for little fingers to pick up, baby loves them. She's currently into knocking them down, chewing them and bashing them together and will grow into stacking in due course.";2016-11-02;72;19
+233;2;"ai découvert cette marque il y a peu de temps et j'adore leurs produits. Ils sont très résistants et mon fils de 8 mois adore jouer avec. Il a également le sous-marin pour le bain et les formes à trie";2017-02-09;72;2
+234;4;"Bought this blanket to use in a diaper cake I was making for a baby shower.  Wanted it to match with another blanket I had bought.  When I received it, I was a bit disappointed because the color seeme";2023-06-09;73;2
+235;5;"I gave this 4 stars only because it was not as described.  Love this blanket.  The star design is suitable for a boy or girl.  The boarder of the blanket, at least on the one I received, was not blue ";2023-06-03;73;10
+236;1;"I highly recommend these blankets!! We bought the cream/off white colored ones and they are lovely! A great size in my opinion.. with our baby being so little we are able to fold it almost to a half  ";2023-06-11;73;12
+237;2;"Great size for little baby, very soft and warm.";2023-05-18;73;12
+238;3;"It's an ok blanket. It does the job but I was a little disappointed in the quality. It's a nice size and works great for swaddling. It looks thick in the pictures but it's extremely thin. It's definit";2023-02-14;73;7
+239;1;"I love this cotton blanket. It is good for swaddling new infants. It is not very heavy, provides some warmth.";2023-04-14;73;7
+240;3;"We purchased this blanket as a dupe for my own baby blanket from childhood in an attempt to recreate some old pictures. Low and behold my son is now obsessed with his new blankie! While it was slightl";2022-10-19;73;14
+241;3;"These blankets are amazing!! I received one as a gift and ended up buying these because I had to have a few more we used them that much. They're so soft and stretchy. They're the perfect size to swadd";2022-10-27;73;8
+242;2;"Very nice little blanket, pretty color. Baby's momma was happy with it.";2022-01-04;73;2
+243;2;"Muy bella frazada solo que pequeña para uso del bebé.";2020-08-23;73;11
+244;3;"Es buen producto a pesar de serMuy pequeña.";2019-10-16;73;4
+245;2;"Ordered 2 more these are a great baby blanket!";2020-10-03;73;2
+246;5;"My baby and i loves this blanket, whener i wrap her in it to cuddle or feed her she stop fussing. i bought 2 different colors to go with her room";2016-04-07;73;11
+247;5;"My 2/3 year olds at school love to build with these.It incorporates colors and counting at the same time.";2021-07-26;74;3
+248;5;"When the Littles go over to their Great Grandmothers house she has a set of these, but when the other great grand kids come over there was never enough. so glad we were able to find these!!";2020-06-03;74;6
+249;1;"They don’t stay together to actually build anything.";2020-11-28;74;17
+250;3;"the kids love to build with these-";2020-01-05;74;18
+251;3;"Toddler was having trouble sitting at the table and we gave her this seat with the foot rest, she immediately was much more able to stay in her own space!";2023-05-16;75;8
+252;1;"I had no issues putting this high chair together. I purchased it because I was sick of needing to constantly wash the cloth cover on our old high chair and wanted something that would grow with our 1 ";2023-01-12;75;18
+253;1;"Just received this high chair a few days ago and overall it’s a great alternative to the similar looking, name brand high chairs that are ridiculously expensive.For $85 (sale), this seems well worth i";2022-12-20;75;3
+254;4;"This is just a amazing high chair!  I purchased this high chair the year of 2013. The high chair is now a chair at the table. The only thing that makes me upset is the new feet they have on them. It w";2020-06-29;75;14
+255;1;"The chair grows as the child grows but has to be disassembled to make that happen in the tray area.  Not a big deal.  The plastic tray comes off for easy cleaning.  The chair has a combo belt and arms";2021-08-12;75;15
+256;4;"LOVE this chair for my 23 month old toddler. He can climb up and down it by himself, it pushes right up to the table, and the side rails keep him from falling out unlike his booster seat. But if your ";2011-09-17;75;16
+257;3;"My friend is very happy with this gift, because this chair is very safe and solid, the configuration of the white rubber pad dining board is also very convenient to wash clean and hygienic, this woode";2022-09-07;75;1
+258;4;"I could not afford other modern wooden high chairs like this, so I thought this would be a nice alternative. It wasn't too difficult in putting it together myself, but I normally don't have issues wit";2013-11-01;75;14
+259;2;"I was disappointed in the quality of the wood (it is a soft wood and marks easily). Also you have to use an Allen key to adjust the seat and every time you take off and put on the tray. Definitly not ";2013-01-30;75;20
+260;4;"Awesome,sleek, looks great in kitchen. Love it";2016-12-01;75;4
+261;4;"I love the look of this chair, however, I ended up returning it as it did not fit our needs. We were looking for a high chair that all sizes of children could use. The description shows that it adjust";2012-09-19;75;7
+262;2;"What I love is that these stack and also nest.  I love the pictures and colors.  I also like that there are so many different pictures to choose from.  What I don't like is that there is no way to kee";2011-03-08;78;18
+263;5;"I got these for my son for Christmas and he’s played with them every day for 2 months.... he loves them! They are cardboard but they have held up pretty good! He actually just broke one yesterday but ";2018-03-03;78;16
+264;4;"As others mentioned , these are just plain card boards wrapped in color papers, absolute crap in my opinion, and not even sturdy enough, if an toddler accidentally steps on or sit on these .. these ar";2017-06-14;78;10
+265;4;"So cute, lightweight so there are no worries of injuries when the tower comes toppling over, I love that there are different themes/ designs on each side. They have help up surprisingly well even with";2015-05-31;78;17
+266;3;"I purchased this toy for my granddaughter for Christmas and she loves it.  She can stack the blocks, knock them over, and start again.  Each side has cute pictures and they are very colorful.  I love ";2014-01-08;78;5
+267;4;"Wonderful toy!  My 2 year old grand daughter LOVES stacking and nesting these sturdy cardboard blocks!";2018-01-11;78;12
+268;3;"The boxes are carboard, flimsy, looks a lot cheaper than Alex toys should be.";2016-04-13;78;12
+269;2;"My 2 year old niece loved these! They are light weight and easy to store. I would definitely recommend these for any toddler to likes to stack!";2014-01-18;78;6
+270;2;"Ok";2016-02-11;78;16
+271;4;"I read through the reviews here before I bought this warmer, and I know a few people had some issues but I forget precisely what they were aside from the one reviewer who was simply aghast at the pros";2016-05-06;80;20
+272;3;"My wife and I have a four-month old daughter, completely formula fed.  For months 1 & 2, we would either a) pour the newly opened formula into the bottle at room temperature and feed it to our daughte";2022-03-22;80;5
+273;3;"Works great";2023-03-29;80;7
+274;2;"My wife is expressing breast milk a lot so the faff of boiling the kettle and heating the bottle up in a bowl of boiling water was getting too much of a  hassle so we decided to buy this little gadget";2020-04-29;80;10
+275;1;"We’re very impressed with this bottle warmer. It was bought to replace a cheaper model which was just a hot water bath with no timer. The built in timer works brilliantly and the steam heating is very";2019-04-26;80;1
+276;5;"A few teething problems in the first couple of days as described in previous reviews but soon got it sussed and I love it! Dr Browns bottles.. Don't screw the lid on completely and there won't be any ";2016-05-30;80;17
+277;2;"Our baby arrived on Monday, have used the bottle warmer a few times and now it doesn’t work. We have selected the warm time required, hit the play button and the timer skips straight to zero without w";2019-06-27;80;6
+278;2;"It's a decent product. However the temperature of bottles does seem to be a bit hit and miss for the same amount of formula from the fridge for the same length of time. Occasionally the formula is qui";2016-03-13;80;19
+279;3;"Gift for newborn. Bought matching outfit.";2023-06-03;81;2
+280;5;"I like everything about the product I received. Thank you";2023-03-13;81;18
+281;1;"The cotton is soft .  The edges are finished. The blanket washed well.  The pattern is sweet!";2022-10-03;81;19
+282;4;"Loved the softness, quality and prettiness of this baby blanket.  Nice gift item.  Recommend it to others.";2021-12-13;81;16
+283;2;"This blanket is neither here nor there. It’s too big to be used as a blanket for a baby, and too small to be used as a swaddle.";2020-09-07;81;20
+284;4;"This blanket is adorable. It’s lightweight, not too thick, which I like so I can tuck it in close around the baby when in the car seat, or wrap the baby in it in a swaddle. I’m due in January, so I wo";2017-12-02;81;11
+285;1;"Perfect for a little bundle of joy! It’s dainty and girly without being iver the top with flowers.";2021-02-10;81;12
+286;3;"I’m so happy with swaddle, it’s extra soft and very very elegant , i bought the whole set ( vests , burb cloth, overall) they are amazing";2020-09-08;81;1
+287;5;"Muy bonita tela pero es demasiado pequeña la mantita";2019-01-03;81;11
+288;4;"But big but she’ll grow in. Very nice quality";2021-12-28;83;3
+289;5;"I don’t often write reviews unless I’m truly impressed in either a positive or negative way. I debated purchasing these pants because of the price tag—$10 is a bit much for a pair of child’s pants in ";2020-01-25;83;16
+290;5;"Fits perfectly, great fir either boy or girl.";2021-03-02;83;5
+291;3;"Absolutely love these pants. They look so cozy, fit well, and are cute. Even the little pocket down by the ankle is cute. Washed them prior to wearing and they didn't shrink and lose color either. Had";2017-01-03;83;20
+292;3;"These pants are super nice and worth the money. They are very soft and thick. I have already bought another pair in a different color. They are highly recommended.";2018-07-18;83;9
+293;1;"He love they are soft";2020-02-12;83;16
+294;2;"LOVE and adore this brand. Soft, cozy and no chemicals for our newborn little lady!";2017-08-21;83;2
+295;5;"all babysoy products are super soft";2018-10-19;83;16
+296;1;"My baby is very tall and outgrew his bassinet quickly, we were not ready to move him to his own room yet so this portable crib is perfect. This is also perfect for small spaces that would need to fold";2023-05-25;84;10
+297;4;"I used to have a small crib like this one for my first born, the wheels were better quality. This crib has plastic wheels that barely work so it sometimes feels like you’re dragging the crib.However, ";2023-06-29;84;11
+298;3;"Grandma here.  Love this for my house. Originally bought a bassinet that flipped to changing table. When she got too big for that  I got this and bought a foldable mattress to go with it. I am able to";2023-02-03;84;20
+299;1;"Great bed. Sturdy! My 2yr old grandchild sleeps in it all the time. Great price, recommend getting the mattress matched to the bed. The one that comes with is not thick enough.";2023-06-04;84;20
+300;1;"We bought this on our friend's recommendation. Easy to assemble, and it stands on its own when folded, which was a huge plus when we were setting up our nursery.We opted to put our newborn directly in";2023-02-19;84;15
+301;5;"I looked  a long time for a small mini crib of a nice simple design and got this one eventually b/c I had seen it in person and it wasn't a risk. It is nice looking and small enough to wheel around. W";2013-11-07;84;9
+302;3;"But not with mattressI ordering again you guys says 3 in mattress 🙄";2023-05-13;84;8
+303;4;"Nice crib. Plastic blocks have to be removed when using lower settings. If they are left in place, a baby can get hurt on them.";2023-04-17;84;5
+304;2;"I'm a speech language pathologist and my students love this game. It's great for categorizing, fine motor, colors, and reinforcement. The fruit are made very hardy and I can imagine using this for yea";2015-12-08;85;4
+305;4;"Game is very easy, even for a 4 year old. 4 year old became bored of it very quickly, even after playing different variations of the game. Would also appreciate a more sturdy and durable material, oth";2022-01-21;85;9
+306;2;"My 4 year old son can write all of his letters. However, his penmanship and the way he grips the pencil needs some help.This has been a great game and a great tool to hopefully strengthen his hand mus";2020-12-05;85;19
+307;3;"My four year old and two year old have loved playing this game since it arrived. The fruit was well made and sturdy. The tongs are of relatively good quality. Unfortunately, the box that makes up the ";2021-02-21;85;7
+308;4;"Our 4 year old is having some difficulty with fine motor skills, so we decided to try this game from Learning Resources.  The object of this game is to be the first to gather one fruit of each color w";2016-11-03;85;11
+309;4;"Fun game for preschool age. A lot of the negative reviews say that there never really is an 'avalanche' We just tilt it up more with each turn and problem solved. Also there are not 'rules', but we ju";2021-01-02;85;16
+310;3;"This game is fun.  We have had it for almost a year.It helps to work on taking turns, colors, counting to three, strategy (collect one of each fruit, not just your favorite color of fruit), fine motor";2014-11-06;85;3
+311;1;"The media could not be loaded.
+                
+            
+                
+            
+            
+        
+    
+    
+
+
+
+
+
+
+
+
+  
+  
+    &nbsp;This is a great game to improve fine motor skills.  I";2016-08-27;85;9
+312;1;"Esta hecho de cartón, se maltrata muy fácil, ya llegó un poco maltratado, la calidad es muy mala  y ni siquiera es un juego económico";2020-03-08;85;1
+313;3;"We love playing this. Helps kids with motor skills.";2022-04-22;85;8
+314;3;"I bought this for my 6 years old son. It helps with motor skills development and it is fun also to play it. Highly recommend the product!";2023-06-08;85;6
+315;5;"La caja trae dos pinzas de plástico rígidas, 40 frutas de plástico duro, un stand de cartón y una ruleta con números, colores y una estrella. Las pinzas permiten una fácil sujeción para los niños, tie";2019-01-11;85;1
+316;1;"My 8 year old has fine motor delays so this game was recommended by his occupational therapist. His pincer grasp gets a workout setting this game up as well as playing it. The fruits are some kind of ";2019-03-27;85;16
+317;5;"Excellent quality, very cute. Nice soft leather. Great keepsake for baby. Fast shipper.";2023-03-07;86;8
+318;3;"They were perfect,  her feet  are so little. I wish Baby Deer carried that size in more styles.  I ordered the red patten shoes in size 0, but they are a little  big.";2022-09-07;86;16
+319;4;"These shoes are exactly what I was searching for. Fits perfect for a premise.";2022-10-25;86;13
+320;5;"The little leather shoes are adorable, but they run small.  The size 0 shoes I ordered looks like doll shoes.  I have reordered a size 1 but have not received them yet.";2022-04-01;86;8
+321;5;"Well made leather, traditional baby shoe.It has a natural looking width...most newborn shoes are too wide...this is the width of a normal baby foot. It has a strap to keep it from getting kicked off.";2022-06-28;86;8
+322;1;"These are the only shoe size (size 0 infants) that can fit my daughter. They may be a little on the wide side, but they stay on her feet. And with socks on they fit perfectly. Have not found any other";2020-02-28;86;19
+323;2;"Baby Deer brand shoes are the best for tiny feet. Well made leather shoes.";2021-10-09;86;1
+324;5;"my daughter had been wearing size newborn shoes (equivalent to size 0) but at 4 months, she is now a size 1 with narrow footsies.  These shoes would be perfect, not too wide like some of the other bra";2014-09-10;86;6
+325;2;"BABY ART Hand & footprint
+
+
+
+
+
+
+
+  
+  
+    It was a nice idea but had to request additional ink swab as original was faulted and I thought it was overpriced for what you actually got.";2010-11-13;87;18
+326;5;"Was great";2015-06-08;89;9
+327;3;"My daughter LOVES these. She uses them every day.  She has loads of play food for her kitchen, but prefers using these to ""cook."" She loves to empty things and put them back in the container....check.";2023-05-17;91;12
+328;4;"This is a fabulous set of quality play food with so many educational/learning opportunities.";2023-05-20;91;12
+329;4;"Really disappointed in the quality. I justify paying their prices because their quality is usual awesome and I know they will last through all of my children playing with them. This set I don’t think ";2022-05-03;91;3
+330;2;"First thing husband said was “wish they were plastic instead of cardboard.” They seem sturdy enough. Will update as I have 2 children ages 4 and 2. The newly turned 2 year old got these for her birthd";2022-08-22;91;14
+331;5;"My son loves play foods and this set is one of his favorites. He was so excited to discover foods in each can and I love that it can help him learn to count.";2023-01-11;91;17
+332;4;"Got these as a gift for my niece in her play kitchen.  They were the only toy cans I could find that had play food inside, much more exciting than empty cans.  She is only a toddler, and I know they c";2021-03-27;91;9
+333;3;"My grand-daughter made this happy little chuckle noise as soon as she pulled off the wrapping paper and saw these! Opening and closing the silver-colored rubber lids is easy even for a 2-year-old, and";2014-09-07;91;6
+334;2;"Set is great, but the can of 9 beans only had 6 inside.  This is a big deal since my grandson is very particular about learning and counting which was the whole reason I ordered this for him!  Now it ";2020-12-07;91;13
+335;3;"Es una idea muy creativa para numeros, contar etc a mi niña de 3 le encanta y clasificarlos solo que al taparlos se rompió el fondo de uno solo ese detalle";2022-10-22;91;1
+336;4;"This is great for grocery shops and learning how to count. There is little pieces inside the can that the little ones can use for pretend cooking and to learn to count.";2020-01-13;91;20
+337;2;"Se las compré a mi bb de 1 año y su expresión al verlas fue wooooooooow y ama jugar, sacar, abrirlas bueno hasta apilar las latas jajaja......es lo más lindo y real su contenido. Cuando son mayores pu";2022-07-28;91;1
+338;2;"The media could not be loaded.
+                
+            
+                
+            
+        
+    
+    
+
+
+
+
+
+
+
+
+  
+    &nbsp;Muy útiles, te trae un papelito donde te explica cómo utilizarlos par";2020-02-07;91;5
+339;4;"Me encantan y a mi hija también, están hechos de un carton muy resistente.";2019-09-30;91;10
+340;5;"These used to come inside the small bottles. They are awesome for containing 2oz or less and just dropping in a bottle. Then it keeps the milk all together and not all over a big bottle. I get these f";2021-12-10;92;18
+341;4;"Work great!";2014-12-22;92;6
+342;1;"tiny";2014-10-30;92;20
+343;4;"I actually use these to keep a small amount of my lactose free milk at work for my tea! It might sound silly but a whole carton is such a waste. These are perfect and pour without spilling.";2023-06-24;92;1
+344;1;"Geniales por su practicidad para llevar en la bolsa varias dosis de leche en polvo para el bebé sin necesidad de andar abriendo y cerrando botes más grandes. Además, no siempre es necesaria tanta cant";2020-06-05;92;13
+345;4;"Tiro uma estrela pelo o que já falaram acerca do armazenamento ser indicado para quem produz pouco leite (cada armazenamento só está nivelado até aos 50ml), portanto não me vou repetir neste ponto.Tir";2022-10-09;92;7
+346;2;"L'azienda in se non ha bisogno di presentazioni, in quanto è rinomata a livello mondiale: è anche per questo che la mia scelta è ricaduta su Tommee Tippee.Detto questo, i contenitori che ho acquistato";2015-09-16;92;11
+347;1;"L'azienda in se non ha bisogno di presentazioni, in quanto è rinomata a livello mondiale: è anche per questo che la mia scelta è ricaduta su Tommee Tippee.Detto questo, i contenitori che ho acquistato";2016-09-28;92;9
+348;5;"Adorable dress.very dressy.beautiful color";2015-07-30;94;10
+349;2;"I bought this for my granddaughters Christening day and it was just so cute and fit her great.  Excellent quality and fast delivery makes this a 5 star purchase.";2014-11-19;94;4
+350;1;"I wanted an ivory dress and the one that was sent was PINK!!!It's going back. Didn't even open the bag!!";2014-10-02;94;5
+351;1;"The zipper on the bag sticks but will open when forced. The cool packs do not stay in place but it’s not a big deal. It does the job.";2022-12-28;99;14
+352;2;"Such a great purchase! I can take it on all the road trips and any other trips. Although I no longer use the provided bottles, it fits all .";2022-12-03;99;17
+353;4;"This has been a perfect accessory as a breastfeeding & pumping mom.At first, I was just happy to have the extra bottles. It was nice not to have to wash the only two Ameda bottles that come with the p";2016-09-22;99;18
+354;3;"This is honestly one of my favorite products I have bought!  It is a GREAT size!  When you have so schlep breast pump gear to work every day, size makes a huge difference.  It is compact, yet still ho";2016-06-20;99;4
+355;1;"I have been using this for 6 months now and find it make commuting and pumping much easier. It fits right into my pumping bag (Ameda Purely Yours) along with my simple wishes pumping bra. Meaning ever";2017-01-03;99;1
+356;5;"When I opened this package up, I couldn't help but to laugh because I thought it would be bigger than it was. I think I just bought it without really reading the description and thought, this would be";2020-06-30;99;5
+357;2;"I love almost everything about this product.  It came labeled BPA free on the insert so I was thrilled with that.  I pump each day at work and my company has a fridge.  After leaving it in the fridge ";2013-02-28;99;10
+358;4;"Worth the money. Saves me when I got out for over 2 hours and I can keep any pumped milk saved and cool.";2019-12-01;99;6
+359;1;"Cumple todo lo que promete, para el trabajo funciona muy bien por su tamaño, aunque os bloques de hielo se deshacen muy rápido, un consejo sería meterlos en el refrigerador del trabajo si para eso se ";2020-05-06;99;9
+360;1;"las botellas son tamaño estandar, el precio es muy economico y hasta ahora cumple con su funcion, creo q la dif entre otros solo es la marca y como mi extractor no es medela a mi me ha funcionado exce";2019-11-19;99;5
+361;3;"esta hielera es muy económica y además incluye 3 refrigerantes que duran aproximadamente 10 horas lo usé muy poco tiempo ya que dejé de trabajar pero el tiempo que lo estuve usando Me sirvió a la perf";2019-12-20;99;6
+362;5;"Es buen producto fácil de transportar, solo que los enfriadores no duran las 12 horas congelados";2019-08-21;99;5

@@ -85,4 +85,19 @@
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>
+
+
+    <changeSet id="20231110103921-1-relations-data" author="ancilloy" runOnChange="true">
+        <loadData
+                  file="config/liquibase/fake-data/rel_produit__category.csv"
+                  separator=";"
+                  tableName="rel_produit__category"
+                  usePreparedStatements="true">
+            <column name="category_id" type="numeric"/>
+            <column name="produit_id" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+
+
 </databaseChangeLog>

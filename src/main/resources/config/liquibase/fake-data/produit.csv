@@ -1,42 +1,101 @@
 id;id_produit;libelle;description;prix_unitaire;taille;couleur;stock;version
-1;1;Body en coton;Body dou en coton pour bébé;12.99;3;Blanc;1;1
-2;2;Pyjama étoilé;Pyjama confortable avec motif étoilé;19.99;6;Bleu;2;1
-3;3;Doudou lapin;Doudou moelleu en forme de lapin;9.99;;Rose;120;1
-4;4;Biberon anti-colique;Biberon avec système anti-colique;14.99;250 ml;Vert;60;1
-5;5;Chaussettes en laine;Chaussettes chaudes en laine;8.99;1;Gris;50;1
-6;6;Mobile musical;Mobile avec musique apaisante;24.99;;Multicolore;30;1
-7;7;Couverture en polaire;Couverture douce en polaire;18.99;80;Jaune;70;1
-8;8;Tapis d'éveil;Tapis d'éveil coloré avec jouets suspendus;29.99;100;Orange;40;1
-9;9;Sucette orthodontique;Sucette avec forme orthodontique;6.99;;Bleu;90;1
-10;10;Lingettes pour bébé;Lingettes douces pour le visage et les mains;4.99;Pack de 50;Blanc;110;1
-11;11;Cape de bain;Cape de bain en éponge;15.99;70;Vert;75;1
-12;12;Porte-bébé ergonomique;Porte-bébé avec support dorsal;39.99;31;Noir;25;1
-13;13;Poussette légère;Poussette compacte et légère;89.99;;Rouge;15;1
-14;14;Bavoir imperméable;Bavoir avec revêtement imperméable;7.99;;Rose;120;1
-15;15;Thermomètre frontal;Thermomètre infrarouge pour bébé;18.99;;Bleu;50;1
-16;16;Protège-carnet de santé;Protège-carnet de santé en tissu;12.99;;Gris;80;1
-17;17;Kit de manucure bébé;Kit complet pour les ongles de bébé;9.99;;Rose;100;1
-18;18;Jouet de dentition;Jouet de dentition en silicone;5.99;;Bleu;70;1
-19;19;Gigoteuse d'hiver;Gigoteuse chaude pour l'hiver;22.99;61;Vert;40;1
-20;20;Livre en tissu;Livre en tissu avec textures différentes;11.99;;Multicolore;60;1
-21;21;Chaise haute évolutive;Chaise haute évolutive avec plateau amovible;49.99;;Blanc;20;1
-22;22;Peluche musicale;Peluche musicale avec berceuse;16.99;;Jaune;35;1
-23;23;Barrière de sécurité;Barrière de sécurité pour escaliers;34.99;75;Bleu;15;1
-24;24;Set de vaisselle bébé;Set de vaisselle en silicone pour bébé;27.99;;Rose;25;1
-25;25;Puzzle en bois;Puzzle éducatif en bois;8.99;;Multicolore;55;1
-26;26;Tétine en silicone;Tétine en silicone sans BPA;3.99;;Vert;90;1
-27;27;Baignoire pliable;Baignoire pliable pour bébé;32.99;;Bleu;30;1
-28;28;Kit de premiers secours;Kit de premiers secours pour bébé;19.99;;Rouge;40;1
-29;29;Cape de bain avec capuche;Cape de bain avec capuche en forme d'animal;21.99;80;Rose;50;1
-30;30;Veilleuse nomade;Veilleuse rechargeable avec plusieurs couleurs;14.99;;Blanc;65;1
-31;31;Puzzle mousse;Tapis puzzle en mousse pour jouer et s'asseoir;26.99;120;Multicolore;20;1
-32;32;Gobelet anti-fuites;Gobelet avec bec anti-fuites;9.99;;Bleu;80;1
-33;33;Tapis de jeu en tissu;Tapis de jeu doux en tissu;32.99;150;Gris;15;1
-34;34;Chaussons en laine;Chaussons chauds en laine;11.99;61;Bleu;40;1
-35;35;Siège auto pivotant;Siège auto pivotant pour bébé;159.99;24;Noir;10;1
-36;36;Attache-tétine;Attache-tétine en silicone;5.99;;Rose;75;1
-37;37;Lampe veilleuse;Lampe veilleuse avec projection d'étoiles;23.99;;Bleu;30;1
-38;38;Brosse et peigne bébé;Brosse et peigne doux pour bébé;8.99;;Blanc;60;1
-39;39;Gilet en tricot;Gilet en tricot pour bébé;17.99;1;Rose;45;1
-40;40;Tapis de bain antidérapant;Tapis de bain avec surface antidérapante;13.99;50;Bleu;50;1
-41;41;Tire-lait électrique;Tire-lait électrique double pompage;79.99;;Blanc;25;1
+0;0;"BabyRice Baby / Toddler Handprint Footprint Kit with 14.5x8.5"" Black Frame, Black mount";;9.99;6;Jaune;25;1
+1;1;"Luna Bean Belly Cast Kit Pregnancy Casting Kit (Smooth) - Mom to Be Gift, Best Gifts Expecting Mom, Pregnancy Gifts for First Time Moms, Pregnant Mom Gifts";;29.99;7;Orange;30;1
+2;2;"Janod Magic Tree Round Stacking Pyramid Comes with Ten Circular Nesting Blocks That Stack on top of Each Other to Create a Magic Scene";;39.99;2;Bleu;135;1
+3;3;"Petit Ami Baby Girls' Daygown with Wave Smocking, White";;19.99;6;Gris;110;1
+4;4;"Luna Bean Belly Cast Kit Pregnancy Casting Kit (Natural) – Mom to Be Gift, Best Gifts Expecting Mom, Pregnancy Gifts for First Time Moms, Pregnant Mom Gifts";;19.99;3;Noir;195;1
+5;5;"BabyRice Baby Footprint Kit Handprint Kit Silver Frame Inkless Wipe Kit 0-3 years";;19.99;8;Gris;145;1
+6;6;"Lifesighs Babies.a Part of God we get to Hold Frame";;9.99;5;Vert;30;1
+7;7;"Ralph Lauren Layette Infant/Toddler Suzanne Sandal";;19.99;6;Rouge;95;1
+8;8;"Lauri Tall-Stackers - Mighty Monkey Pegs & Pegboard Set";;27.04;4;Noir;80;1
+9;9;"BabyRice Baby Handprint Footprint Impression Kit/Antique Silver Frame/Baby Paint Wipe 0-3 years";;39.99;7;Jaune;60;1
+10;10;"Stride Rite Unisex-Child SRT Emilia";;29.99;1;Bleu;110;1
+11;11;"Stride Rite SRT Baby and Toddler Boys Elliot Leather Sneaker";;19.99;7;Violet;120;1
+12;12;"BabyRice Baby Handprint Footprint Kit with 11.5x8.5"" Brushed Silver Display Frame, Black 3 space mount, Black Inkless Wipe 0-3 years";;39.99;8;Rouge;85;1
+13;13;"Set of Two Pairs one Size Magic Mittens";;9.99;6;Violet;30;1
+14;14;"Set of Two Pairs one Size Magic Mittens";;9.99;2;Gris;195;1
+15;15;"BabyRice Baby Hand & Footprint Kit with Silver Frame, White 3 mount, Black Inkless Wipe";;49.99;5;Gris;190;1
+16;16;"Set of Two Pairs One Size Magic Mittens with Monogram";;9.99;4;Bleu;100;1
+17;17;"Set of Four Pairs One Size Stretch Magic Gloves for Children Ages 1-4 Years";;12.99;9;Rose;10;1
+18;18;"Set of Two Pairs one Size Magic Mittens";;19.99;9;Rose;110;1
+19;19;"Set of Two Pairs One Size Magic Mittens for Ages 3-12 Months";;9.99;8;Vert;15;1
+20;20;"Set of Four Pairs Magic Stretch Mittens for Ages 3-12 Months";;12.99;3;Bleu;50;1
+21;21;"Set of Two Pairs One Size Magic Mittens for Ages 3-12 Months";;9.99;8;Jaune;25;1
+22;22;"Set of Two Pairs one Size Magic Mittens";;9.99;7;Noir;10;1
+23;23;"Set of Four Pairs One Size Magic Mittens for Infants Ages 3-12 Months";;12.99;10;Bleu;90;1
+24;24;"Set of Four Pairs one Size Magic Gloves One with onogram";;12.99;1;Violet;200;1
+25;25;"Set of Four Pairs Stretch Magic Mittens for Ages 3-12 Months";;12.99;2;Marron;180;1
+26;26;"Pure Alpaca Slouchy Hat with Fingerless Gloves Set - Design Name: Lisbon (Ready to Ship from France)";;39.99;9;Marron;20;1
+27;27;"BabyRice Baby Handprint & Footprint Kit with 11.5x8.5"" brushed Pewter Display Frame, White 3 space mount";;39.99;2;Noir;60;1
+28;28;"Baby Casting Kit with 11.5x8.5"" White Box Display Frame, Pink 3 space mount, Silver paint by BabyRice";;9.99;2;Vert;30;1
+29;29;"BabyRice Baby Hand Print & Footprint Kit, 11.5x8.5"" Pewter Frame, White 3 space mount";;9.99;9;Marron;170;1
+30;30;"BabyRice New Baby Handprint Footprint Kit, Inkless Wipe with Black Display Frame, Black Mount 0-3 yrs";;19.99;8;Blanc;135;1
+31;31;"Satsuma Designs Baby Mittens, Natural, One Size";;9.5;3;Noir;100;1
+32;32;"Russ Berrie 1st Birthday 4"" x 6"" Photo Frame, Blue (Discontinued by Manufacturer)";;24.99;5;Orange;175;1
+33;33;"Set of Four Fleece Polyester Microfiber Gloves for Infants Ages 3-12 Months";;14.99;8;Orange;195;1
+34;34;"Baby Winter Mittens";;4.45;2;Orange;180;1
+35;35;"Luvable Friends Baby Girls' Nylon Tights";;29.99;5;Vert;115;1
+36;36;"Four Pairs Fleece Polyester Microfiber Gloves for Infants Ages 3-12 Months";;14.99;10;Jaune;95;1
+37;37;"Arctix Infant/Toddler Chest High Snow Bib Overalls, Fuchsia, 3T";;15.55;1;Rose;45;1
+38;38;"Arctix unisex-baby Chest High Snow Bib Overalls";;39.99;1;Marron;95;1
+39;39;"Luvable Friends Unisex Baby Cotton Gowns";;9.99;5;Marron;75;1
+40;40;"Four Pairs Fleece Gloves for Infants and Toddlers Ages 3-12 Months";;14.99;10;Bleu;65;1
+41;41;"Four Pairs Fleece Polyester Microfiber Gloves for Infants Ages 3-12 Months";;39.99;9;Marron;10;1
+42;42;"Set of Four Pairs Fleece Polyester Microfiber Gloves for Infants Ages 3-12 Months";;14.99;4;Gris;25;1
+43;43;"Set of Four Magic Stretch Gloves for Infants and Toddlers Ages 1-4 years";;12.99;9;Violet;115;1
+44;44;"Four Pairs Multicolor Finest Mongolian Fleece Mittens for Infants Ages 3-12 Months";;14.99;4;Noir;175;1
+45;45;"Magic Gloves for Kids";;12.99;2;Orange;25;1
+46;46;"Magic Gloves for Kids";;39.99;4;Violet;85;1
+47;47;"Set of Four Pairs Fleece Polyester Microfiber Gloves for Infants Ages 3-12 Months";;14.99;2;Rose;30;1
+48;48;"Set of Four Pairs One Size Mongolian Fleece Mittens for Infants Ages 0-6 Months";;14.99;9;Marron;125;1
+49;49;"Set of Four Pairs One Size Mongolian Fleece Mittens for Infants Ages 0-6 Months";;14.99;6;Rose;75;1
+50;50;"Set of Four Magic Stretch Gloves for Infants and Toddlers Ages 1-4 Years";;12.99;3;Jaune;125;1
+51;51;"Polish Religious Icons Polart Silver Plated Icon- John Paul II, Ikona Jana Pawla II, 2.0"" W x 2.25"" H";;29.95;3;Rose;100;1
+52;52;"KicKee Pants Layette Gown, Moss";;19.99;1;Vert;55;1
+53;53;"KicKee Pants Baby Boys' Footies with Paws";;33.0;10;Bleu;125;1
+54;54;"KicKee Pants Long Sleeved Pajama Set, Twilight";;19.99;1;Rouge;150;1
+55;55;"KicKee Pants Legging, Lotus";;49.99;7;Rose;55;1
+56;56;"KicKee Pants Short Sleeved Pajama Set, Twilight";;39.99;6;Marron;40;1
+57;57;"KicKee Pants Basic Long Sleeve Pajama Set";;39.99;7;Bleu;110;1
+58;58;"KicKee Pants Short Sleeved Pajama Set, Natural";;19.99;6;Vert;145;1
+59;59;"KicKee Pants Short Sleeved Pajama Set, Lotus";;49.99;3;Violet;175;1
+60;60;"KicKee Pants Short Sleeved Pajama Set, Bark";;19.99;5;Marron;70;1
+61;61;"First Impressions Infant Boys White car Shortall Overalls & T-Shirt Set";;31.49;9;Rouge;150;1
+62;62;"KicKee Pants Short Sleeved Pajama Set, Moss, Newborn";;20.73;4;Marron;75;1
+63;63;"Josmo Infant/Toddler 81290 Sandal";;39.99;10;Vert;140;1
+64;64;"KicKee Pants Coverall, Twilight";;39.99;2;Bleu;55;1
+65;65;"Hatley Footed Coverall Watermelons";;19.99;4;Noir;20;1
+66;66;"LITTLE ALL-STAR . . . painted keepsake by Malden - 4x6";;6.73;10;Marron;200;1
+67;67;"HWTONG Sigikid Comforter Cancer (Girl)";;19.43;1;Jaune;180;1
+68;68;"Four Pairs Magic Stretch Gloves for Infants Toddlers Ages 1-4 Years";;33.0;8;Violet;180;1
+69;69;"Set of Four Fleece Microfiber Lined One Size Glove for Ages 3-12 Months";;31.99;1;Gris;200;1
+70;70;"Set of Four One Size Finest Mongolian Fleece Multicolor Mittens for Ages 3-12 Months";;31.99;1;Bleu;55;1
+71;71;"Set of Four Pairs One Size Mongolian Fleece Gloves for Infants Ages 3-12 Months";;14.99;10;Orange;90;1
+72;72;"Green Toys My First Stacker, Colors May Vary";;12.72;1;Vert;30;1
+73;73;"American Baby Company 30 X 40 - Soft 100% Natural Cotton Thermal/Waffle Swaddle Blanket, Celery, Soft Breathable, for Boys and Girls";;10.47;7;Marron;125;1
+74;74;"Constructive Playthings Ring Builders Stacking Toys for Kids, Classroom Must Haves for Teaching Color Recognition, Matching, Alternative to Classic Building Blocks, 96 Pc Constructive Gears, 3 Years";;20.94;3;Gris;60;1
+75;75;"Embassy Convertible Height Adjustable Wood Baby High Chair with 2 Trays";;95.0;5;Rouge;155;1
+76;76;"Mud Pie Initial Baby Boy Blue Initial Fabric Frame, Letter I";;22.99;3;Gris;55;1
+77;77;"Set of Four Pairs One Size Mongolian Fleece Mittens for Infants Ages 0-6 Months";;14.99;10;Rouge;35;1
+78;78;"ALEX Toys Little Hands Match and Stack";;32.99;2;Noir;115;1
+79;79;"Four Pairs of Multicolor Finest Mongolian Fleece Mittens for Ages 3-12 Months";;31.99;10;Violet;155;1
+80;80;"Dr. Brown's Deluxe Baby Bottle Warmer";;39.99;1;Rose;130;1
+81;81;"Little Me Baby-Girls Newborn Petite Rose Tag Along Blanket";;12.98;10;Marron;115;1
+82;82;"Zutano Lions Long Sleeve Wrap Body, White";;15.7;4;Bleu;155;1
+83;83;"Babysoy Double Layered Cozy Pants";;29.99;3;Marron;60;1
+84;84;"Dream On Me 3 in 1 Portable Folding Stationary Side Crib in White, Greenguard Gold Certified, Safety Wheel with Locking Casters, Convertible, 3 Mattress Heights";;169.98;1;Bleu;95;1
+85;85;"Learning Resources Avalanche Fruit Stand - 42 Pieces, Ages 3+ Toddler Learning Toys, Fine Motor/Grip Game, Develops Color Matching Skills, Preschool Toys";;19.99;1;Orange;190;1
+86;86;"Baby Deer Unisex-Child 1820-K Crib Shoe";;9.99;9;Rose;110;1
+87;87;"BabyRice Baby Hand & Footprint Prints Kit with 11.5x8.5"" White display frame & Pink paint wipe swab";;29.99;3;Marron;165;1
+88;88;"Set of Four Pairs of One Size Magic Gloves for Infants Ages 1-3 Years";;29.99;8;Noir;10;1
+89;89;"Large Baby Casting Kit with 11.5x8.5"" brushed Pewter 3D Box Display Frame/Pewter Metallic Paint by BabyRice";;49.99;10;Marron;70;1
+90;90;"Set of Four Pairs of One Size Magic Gloves for Infants Ages 1-3 Years";;29.99;10;Noir;170;1
+91;91;"Learning Resources One To Ten Counting Cans - 65 Pieces, Ages 3+ Toddler Learning Toys, Preschool Pretend Play Toys, Supermarket Toys";;38.88;6;Noir;140;1
+92;92;"Tommee Tippee Closer to Nature Milk Storage Pots x4";;13.0;3;Rouge;15;1
+93;93;"KID Collection Baby-Girls Flower Princess Dress 24M Xl White (Kid B776)";;19.99;8;Bleu;25;1
+94;94;"KID Collection Baby-Girls Flower Princess Dress 12M Med Ivory (Kid B776)";;19.99;2;Rose;145;1
+95;95;"Set of Four Pairs Stretch Magic Mittens for Infants Ages 3-12 Months";;29.99;10;Noir;10;1
+96;96;"Little Me Nautical 3 Piece Take Me Home Pant Set, White/Navy";;19.99;8;Gris;160;1
+97;97;"Set of Four Pairs Stretch Magic Mittens for Infants Ages 3-12 Months";;29.99;10;Vert;25;1
+98;98;"Set of Four Fleece Microfiber Mitten for Infants Ages 3-2 Months";;29.99;2;Jaune;185;1
+99;99;"Ameda MYA Cool N Carry Breast Milk Storage System | Includes Insulated Nylon Carry Bag, 3 Freezer Packs, 6 4oz. Bottles with 2-Piece Lock-Tight Caps";;27.04;5;Marron;110;1
