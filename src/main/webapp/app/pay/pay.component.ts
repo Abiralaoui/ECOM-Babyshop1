@@ -18,11 +18,17 @@ import {TypePayement} from 'app/entities/enumerations/type-payement.model';
 import {EtatCommande} from "../entities/enumerations/etat-commande.model";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ValiderCommandePopupComponent } from 'app/valider-commande-popup/valider-commande-popup.component';
+import {Observable} from "rxjs";
 
 
 interface ProduitGroup {
   produits: IProduit[];
   quantite: number;
+}
+export interface IImage {
+  id: number;
+  url: string;
+  // Autres propriétés éventuelles
 }
 
 @Component({
@@ -31,6 +37,10 @@ interface ProduitGroup {
   styleUrls: ['./pay.component.scss']
 })
 export class PayComponent implements OnInit {
+  produits$: Observable<IProduit[]> | null = null;
+  produitsFiltered: IProduit[] = [];
+  produitsWithOccurences: { produit: IProduit; occurences: number }[] = [];
+  Nbarticle: Observable<number> | undefined;
   total = 0;
   paiementIsOk = false;
   error= false;
@@ -99,21 +109,30 @@ export class PayComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //   this.cartItems = JSON.parse(localStorage.getItem('cartItems')!) || [];
-    //
-    //   this.clientService.getDeliveryAddress().subscribe((result) => {
-    //     let adr: Adresse | null = result.body;
-    //
-    //     if(adr !== null){
-    //       this.paymentForm.patchValue({
-    //         adresse: adr.rue,
-    //         complementAdresse: adr.complement,
-    //         ville: adr.ville,
-    //         region: adr.region,
-    //         codePostal: adr.codePostal
-    //       });
-    //     }
-    //   });
+    this.produits$ = this.panierService.produits$;
+    this.produits$ = this.panierService.produits$;
+
+    this.produits$.subscribe((produits: IProduit[]) => {
+      const uniqueProduits = produits.filter((produit, index, self) =>
+        index === self.findIndex((p) => p.libelle === produit.libelle)
+      );
+
+      this.produitsFiltered = uniqueProduits;
+
+      const occurencesMap = produits.reduce((acc, produit) => {
+        if (produit.libelle) {
+          acc.set(produit.libelle, (acc.get(produit.libelle) || 0) + 1);
+        }
+        return acc;
+      }, new Map<string, number>());
+
+      this.produitsWithOccurences = uniqueProduits.map((produit) => ({
+        produit,
+        occurences: occurencesMap.get(produit.libelle || '') || 0,
+      }));
+    });
+
+    this.Nbarticle = this.panierService.nombreArticles$;
     this.total=this.panierService.gettotal();
     this.accountService.identity().subscribe((account) => {
       if (account?.login) {

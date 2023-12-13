@@ -3,7 +3,6 @@
   <form [formGroup]="paymentForm" (ngSubmit)="payCommand()">
 
     <div class="container mt-4 mb-4">
-      <div class="container"><h2>Entrer vos données bancaires pour payer votre commande:</h2></div>
       <div class="container formulaires" style="justify-content: left;">
         <div class="col-lg-7" style="margin-right: 50px;">
           <div
@@ -24,53 +23,66 @@
             </div>
           </div>
           <div class="card mt-4">
-            <div class="card-header space">
-              <h5 class="card-title">Adresse de livraison</h5>
+            <div class="card-header space" style="background-color: #d8e8e8">
+              <h5 class="card-title">Payer  de Commande  </h5>
+
             </div>
             <div class="card-body">
+              <h6>Adresse de livraison</h6>
               <div class="input-group mt-3">
-                <span class="input-group-text">Adresse et rue</span>
+                <span class="input-group-text" style="background-color: white;">Adresse et rue</span>
                 <input  formControlName="adresse" type="text" placeholder="victor Hugo rue 23" maxlength="50" class="form-control">
               </div>
-
-              <div class="input-group mt-3">
-                <span class="input-group-text">Complément</span>
-                <input formControlName="complementAdresse" type="text" class="form-control">
+              <div class="input-group mt-2">
+                <span class="input-group-text" style="background-color: white;">Code Postal</span>
+                <input [formControl]="codePostal" type="text" placeholder="38000" class="form-control" maxlength="5">
               </div>
+
               <div class="double-column">
                 <div>
                   <div class="input-group mt-3">
-                    <span class="input-group-text">Ville</span>
+                    <span class="input-group-text" style="background-color: white;">Ville</span>
                     <input formControlName="ville" type="text" placeholder="Grenoble" class="form-control">
                   </div>
                 </div>
                 <div>
                   <div class="input-group mt-3">
-                    <span class="input-group-text">Région</span>
+                    <span class="input-group-text" style="background-color: white;">Région</span>
                     <input formControlName="region" type="text" placeholder="France" class="form-control">
                   </div>
                 </div>
               </div>
-              <div class="input-group mt-2">
-                <span class="input-group-text">Code Postal</span>
-                <input [formControl]="codePostal" type="text" placeholder="38000" class="form-control" maxlength="5">
-              </div>
+
             </div>
           </div>
 
-          <div class="card mt-4">
-            <div class="card-header space">
-              <h5 class="card-title">Carte Bancaire</h5>
+          <div class="card bg-white">
+            <div  style="background-color: white;"class="card-header space">
+              <h6 > méthode de paiement  </h6>
               <div>
                 <img src="https://www.reussir-mon-ecommerce.fr/wp-content/uploads/2016/03/logo-cb-1.jpg" width="350" alt="Credit Card black png" />
                 <img src="https://www.reussir-mon-ecommerce.fr/wp-content/uploads/2016/03/MasterCard-Logo-1-1024x768.png" width="350" alt="Credit Card black png" />
                 <img src="https://www.reussir-mon-ecommerce.fr/wp-content/uploads/2016/03/logo-visa-1.png" width="350" alt="Credit Card black png" />
+                <img src="https://th.bing.com/th/id/R.e256e5b3733c2012d7f56a859884850e?rik=iRJUxSUgRjDaww&riu=http%3a%2f%2fstatic2.businessinsider.com%2fimage%2f5362364d69bedde107667744-960%2fnew-paypal-logo.jpg&ehk=ccGQjd5VkmyXOO9vlUPjIVTKziy8e7gHxkGT4ZErytc%3d&risl=&pid=ImgRaw&r=0" width="300" alt="Credit Card black png" />
               </div>
             </div>
 
             <div class="card-body">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input small-radio-input" type="radio" name="methodPayment" id="creditCard" value="creditCard">
+                <label class="form-check-label" for="creditCard">
+                  Carte de crédit
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input small-radio-input" type="radio" name="methodPayment" id="debitCard" value="debitCard">
+                <label class="form-check-label" for="debitCard">
+                  Paypal
+                </label>
+              </div>
+
               <div class="input-group mt-3">
-                <span class="input-group-text">Numéro de carte</span>
+                <span class="input-group-text" style="background-color: white;">Numéro de carte</span>
                 <input [ngClass]="{
                       'border-danger border-3': numero.touched && !numero.valid }" [formControl]="numero" type="text" placeholder="XXXXXXXXXXXXXXXX" maxlength="16" class="form-control">
               </div>
@@ -78,10 +90,18 @@
                       'invisible': numero.valid || numero.untouched }"    class="text-danger  " >
                       Le numéro doit contenir 16 chiffres compris entre 0 et 9
                     </span>
+              <div class="input-group mt-2">
+                <span class="input-group-text" style="background-color: white;">Porteur de carte</span>
+                <input [ngClass]="{
+                      'border-danger border-3': nom.touched && !nom.valid }"  [formControl]="nom" type="text" placeholder=" ABIR ALAOUI " class="form-control">
+              </div>
+              <span [hidden]="nom.valid || nom.untouched" class="text-danger">
+                      Veuillez indiquer un nom du porteur du carte
+              </span>
               <div class="double-column">
                 <div>
                   <div class="input-group mt-3">
-                    <span class="input-group-text">Date expiration</span>
+                    <span class="input-group-text" style="background-color: white;">Date expiration</span>
                     <input  [ngClass]="{
                       'border-danger border-3': dateExpiration.touched && !dateExpiration.valid }" [formControl]="dateExpiration" type="text" placeholder="01/2023" maxlength="7" class="form-control">
                   </div>
@@ -89,7 +109,7 @@
                 </div>
                 <div>
                   <div class="input-group mt-3">
-                    <span class="input-group-text">CVV</span>
+                    <span class="input-group-text" style="background-color: white;">CVV</span>
                     <input  [ngClass]="{
                       'border-danger border-3': cryptogramme.touched && !cryptogramme.valid }"[formControl]="cryptogramme" type="text" placeholder="CVV" maxlength="3" class="form-control">
                   </div>
@@ -108,14 +128,7 @@
               </span>
 
 
-              <div class="input-group mt-2">
-                <span class="input-group-text">Nom du titulaire</span>
-                <input [ngClass]="{
-                      'border-danger border-3': nom.touched && !nom.valid }"  [formControl]="nom" type="text" placeholder=" ABIR ALAOUI " class="form-control">
-              </div>
-              <span [hidden]="nom.valid || nom.untouched" class="text-danger">
-                      Veuillez indiquer un nom du porteur du carte
-                    </span>
+
 
             </div>
           </div>
@@ -125,23 +138,45 @@
         <div class="col-lg-5">
           <div class="col-lg-10">
             <div class="card mt-4">
-              <div class="card-header space">
-                <h5 class="card-title">Ma  commande</h5>
-              </div>
               <div class="card-body">
-
+                <h5 >Ma Commande</h5>
+                <hr>
                 <div class="float-right text-right">
-                  <h4>Total à payer :</h4>
+
+                  <div *ngFor="let item of produitsWithOccurences" class="product">
+                    <div class="product-image">
+                      <!-- Your image -->
+                      <img
+                        *ngIf="item.produit.images && item.produit.images.length > 0"
+                        [src]="item.produit.images[0].url"
+                        alt="Image du produit"
+                        style="width: 55px; height: 50px;"
+                      />
+                      <!-- The label -->
+                      <span>{{ item.produit.libelle }}</span>
+                      <!-- Occurrence count -->
+                      <span style="color: dimgrey; margin-left: 10px; font-weight: bold;"> {{ item.occurences }}</span>
+                      <hr>
+                    </div>
+
+                  </div>
+                  <h6 style="color: #6c757d">Nombre d'Article</h6>
+                  <div *ngIf="Nbarticle | async as nbArticleValue" style="font-weight: bold;color: #6c757d">
+                    {{ nbArticleValue }}
+                  </div>
+                  <hr>
+                  <h6 style="color: #6c757d">Total à payer </h6>
                   <h3>{{ total | currency:'EUR' }}</h3>
+
+                  <div class=" mt-4 col-lg-10">
+                    <button type="submit" style="background-color: #67987c; margin-left: 90px; color: white;   border-radius: 10px;" class="btn  bg-gray  btn-lg " [disabled]="!paymentForm.valid">Payer commande</button>
+                  </div>
                 </div>
 
               </div>
             </div>
+          </div>
 
-          </div>
-          <div class=" mt-4 col-lg-10">
-            <button type="submit" style="background-color: #3e8acc; color: white;  border-radius: 10px;" class="btn  bg-gray  btn-lg w-100" [disabled]="!paymentForm.valid">Payer</button>
-          </div>
           <div class=" mt-4 col-lg-10">
             <h5 *ngIf="paiementIsOk" class="text text-center text-success">
               Paiement effectué avec succès !
