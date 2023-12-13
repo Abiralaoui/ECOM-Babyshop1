@@ -3,8 +3,12 @@ package com.mycompany.myapp.service;
 import com.mycompany.myapp.domain.CarteBancaire;
 import com.mycompany.myapp.domain.Commande;
 import com.mycompany.myapp.domain.LigneCommande;
+import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.domain.enumeration.EtatCommande;
+import com.mycompany.myapp.repository.ClientRepository;
 import com.mycompany.myapp.repository.CommandeRepository;
+import com.mycompany.myapp.repository.UserRepository;
+import com.mycompany.myapp.service.dto.ClientDTO;
 import com.mycompany.myapp.service.dto.CommandeDTO;
 import com.mycompany.myapp.service.exceptions.CarteBancaireNotValidException;
 import com.mycompany.myapp.service.exceptions.OutOfStockException;
@@ -37,11 +41,17 @@ public class CommandeService {
 
     private final LigneCommandeService ligneCommandeService;
 
+    private final UserRepository userRepository;
 
-    public CommandeService(CommandeRepository commandeRepository, CommandeMapper commandeMapper, LigneCommandeService ligneCommandeService) {
+    private final MailService mailService;
+
+
+    public CommandeService(UserRepository userRepository,CommandeRepository commandeRepository, CommandeMapper commandeMapper, LigneCommandeService ligneCommandeService,MailService mailService) {
         this.commandeRepository = commandeRepository;
         this.commandeMapper = commandeMapper;
         this.ligneCommandeService = ligneCommandeService;
+        this.mailService=mailService;
+        this.userRepository=userRepository;
     }
 
     /**
@@ -71,7 +81,10 @@ public class CommandeService {
 
         commandeDTO.setEtat(EtatCommande.PAYEE);
         commandeDTO.setId(commande.getId());
+          sendConfirmationEmail(commandeDTO);
         partialUpdate(commandeDTO);
+      
+
 
         return commandeMapper.toDto(commande);
     }
@@ -145,5 +158,34 @@ public class CommandeService {
     public List<CommandeDTO> getCommandsByClientId(Long id) {
         log.debug("Request all commands by client id : {}", id);
         return commandeRepository.findByClientId(id).stream().map(commandeMapper::toDto).collect(Collectors.toList());
+    }
+    /**
+     * Send email confirmation to the client.
+     *
+     * @param commandeDTO the order details.
+     */
+    private void sendConfirmationEmail(CommandeDTO commandeDTO) {
+        User user = getUserFromCommandeDTO(commandeDTO); // Replace this with actual logic to get the user
+  log.debug("user to sent email  : {}", user);
+        if (user != null && user.getEmail() != null) {
+            String subject = "Order Confirmation";
+            String content = "Thank you for your order! Your order ID is: " + commandeDTO.getId();
+
+            mailService.sendEmail(user.getEmail(), subject, content, false, true);
+        }else {  log.warn("User or user email is null. Cannot send confirmation email."); }
+    }
+    private User getUserFromCommandeDTO(CommandeDTO commandeDTO) {
+        ClientDTO clientDTO = commandeDTO.getClient();
+          log.debug("clientdto : {}", clientDTO);
+       long clientId = clientDTO != null ? clientDTO.getId() : null;
+  log.debug("clientid  : {}", clientId);
+        return userRepository.findById(clientId)
+            .map(user -> {
+               
+                return user;
+            })
+            .orElse(null); 
+    
+        
     }
 }
