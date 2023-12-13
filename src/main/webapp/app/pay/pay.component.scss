@@ -37,6 +37,9 @@
   align-items: center;
   gap: 1rem;
 }
+.small-radio-input {
+  transform: scale(0.8); /* Ajustez la valeur pour réduire la taille selon vos besoins */
+}
 
 .double-column > div {
   flex: 1;
