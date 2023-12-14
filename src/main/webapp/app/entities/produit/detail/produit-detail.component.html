@@ -21,7 +21,11 @@
     <h2>{{ produit.prixUnitaire }} €</h2>
 
     <button class="normal"
+
+            *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"
+
             [disabled]="!produit.outOfStock"
+
             (click)="ajouterAuPanier()"
     >
       Add to Cart

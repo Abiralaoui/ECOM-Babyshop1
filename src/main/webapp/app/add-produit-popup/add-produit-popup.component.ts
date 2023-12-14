@@ -18,7 +18,7 @@ export class AddProduitPopupComponent implements OnInit {
     this.loadProduitImages();
     setTimeout(() => {
       this.activeModal.close();
-    },5000);
+    },3000);
   }
   loadProduitImages(): void {
     if (this.produit?.id !== undefined) {
@@ -41,6 +41,6 @@ export class AddProduitPopupComponent implements OnInit {
   }
 
   redirectToPay(): void {
-   this.router.navigate(['/pay']);
+   this.router.navigate(['/login']);
   }
 }
