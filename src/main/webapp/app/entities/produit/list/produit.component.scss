@@ -181,19 +181,21 @@
   }
 
 }
-.active{
-  color: #014841;
-  position: relative;
-  font-weight: bold;
-  &::after {
-    content: "";
-    width: 50%;
+.filter-container{
+  .active{
+    color: #014841;
+    position: relative;
+    font-weight: bold;
+    &::after {
+      content: "";
+      width: 50%;
 
-    height: 2px;
-    background: #014841;
-    position: absolute;
-    bottom: -4px;
-    left: 0;
+      height: 2px;
+      background: #014841;
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+    }
   }
 }
 ::ng-deep {
