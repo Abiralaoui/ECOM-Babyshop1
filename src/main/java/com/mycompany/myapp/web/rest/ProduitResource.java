@@ -261,4 +261,15 @@ public class ProduitResource {
             avisService.findAvisByProductId(id)
         );
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<ProduitDTO>> getProduitByKeyword(@RequestParam("keyword") String keyword,
+                                                                Pageable pageable) {
+
+        log.debug("REST request to get Produits by keyword: {}", keyword);
+
+        Page<ProduitDTO> entityList = produitService.searchProductByKeyword(keyword, pageable);
+
+        return ResponseEntity.ok().body(entityList);
+    }
 }

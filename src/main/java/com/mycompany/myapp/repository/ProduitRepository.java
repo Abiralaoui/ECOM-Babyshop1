@@ -49,4 +49,7 @@ public interface ProduitRepository
     @Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
     Optional<Produit> findWithLockingById(Long id);
 
+    @Query("SELECT p FROM Produit p WHERE p.libelle LIKE %:keyword%")
+    Page<Produit> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
+
 }
