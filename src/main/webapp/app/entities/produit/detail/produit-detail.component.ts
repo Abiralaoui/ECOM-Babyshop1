@@ -38,6 +38,7 @@ export class ProduitDetailComponent implements OnInit {
   images: string[] | undefined;
   mainImage: string | undefined;
   avisGlobal: number | undefined;
+  newReview: { note: number | null, commentaire: string | null } = { note: null, commentaire: null };
   constructor( private produitService:ProduitService,private avisService: AvisService,private panierService: PanierService,protected LigneCommandeService: LigneCommandeService,protected activatedRoute: ActivatedRoute ,protected accountService: AccountService ) {
 
   }
@@ -107,6 +108,24 @@ export class ProduitDetailComponent implements OnInit {
     console.log('Produit ajouté au panier :', this.produit);
   }
 
+  submitReview(): void {
+    if (this.produit!==undefined && this.newReview.note !== null && this.newReview.commentaire !== null) {
+      // Assuming you have a method in AvisService to post a new review
+      this.avisService.create({
+        id: null,
+        note: this.newReview.note,
+        commentaire: this.newReview.commentaire,
+        date: null,  // Set the date accordingly, if needed
+        produit: this.produit,
+        client: null,  // Set the client accordingly, if needed
+      }).subscribe(() => {
+
+
+        // Reset the newReview object for a new review
+        this.newReview = { note: null, commentaire: null };
+      });
+    }
+  }
   // Ajoutez ici la logique pour ajouter le produit au panier
   // Vous pouvez utiliser un service pour gérer le panier ou effectuer d'autres actions nécessaires
   // Par exemple, si vous utilisez un service de panier, vous pourriez appeler une méthode comme :
