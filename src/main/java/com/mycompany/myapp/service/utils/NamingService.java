@@ -9,26 +9,21 @@ import java.util.UUID;
 public class NamingService {
 
     public static MultipartFile generateUniqueImageFile(MultipartFile file) {
-        // Get the original file name with extension
         String originalFileName = file.getOriginalFilename();
 
-        if (originalFileName == null || originalFileName.isEmpty()) {
+        if (originalFileName == null || originalFileName.isEmpty())
             throw new IllegalArgumentException("Invalid file name");
-        }
 
-        // Generate a unique image name based on the original file name
         String uniqueImageName = generateUniqueImageName(originalFileName);
 
-        // Create a new MultipartFile with the modified file name
         return new CustomMultipartFile(file, uniqueImageName);
     }
 
     private static String getFileExtension(String fileName) {
         int lastDotIndex = fileName.lastIndexOf('.');
-        if (lastDotIndex == -1) {
-            // File name has no extension
+
+        if (lastDotIndex == -1)
             return "";
-        }
         return fileName.substring(lastDotIndex + 1);
     }
 
