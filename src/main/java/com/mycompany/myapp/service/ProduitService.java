@@ -182,4 +182,8 @@ public class ProduitService {
         log.debug("Request to get Produit : {}", id);
         return produitRepository.getById(id);
     }
+
+    public Page<ProduitDTO> searchProductByKeyword(String keyword, Pageable pageable) {
+        return produitRepository.findByKeyword(keyword, pageable).map(produitMapper::toDto);
+    }
 }
