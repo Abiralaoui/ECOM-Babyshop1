@@ -33,7 +33,7 @@ export class ProduitComponent implements OnInit {
   produits?: IProduit[];
   categories?: ICategory[];
   isLoading = false;
-  predicate = 'id';
+  predicate = 'prixUnitaire';
   ascending = true;
   cachedProducts?: IProduit[];
   searchTerm = '';
@@ -48,6 +48,7 @@ export class ProduitComponent implements OnInit {
   isClicked = false;
   minValue = 0;
   maxValue = 500;
+  sortOptions = "";
   options: Options = {
     floor: 0,
     ceil: 500,
@@ -124,7 +125,8 @@ export class ProduitComponent implements OnInit {
   load(): void {
     const pageable = {
       'page': this.currentPage,
-      'size': 25
+      'size': 25,
+      'sort': [this.sortOptions]
     };
 
     this.loadFromBackendWithRouteInformations(pageable, this.criteria).subscribe({
@@ -160,14 +162,22 @@ export class ProduitComponent implements OnInit {
 
   applyFilter(type: 'prix' | 'taille', order: 'asc' | 'desc'): void {
     if (type === 'prix') {
-      this.prixFilter = order;
+      this.sortOptions = 'prixUnitaire';
     }
 
     if (type === 'taille') {
-      this.tailleFilter = order;
+      this.sortOptions = 'taille';
     }
 
-    this.search();
+    if (order === 'asc') {
+       this.sortOptions += ',asc';
+    } else {
+      this.sortOptions += ',desc'
+    }
+
+    this.currentPage = 0;
+
+    this.load();
   }
 
   test(): void {
@@ -308,7 +318,7 @@ export class ProduitComponent implements OnInit {
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body?.content);
 
     this.totalPages = response.body.totalPages;
-    this.produits = this.refineData(dataFromBody);
+    this.produits = dataFromBody;
     this.totalItems = this.produits.length; // Update totalItems after data is loaded
   }
 
@@ -325,7 +335,6 @@ export class ProduitComponent implements OnInit {
 
     const queryObject = {
       eagerload: true,
-      sort: this.getSortQueryParam(predicate, ascending),
       ...criteria,
       ...pageable
     };
