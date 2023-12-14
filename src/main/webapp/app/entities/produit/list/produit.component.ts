@@ -21,6 +21,7 @@ import { ImageService } from 'app/entities/image/service/image.service';
 import { OutOfStockPopupComponent } from 'app/out-of-stock-popup/out-of-stock-popup.component';
 import { AddProduitPopupComponent } from 'app/add-produit-popup/add-produit-popup.component';
 import {faCircleChevronDown, faCircleChevronUp} from "@fortawesome/free-solid-svg-icons";
+import { ProduitSharedService } from '../../../panier/produit-shared.service';
 
 
 @Component({
@@ -76,6 +77,7 @@ export class ProduitComponent implements OnInit {
     protected panierService: PanierService,
     protected categoryService: CategoryService,
     private imageService: ImageService,
+    private pservice:ProduitSharedService
   ) {}
 
   trackId = (_index: number, item: IProduit): number => this.produitService.getProduitIdentifier(item);
@@ -91,6 +93,7 @@ export class ProduitComponent implements OnInit {
     ).subscribe(() => {
       this.search();
     });
+
   }
 
   fetchCategories(): void {
@@ -134,7 +137,7 @@ export class ProduitComponent implements OnInit {
         this.cachedProducts = [];
         this.loadImagesForProducts();
         if (this.produits !== undefined) {
-
+          this.pservice.setProduits(this.produits!);
           for (let i = 0; i < this.produits.length; i++) {
             this.produits[i].outOfStock = this.produits[i].stock === 0;
             this.cachedProducts.push(this.produits[i]);
@@ -215,6 +218,7 @@ export class ProduitComponent implements OnInit {
   onPageChange(pageNumber: any): void {
     this.currentPage = pageNumber;
     this.load();
+    
   }
 
   getPages(): (number | 'ellipsis')[] {
