@@ -1,8 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { PanierService } from './panier.service';
 import { IProduit } from 'app/entities/produit/produit.model';
 import {AccountService} from "../core/auth/account.service";
+import {faCaretDown, faCaretUp, faTimesCircle, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {NgbCarousel, NgbCarouselConfig, NgbSlideEvent, NgbSlideEventSource} from "@ng-bootstrap/ng-bootstrap";
 interface ProduitGroup {
   produits: IProduit[];
   quantite: number;
@@ -15,7 +17,14 @@ interface ProduitGroup {
 export class PanierComponent implements OnInit {
   produits: IProduit[] = [];
   produitsSameCategory: IProduit[] = [];
-  constructor(private router: Router, public  accountService: AccountService,public panierService: PanierService,private cdr: ChangeDetectorRef) { }
+  images = [700, 533, 807, 124].map((n) => `https://picsum.photos/id/${n}/900/500`);
+
+  constructor(private router: Router, public  accountService: AccountService,public panierService: PanierService,private cdr: ChangeDetectorRef,config: NgbCarouselConfig) {
+    config.interval = 10000;
+    config.wrap = false;
+    config.keyboard = false;
+    config.pauseOnHover = false;
+  }
 
   ngOnInit(): void {
     this.panierService.produits$.subscribe((produits) => {
@@ -86,6 +95,11 @@ export class PanierComponent implements OnInit {
 
     return produitsGroupes;
   }
+  calculePartialTotale(produitGroup1: ProduitGroup): number {
+
+    return (produitGroup1.produits[0].prixUnitaire??0) * produitGroup1.quantite;
+
+  }
 
   // Méthode pour calculer le total du panier
   calculerTotal(): number {
@@ -102,5 +116,14 @@ export class PanierComponent implements OnInit {
 
   ajouter(produit: IProduit): void {
     this.panierService.ajouterAuPanier(produit);
+
 }
+
+
+
+
+  protected readonly faTimesCircle = faTimesCircle;
+  protected readonly faCaretUp = faCaretUp;
+  protected readonly faCaretDown = faCaretDown;
+  protected readonly faTrash = faTrash;
 }
