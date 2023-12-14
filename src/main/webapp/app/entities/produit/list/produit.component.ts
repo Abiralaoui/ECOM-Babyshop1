@@ -1,12 +1,10 @@
 // produit.component.ts
 
 // ... (existing imports)
-import { ViewEncapsulation } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { IProduit } from '../produit.model';
 import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
 import { EntityArrayResponseType, ProduitService } from '../service/produit.service';
@@ -156,29 +154,8 @@ export class ProduitComponent implements OnInit {
   }
 
   search(): void {
-    if (this.searchTerm.trim() !== '') {
-      this.produits = this.cachedProducts?.filter((produit) =>
-          produit.libelle?.toLowerCase().includes(this.searchTerm.toLowerCase())
-      );
-    }
-
-    if (this.prixFilter) {
-      this.produits = this.produits?.sort((a, b) => {
-        const prixA = a.prixUnitaire !== undefined && a.prixUnitaire !== null ? a.prixUnitaire : 0;
-        const prixB = b.prixUnitaire !== undefined && b.prixUnitaire !== null ? b.prixUnitaire : 0;
-        const order = this.prixFilter === 'asc' ? 1 : -1;
-        return (prixA - prixB) * order;
-      });
-    }
-
-    if (this.tailleFilter) {
-      this.produits = this.produits?.sort((a, b) => {
-        const tailleA = a.taille !== undefined && a.taille !== null ? a.taille : 0;
-        const tailleB = b.taille !== undefined && b.taille !== null ? b.taille : 0;
-        const order = this.tailleFilter === 'asc' ? 1 : -1;
-        return (tailleA - tailleB) * order;
-      });
-    }
+    this.criteria['libelle.contains'] = this.searchTerm.trim();
+    this.load();
   }
 
   applyFilter(type: 'prix' | 'taille', order: 'asc' | 'desc'): void {
@@ -275,18 +252,7 @@ export class ProduitComponent implements OnInit {
     this.criteria['prixUnitaire.lessThan'] = $event.highValue;
     this.criteria['prixUnitaire.greaterThan'] = $event.value;
 
-    this.produitService.fetchProductsByCriteria(this.criteria).subscribe({
-      next: (res: EntityArrayResponseType) => {
-        this.onResponseSuccess(res);
-
-        this.cachedProducts = [];
-        if (this.produits !== undefined) {
-          for (let i = 0; i < this.produits.length; i++) {
-            this.cachedProducts.push(this.produits[i]);
-          }
-        }
-      }
-    });
+    this.load();
   }
   loadImagesForProducts(): void {
     this.imageService.query().subscribe(
