@@ -91,8 +91,6 @@ export class ProduitComponent implements OnInit {
     ).subscribe(() => {
       this.search();
     });
-
-
   }
 
   fetchCategories(): void {
@@ -163,10 +161,12 @@ export class ProduitComponent implements OnInit {
   applyFilter(type: 'prix' | 'taille', order: 'asc' | 'desc'): void {
     if (type === 'prix') {
       this.sortOptions = 'prixUnitaire';
+      this.prixFilter = order;
     }
 
     if (type === 'taille') {
       this.sortOptions = 'taille';
+      this.tailleFilter = order;
     }
 
     if (order === 'asc') {
