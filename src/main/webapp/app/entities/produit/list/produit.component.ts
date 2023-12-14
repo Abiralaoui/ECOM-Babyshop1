@@ -22,13 +22,7 @@ import {Options, LabelType, ChangeContext} from '@angular-slider/ngx-slider';
 import { ImageService } from 'app/entities/image/service/image.service';
 import { OutOfStockPopupComponent } from 'app/out-of-stock-popup/out-of-stock-popup.component';
 import { AddProduitPopupComponent } from 'app/add-produit-popup/add-produit-popup.component';
-import {arrow} from "@popperjs/core";
-import {
-  faArrowAltCircleDown,
-  faCircleChevronDown,
-  faCircleChevronUp,
-  faRotate
-} from "@fortawesome/free-solid-svg-icons";
+
 
 @Component({
   selector: 'jhi-produit',
@@ -55,9 +49,6 @@ export class ProduitComponent implements OnInit {
   isClicked = false;
   minValue = 0;
   maxValue = 500;
-  isTailleCollapsed = true;
-  isPrixCollapsed = true;
-  isCategoryCollapsed = true;
   options: Options = {
     floor: 0,
     ceil: 500,
@@ -131,10 +122,10 @@ export class ProduitComponent implements OnInit {
   load(): void {
     const pageable = {
       'page': this.currentPage,
-      'size': 20
+      'size': 25
     };
 
-    this.loadFromBackendWithRouteInformations(pageable).subscribe({
+    this.loadFromBackendWithRouteInformations(pageable, this.criteria).subscribe({
       next: (res: EntityArrayResponseType) => {
         this.onResponseSuccess(res);
 
@@ -147,8 +138,6 @@ export class ProduitComponent implements OnInit {
             this.cachedProducts.push(this.produits[i]);
 
           }
-          console.log("iciii")
-          console.log(this.produits)
         }
       },
     });
@@ -212,7 +201,7 @@ export class ProduitComponent implements OnInit {
       this.panierService.ajouterAuPanier(produit);
       const modalRef = this.modalService.open(AddProduitPopupComponent);
       modalRef.componentInstance.produit =produit;
-    event.stopPropagation();
+      event.stopPropagation();
   }
 
   onCategoryChange(event: any, category: ICategory): void {
@@ -225,24 +214,9 @@ export class ProduitComponent implements OnInit {
     }
 
     this.criteria['categoryId.in'] = this.selectedCategories;
+    this.currentPage = 0;
 
-    this.produitService.fetchProductsByCriteria(this.criteria).subscribe({
-      next: (res: EntityArrayResponseType) => {
-        this.onResponseSuccess(res);
-
-        this.cachedProducts = [];
-        if (this.produits !== undefined) {
-          for (let i = 0; i < this.produits.length; i++) {
-            this.cachedProducts.push(this.produits[i]);
-            this.produits[i].outOfStock = this.produits[i].stock === 0;
-
-
-          }
-
-        }
-
-      }
-    });
+    this.load();
   }
 
   onPageChange(pageNumber: any): void {
@@ -260,7 +234,6 @@ export class ProduitComponent implements OnInit {
     return pages;
   }
 
-  // pagination.component.ts
   getPagesWithEllipsis(): (number | 'ellipsis')[] {
     const pages: (number | 'ellipsis') [] = [];
     const maxPages = 10;
@@ -348,10 +321,10 @@ export class ProduitComponent implements OnInit {
     return description;
   }
 
-  protected loadFromBackendWithRouteInformations(pageable?: any): Observable<EntityArrayResponseType> {
+  protected loadFromBackendWithRouteInformations(pageable?: any, criteria?:any): Observable<EntityArrayResponseType> {
     return combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data]).pipe(
       tap(([params, data]) => this.fillComponentAttributeFromRoute(params, data)),
-      switchMap(() => this.queryBackend(this.predicate, this.ascending, pageable))
+      switchMap(() => this.queryBackend(this.predicate, this.ascending, pageable, criteria))
     );
   }
 
@@ -377,15 +350,13 @@ export class ProduitComponent implements OnInit {
     return data ?? [];
   }
 
-  protected queryBackend(predicate?: string, ascending?: boolean, pageable?: any): Observable<EntityArrayResponseType> {
+  protected queryBackend(predicate?: string, ascending?: boolean, pageable?: any, criteria?:any): Observable<EntityArrayResponseType> {
     this.isLoading = true;
-    const criteria = (this.selectedCategories.length === 0) ? {} :
-                      {key: 'category.in', value:this.selectedCategories};
 
     const queryObject = {
       eagerload: true,
       sort: this.getSortQueryParam(predicate, ascending),
-      criteria,
+      ...criteria,
       ...pageable
     };
     return this.produitService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
@@ -421,10 +392,4 @@ export class ProduitComponent implements OnInit {
     // Example: modalRef.componentInstance.someData = yourData;
     // Example: modalRef.result.then((result) => { /* Handle modal result */ });
   }
-
-  protected readonly arrow = arrow;
-  protected readonly faArrowAltCircleDown = faArrowAltCircleDown;
-  protected readonly faCircleChevronDown = faCircleChevronDown;
-  protected readonly faRotate = faRotate;
-  protected readonly faCircleChevronUp = faCircleChevronUp;
 }

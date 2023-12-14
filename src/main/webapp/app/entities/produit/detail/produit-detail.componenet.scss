@@ -150,4 +150,6 @@
     border: 1px solid #088178;
   }
 }
-
+.avis-section-scrollable {
+  max-height: 300px; /* Ajustez la hauteur maximale selon vos besoins */
+  overflow-y: auto;}

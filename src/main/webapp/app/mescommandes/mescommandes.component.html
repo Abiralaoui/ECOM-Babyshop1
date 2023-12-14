@@ -1,23 +1,39 @@
 <!-- mes-commandes.component.html -->
 <div class="container">
-    <h2 class="page-title">Vos Commandes</h2>
+  <h2 class="page-title">Vos Commandes</h2>
 
-    <div *ngIf =" commandes.length === 0" class="no-orders-message">
+  <div *ngIf="commandes.length === 0" class="no-orders-message">
       <p>Vous n'avez pas encore passé de commandes.</p>
-    </div>
-
-
-    <div *ngIf="commandes.length > 0">
-      <div class="order-card" *ngFor="let commande of commandes">
-        <div class="order-header">
-         
-          <p class="order-id">Commande faite le  {{ commande.date}}</p>
-          <p class="order-status">Type de payment: {{ commande.typePayement }}</p>
-          <p class="order-status">État: {{ commande.etat }}</p>
-          <p class="order-status">produit: {{ commande.ligneCommandes }}</p>
-          <p class="order-status">prix: faut ajouter la methode calculprix</p>
-        </div>
-        <!-- Add other properties of the commande object that you want to display -->
-      </div>
-    </div>
   </div>
+
+  <div *ngIf="commandes.length > 0" class="order-section-scrollable">
+      <div class="order-card" *ngFor="let commande of commandes; let i = index">
+          <div class="order-header">
+              <p class="order-id">Commande faite le {{ formatDate(commande.date!) }}</p>
+              <p class="order-status">Type de payment: {{ commande.typePayement }}</p>
+              <p class="order-status">État: {{ commande.etat }}</p>
+            
+              <div class="ligne-commandes">
+               
+                <div *ngFor="let ligneCommande of commande.ligneCommandes; let j = index"
+                     (mouseover)="ligneCommande.showDetails = true" 
+                     (mouseout)="ligneCommande.showDetails = false">
+                    <p class="order-status">
+                      <img [src]="ligneCommande.produit?.images?.[0]?.url || '../../../content/images/img.png'" >
+                      <span *ngIf="ligneCommande.showDetails" class="product-details">
+                        <!-- Use optional chaining here -->
+                        <img [src]="ligneCommande.produit?.images?.[0]?.url || '../../../content/images/img.png'" 
+                             alt="{{ ligneCommande.produit?.libelle }}" />
+                        <span>{{ ligneCommande.produit?.libelle }}</span>
+                      </span>
+                    </p>
+                    
+                </div>
+              </div>
+            
+           
+              <p class="order-status">Prix total: {{ calculateTotalPrice(commande) | currency:'EUR' }}</p>
+          </div>
+      </div>
+  </div>
+</div>
