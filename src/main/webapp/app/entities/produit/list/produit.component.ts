@@ -184,10 +184,12 @@ export class ProduitComponent implements OnInit {
   applyFilter(type: 'prix' | 'taille', order: 'asc' | 'desc'): void {
     if (type === 'prix') {
       this.prixFilter = order;
+      this.tailleFilter =null;
     }
 
     if (type === 'taille') {
       this.tailleFilter = order;
+      this.prixFilter = null;
     }
 
     this.search();
