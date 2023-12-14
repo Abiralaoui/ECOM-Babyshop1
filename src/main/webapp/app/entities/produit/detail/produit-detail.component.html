@@ -21,7 +21,7 @@
     <h2>{{ produit.prixUnitaire }} €</h2>
 
     <button class="normal"
-            *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'ROLE_USER'])"
+            *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"
             (click)="ajouterAuPanier()"
     >
       Add to Cart
@@ -66,7 +66,7 @@
           </li>
         </ul>
       </div>
-      
+
       <div *ngIf="!avisList || avisList.length === 0" class="no-avis-message">
         <p>Aucun avis disponible pour ce produit.</p>
       </div>

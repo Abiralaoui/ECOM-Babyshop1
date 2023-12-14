@@ -6,6 +6,7 @@ import {AccountService} from "../core/auth/account.service";
 import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
 import { IProduit } from 'app/entities/produit/produit.model';
+import {ILigneCommande} from "../entities/ligne-commande/ligne-commande.model";
 
 @Component({
   selector: 'jhi-mescommandes',
@@ -16,12 +17,13 @@ export class MescommandesComponent implements OnInit {
 
   commandes: ICommande[] = [];
 
+
   constructor(
     private route: ActivatedRoute,
     private clientCommandeService: ClientCommandeService,
     private accountService : AccountService
   ) {}
-  
+
   ngOnInit(): void {
     /*this.accountService.identity().subscribe(account => {
     })*/
@@ -38,7 +40,6 @@ export class MescommandesComponent implements OnInit {
   getCommandesClientt(clientId: number): void {
     this.clientCommandeService.getCommandesClient(clientId)
       .subscribe(Commandes => {
-
         this.commandes = Commandes;
       });
   }
