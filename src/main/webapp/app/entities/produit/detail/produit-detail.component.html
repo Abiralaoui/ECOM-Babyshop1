@@ -21,7 +21,11 @@
     <h2>{{ produit.prixUnitaire }} €</h2>
 
     <button class="normal"
+
             *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN'])"
+
+            [disabled]="!produit.outOfStock"
+
             (click)="ajouterAuPanier()"
     >
       Add to Cart
@@ -30,6 +34,11 @@
       <h4>Détails du produit</h4>
       <span>
           {{ produit.description }}
+    </span>
+      <span
+      [ngClass]="{'text-danger': produit.outOfStock, 'text-success': !produit.outOfStock}"
+      >
+          {{ produit.outOfStock ? 'Rupture de stock' : 'En stock' }}
     </span>
       <div>
         <span jhiTranslate="mainApp.produit.taille">Taille</span>
@@ -70,6 +79,20 @@
       <div *ngIf="!avisList || avisList.length === 0" class="no-avis-message">
         <p>Aucun avis disponible pour ce produit.</p>
       </div>
+    </div>
+    <div *ngIf="this.accountService.hasAnyAuthority(['ROLE_USER'])">
+      <h3>Leave a Review</h3>
+      <form (ngSubmit)="submitReview()">
+        <div class="form-group">
+          <label for="note">Rating (1-5):</label>
+          <input type="number" class="form-control" id="note" [(ngModel)]="newReview.note" name="note" required min="1" max="5">
+        </div>
+        <div class="form-group">
+          <label for="commentaire">Comment:</label>
+          <textarea class="form-control" id="commentaire" [(ngModel)]="newReview.commentaire" name="commentaire" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+      </form>
     </div>
 
     <!-- Vos autres éléments ... -->

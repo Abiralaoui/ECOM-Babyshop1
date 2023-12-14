@@ -29,11 +29,15 @@
         <form class="filters">
           <label
             [ngClass]= "{'active': prixFilter === 'asc'}"
+            (click)="applyFilter('prix', 'asc')"
           >
-            <input  type="radio" name="prix" (change)="applyFilter('prix', 'asc')" style="display: none" /> Prix Croissant
+            Prix Croissant
           </label>
-          <label  [ngClass]= "{'active': prixFilter === 'desc'}">
-            <input type="radio" name="prix" (change)="applyFilter('prix', 'desc')" style="display: none"  /> Prix Décroissant
+          <label
+            [ngClass]= "{'active': prixFilter === 'desc'}"
+            (click)="applyFilter('prix', 'desc')"
+          >
+            Prix Décroissant
           </label>
         </form>
         </div>
@@ -62,13 +66,15 @@
           <form class="filters"   >
             <label
               [ngClass]= "{'active': tailleFilter === 'asc'}"
+              (click)="applyFilter('taille', 'asc')"
             >
-              <input type="radio" name="taille" (change)="applyFilter('taille', 'asc')" style="display: none" /> Taille Croissante
+               Taille Croissante
             </label>
             <label
               [ngClass]= "{'active': tailleFilter === 'desc'}"
+              (click)="applyFilter('taille', 'desc')"
             >
-              <input type="radio" name="taille" (change)="applyFilter('taille', 'desc')" style="display: none" /> Taille Décroissante
+               Taille Décroissante
             </label>
           </form>
         </div>
