@@ -12,6 +12,7 @@ import dayjs from 'dayjs/esm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddProduitPopupComponent } from 'app/add-produit-popup/add-produit-popup.component';
 import { OutOfStockPopupComponent } from 'app/out-of-stock-popup/out-of-stock-popup.component';
+import { HttpResponse } from '@angular/common/http';
 
 
 @Component({
@@ -123,8 +124,7 @@ export class ProduitDetailComponent implements OnInit {
     // Do whatever you want with the updated rating in the parent component
   }
   submitReview(): void {
-
-    if (this.produit!==undefined && this.newReview.note !== null && this.newReview.commentaire !== null) {
+    if (this.produit !== undefined && this.newReview.note !== null && this.newReview.commentaire !== null) {
       // Assuming you have a method in AvisService to post a new review
       console.log('Nouvel avis :', this.newReview);
       this.avisService.create({
@@ -134,14 +134,18 @@ export class ProduitDetailComponent implements OnInit {
         date: dayjs(),  // Set the date accordingly, if needed
         produit: this.produit,
         client: null,  // Set the client accordingly, if needed
-      }).subscribe(() => {
-
-
+      }).subscribe((response: HttpResponse<IAvis>) => {
+        const newlyAddedReview: IAvis| null = response.body ; // Ensure there is an 'id' property
+  
+        // Update the local state with the newly added review
+        this.avisList = [newlyAddedReview!, ...this.avisList];
+  
         // Reset the newReview object for a new review
         this.newReview = { note: null, commentaire: null };
       });
     }
   }
+  
   gotosubscription(){
     this.router.navigate(['/login']);
   }
