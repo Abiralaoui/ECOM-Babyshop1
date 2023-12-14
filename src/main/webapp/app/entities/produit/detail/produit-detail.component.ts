@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { IProduit } from '../produit.model';
 import {AccountService} from "../../../core/auth/account.service";
@@ -9,6 +9,9 @@ import { PanierService } from 'app/panier/panier.service';
 import { AvisService } from 'app/entities/avis/service/avis.service';
 import { IAvis } from 'app/entities/avis/avis.model';
 import dayjs from 'dayjs/esm';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddProduitPopupComponent } from 'app/add-produit-popup/add-produit-popup.component';
+import { OutOfStockPopupComponent } from 'app/out-of-stock-popup/out-of-stock-popup.component';
 
 
 @Component({
@@ -41,7 +44,8 @@ export class ProduitDetailComponent implements OnInit {
   avisGlobal: number | undefined;
   newReview: { note: number | null, commentaire: string | null } = { note: null, commentaire: null };
   selected = 0;
-  constructor( private produitService:ProduitService,private avisService: AvisService,private panierService: PanierService,protected LigneCommandeService: LigneCommandeService,protected activatedRoute: ActivatedRoute ,protected accountService: AccountService ) {
+  outOfStockMessage: string | undefined;
+  constructor(private router:Router, private modalService: NgbModal, private produitService:ProduitService,private avisService: AvisService,private panierService: PanierService,protected LigneCommandeService: LigneCommandeService,protected activatedRoute: ActivatedRoute ,protected accountService: AccountService ) {
 
   }
 
@@ -107,6 +111,8 @@ export class ProduitDetailComponent implements OnInit {
     if (this.produit) {
       this.panierService.ajouterAuPanier(this.produit);
     }
+    const modalRef = this.modalService.open(AddProduitPopupComponent);
+    modalRef.componentInstance.produit =this.produit;
     console.log('Produit ajouté au panier :', this.produit);
   }
 
@@ -136,11 +142,18 @@ export class ProduitDetailComponent implements OnInit {
       });
     }
   }
-  // Ajoutez ici la logique pour ajouter le produit au panier
-  // Vous pouvez utiliser un service pour gérer le panier ou effectuer d'autres actions nécessaires
-  // Par exemple, si vous utilisez un service de panier, vous pourriez appeler une méthode comme :
-  // this.panierService.ajouterAuPanier(this.produit);
-
+  gotosubscription(){
+    this.router.navigate(['/login']);
+  }
+  showOutOfStockModal(): void {
+    const modalRef = this.modalService.open(OutOfStockPopupComponent, {
+      /* Optionally, you can configure modal options here */
+    });
+  
+    // You can pass data or subscribe to events from the modal
+    // Example: modalRef.componentInstance.someData = yourData;
+    // Example: modalRef.result.then((result) => { /* Handle modal result */ });
+  }
 
   protected readonly Date = Date;
 }

@@ -41,6 +41,6 @@ export class AddProduitPopupComponent implements OnInit {
   }
 
   redirectToPay(): void {
-   this.router.navigate(['/login']);
+   this.router.navigate(['/pay']);
   }
 }
