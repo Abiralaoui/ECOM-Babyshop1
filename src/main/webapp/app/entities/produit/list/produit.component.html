@@ -6,41 +6,110 @@
     <div  style="background-color: white" class="col-md-2">
       <!-- ...  <jhi-category></jhi-category>-->
 
-      <div class="filter-container mb-3">
-        <h4 >Trier par Prix</h4>
-        <form style="gap: 3;">
-          <label>
+      <div class="filter-container mb-3 my-filtre">
+        <div style="display: flex">
+          <div style="cursor: pointer; display: flex"  (click)="isPrixCollapsed =! isPrixCollapsed">
+            <h4 >Trier par Prix</h4>
+            <fa-icon
+              [icon]="faCircleChevronDown"
+              [ngClass]= "{'none': isPrixCollapsed}"
+              class="icon"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faCircleChevronUp"
+              class="icon"
+              [ngClass]= "{'none': !isPrixCollapsed}"></fa-icon>
+
+
+          </div>
+
+        </div>
+        <div class="collapse" [ngbCollapse]="isPrixCollapsed"  >
+
+        <form class="filters">
+          <label
+            [ngClass]= "{'active': prixFilter === 'asc'}"
+          >
             <input  type="radio" name="prix" (change)="applyFilter('prix', 'asc')" style="display: none" /> Prix Croissant
           </label>
-          <label>
+          <label  [ngClass]= "{'active': prixFilter === 'desc'}">
             <input type="radio" name="prix" (change)="applyFilter('prix', 'desc')" style="display: none"  /> Prix Décroissant
           </label>
         </form>
-      </div>
-
-      <div class="filter-container mb-3">
-        <h4>Trier par Taille</h4>
-        <form style="gap: 3">
-          <label>
-            <input type="radio" name="taille" (change)="applyFilter('taille', 'asc')" style="display: none" /> Taille Croissante
-          </label>
-          <label>
-            <input type="radio" name="taille" (change)="applyFilter('taille', 'desc')" style="display: none" /> Taille Décroissante
-          </label>
-        </form>
-      </div>
-
-
-      <div class="filter-container mb-3">
-        <div *ngFor="let category of categories">
-          <label>
-            <input type="checkbox" [value]="category.id" (change)="onCategoryChange($event, category)">
-            {{ category.nom }}
-          </label>
         </div>
       </div>
 
-      <div class="filter-container mb-3">
+      <div  class="filter-container mb-3  pointer my-filtre">
+        <div style="display: flex">
+          <div style="cursor: pointer; display: flex"  (click)="isTailleCollapsed =! isTailleCollapsed">
+          <h4 >Trier par Taille</h4>
+
+              <fa-icon
+                [icon]="faCircleChevronDown"
+                [ngClass]= "{'none': isTailleCollapsed}"
+                class="icon"
+              ></fa-icon>
+            <fa-icon
+              [icon]="faCircleChevronUp"
+              class="icon"
+              [ngClass]= "{'none': !isTailleCollapsed}"></fa-icon>
+
+
+          </div>
+
+        </div>
+        <div class="collapse " [ngbCollapse]="isTailleCollapsed"  >
+          <form class="filters"   >
+            <label
+              [ngClass]= "{'active': tailleFilter === 'asc'}"
+            >
+              <input type="radio" name="taille" (change)="applyFilter('taille', 'asc')" style="display: none" /> Taille Croissante
+            </label>
+            <label
+              [ngClass]= "{'active': tailleFilter === 'desc'}"
+            >
+              <input type="radio" name="taille" (change)="applyFilter('taille', 'desc')" style="display: none" /> Taille Décroissante
+            </label>
+          </form>
+        </div>
+
+
+      </div>
+
+
+      <div class="filter-container mb-3 my-filtre">
+        <div style="display: flex">
+          <div style="cursor: pointer; display: flex"  (click)="isCategoryCollapsed =! isCategoryCollapsed">
+            <h4 >Trier par Category</h4>
+
+            <fa-icon
+              [icon]="faCircleChevronDown"
+              [ngClass]= "{'none': isCategoryCollapsed}"
+              class="icon"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faCircleChevronUp"
+              class="icon"
+              [ngClass]= "{'none': !isCategoryCollapsed}"></fa-icon>
+
+
+          </div>
+
+        </div>
+        <div class="collapse" [ngbCollapse]="isCategoryCollapsed">
+          <div class="filters"  *ngFor="let category of categories">
+            <label
+              [ngClass]= "{'active': selectedCategories.includes(category.id)}"
+            >
+              <input type="checkbox" style="display: none" [value]="category.id" (change)="onCategoryChange($event, category)">
+              {{ category.nom }}
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="filter-container mb-3 custom-slider">
         <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeEnd)="updateSliderInfo($event)"></ngx-slider>
       </div>
     </div>
@@ -164,7 +233,7 @@
             <div class="container">
               <div>
                 <div *ngIf="produit.images && produit.images.length > 0">
-                  <img [src]="produit.images[0].url" alt="Product Image" style="width: 200px; height: auto;">
+                  <img [src]="produit.images[0].url" alt="Product Image" style="width: 200px; height: 150px; object-fit: contain;">
                 </div>
                 <div class="product-lounge mx-2 mt-2">
                   <h6>{{ truncateDescription(produit.libelle) }}</h6>

@@ -22,7 +22,13 @@ import {Options, LabelType, ChangeContext} from '@angular-slider/ngx-slider';
 import { ImageService } from 'app/entities/image/service/image.service';
 import { OutOfStockPopupComponent } from 'app/out-of-stock-popup/out-of-stock-popup.component';
 import { AddProduitPopupComponent } from 'app/add-produit-popup/add-produit-popup.component';
-
+import {arrow} from "@popperjs/core";
+import {
+  faArrowAltCircleDown,
+  faCircleChevronDown,
+  faCircleChevronUp,
+  faRotate
+} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'jhi-produit',
@@ -49,6 +55,9 @@ export class ProduitComponent implements OnInit {
   isClicked = false;
   minValue = 0;
   maxValue = 500;
+  isTailleCollapsed = true;
+  isPrixCollapsed = true;
+  isCategoryCollapsed = true;
   options: Options = {
     floor: 0,
     ceil: 500,
@@ -79,7 +88,7 @@ export class ProduitComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
-   
+
     this.fetchCategories();
 
     this.activatedRoute.queryParamMap.pipe(
@@ -132,11 +141,11 @@ export class ProduitComponent implements OnInit {
         this.cachedProducts = [];
         this.loadImagesForProducts();
         if (this.produits !== undefined) {
-         
+
           for (let i = 0; i < this.produits.length; i++) {
             this.produits[i].outOfStock = this.produits[i].stock === 0;
             this.cachedProducts.push(this.produits[i]);
-        
+
           }
           console.log("iciii")
           console.log(this.produits)
@@ -226,10 +235,10 @@ export class ProduitComponent implements OnInit {
           for (let i = 0; i < this.produits.length; i++) {
             this.cachedProducts.push(this.produits[i]);
             this.produits[i].outOfStock = this.produits[i].stock === 0;
-          
+
 
           }
-          
+
         }
 
       }
@@ -407,9 +416,15 @@ export class ProduitComponent implements OnInit {
     });
 
     event.stopPropagation();
-  
+
     // You can pass data or subscribe to events from the modal
     // Example: modalRef.componentInstance.someData = yourData;
     // Example: modalRef.result.then((result) => { /* Handle modal result */ });
   }
+
+  protected readonly arrow = arrow;
+  protected readonly faArrowAltCircleDown = faArrowAltCircleDown;
+  protected readonly faCircleChevronDown = faCircleChevronDown;
+  protected readonly faRotate = faRotate;
+  protected readonly faCircleChevronUp = faCircleChevronUp;
 }

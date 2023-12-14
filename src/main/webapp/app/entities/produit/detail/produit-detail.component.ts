@@ -87,7 +87,7 @@ export class ProduitDetailComponent implements OnInit {
         total += avis.note ?? 0;
       }
 
-      return total / this.avisList.length;
+      return (total / this.avisList.length);
     }
     return undefined;
   }

@@ -14,7 +14,7 @@
   <div *ngIf="produit" class="single-pro-details">
     <h6>Home/Detail</h6>
     <div style="display: flex;align-items: center;gap:10px">
-      <app-rating [size]="30" [rating]="getAvisGlobal() ?? 0" ></app-rating> <span style="color: #ffc107;margin-top: 4px">{{ getAvisGlobal() ?? 0 }} / 5</span>
+      <app-rating [size]="30" [rating]="getAvisGlobal() ?? 0" ></app-rating> <span style="color: #ffc107;margin-top: 4px">{{ getAvisGlobal()?.toFixed(2) ?? 0 }} / 5</span>
     </div>
     <h4>{{ produit.libelle }}</h4>
 

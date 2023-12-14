@@ -1,4 +1,6 @@
-
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~@fortawesome/fontawesome-free/css/all.css';
 .out-of-stock-banner {
   background-color: #ff5757;
   color: #fff; /* White text color */
@@ -139,5 +141,82 @@
       right: 10px;
       top: 83%;
     }
+  }
+}
+.templatemo-accordion {
+  a{
+    color: #000;
+    &:hover{
+      color: #333d4a;
+    }
+  }
+}
+.none{
+  display: none;
+  transition: 0.5s ease;
+}
+.my-filtre{
+  position: relative;
+
+  .icon{
+    position: absolute;
+    top: 1px;
+    right: -4px;
+    font-size: 20px;
+    color: #088178;
+    cursor: pointer;
+  }
+  h4{
+    color: #088178;
+    font-size: 20px;
+  }
+  .filters{
+    margin-top: 10px;
+    margin-left: 20px;
+    label{
+
+      margin-bottom: 10px;
+
+    }
+  }
+
+}
+.active{
+  color: #014841;
+  position: relative;
+  font-weight: bold;
+  &::after {
+    content: "";
+    width: 50%;
+
+    height: 2px;
+    background: #014841;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+  }
+}
+::ng-deep {
+  .custom-slider .ngx-slider .ngx-slider-bar {
+    background: #aad1bb;
+    height: 2px;
+  }
+
+  .custom-slider .ngx-slider .ngx-slider-selection {
+    background: #39835a;
+  }
+
+  .custom-slider .ngx-slider .ngx-slider-pointer {
+    height: 9px;
+    width: 9px;
+    top: auto; /* to remove the default positioning */
+    bottom: 15px;
+    background-color: #39835a;
+
+
+
+  }
+  .custom-slider .ngx-slider .ngx-slider-pointer:after {
+    display: none;
   }
 }
