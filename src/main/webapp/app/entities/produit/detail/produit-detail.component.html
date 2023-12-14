@@ -76,12 +76,14 @@
         <p>Aucun avis disponible pour ce produit.</p>
       </div>
     </div>
-    <div *ngIf="this.accountService.hasAnyAuthority(['ROLE_USER'])">
+    <div *ngIf="this.accountService.hasAnyAuthority(['ROLE_USER'])" style="margin-top: 30px" >
       <h3>Leave a Review</h3>
       <form (ngSubmit)="submitReview()">
         <div class="form-group">
-          <label for="note">Rating (1-5):</label>
-          <input type="number" class="form-control" id="note" [(ngModel)]="newReview.note" name="note" required min="1" max="5">
+          <label for="note">Rating :</label>
+
+          <app-rating id="note" [size]="20" [rating]="selected"  [readonly]="false" (rateChangeEvent)="onRatingChange($event)" ></app-rating>
+
         </div>
         <div class="form-group">
           <label for="commentaire">Comment:</label>

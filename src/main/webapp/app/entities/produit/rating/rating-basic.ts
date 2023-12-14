@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -28,5 +28,10 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 export class NgbdRatingBasic {
   @Input() rating: number = 0;
   @Input() size: number = 16;
+  @Input() readonly: boolean = true;
+  @Output() rateChangeEvent: EventEmitter<number> = new EventEmitter<number>();
+  onRateChange(newRating: number): void {
+    this.rateChangeEvent.emit(newRating);
+  }
 
 }

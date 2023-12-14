@@ -1,3 +1,4 @@
 
-<ngb-rating [max]="5" [(rate)]="rating" [readonly]="true" [style.font-size.px]="size" ></ngb-rating>
+<ngb-rating [max]="5" [(rate)]="rating" [readonly]="readonly" [style.font-size.px]="size" (rateChange)="onRateChange($event)" ></ngb-rating>
+
 

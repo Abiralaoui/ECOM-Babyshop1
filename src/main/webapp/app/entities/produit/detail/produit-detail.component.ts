@@ -8,6 +8,7 @@ import {LigneCommandeService} from "../../ligne-commande/service/ligne-commande.
 import { PanierService } from 'app/panier/panier.service';
 import { AvisService } from 'app/entities/avis/service/avis.service';
 import { IAvis } from 'app/entities/avis/avis.model';
+import dayjs from 'dayjs/esm';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class ProduitDetailComponent implements OnInit {
   mainImage: string | undefined;
   avisGlobal: number | undefined;
   newReview: { note: number | null, commentaire: string | null } = { note: null, commentaire: null };
+  selected = 0;
   constructor( private produitService:ProduitService,private avisService: AvisService,private panierService: PanierService,protected LigneCommandeService: LigneCommandeService,protected activatedRoute: ActivatedRoute ,protected accountService: AccountService ) {
 
   }
@@ -108,14 +110,22 @@ export class ProduitDetailComponent implements OnInit {
     console.log('Produit ajouté au panier :', this.produit);
   }
 
+
+  onRatingChange(newRating: number): void {
+    this.newReview.note = newRating;
+    console.log('Nouvelle note sélectionnée :', newRating);
+    // Do whatever you want with the updated rating in the parent component
+  }
   submitReview(): void {
+
     if (this.produit!==undefined && this.newReview.note !== null && this.newReview.commentaire !== null) {
       // Assuming you have a method in AvisService to post a new review
+      console.log('Nouvel avis :', this.newReview);
       this.avisService.create({
         id: null,
         note: this.newReview.note,
         commentaire: this.newReview.commentaire,
-        date: null,  // Set the date accordingly, if needed
+        date: dayjs(),  // Set the date accordingly, if needed
         produit: this.produit,
         client: null,  // Set the client accordingly, if needed
       }).subscribe(() => {
