@@ -5,15 +5,21 @@ import com.mycompany.myapp.domain.Produit;
 import com.mycompany.myapp.repository.ImageRepository;
 import com.mycompany.myapp.repository.ProduitRepository;
 import com.mycompany.myapp.service.dto.ImageDTO;
+import com.mycompany.myapp.service.dto.ProduitDTO;
+import com.mycompany.myapp.service.exceptions.FileIsEmptyException;
+import com.mycompany.myapp.service.exceptions.FileNotImageException;
 import com.mycompany.myapp.service.mapper.ImageMapper;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import com.mycompany.myapp.service.utils.NamingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Service Implementation for managing {@link Image}.
@@ -28,11 +34,14 @@ public class ImageService {
 
     private final ProduitRepository produitRepository;
 
+    private final S3StorageService s3StorageService;
+
     private final ImageMapper imageMapper;
 
-    public ImageService(ImageRepository imageRepository, ProduitRepository produitRepository, ImageMapper imageMapper) {
+    public ImageService(ImageRepository imageRepository, ProduitRepository produitRepository, S3StorageService s3StorageService, ImageMapper imageMapper) {
         this.imageRepository = imageRepository;
         this.produitRepository = produitRepository;
+        this.s3StorageService = s3StorageService;
         this.imageMapper = imageMapper;
     }
 
@@ -121,6 +130,23 @@ public class ImageService {
         log.debug("Request image urls by product id : " + id);
 
         return imageRepository.findByProduitId(id).stream().map(image -> image.getUrl()).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public String uploadImageToS3Bucket(MultipartFile image, ProduitDTO produitDTO) throws FileIsEmptyException, FileNotImageException {
+        var multipartUniqueFile = NamingService.generateUniqueImageFile(image);
+        String url = s3StorageService.saveFile(
+            multipartUniqueFile
+        );
+
+        save(new ImageDTO(url, produitDTO));
+
+        return multipartUniqueFile.getOriginalFilename();
+    }
+
+
+    public void deleteImagesFromS3Bucket(String imageName) {
+        s3StorageService.deleteFile(imageName);
     }
 
 }

@@ -11,7 +11,10 @@ import com.mycompany.myapp.service.mapper.LigneCommandeMapper;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.mycompany.myapp.web.rest.errors.ErrorConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -49,12 +52,15 @@ public class LigneCommandeService {
      */
     public LigneCommandeDTO save(LigneCommandeDTO ligneCommandeDTO, Long commandeId) {
         log.debug("Request to save LigneCommande : {}", ligneCommandeDTO);
+
         LigneCommande ligneCommande = ligneCommandeMapper.toEntity(ligneCommandeDTO);
         Produit produit = produitService.getProduitById(ligneCommandeDTO.getProduit().getId());
         Commande commande = commandeRepository.getReferenceById(commandeId);
+
         ligneCommande.setProduit(produit);
         ligneCommande.setCommande(commande);
         ligneCommande = ligneCommandeRepository.save(ligneCommande);
+
         return ligneCommandeMapper.toDto(ligneCommande);
     }
 
@@ -131,10 +137,19 @@ public class LigneCommandeService {
         var itemsleft = stock - quantity;
 
         if (itemsleft < 0)
-            throw new OutOfStockException("There's " + itemsleft + " left on stock.");
+            throw new OutOfStockException(ErrorConstants.ERR_NOT_ENOUGH_ITEMS_IN_STOCK);
 
         produit.setStock(produit.getStock() - quantity);
 
         produitService.partialUpdate(produit);
+    }
+
+
+    @Transactional
+    public void saveLignesCommande(Set<LigneCommandeDTO> ligneCommandes, Long commandeId) throws OutOfStockException {
+        for (var ligneCommande: ligneCommandes) {
+            save(ligneCommande, commandeId);
+            updateStock(ligneCommande.getProduit().getId(), ligneCommande.getQuantite());
+        }
     }
 }

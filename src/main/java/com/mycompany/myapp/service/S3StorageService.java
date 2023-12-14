@@ -81,7 +81,7 @@ public class S3StorageService {
     }
 
     public String deleteFile(String filename) {
-        s3.deleteObject(bucketName,filename);
+        s3.deleteObject(bucketName, filename);
 
         return "File deleted";
     }

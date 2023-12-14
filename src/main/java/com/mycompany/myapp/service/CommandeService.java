@@ -72,19 +72,13 @@ public class CommandeService {
         commande.setDate(Instant.now());
         commande = commandeRepository.save(commande);
 
-        var ligneCommandes = commandeDTO.getLigneCommandes();
-
-        for (var ligneCommande: ligneCommandes) {
-            ligneCommandeService.save(ligneCommande, commande.getId());
-            ligneCommandeService.updateStock(ligneCommande.getProduit().getId(), ligneCommande.getQuantite());
-        }
+        ligneCommandeService.saveLignesCommande(commandeDTO.getLigneCommandes(), commande.getId());
 
         commandeDTO.setEtat(EtatCommande.PAYEE);
         commandeDTO.setId(commande.getId());
-          sendConfirmationEmail(commandeDTO);
-        partialUpdate(commandeDTO);
-      
 
+        sendConfirmationEmail(commandeDTO);
+        partialUpdate(commandeDTO);
 
         return commandeMapper.toDto(commande);
     }
@@ -108,6 +102,7 @@ public class CommandeService {
      * @param commandeDTO the entity to update partially.
      * @return the persisted entity.
      */
+    @Transactional
     public Optional<CommandeDTO> partialUpdate(CommandeDTO commandeDTO) {
         log.debug("Request to partially update Commande : {}", commandeDTO);
 
@@ -155,6 +150,7 @@ public class CommandeService {
         commandeRepository.deleteById(id);
     }
 
+    @Transactional
     public List<CommandeDTO> getCommandsByClientId(Long id) {
         log.debug("Request all commands by client id : {}", id);
         return commandeRepository.findByClientId(id).stream().map(commandeMapper::toDto).collect(Collectors.toList());
@@ -165,27 +161,28 @@ public class CommandeService {
      * @param commandeDTO the order details.
      */
     private void sendConfirmationEmail(CommandeDTO commandeDTO) {
-        User user = getUserFromCommandeDTO(commandeDTO); // Replace this with actual logic to get the user
-  log.debug("user to sent email  : {}", user);
+        User user = getUserFromCommandeDTO(commandeDTO);
+
+        log.debug("user to sent email  : {}", user);
+
         if (user != null && user.getEmail() != null) {
             String subject = "Order Confirmation";
             String content = "Thank you for your order! Your order ID is: " + commandeDTO.getId();
 
             mailService.sendEmail(user.getEmail(), subject, content, false, true);
-        }else {  log.warn("User or user email is null. Cannot send confirmation email."); }
+        } else {
+            log.warn("User or user email is null. Cannot send confirmation email.");
+            // TODO : Add exception here
+        }
     }
+
     private User getUserFromCommandeDTO(CommandeDTO commandeDTO) {
         ClientDTO clientDTO = commandeDTO.getClient();
-          log.debug("clientdto : {}", clientDTO);
-       long clientId = clientDTO != null ? clientDTO.getId() : null;
-  log.debug("clientid  : {}", clientId);
-        return userRepository.findById(clientId)
-            .map(user -> {
-               
-                return user;
-            })
-            .orElse(null); 
-    
-        
+
+        log.debug("clientdto : {}", clientDTO);
+
+        Long clientId = clientDTO != null ? clientDTO.getId() : null;
+
+        return userRepository.findById(clientId).orElse(null);
     }
 }

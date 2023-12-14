@@ -2,15 +2,15 @@ package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.domain.Produit;
 import com.mycompany.myapp.repository.ProduitRepository;
-import com.mycompany.myapp.service.dto.ImageDTO;
 import com.mycompany.myapp.service.dto.ProduitDTO;
 import com.mycompany.myapp.service.mapper.ProduitMapper;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.mycompany.myapp.service.utils.NamingService;
 import com.mycompany.myapp.service.exceptions.FileIsEmptyException;
 import com.mycompany.myapp.service.exceptions.FileNotImageException;
 import org.slf4j.Logger;
@@ -33,20 +33,15 @@ public class ProduitService {
 
     private final ProduitRepository produitRepository;
 
-    private final ProduitMapper produitMapper;
-
-    private final S3StorageService s3StorageService;
-
     private final ImageService imageService;
 
+    private final ProduitMapper produitMapper;
 
     public ProduitService(ProduitRepository produitRepository,
                           ProduitMapper produitMapper,
-                          S3StorageService s3StorageService,
                           ImageService imageService) {
         this.produitRepository = produitRepository;
         this.produitMapper = produitMapper;
-        this.s3StorageService = s3StorageService;
         this.imageService = imageService;
     }
 
@@ -60,21 +55,22 @@ public class ProduitService {
     @Transactional
     public ProduitDTO save(ProduitDTO produitDTO, List<MultipartFile> images) throws FileIsEmptyException, FileNotImageException {
         log.debug("Request to save Produit : {}", produitDTO);
+
         Produit produit = produitMapper.toEntity(produitDTO);
+        List<String> uploadedImagesName = new ArrayList<>();
+
         produit = produitRepository.save(produit);
 
         if (images != null) {
             produitDTO = produitMapper.toDto(produit);
 
             try {
-                for (MultipartFile image : images) {
-                    String url = s3StorageService.saveFile(
-                        NamingService.generateUniqueImageFile(image)
+                for (MultipartFile image : images)
+                    uploadedImagesName.add(
+                        imageService.uploadImageToS3Bucket(image, produitDTO)
                     );
-                    imageService.save(new ImageDTO(url, produitDTO));
-                }
             } catch (Exception exception) {
-                handleS3StorageException(exception);
+                handleS3StorageException(exception, uploadedImagesName);
 
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
@@ -83,20 +79,18 @@ public class ProduitService {
         return produitMapper.toDto(produit);
     }
 
+    private void handleS3StorageException(Exception e, List<String> imagesName) {
+        log.error("Exception occurred in S3 storage service: " + e.getMessage());
+
+        imagesName.forEach(imageService::deleteImagesFromS3Bucket);
+    }
+
     @Transactional
     public ProduitDTO save(ProduitDTO produitDTO) {
         log.debug("Request to save Produit : {}", produitDTO);
         Produit produit = produitMapper.toEntity(produitDTO);
         produit = produitRepository.save(produit);
         return produitMapper.toDto(produit);
-    }
-
-    private void handleS3StorageException(Exception e) {
-        // Log the exception or perform other actions
-        System.err.println("Exception occurred in S3 storage service: " + e.getMessage());
-
-        // Add cleanup logic if needed, e.g., deleting records from the database
-        // ...
     }
 
     /**
