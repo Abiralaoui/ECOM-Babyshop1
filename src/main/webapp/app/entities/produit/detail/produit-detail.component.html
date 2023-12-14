@@ -21,7 +21,7 @@
     <h2>{{ produit.prixUnitaire }} €</h2>
 
     <button class="normal"
-            *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'ROLE_USER'])"
+            [disabled]="!produit.outOfStock"
             (click)="ajouterAuPanier()"
     >
       Add to Cart
@@ -30,6 +30,11 @@
       <h4>Détails du produit</h4>
       <span>
           {{ produit.description }}
+    </span>
+      <span
+      [ngClass]="{'text-danger': produit.outOfStock, 'text-success': !produit.outOfStock}"
+      >
+          {{ produit.outOfStock ? 'Rupture de stock' : 'En stock' }}
     </span>
       <div>
         <span jhiTranslate="mainApp.produit.taille">Taille</span>
@@ -66,7 +71,7 @@
           </li>
         </ul>
       </div>
-      
+
       <div *ngIf="!avisList || avisList.length === 0" class="no-avis-message">
         <p>Aucun avis disponible pour ce produit.</p>
       </div>
