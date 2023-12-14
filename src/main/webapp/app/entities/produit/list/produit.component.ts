@@ -22,6 +22,7 @@ import {Options, LabelType, ChangeContext} from '@angular-slider/ngx-slider';
 import { ImageService } from 'app/entities/image/service/image.service';
 import { OutOfStockPopupComponent } from 'app/out-of-stock-popup/out-of-stock-popup.component';
 import { AddProduitPopupComponent } from 'app/add-produit-popup/add-produit-popup.component';
+import {faCircleChevronDown, faCircleChevronUp} from "@fortawesome/free-solid-svg-icons";
 
 
 @Component({
@@ -62,6 +63,9 @@ export class ProduitComponent implements OnInit {
     }
   };
   selectedCategories: number[] = [];
+  isCategoryCollapsed = true;
+  isPrixCollapsed = true;
+  isTailleCollapsed = true;
 
   constructor(
     protected produitService: ProduitService,
@@ -392,4 +396,7 @@ export class ProduitComponent implements OnInit {
     // Example: modalRef.componentInstance.someData = yourData;
     // Example: modalRef.result.then((result) => { /* Handle modal result */ });
   }
+
+  protected readonly faCircleChevronDown = faCircleChevronDown;
+  protected readonly faCircleChevronUp = faCircleChevronUp;
 }
