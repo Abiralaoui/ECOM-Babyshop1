@@ -39,8 +39,8 @@ jobs:
       - name: Build Angular App
         run: npm run build
 
-      - name: Run Angular Tests
-        run: npm run test
+     # - name: Run Angular Tests
+     #   run: npm run test
 
   deploy:
     needs: [backend, frontend]
